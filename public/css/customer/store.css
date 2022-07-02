@@ -1,0 +1,37 @@
+.storepage {
+    /* top: 360px; */
+    /* position: absolute; */
+    left: -12px;
+    width: 1320px;
+    height: 200px;
+}
+
+.store_name {
+    font-size: 25px;
+    font-weight: 550;
+    text-decoration: none;
+    color: #001135;
+    margin-left: -20px;
+    margin-top: 10px;
+}
+
+.storedetails_ {
+    margin-top: -15px;
+    margin-left: -20px;
+}
+
+.register {
+    margin-top: 5px;
+    color: grey;
+    font-size: 14px;
+}
+
+.description_ {
+    font-size: 15px;
+    margin: 40px 0;
+}
+
+.icon {
+    margin-left: 50px;
+    margin-top: 35px;
+}

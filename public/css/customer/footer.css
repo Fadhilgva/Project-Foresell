@@ -1,0 +1,53 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer > li {
+    padding: 4px;
+    color: grey;
+    font-size: 15px;
+}
+
+.footer > li:hover {
+    color: #001135;
+    cursor: pointer;
+}
+
+hr {
+    border-width: 3px;
+}
+
+/* .card {
+    padding: 2% 7%;
+} */
+
+.social > i {
+    padding: 1%;
+    font-size: 15px;
+}
+
+.social > i:hover {
+    color: #001135;
+    cursor: pointer;
+}
+
+.policy > div {
+    padding: 4px;
+}
+
+.heading {
+    font-family: Poppins;
+    color: black;
+}
+
+.divider {
+    border-top: 2px solid;
+}
+
+#footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}

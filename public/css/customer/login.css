@@ -1,0 +1,22 @@
+.login {
+    width: 506px;
+    background-color: #001135;
+}
+.login:hover {
+    background-color: #001135;
+}
+
+.sign_in {
+    margin-top: 120px;
+    margin-bottom: 12px;
+}
+
+.sign_up {
+    margin-top: 135px;
+    margin-bottom: 135px;
+}
+
+.sign_up_ {
+    margin-top: 120px;
+    margin-bottom: 120px;
+}

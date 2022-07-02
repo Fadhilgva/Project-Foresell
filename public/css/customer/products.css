@@ -1,0 +1,215 @@
+.product-grid {
+    margin-top: 30px;
+    background-color: white;
+    border-radius: 10px;
+}
+.product-grid .product-image {
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+.product-grid .product-image a.image {
+    display: block;
+}
+.product-grid .product-image img {
+    width: 100%;
+    height: auto;
+}
+.product-grid .product-image .img-1 {
+    transition: all 0.3s ease 0s;
+    border-radius: 3px 3px 0 0;
+}
+.product-grid:hover .product-image .img-1 {
+    opacity: 0;
+}
+.product-grid .product-image .img-2 {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    backface-visibility: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    transition: all 0.3s ease 0s;
+    border-radius: 3px 3px 0 0;
+}
+.product-grid:hover .product-image .img-2 {
+    opacity: 1;
+}
+.product-grid .product-hot-label,
+.product-grid .product-discount-label {
+    color: #fff;
+    background: #ff6f00;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    border-radius: 3px;
+}
+.product-grid .product-discount-label {
+    background: #ff3939;
+    left: auto;
+    right: 10px;
+}
+.product-grid .product-view {
+    color: #fff;
+    background: #000;
+    font-size: 16px;
+    text-align: right;
+    line-height: 50px;
+    width: 60px;
+    height: 60px;
+    padding: 0 16px 0 0;
+    border-radius: 50px;
+    opacity: 0;
+    transform: scale(0);
+    position: absolute;
+    bottom: -40px;
+    left: -40px;
+    transition: all 0.3s ease;
+}
+.product-grid:hover .product-view {
+    opacity: 1;
+    transform: scale(1);
+    bottom: -20px;
+    left: -20px;
+}
+.product-grid .product-view:hover {
+    background: #ff6f00;
+}
+.product-grid .product-links {
+    transform: translateX(50%);
+    position: absolute;
+    bottom: 0%;
+    right: 50%;
+    z-index: 1;
+}
+.product-grid .product-links li {
+    margin: -5px 0;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all 0.3s ease;
+    border-radius: 0;
+}
+.product-grid .product-links li:nth-child(2) {
+    transition-delay: 0.1s;
+}
+.product-grid .product-links li:nth-child(3) {
+    transition-delay: 0.2s;
+}
+.product-grid:hover .product-links li {
+    opacity: 1;
+    transform: translateX(0);
+}
+.product-grid .product-links li a {
+    color: white;
+    background-color: #001135;
+    font-size: 15px;
+    text-align: center;
+    padding: 5px;
+    width: 310px;
+    height: 35px;
+    display: block;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.product-grid .product-links li a:hover {
+    background: #001135;
+    color: white;
+}
+.product-grid .product-content {
+    background: #fff;
+    padding: 15px;
+    border-radius: 0 0 10px 10px;
+}
+.product-grid .rating {
+    color: #f7bc3d;
+    font-size: 12px;
+    list-style: none;
+    /* margin-bottom: 5px; */
+}
+.product-grid .rating li {
+    display: inline-block;
+}
+.product-grid .rating .disable {
+    color: #a3a3a3;
+    font-size: 12px;
+    margin-bottom: 3px;
+}
+.product-grid .title {
+    font-size: 17px;
+    font-weight: 500;
+    text-transform: capitalize;
+    margin: 0 0 5px;
+    text-decoration: none;
+}
+.product-grid .title a {
+    color: #001135;
+    font-weight: 500;
+    transition: all 0.3s ease 0s;
+    text-decoration: none;
+}
+.product-grid .price_ {
+    color: #001135;
+    font-size: 16px;
+    font-weight: 650;
+}
+
+.name_produk {
+    font-size: 20px;
+    font-weight: 600;
+    color: #001135;
+    text-decoration: none;
+}
+
+.product-grid .price span {
+    color: #999;
+    font-size: 14px;
+    font-weight: 400;
+    text-decoration: line-through;
+    margin-right: 5px;
+}
+@media screen and (max-width: 990px) {
+    .product-grid {
+        margin-bottom: 30px;
+    }
+}
+
+.product-like-icon {
+    color: #9fa6b0;
+    font-size: 24px;
+    line-height: 20px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.product-like-icon:hover {
+    color: #ff6161;
+}
+
+.store {
+    color: #001135;
+    font-size: 12px;
+    text-decoration: none;
+    margin-top: 5px;
+    margin-bottom: 8px;
+}
+.store:hover {
+    color: #ff6f00;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.carousel-products {
+    height: 480px;
+}
+
+.diskon {
+    margin-top: -7px;
+}
