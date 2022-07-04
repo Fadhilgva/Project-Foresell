@@ -106,7 +106,7 @@ class BankController extends Controller
 
         if($request->logo){
 
-            File::delete('image/admin/bank/'. $banks->logo);
+            File::delete('/image/admin/bank/'. $banks->logo);
 
             $logo =  time().'-'.$request->logo->getClientOriginalName();
             $request->logo->move('image\admin\bank', $logo);
