@@ -31,12 +31,13 @@
                                     <th width="100px">Action</th>
                                     <th>Gambar</th>
                                     <th>Nama</th>
+                                    <th>Slug</th>
                                     <th>Total Pendapatan</th>
                                     <th>Created At</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @for ($i = 1; $i <= 5; $i++)
+                                @foreach ($categories as $cat)
                                     <tr>
                                         <td>
                                             <div>
@@ -47,12 +48,13 @@
                                                     id="btn-detail"><i class="fa fa-eye"></i></a>
                                             </div>
                                         </td>
-                                        <td>gambar</td>
-                                        <td>Elektronik</td>
-                                        <td>17.000.000</td>
-                                        <td>21 Maret 2020</td>
+                                        <td><img src="{{ $cat->image }}" alt="gambar" width="50" height="50"></td>
+                                        <td>{{ $cat->name }}</td>
+                                        <td>{{ $cat->slug }}</td>
+                                        <td>Not Found</td>
+                                        <td>{{ $cat->created_at }}</td>
                                     </tr>
-                                @endfor
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
