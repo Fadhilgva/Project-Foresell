@@ -51,7 +51,7 @@
             <div class="divider d-flex align-items-center my-4">
               <p class="text-center fw-bold mx-3 mb-0">Or</p>
             </div> --}}
-            <h1 class="fw-bold mb-3">Sign in Admin</h1>
+            <h1 class="fw-bold mb-3">Sign in Admin Foresell</h1>
             <!-- Email input -->
             <div class="form-outline mb-4">
               <input type="email" id="form3Example3" class="form-control form-control-lg @error('email') is-invalid @enderror"  name="email" value="{{ old('email') }}" required autocomplete="email" autofocus
