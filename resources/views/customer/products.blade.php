@@ -3,6 +3,13 @@
 @section('container')
 {{-- Products --}}
 <div class="container my-5 p-1">
+    @if (session()->has('success'))
+    <div class="alert alert-success alert-dismissible fade show text-center mx-auto col-5" role="alert">
+        <small>{{ session('success') }}</small>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+
     @if ($products->count() > 0)
     <div class="h2 title mb-1 text-center">All Products</div>
     <div class="fs-6 mt-n1 mb-3 text-center">Finding Best Products Now in Your Fingertips</div>
@@ -14,8 +21,8 @@
             <div class="product-grid shadow-sm">
                 <div class="product-image">
                     <a href="/products/{{ $product->slug }}" class="image">
-                        <img class="img-1" src="{{ asset('img/customer/img-1.png') }}" width="500" height="500">
-                        <img class="img-2" src="{{ asset('img/customer/img-2.png') }}" width="500" height="500">
+                        <img class="img-1" src="{{ asset('https://source.unsplash.com/600x600?technology') }}" width="500" height="500">
+                        <img class="img-2" src="{{ asset('https://source.unsplash.com/600x600?product') }}" width="500" height="500">
                     </a>
                     @if($product->discount >= 1)
                     <span class="product-hot-label">{{ $product->discount }}% OFF</span>
@@ -38,9 +45,16 @@
                         </button>
                         @endauth
                     </form>
-                    <ul class="product-links">
-                        <li><a href="/cart">Add to Cart</a></li>
-                    </ul>
+                    <form action="/add_cart/{{ $product->id }}" method="POST">
+                        @csrf
+                        <ul class="product-links">
+                            <li>
+                                <a>
+                                    <button type="submit" class="btn btn-link text-decoration-none text-white pb-5">Add to Cart</button>
+                                </a>
+                            </li>
+                        </ul>
+                    </form>
                 </div>
                 <div class="product-content">
                     <ul class="rating row">

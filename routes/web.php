@@ -118,6 +118,35 @@ Route::group(
     }
 );
 
+Route::get('/shipping', function () {
+    return view('customer.shipping', [
+        'title' => 'Shipping'
+    ]);
+});
+
+Route::get('/billing', function () {
+    return view('customer.billing', [
+        'title' => 'Billing'
+    ]);
+});
+
+Route::get('/completed', function () {
+    return view('customer.completed', [
+        'title' => 'Completed'
+    ]);
+});
+
+Route::get('/orders', function () {
+    return view('customer.orders', [
+        'title' => 'Your Orders'
+    ]);
+});
+
+Route::get('/orderdetails', function () {
+    return view('customer.details', [
+        'title' => 'Your Orders'
+    ]);
+});
 
 //----------------------------------------------------------------------------------------------------
 /*

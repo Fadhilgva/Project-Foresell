@@ -114,7 +114,7 @@
     {{-- More in this Store --}}
     <div class="container my-5">
         <div class="container">
-            <div class="h3 title mb-1">More in {{ $product->store->name }}</div>
+            <div class="h4 title mb-1">More in {{ $product->store->name }}</div>
             <div id="carouselExampleIndicators1" class="carousel slide mb-0" data-bs-ride="true">
                 <div class="carousel-inner carousel-products" style="height: 500px;">
                     <div class="carousel-item active">
@@ -304,7 +304,7 @@
     {{-- Related Product --}}
     <div class="container my-5">
         <div class="container">
-            <div class="h3 title mb-1">Related Products</div>
+            <div class="h4 title mb-1">Related Products</div>
             <div id="carouselExampleIndicators2" class="carousel slide mb-0" data-bs-ride="true">
                 <div class="carousel-inner carousel-products" style="height: 500px;">
                     <div class="carousel-item active">

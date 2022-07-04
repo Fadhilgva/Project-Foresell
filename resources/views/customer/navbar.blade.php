@@ -39,7 +39,7 @@
                             </a>
                         </li>
                         <li class="navbar-item dropdown">
-                            <a class="nav-link dropdown-toggle
+                            <a class="nav-link dropdown-toggle 
                             {{  Request::is ('profile') ? 'active' : '' }}" href="/profile" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="{{ asset('img/customer/bx-user.svg') }}" class="d-inline-block align-text-center" alt="" width="30"> {{ Auth()->user()->name }}
                             </a>

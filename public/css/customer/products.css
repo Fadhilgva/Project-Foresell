@@ -89,7 +89,7 @@
     z-index: 1;
 }
 .product-grid .product-links li {
-    margin: -5px 0;
+    margin: 0px 0;
     opacity: 0;
     transform: translateY(100%);
     transition: all 0.3s ease;
@@ -110,7 +110,7 @@
     background-color: #001135;
     font-size: 15px;
     text-align: center;
-    padding: 5px;
+    padding: 0px;
     width: 310px;
     height: 35px;
     display: block;
@@ -185,8 +185,8 @@
     font-size: 24px;
     line-height: 20px;
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 5px;
+    right: 5px;
 }
 
 .product-like-icon:hover {

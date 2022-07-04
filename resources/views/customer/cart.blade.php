@@ -28,6 +28,7 @@
 
             {{-- Cart --}}
             <div class="row">
+                @if($carts->count()>0)
                 <div class="col-lg-9 my-3">
                     <div class="table-responsive mb-4">
                         <table class="table">
@@ -48,39 +49,46 @@
                                 </tr>
                             </thead>
                             <tbody class="border-0">
-                                @for ($i = 0; $i < 1; $i++) <tr>
+                                @foreach ($carts as $cart)
+                                <tr>
                                     <td class="p-3 border-0">
                                         <div class="d-flex align-items-center">
-                                            <a class="reset-anchor d-block animsition-link" href="/product"><img src="{{ asset('img/customer/img-1.png') }}" alt="" width="70" /></a>
+                                            <a class="reset-anchor d-block animsition-link" href="/products/{{ $cart->product->slug }}"><img src="{{ asset('img/customer/img-1.png') }}" width="70" /></a>
                                             <div class="ms-3">
-                                                <a class="reset-anchor animsition-link title text-decoration-none" href="/product">Asus TUF Dash F15</a>
+                                                <a class="reset-anchor animsition-link title text-decoration-none" href="/products/{{ $cart->product->slug }}">{{ $cart->product->name }}</a>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="p-3 align-middle border-0">
-                                        <p class="mb-0 small">Rp{{ $a=18600000 }}</p>
+                                        <p class="mb-0 small">Rp{{ $cart->product->price * ((100 - $cart->product->discount)/100) }}</p>
                                     </td>
                                     <td class="p-3 align-middle border-0">
                                         <div class="quantity p-1">
                                             <button class="dec-btn p-1">
                                                 <i class='bx bx-minus'></i>
                                             </button>
-                                            <input class="form-control border-0 shadow-sm-0 p-0 quantity" type="number" value="{{ $b=2 }}" min="1" max="100" name="quantity" />
+                                            <input class="form-control border-0 shadow-sm-0 p-0 quantity" type="number" value="{{ $cart->qty }}" min="1" max="100" name="quantity" />
                                             <button class="inc-btn p-1">
                                                 <i class='bx bx-plus'></i>
                                             </button>
                                         </div>
                                     </td>
                                     <td class="p-3 align-middle border-0">
-                                        <p class="mb-0 small">Rp{{ $a *= $b }}</p>
+                                        <p class="mb-0 small">Rp{{ $cart->total_product }}</p>
                                     </td>
                                     <td class="p-3 align-middle border-0">
-                                        <a class="reset-anchor" href="">
-                                            <img src="{{ asset('img/customer/bx-trash.svg') }}" width="20">
-                                        </a>
+                                        <form action="/delete_cart" method="post">
+                                            @csrf
+                                            <input type="hidden" name="id" id="id" value="{{ $cart->id }}">
+                                            <a class="reset-anchor">
+                                                <button type="submit" class="btn btn-link">
+                                                    <img src="{{ asset('img/customer/bx-trash.svg') }}" width="20">
+                                                </button>
+                                            </a>
+                                        </form>
                                     </td>
-                                    </tr>
-                                    @endfor
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -89,32 +97,28 @@
                     <div class="card border rounded p-lg-1 bg-light">
                         <div class="card-body">
                             <h5 class="mb-4">Cart total</h5>
+                            @foreach ($cartdetail as $cart)
                             <ul class="list-unstyled mb-0">
-                                <li class="d-flex align-items-center justify-content-between">
-                                    <strong class="small font-weight-bold">Subtotal
+                                <li class="d-flex align-items-center justify-content-between mt-3 mb-1">
+                                    <strong class="small font-weight-bold">Discount
                                     </strong>
-                                    <span class="text-muted small">Rp{{ $a }}
+                                    <span>-Rp{{ $cart->total_disc }}
                                     </span>
                                 </li>
-                                <li class="border-bottom my-2"></li>
                                 <li class="d-flex align-items-center justify-content-between mb-4">
                                     <strong class="small font-weight-bold">Total
                                     </strong>
-                                    <span>Rp{{ $a }}
+                                    <span>Rp{{ $cart->total }}
                                     </span>
                                 </li>
-                                {{-- <li>
-                                    <form action="#">
-                                        <div class="input-group mb-0">
-                                            <input class="form-control" type="text" placeholder="Enter your coupon" />
-                                            <button class="btn btn-dark btn-sm w-100" type="submit"><i class="fas fa-gift me-2"></i>Apply coupon</button>
-                                        </div>
-                                    </form>
-                                </li> --}}
                             </ul>
+                            @endforeach
                         </div>
                     </div>
                 </div>
+                @else
+                <p class="text-center fs-4 title noproduct mt-3">No Product found</p>
+                @endif
             </div>
 
             {{-- Navigation --}}

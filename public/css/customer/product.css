@@ -74,6 +74,10 @@
     color: #dcdcdc;
 }
 
+.bx-heart:hover {
+    color: #ff6161;
+}
+
 .bxs-heart {
     color: #ff6161;
 }

@@ -9,10 +9,10 @@ body {
     bottom: 3rem;
     z-index: 10;
 }
-.carousel-item {
+/* .carousel-item {
     border-color: aqua;
     color: yellow;
-}
+} */
 
 .details {
     background-color: #001135;
@@ -58,4 +58,9 @@ body {
 
 .noproduct {
     margin: 100px 0;
+}
+
+.badgecart {
+    color: #001135;
+    background-color: #fbaa28;
 }
