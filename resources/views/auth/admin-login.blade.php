@@ -35,7 +35,7 @@
               </div>
               @endif
 
-              <form action="/login" method="POST">
+              <form action="{{ route('admin.login.store') }}" method="POST">
                 @csrf
                 <div class="form-floating mb-4">
                   <input type="email" name="email" class="form-control
