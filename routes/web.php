@@ -94,13 +94,12 @@ Route::group(
         Route::post('/register', [RegisteredUserController::class, 'store']);
 
         //REGISTER ADMIN
-        Route::get('/admin-foresell/register', [RegisteredAdminController::class, 'create'])->name('foresell.register');
+        Route::get('/admin-foresell/register', [RegisteredAdminController::class, 'create'])->name('foresell.create');
         Route::post('/admin-foresell/register', [RegisteredAdminController::class, 'store'])->name('foresell.store');
 
         //LOGIN ADMIN
-        Route::get('/admin-foresell/login', function(){
-            return view("auth.admin-login");
-        });
+        Route::get('/admin-foresell/login', [AdminAuthenticatedSessionController::class, 'create'])->name('admin.login');
+        Route::post('/admin-foresell/login', [AdminAuthenticatedSessionController::class, 'store'])->name('admin.login.store');
     }
 );
 
@@ -173,7 +172,7 @@ Route::get('/admin_toko/tambah_diskon/edit',[TambahDiskonController::class, 'edi
 Route::group(['middleware' => ['auth', 'role:adminForesell']], function() {
 
     Route::get('/admin-foresell/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-    Route::post('/admin-foresell/dashboard', [AdminAuthenticatedSessionController::class, 'store'])->name('admin.login');
+    Route::post('/admin-foresell/dashboard', [AdminAuthenticatedSessionController::class, 'store'])->name('admin.dashboard.store');
 
     // USER
     Route::get('/admin-foresell/list/users', function () {

@@ -91,7 +91,7 @@
                       style="padding-left: 2.5rem; padding-right: 2.5rem;">{{ __('Create') }}</button>
 
                     <p class="small fw-bold mt-2 pt-1 mb-0">Already registered?
-                        <a href="admin-foresell/login" class="link-danger">{{ __('Login') }}</a>
+                        <a href="/admin-foresell/login" class="link-danger">{{ __('Login') }}</a>
                     </p>
                 </div>
             </form>
