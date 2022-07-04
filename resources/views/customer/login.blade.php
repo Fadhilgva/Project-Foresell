@@ -72,6 +72,11 @@
                                 <a class="fw-bold text-decoration-none text-dark" href="/register">Create One</a>
                             </p>
                         </div>
+                        <div class="row justify-content-center">
+                            <div class="col-md-4">
+                                <a class="btn btn-warning text-small" href="/admin_toko/login_store">Store Login</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -25,7 +25,9 @@ class RegisteredAdminController extends Controller
     {
         // $route = Route::current();
         // dd($route);
-        return view('auth.register-admin');
+        return view('auth.register-admin', [
+            'title' => 'Admin Register'
+        ]);
     }
 
     /**

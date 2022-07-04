@@ -11,8 +11,11 @@ class AdminTokoLoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
-        return view('admin_toko.login_store.index');
+    public function index()
+    {
+        return view('admin_toko.login_store.index', [
+            'title' => 'Store Login'
+        ]);
     }
 
     /**

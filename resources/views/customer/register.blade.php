@@ -11,7 +11,7 @@
                 <div class="container">
                     <div class="d-flex justify-content-end me-lg-5">
                         <a href="/">
-                            <img src="img/bx-x.svg" alt="" width="30">
+                            <img src="{{ asset('img/bx-x.svg') }}" alt="" width="30">
                         </a>
                     </div>
                     <div class="row">
