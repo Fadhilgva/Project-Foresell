@@ -8,14 +8,15 @@ use GuzzleHttp\Middleware;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BankController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TokoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KurirController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\StoreController;
 
 //ADMIN TOKO
+use App\Http\Controllers\StoreController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -27,10 +28,10 @@ use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataOrderController;
 use App\Http\Controllers\DataProdukController;
-use App\Http\Controllers\LoginAdminController;
 
 
 // ADMIN
+use App\Http\Controllers\LoginAdminController;
 use App\Http\Controllers\TambahDiskonController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminTokoHomeController;
@@ -115,6 +116,9 @@ Route::group(
         Route::get('/wishlist', [WishlistController::class, 'index']);
         Route::post('/add', [WishlistController::class, 'store']);
         Route::post('/delete_wishlist', [WishlistController::class, 'destroy']);
+        Route::get('/cart', [CartController::class, 'index']);
+        Route::post('/add_cart/{product:id}', [CartController::class, 'store']);
+        Route::post('/delete_cart', [CartController::class, 'destroy']);
     }
 );
 
