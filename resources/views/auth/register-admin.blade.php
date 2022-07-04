@@ -93,7 +93,6 @@
                     <p class="small fw-bold mt-2 pt-1 mb-0">Already registered?
                         <a href="/admin-foresell/login" class="link-danger">{{ __('Login') }}</a>
                     </p>
-
                 </div>
             </form>
         </div>
