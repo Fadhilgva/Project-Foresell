@@ -19,7 +19,7 @@
                             <h3 class="display-6 title mb-0">Register Admin</h3>
                             <p class="caption-text text-muted mb-3">Please enter the details below to register as admin</p>
 
-                            <form action="/register" method="POST">
+                            <form action="{{ route('foresell.store') }}" method="POST">
                                 @csrf
                                 <div class="row g-3 mb-4">
                                     <h6 class="mb-0 title">Account Information</h6>
