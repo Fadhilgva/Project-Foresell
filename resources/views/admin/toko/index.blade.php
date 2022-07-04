@@ -29,34 +29,30 @@
                             <thead class="table-dark">
                                 <tr>
                                     <th width="100px">Action</th>
-                                    <th>Nama</th>
-                                    <th>Email</th>
-                                    <th>No. Telp</th>
-                                    <th>Alamat</th>
+                                    <th>Name</th>
+                                    <th>Location</th>
                                     <th>Total Pendapatan</th>
                                     <th>Created At</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @for ($i = 1; $i <= 5; $i++)
+                                @foreach ($stores as $store)
                                     <tr>
                                         <td width="50px">
                                             <div>
                                                 <button href="#" class="btn btn-danger btn-sm" id="delete"><i
                                                         class="fa fa-trash"></i></button>
 
-                                                <a href="#" class="btn btn-warning btn-sm btn-eye" id="btn-detail"><i
-                                                        class="fa fa-eye"></i></a>
+                                                <a href="#" class="btn btn-warning btn-sm btn-pen" id="btn-detail"><i
+                                                        class="fa fa-pen"></i></a>
                                             </div>
                                         </td>
-                                        <td>Emotixa</td>
-                                        <td>emotixa@gmail.com</td>
-                                        <td>08123925123</td>
-                                        <td>Jl. Kebagusan</td>
-                                        <td>20.000.000</td>
-                                        <td>12 Juni 2020</td>
+                                        <td>{{ $store->name }}</td>
+                                        <td>{{ $store->location }}</td>
+                                        <td>not found</td>
+                                        <td>{{ $store->created_at }}</td>
                                     </tr>
-                                @endfor
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TokoController extends Controller
 {
@@ -13,7 +14,9 @@ class TokoController extends Controller
      */
     public function index()
     {
-        return view("admin.toko.index");
+        $stores = DB::select("SELECT name, location, created_at FROM stores;");
+        
+        return view("admin.toko.index", compact('stores'));
     }
 
     /**
