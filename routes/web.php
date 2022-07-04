@@ -2,10 +2,11 @@
 
 use App\Models\Product;
 use Nette\Schema\Expect;
-use Illuminate\Support\Facades\Route;
+use GuzzleHttp\Middleware;
 
 // CUSTOMER
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TokoController;
@@ -13,24 +14,25 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\KurirController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StoreController;
-use App\Http\Controllers\OrdersController;
 
 //ADMIN TOKO
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataOrderController;
 use App\Http\Controllers\DataProdukController;
 use App\Http\Controllers\LoginAdminController;
-use App\Http\Controllers\TambahDiskonController;
-use App\Http\Controllers\AdminCategoryController;
 
 
 // ADMIN
+use App\Http\Controllers\TambahDiskonController;
+use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminTokoHomeController;
 use App\Http\Controllers\DataPenjualanController;
 use App\Http\Controllers\AdminTokoLoginController;
@@ -41,7 +43,6 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\RegisteredAdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\AdminAuthenticatedSessionController;
-use GuzzleHttp\Middleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -175,9 +176,7 @@ Route::group(['middleware' => ['auth', 'role:adminForesell']], function() {
     Route::post('/admin-foresell/dashboard', [AdminAuthenticatedSessionController::class, 'store'])->name('admin.dashboard.store');
 
     // USER
-    Route::get('/admin-foresell/list/users', function () {
-        return view('admin.users');
-    });
+    Route::get('/admin-foresell/list/users', [AdminUserController::class, 'index']);
 
     // ORDER
     Route::get('/orders-payment-status', [OrdersController::class, 'statusPayment']);

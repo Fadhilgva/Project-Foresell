@@ -8,33 +8,6 @@
 @section('content')
 
     <h1 class="text-grey">List Users</h1>
-    {{-- @if (1 == 1)
-        <table class="mt-4 table table-hover table-bordered">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Shop</th>
-            </tr>
-            </thead>
-            <tbody>
-                @for ($i = 0; $i <= 5; $i++)
-                    <tr>
-                        <th scope="row">{{ $i }}</th>
-                        <td>NAME</td>
-                        <td>EMAIL@GMAIL.COM</td>
-                        <td>Olshop22</td>
-                    </tr>
-                @endfor
-            </tbody>
-        </table>
-     <div class="d-flex justify-content-center mt-2">{{ $post->links() }} </div>
-    @else
-        <div class="mt-4 alert alert-info" role="alert">
-             Haven't User
-        </div>
-    @endif --}}
 
     <div class="row">
         <div class="col-md-12">
@@ -59,19 +32,17 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Role</th>
-                                    <th>No WA</th>
-                                    <th>Kelamin</th>
+                                    <th>Phone</th>
                                     <th>Alamat</th>
                                     <th>Created At</th>
-                                    <th>Updated At</th>
+
                                 </tr>
                             </thead>
-                            <tbody>
+                            {{-- <tbody>
                                 @for ($i = 1; $i <= 5; $i++)
                                     <tr>
                                         <td>
                                             <div style="width:50px">
-                                                {{-- <a href="#" class="btn btn-warning btn-xs btn-edit" id="edit"><i class="fa fa-pencil"></i></a> --}}
 
                                                 <button href="#" class="btn btn-danger btn-xs btn-hapus" id="delete"><i
                                                         class="fa fa-trash"></i></button>
@@ -81,12 +52,29 @@
                                         <td>adinta@gmail.com</td>
                                         <td>User</td>
                                         <td>0895392598133</td>
-                                        <td>L</td>
                                         <td>Jl. Kebagusan</td>
-                                        <td>null</td>
                                         <td>null</td>
                                     </tr>
                                 @endfor
+                            </tbody> --}}
+                            <tbody>
+                                @foreach ($users as $user)
+                                <tr>
+                                    <td>
+                                        <div style="width:50px">
+
+                                            <button href="#" class="btn btn-danger btn-xs btn-hapus" id="delete"><i
+                                                    class="fa fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                    <td>{{ $user->UserName }}</td>
+                                    <td>{{ $user->Email }}</td>
+                                    <td>{{ $user->RoleName }}</td>
+                                    <td>{{ $user->Phone }}</td>
+                                    <td><small>{{ $user->Address }}</small></td>
+                                    <td>{{ $user->Register }}</td>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
