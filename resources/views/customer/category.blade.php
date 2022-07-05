@@ -14,6 +14,12 @@
     @foreach ($products->take(1) as $a)
     <h1 class="h3 title text-start">{{ $a->category->name }}</h1>
     @endforeach
+    @if (session()->has('success'))
+    <div class="alert alert-success alert-dismissible fade show text-center mx-auto col-5" role="alert">
+        <small>{{ session('success') }}</small>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
     <div class="row">
         @foreach ($products as $product)
         <div class="col-md-3 col-sm-6">
@@ -44,13 +50,20 @@
                         </button>
                         @endauth
                     </form>
-                    <ul class="product-links">
-                        <li><a href="/cart">Add to Cart</a></li>
-                    </ul>
+                    <form action="/add_cart/{{ $product->id }}" method="POST">
+                        @csrf
+                        <ul class="product-links">
+                            <li>
+                                <a>
+                                    <button type="submit" class="btn btn-link text-decoration-none text-white pb-5">Add to Cart</button>
+                                </a>
+                            </li>
+                        </ul>
+                    </form>
                 </div>
                 <div class="product-content">
                     <ul class="rating row">
-                        <a href="" class="store">
+                        <a href="/stores?store={{ $product->store->slug }}" class="store">
                             <img src="{{ asset('img/customer/bxs-check-shield.svg') }}" class="d-inline-block align-text-center" width="10"> {{ $product->store->name }}</a>
                         <li class="disable">{{ $product->sold }} Sold</li>
                     </ul>

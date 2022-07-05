@@ -45,7 +45,7 @@ class UserController extends Controller
             'name' => 'required|max:255|',
             'email' => 'required|email:dns|',
             'phone' => 'required|min:8|max:15',
-            'city' => 'required|min:5|max:50',
+            'city' => 'required|min:3|max:50',
             'address' => 'required|min:20|max:200',
             'postalcode' => 'required|min:5|max:7'
         ];

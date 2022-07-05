@@ -14,16 +14,4 @@ class CartDetail extends Model
     {
         return $this->hasMany(Cart::class, 'cart_id');
     }
-
-    public function Product()
-    {
-        return $this->belongsTo(Product::class, 'product_id');
-    }
-
-    public function updatedetail($itemdetail, $qty, $price, $discount)
-    {
-        $this->attributes['qty'] = $itemdetail->qty + $qty;
-        $this->attributes['total_product'] = $itemdetail->subtotal + ($qty * ($price - $discount));
-        self::save();
-    }
 }
