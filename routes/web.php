@@ -82,8 +82,6 @@ Route::get('/categories', [CategoryController::class, 'show']);
 
 Route::get('/stores', [StoreController::class, 'index']);
 
-
-
 Route::group(
     ['middleware' => ['guest']],
     function () {

@@ -1,8 +1,8 @@
 @extends('sb-admin.app')
 @section('title', 'Bank')
-@section('Bank', 'active')
-@section('main', 'show')
-@section('main-active', 'active')
+@section('bank', 'active')
+@section('payment', 'show')
+@section('payment-active', 'active')
 
 
 @section('content')
