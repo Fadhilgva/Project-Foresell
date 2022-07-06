@@ -2,12 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Models\AdminBank;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Store;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Courier;
 use App\Models\Promotion;
 use App\Models\PromotionBanner;
 
@@ -77,5 +79,41 @@ class DatabaseSeeder extends Seeder
         Promotion::factory(2)->create();
 
         PromotionBanner::factory(4)->create();
+
+        AdminBank::create([
+            'bankName' => 'BNI Virtual Account',
+            'noRekening' => '8807 0813 5763 8723'
+        ]);
+
+        AdminBank::create([
+            'bankName' => 'Gopay',
+            'noRekening' => '0813 5763 8723'
+        ]);
+
+        AdminBank::create([
+            'bankName' => 'OVO',
+            'noRekening' => '0813 5763 8723'
+        ]);
+
+        AdminBank::create([
+            'bankName' => 'Cash On Delivery',
+            'noRekening' => 'Customer membayar pesanan secara langsung ketika pesanan tiba di tangan pembeli.'
+        ]);
+
+        Courier::create([
+            'name' => 'J&T Express'
+        ]);
+        Courier::create([
+            'name' => 'Ninja Xpress'
+        ]);
+        Courier::create([
+            'name' => 'SiCepat Ekspres'
+        ]);
+        Courier::create([
+            'name' => 'Lion Parcel'
+        ]);
+        Courier::create([
+            'name' => 'JNE Express'
+        ]);
     }
 }

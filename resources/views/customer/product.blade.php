@@ -60,6 +60,12 @@
                     <span class="price mt-2">Rp{{ $product->price }}</span>
                     @endif
                 </div>
+                @if (session()->has('success1'))
+                <div class="alert alert-success alert-dismissible fade show text-center mx-auto col-auto" role="alert">
+                    <small>{{ session('success1') }}</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
                 <span class="category">Category : <a href="/categories?category={{ $product->category->slug }}" class="text-decoration-none category_">{{ $product->category->name }}</a></span>
                 <p class="category mt-2">Stock : {{ $product->stock }}</p>
                 <p class="fs-7 description mt-1">{!! $product->desc !!}</p>
@@ -67,16 +73,13 @@
             <div>
                 <div class="mt-2">
                     <div class="quantity p-1 border-dark">
-                        <button class="dec-btn p-1">
-                            <i class='bx bx-minus'></i>
-                        </button>
-                        <input class="form-control border-0 shadow-sm-0 p-0 quantity" type="number" value="1" min="1" max="100" name="quantity" />
-                        <button class="inc-btn p-1">
-                            <i class='bx bx-plus'></i>
-                        </button>
-                        <div class="ms-3">
-                            <a class="btn btn-dark" type="submit" href="/cart">Add to cart</a>
-                        </div>
+                        <form action="/add_cartproduct/{{ $product->id }}" method="POST">
+                            @csrf
+                            <div class="ms-3">
+                                <input type="number" name="quantity" min="1" max="{{ $product->stock }}" value="1">
+                                <button class="btn text-white" type="submit" style="background-color: #001135">Add to cart</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div class="mt-5">
@@ -112,6 +115,12 @@
     </div>
 
     {{-- More in this Store --}}
+    @if (session()->has('success'))
+    <div class="alert alert-success alert-dismissible fade show text-center mx-auto col-5" role="alert">
+        <small>{{ session('success') }}</small>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
     <div class="container my-5">
         <div class="container">
             <div class="h4 title mb-1">More in {{ $product->store->name }}</div>
@@ -148,9 +157,16 @@
                                             </button>
                                             @endauth
                                         </form>
-                                        <ul class="product-links">
-                                            <li><a href="/cart">Add to Cart</a></li>
-                                        </ul>
+                                        <form action="/add_cart/{{ $product->id }}" method="POST">
+                                            @csrf
+                                            <ul class="product-links">
+                                                <li>
+                                                    <a>
+                                                        <button type="submit" class="btn btn-link text-decoration-none text-white pb-5">Add to Cart</button>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </form>
                                     </div>
                                     <div class="product-content">
                                         <ul class="rating row">
@@ -205,9 +221,16 @@
                                             </button>
                                             @endauth
                                         </form>
-                                        <ul class="product-links">
-                                            <li><a href="/cart">Add to Cart</a></li>
-                                        </ul>
+                                        <form action="/add_cart/{{ $product->id }}" method="POST">
+                                            @csrf
+                                            <ul class="product-links">
+                                                <li>
+                                                    <a>
+                                                        <button type="submit" class="btn btn-link text-decoration-none text-white pb-5">Add to Cart</button>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </form>
                                     </div>
                                     <div class="product-content">
                                         <ul class="rating row">
@@ -262,9 +285,16 @@
                                             </button>
                                             @endauth
                                         </form>
-                                        <ul class="product-links">
-                                            <li><a href="/cart">Add to Cart</a></li>
-                                        </ul>
+                                        <form action="/add_cart/{{ $product->id }}" method="POST">
+                                            @csrf
+                                            <ul class="product-links">
+                                                <li>
+                                                    <a>
+                                                        <button type="submit" class="btn btn-link text-decoration-none text-white pb-5">Add to Cart</button>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </form>
                                     </div>
                                     <div class="product-content">
                                         <ul class="rating row">
@@ -338,9 +368,16 @@
                                             </button>
                                             @endauth
                                         </form>
-                                        <ul class="product-links">
-                                            <li><a href="/cart">Add to Cart</a></li>
-                                        </ul>
+                                        <form action="/add_cart/{{ $product->id }}" method="POST">
+                                            @csrf
+                                            <ul class="product-links">
+                                                <li>
+                                                    <a>
+                                                        <button type="submit" class="btn btn-link text-decoration-none text-white pb-5">Add to Cart</button>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </form>
                                     </div>
                                     <div class="product-content">
                                         <ul class="rating row">
@@ -395,9 +432,16 @@
                                             </button>
                                             @endauth
                                         </form>
-                                        <ul class="product-links">
-                                            <li><a href="/cart">Add to Cart</a></li>
-                                        </ul>
+                                        <form action="/add_cart/{{ $product->id }}" method="POST">
+                                            @csrf
+                                            <ul class="product-links">
+                                                <li>
+                                                    <a>
+                                                        <button type="submit" class="btn btn-link text-decoration-none text-white pb-5">Add to Cart</button>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </form>
                                     </div>
                                     <div class="product-content">
                                         <ul class="rating row">
@@ -452,9 +496,16 @@
                                             </button>
                                             @endauth
                                         </form>
-                                        <ul class="product-links">
-                                            <li><a href="/cart">Add to Cart</a></li>
-                                        </ul>
+                                        <form action="/add_cart/{{ $product->id }}" method="POST">
+                                            @csrf
+                                            <ul class="product-links">
+                                                <li>
+                                                    <a>
+                                                        <button type="submit" class="btn btn-link text-decoration-none text-white pb-5">Add to Cart</button>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </form>
                                     </div>
                                     <div class="product-content">
                                         <ul class="rating row">

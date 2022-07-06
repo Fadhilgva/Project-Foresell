@@ -138,8 +138,14 @@
     <div class="container">
         <div class="h2 title mb-1">Featured Products</div>
         <div class="fs-6 mt-n1 mb-1">Browse the Newest Products</div>
+        @if (session()->has('success'))
+        <div class="alert alert-success alert-dismissible fade show text-center mx-auto col-5" role="alert">
+            <small>{{ session('success') }}</small>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
         <div id="carouselExampleIndicators2" class="carousel slide mb-0" data-bs-ride="true">
-            <div class="carousel-inner carousel-products" style="height: 500px;">
+            <div class="carousel-inner carousel-products" style="height: 520px;">
                 <div class="carousel-item active">
                     <div class="row">
                         @foreach ($products->take(4) as $product)
@@ -171,9 +177,16 @@
                                         </button>
                                         @endauth
                                     </form>
-                                    <ul class="product-links">
-                                        <li><a href="/cart">Add to Cart</a></li>
-                                    </ul>
+                                    <form action="/add_cart/{{ $product->id }}" method="POST">
+                                        @csrf
+                                        <ul class="product-links">
+                                            <li>
+                                                <a>
+                                                    <button type="submit" class="btn btn-link text-decoration-none text-white pb-5">Add to Cart</button>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </form>
                                 </div>
                                 <div class="product-content">
                                     <ul class="rating row">
@@ -228,9 +241,16 @@
                                         </button>
                                         @endauth
                                     </form>
-                                    <ul class="product-links">
-                                        <li><a href="/cart">Add to Cart</a></li>
-                                    </ul>
+                                    <form action="/add_cart/{{ $product->id }}" method="POST">
+                                        @csrf
+                                        <ul class="product-links">
+                                            <li>
+                                                <a>
+                                                    <button type="submit" class="btn btn-link text-decoration-none text-white pb-5">Add to Cart</button>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </form>
                                 </div>
                                 <div class="product-content">
                                     <ul class="rating row">
@@ -285,9 +305,16 @@
                                         </button>
                                         @endauth
                                     </form>
-                                    <ul class="product-links">
-                                        <li><a href="/cart">Add to Cart</a></li>
-                                    </ul>
+                                    <form action="/add_cart/{{ $product->id }}" method="POST">
+                                        @csrf
+                                        <ul class="product-links">
+                                            <li>
+                                                <a>
+                                                    <button type="submit" class="btn btn-link text-decoration-none text-white pb-5">Add to Cart</button>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </form>
                                 </div>
                                 <div class="product-content">
                                     <ul class="rating row">

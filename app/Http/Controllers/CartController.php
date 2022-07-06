@@ -14,7 +14,7 @@ class CartController extends Controller
     {
         $itemuser = $request->user();
         $cartdetail = CartDetail::where('user_id', $itemuser->id)->get();
-        $cart = Cart::where('user_id', $itemuser->id)->get();
+        $cart = Cart::where('user_id', $itemuser->id)->latest()->get();
 
         return view('customer.cart', [
             'title' => 'Cart',
@@ -70,6 +70,53 @@ class CartController extends Controller
         }
     }
 
+    public function storeproduct(Request $request, $id)
+    {
+        $userid = auth()->user()->id;
+        $product = Product::find($id);
+        $userproduct = Cart::where('user_id', $userid)->where('product_id', $product->id)->first();
+        $userdetail = CartDetail::where('user_id', $userid)->first();
+
+
+        if ($userproduct) {
+            $userproduct->qty += $request->quantity;
+            $userproduct->total_product += ($product->price * ((100 - $product->discount) / 100)) * $request->quantity;
+            $userproduct->save();
+
+            if ($userdetail) {
+                $userdetail['total_disc'] += ($product->price * (($product->discount) / 100)) * $request->quantity;
+                $userdetail['total'] += ($product->price * ((100 - $product->discount) / 100)) * $request->quantity;
+                $userdetail->save();
+                return back()->with('success1', 'Product Added to Cart Successfully');
+            } else {
+                $cart['user_id'] = $userid;
+                $cart['total_disc'] = ($product->price * (($product->discount) / 100)) * $request->quantity;
+                $cart['total'] = ($product->price * ((100 - $product->discount) / 100)) * $request->quantity;
+                $itemcart = CartDetail::create($cart);
+                return back()->with('success1', 'Product Added to Cart Successfully');
+            }
+        } else {
+            $input['user_id'] = $userid;
+            $input['product_id'] = $product->id;
+            $input['qty'] = $request->quantity;
+            $input['total_product'] = ($product->price * ((100 - $product->discount) / 100)) * $request->quantity;
+            $itemcart = Cart::create($input);
+
+            if ($userdetail) {
+                $userdetail['total_disc'] += ($product->price * (($product->discount) / 100)) * $request->quantity;
+                $userdetail['total'] += ($product->price * ((100 - $product->discount) / 100)) * $request->quantity;
+                $userdetail->save();
+                return back()->with('success1', 'Product Added to Cart Successfully');
+            } else {
+                $cart['user_id'] = $userid;
+                $cart['total_disc'] = ($product->price * (($product->discount) / 100)) * $request->quantity;
+                $cart['total'] = ($product->price * ((100 - $product->discount) / 100)) * $request->quantity;
+                $itemcart = CartDetail::create($cart);
+                return back()->with('success1', 'Product Added to Cart Successfully');
+            }
+        }
+    }
+
     public function destroy(Request $request)
     {
         $delete = CartDetail::where('user_id', Auth::user()->id)->get();
@@ -86,4 +133,20 @@ class CartController extends Controller
             return back();
         }
     }
+
+    // public function minusproduct($id)
+    // {
+    //     $cart = Cart::find($id);
+    //     $cart->qty -= 1;
+    //     if ($cart->qty = 0) {
+    //         $cart->delete();
+    //     }
+    //     return back();
+    // }
+    // public function plusproduct($id)
+    // {
+    //     $cart = Cart::find($id);
+    //     $cart->qty += 1;
+    //     return back();
+    // }
 }

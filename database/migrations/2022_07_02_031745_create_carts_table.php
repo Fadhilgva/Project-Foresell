@@ -19,7 +19,7 @@ class CreateCartsTable extends Migration
             $table->foreignId('product_id');
             $table->foreignId('user_id');
             $table->unsignedInteger('qty');
-            $table->unsignedDouble('total_product');
+            $table->unsignedInteger('total_product');
             $table->timestamps();
         });
     }

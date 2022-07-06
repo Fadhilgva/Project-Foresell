@@ -5,10 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AdminBank extends Model
+class OrderDetails extends Model
 {
     use HasFactory;
-
-    protected $table = 'admin_bank';
     protected $guarded = ['id'];
+
+    public function Order()
+    {
+        return $this->belongsTo(Orders::class, 'order_id');
+    }
 }

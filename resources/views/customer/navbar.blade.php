@@ -75,7 +75,7 @@
                         @endauth
                         @guest
                         <li class="navbar-item">
-                            <a class="nav-link me-3
+                            <a class="nav-link me-4
                                 {{  Request::is ('cart') ? 'active' : '' }}" href="/cart">
                                 <img src="{{ asset('img/customer/bx-cart.svg') }}" class="d-inline-block align-text" alt="" width="30"> Cart
                             </a>
