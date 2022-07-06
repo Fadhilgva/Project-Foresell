@@ -15,7 +15,7 @@
         </div>
 
         <div class="form-group">
-            <label> Category </label>
+            <label> Name </label>
             <input type="text" name="produk" class="form-control">
         </div>
 
