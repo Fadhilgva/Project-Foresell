@@ -3,6 +3,7 @@
 @section('container')
 <div class="container">
     <div class="row">
+        @if($carts->count()>0)
         <div class="col-lg-10 mx-auto" style="margin-top: 60px; margin-bottom:50px">
             {{-- Order Navigasi --}}
             <div>
@@ -28,7 +29,6 @@
 
             {{-- Cart --}}
             <div class="row">
-                @if($carts->count()>0)
                 <div class="col-lg-9 my-3">
                     <div class="table-responsive mb-4">
                         <table class="table">
@@ -64,13 +64,21 @@
                                     </td>
                                     <td class="p-3 align-middle border-0">
                                         <div class="quantity p-1">
-                                            <button class="dec-btn p-1">
-                                                <i class='bx bx-minus'></i>
-                                            </button>
+                                            {{-- <form action="/minusproduct/{{$cart->id}}" method="POST">
+                                                @csrf --}}
+                                                <button class="dec-btn p-1">
+                                                    <i class='bx bx-minus'></i>
+                                                </button>
+                                                {{--
+                                            </form> --}}
                                             <input class="form-control border-0 shadow-sm-0 p-0 quantity" type="number" value="{{ $cart->qty }}" min="1" max="100" name="quantity" />
-                                            <button class="inc-btn p-1">
-                                                <i class='bx bx-plus'></i>
-                                            </button>
+                                            {{-- <form action="/plusproduct/{{$cart->id}}" method="POST">
+                                                @csrf --}}
+                                                <button class="inc-btn p-1">
+                                                    <i class='bx bx-plus'></i>
+                                                </button>
+                                                {{--
+                                            </form> --}}
                                         </div>
                                     </td>
                                     <td class="p-3 align-middle border-0">
@@ -116,9 +124,6 @@
                         </div>
                     </div>
                 </div>
-                @else
-                <p class="text-center fs-4 title noproduct mt-3">No Product found</p>
-                @endif
             </div>
 
             {{-- Navigation --}}
@@ -133,6 +138,46 @@
                 </div>
             </div>
         </div>
+
+        @else
+        <div class="col-lg-10 mx-auto" style="margin-top: 60px; margin-bottom:50px">
+            {{-- Order Navigasi --}}
+            <div>
+                <div class="h2 mb-5 text-center title">Shopping cart</div>
+                <ul class="nav nav-tabs nav-fill border-bottom mb-4">
+                    <li class="mx-auto">
+                        <a class="nav-link title" aria-current="page">1. Shopping cart</a>
+                    </li>
+                    <li class="mx-auto"></li>
+                    <li class="mx-auto">
+                        <a class="nav-link disabled" aria-current="page">2. Shipping Details</a>
+                    </li>
+                    <li class="mx-auto"></li>
+                    <li class="mx-auto">
+                        <a class="nav-link disabled" aria-current="page">3. Billing Information</a>
+                    </li>
+                    <li class="mx-auto"></li>
+                    <li class="mx-auto">
+                        <a class="nav-link disabled" aria-current="page">3. Completed</a>
+                    </li>
+                </ul>
+            </div>
+
+            {{-- Cart --}}
+            <div class="row">
+                <p class="text-center fs-4 title noproduct mt-3">No Product found</p>
+            </div>
+
+            {{-- Navigation --}}
+            <div class="mt-3">
+                <div class="row align-items-center text-center">
+                    <div class="col-md-6 mb-3 mb-md-0 text-md-start">
+                        <a class="btn btn-outline-dark" href="/products"><i class='bx bx-shopping-bag'></i> Back to Products</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
     </div>
 </div>
 @endsection

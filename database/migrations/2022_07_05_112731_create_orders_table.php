@@ -16,8 +16,11 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            // $table->foreignId('bank_id')->nullable();
-            // $table->foreignId('courier_id')->nullable();
+            $table->foreignId('bank_id')->nullable();
+            $table->foreignId('courier_id')->nullable();
+            $table->unsignedInteger('total_disc')->nullable();
+            $table->unsignedInteger('total')->nullable();
+            $table->string('status')->default('Processed');
             $table->string('name');
             $table->string('email');
             $table->string('phone');

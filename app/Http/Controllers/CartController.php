@@ -133,4 +133,20 @@ class CartController extends Controller
             return back();
         }
     }
+
+    // public function minusproduct($id)
+    // {
+    //     $cart = Cart::find($id);
+    //     $cart->qty -= 1;
+    //     if ($cart->qty = 0) {
+    //         $cart->delete();
+    //     }
+    //     return back();
+    // }
+    // public function plusproduct($id)
+    // {
+    //     $cart = Cart::find($id);
+    //     $cart->qty += 1;
+    //     return back();
+    // }
 }

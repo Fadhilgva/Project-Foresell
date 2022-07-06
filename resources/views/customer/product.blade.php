@@ -76,7 +76,7 @@
                         <form action="/add_cartproduct/{{ $product->id }}" method="POST">
                             @csrf
                             <div class="ms-3">
-                                <input type="number" name="quantity" min="1" max="{{ $product->qty }}" value="1">
+                                <input type="number" name="quantity" min="1" max="{{ $product->stock }}" value="1">
                                 <button class="btn text-white" type="submit" style="background-color: #001135">Add to cart</button>
                             </div>
                         </form>

@@ -14,13 +14,17 @@ class Orders extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-    // public function Bank()
-    // {
-    //     return $this->belongsTo(Bank::class, 'bank_id');
-    // }
+    public function Bank()
+    {
+        return $this->belongsTo(AdminBank::class, 'bank_id');
+    }
 
-    // public function Courier()
-    // {
-    //     return $this->belongsTo(Courier::class, 'courier_id');
-    // }
+    public function Courier()
+    {
+        return $this->belongsTo(Courier::class, 'courier_id');
+    }
+    public function OrderDetail()
+    {
+        return $this->hasMany(OrderDetails::class);
+    }
 }

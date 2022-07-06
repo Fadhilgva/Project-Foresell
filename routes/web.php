@@ -121,23 +121,16 @@ Route::group(
         Route::get('/cart', [CartController::class, 'index']);
         Route::post('/add_cart/{product:id}', [CartController::class, 'store']);
         Route::post('/add_cartproduct/{product:id}', [CartController::class, 'storeproduct']);
+        // Route::post('/minusproduct/{cart:id}', [CartController::class, 'minusproduct']);
+        // Route::post('/plusproduct/{cart:id}', [CartController::class, 'plusproduct']);
         Route::post('/delete_cart', [CartController::class, 'destroy']);
         Route::get('/shipping', [OrdersCustController::class, 'index']);
-        Route::post('/editshipping', [OrdersCustController::class, 'update']);
+        Route::post('/editshipping', [OrdersCustController::class, 'updateaddress']);
+        Route::get('/billing', [OrdersCustController::class, 'billing']);
+        Route::post('/billing', [OrdersCustController::class, 'storebilling']);
+        Route::get('/completed', [OrdersCustController::class, 'completed']);
     }
 );
-
-Route::get('/billing', function () {
-    return view('customer.billing', [
-        'title' => 'Billing'
-    ]);
-});
-
-Route::get('/completed', function () {
-    return view('customer.completed', [
-        'title' => 'Completed'
-    ]);
-});
 
 Route::get('/orders', function () {
     return view('customer.orders', [

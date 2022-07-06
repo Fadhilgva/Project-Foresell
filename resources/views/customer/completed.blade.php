@@ -32,7 +32,7 @@
                     <img src="{{ asset('img/customer/check.svg') }}" width="100">
                     {{-- <img src="img/package.svg" width="100"> --}}
                 </div>
-                <div class="h4 title mb-1">Thank you, Fadhil. Your order is confirmed.</div>
+                <div class="h4 title mb-1">Thank you, {{ Auth::user()->name }}. Your order is Confirmed.</div>
                 <div class="fs-6 mt-n1 mb-3">Your order hasn't shipped yet but we will send you ane email when it does.</div>
                 <div class="row align-items-center text-center">
                     <div class="col-md-12 mx-auto">

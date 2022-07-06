@@ -16,9 +16,7 @@ class CreateAdminBanksTable extends Migration
         Schema::create('admin_bank', function (Blueprint $table) {
             $table->id();
             $table->string('bankName');
-            $table->string('email');
-            $table->string('logo');
-            $table->string('phoneNumber');
+            $table->string('image')->nullable();
             $table->string('noRekening');
             $table->timestamps();
         });

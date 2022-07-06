@@ -21,8 +21,8 @@
             <div class="product-grid shadow-sm">
                 <div class="product-image">
                     <a href="/products/{{ $product->slug }}" class="image">
-                        <img class="img-1" src="{{ asset('https://source.unsplash.com/600x600?technology') }}" width="500" height="500">
-                        <img class="img-2" src="{{ asset('https://source.unsplash.com/600x600?product') }}" width="500" height="500">
+                        <img class="img-1" src="{{ asset('img/customer/img-1.png') }}" width="500" height="500">
+                        <img class="img-2" src="{{ asset('img/customer/img-2.png') }}" width="500" height="500">
                     </a>
                     @if($product->discount >= 1)
                     <span class="product-hot-label">{{ $product->discount }}% OFF</span>
