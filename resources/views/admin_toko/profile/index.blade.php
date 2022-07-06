@@ -27,7 +27,7 @@
                 <div class="col-md-12 my-2">
                     <div class="form-floating-sm">
                         <label for="name">Full Name</label>
-                        <input type="text" class="form-control form-control-sm" id="name" name="name" placeholder="Enter your full name" >
+                        <p>Toko A</p>
                     </div>
                 </div>
                 <div class="col-md-6 my-1">
