@@ -103,6 +103,13 @@ class OrdersCustController extends Controller
             return redirect('/cart');
         }
 
+        foreach ($carts as $cart) {
+            $product = Product::find($cart->product->id);
+            $product['stock'] -= $cart->qty;
+            $product['sold'] += $cart->qty;
+            $product->save();
+        }
+
         return redirect('/completed');
     }
 
