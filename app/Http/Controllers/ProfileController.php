@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Store;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -12,7 +15,12 @@ class ProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        return view('admin_toko.profile.index');
+
+        // $store = DB::select("SELECT u.name AS userName, u.email AS userEmail, s.name AS name, s.image AS image, s.address AS address, s.postalcode AS postcode FROM stores s, users u 
+        // WHERE s.user_id = u.id");
+
+        $store = Store::where('user_id', Auth::user()->id)->first();
+        return view('admin_toko.profile.index', compact('store'));
     }
 
     /**

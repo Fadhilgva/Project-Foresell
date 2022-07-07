@@ -27,7 +27,7 @@
                 <div class="col-md-12 my-2">
                     <div class="form-floating-sm">
                         <label for="name">Full Name</label>
-                        <p>Toko A</p>
+                        <p>{{ $store->name }}</p>
                     </div>
                 </div>
                 <div class="col-md-6 my-1">
