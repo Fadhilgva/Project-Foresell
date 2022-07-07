@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Store;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
 
 class AdminTokoRegisterController extends Controller
 {
@@ -36,7 +42,46 @@ class AdminTokoRegisterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'storeName' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string', 'max:255'],
+            'city' => ['required', 'string', 'max:255'],
+            'postalcode' => ['required', 'string', 'max:255'],
+            'phone' => ['required'],
+            'logo' => 'required|mimes:jpg,jpeg,png',
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'same:confirm_password'],
+            'confirm_password' => ['required']
+        ]);
+
+        $logo = time().'-'.$request->logo->getClientOriginalName();
+        $request->logo->move('image\adminToko\logo', $logo);
+
+        $user = User::create([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        $user->attachRole('adminToko');
+
+        event(new Registered($user));
+
+        Auth::login($user);
+
+        $store = Store::create([
+            'name' => $request->storeName,
+            'address' => $request->storeName,
+            'location' => $request->city,
+            'email' => $request->email,
+            'iamge' => $request->logo,
+            'slug' => Str::slug($request->storeName),
+            'user_id' => Auth::user()->id,
+        ]);
+
+        return redirect()->route('store.home');
     }
 
     /**

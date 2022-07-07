@@ -151,14 +151,15 @@ Route::get('/orderdetails', function () {
 Route::get('/admin_toko/login_store', [AdminTokoLoginController::class, 'index']);
 
 //CRUD Register
-Route::get('/admin_toko/register_store', [AdminTokoRegisterController::class, 'index']);
+Route::get('/admin_toko/register_store', [AdminTokoRegisterController::class, 'index'])->name('store.index');
+Route::post('/admin_toko/register_store', [AdminTokoRegisterController::class, 'store'])->name('store.store');
 
 //CRUD Login
 Route::get('/admin_toko/profile', [ProfileController::class, 'index']);
 Route::get('/admin_toko/profile/create', [ProfileController::class, 'create']);
 
 //CRUD Home
-Route::get('/admin_toko/home_store', [AdminTokoHomeController::class, 'index']);
+Route::get('/admin_toko/home_store', [AdminTokoHomeController::class, 'index'])->name('store.home');
 
 //CRUD Data Produk
 // Route::get('/data_produk','DataProdukController@data_produk');
