@@ -11,8 +11,8 @@
 <form action="/data_produk" method="POST" enctype="multipart/form-data">
 
     <div class="form-group">
-        <label> Id. </label>
-        <input type="text" name="produk" class="form-control">
+        <label> Gambar Kategori </label>
+        <input type="file" name="gambar_produk" class="form-control">
     </div>
     
     <div class="form-group">

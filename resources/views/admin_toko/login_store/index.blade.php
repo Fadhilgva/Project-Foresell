@@ -16,7 +16,7 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-10">
-                            <h3 class="display-6 title mb-0">Login as Store Admin</h3>
+                            <h3 class="display-6 title mb-0">Login Admin Store</h3>
                             <p class="caption-text text-muted mb-4">Please enter the details below to login</p>
 
                             {{-- Alert registrasi sukses --}}
@@ -68,8 +68,8 @@
                             </form>
 
                             <p class="text-center small mt-2">
-                                Don't have an account yet?
-                                <a class="fw-bold text-decoration-none text-dark" href="/admin_toko/register_store">Create One</a>
+                                Belum ada akun?
+                                <a class="fw-bold text-decoration-none text-dark" href="/admin_toko/register_store">Buat Satu</a>
                             </p>
                         </div>
                     </div>

@@ -33,6 +33,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Picture</th>
                 <th>Category</th>
                 <th>Description</th>
                 <th>Action</th>
@@ -41,6 +42,7 @@
         <tfoot>
             <tr>
                 <th>Id</th>
+                <th>Picture</th>
                 <th>Category</th>
                 <th>Description</th>
                 <th>Action</th>
@@ -49,18 +51,21 @@
         <tbody>
             <tr>
                 <td>1</td>
+                <td><img src="/img/admin_store/undraw_rocket.svg" width="100" class="img-thumbnail"></td>
                 <td>Makanan</td>
                 <td>Menurut Rustan, Lorem Ipsum atau lipsum awalnya merupakan cuplikan literatur Latin klasik berjudul “De Finibus Bonorum et Malorum” karya Cicero pada 45 Sebelum Masehi. Berikut contoh teks lipsum yang sering digunakan: “Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
                 <td><a type="button" class="btn btn-warning" href="/admin_toko/kategori/edit">Ubah</a> <a type="button" class="btn btn-danger" href="#">Hapus</a></td>
             </tr>
             <tr>
                 <td>2</td>
+                <td><img src="/img/admin_store/undraw_profile_3.svg" width="100" class="img-thumbnail"></td>
                 <td>Gadget</td>
                 <td>Menurut Rustan, Lorem Ipsum atau lipsum awalnya merupakan cuplikan literatur Latin klasik berjudul “De Finibus Bonorum et Malorum” karya Cicero pada 45 Sebelum Masehi. Berikut contoh teks lipsum yang sering digunakan: “Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
                 <td><a type="button" class="btn btn-warning" href="/admin_toko/kategori/edit">Ubah</a> <a type="button" class="btn btn-danger" href="#">Hapus</a></td>
             </tr>
             <tr>
                 <td>3</td>
+                <td><img src="/img/admin_store/undraw_profile_2.svg" width="100" class="img-thumbnail"></td>
                 <td>Kendaraan</td>
                 <td>Menurut Rustan, Lorem Ipsum atau lipsum awalnya merupakan cuplikan literatur Latin klasik berjudul “De Finibus Bonorum et Malorum” karya Cicero pada 45 Sebelum Masehi. Berikut contoh teks lipsum yang sering digunakan: “Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
                 <td><a type="button" class="btn btn-warning" href="/admin_toko/kategori/edit">Ubah</a> <a type="button" class="btn btn-danger" href="#">Hapus</a></td>
@@ -68,6 +73,7 @@
             
             <tr>
                 <td>4</td>
+                <td><img src="/img/admin_store/undraw_profile_1.svg" width="100" class="img-thumbnail"></td>
                 <td>Mainan</td>
                 <td>Menurut Rustan, Lorem Ipsum atau lipsum awalnya merupakan cuplikan literatur Latin klasik berjudul “De Finibus Bonorum et Malorum” karya Cicero pada 45 Sebelum Masehi. Berikut contoh teks lipsum yang sering digunakan: “Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
                 <td><a type="button" class="btn btn-warning" href="/admin_toko/kategori/edit">Ubah</a> <a type="button" class="btn btn-danger" href="#">Hapus</a></td>

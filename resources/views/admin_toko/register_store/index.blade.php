@@ -16,7 +16,7 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-10">
-                            <h3 class="display-6 title mb-0">Register Store</h3>
+                            <h3 class="display-6 title mb-0">Register Store (Daftar Store)</h3>
                             <p class="caption-text text-muted mb-3">Please enter the details below to register your store</p>
 
                             <form action="/register" method="POST">
@@ -28,7 +28,7 @@
                                             <input type="name" name="name" class="form-control @error('name')
                                             is-invalid
                                             @enderror" id="name" placeholder="Full Name" required value="{{ old('name') }}" />
-                                            <label for="name">Full Name</label>
+                                            <label for="name">Username</label>
                                             @error('name')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -50,20 +50,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-6">
-                                        <div class="form-floating">
-                                            <input type="text" name="phone" class="form-control
-                                            @error('phone')
-                                            is-invalid
-                                            @enderror" id="phone" placeholder="08XXXXXXXXXX" required value="{{ old('phone') }}" />
-                                            <label for="phone">Phone Number</label>
-                                            @error('phone')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                            @enderror
-                                        </div>
-                                    </div>
+                                    
                                     <div class="col-6">
                                         <div class="form-floating">
                                             <input type="password" name="password" class="form-control
@@ -78,7 +65,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="row g-3 mb-4">
                                         <div class="form-floating">
                                             <input type="password" name="confirm_password" class="form-control" id="confirm_password" placeholder="08XXXXXXXXXX" required value="" />
                                             <label for="confirm_password">Confirm Password</label>
@@ -86,12 +73,12 @@
                                     </div>
                                 </div>
                                 <div class="row align-items-center mt-4">
-                                    <button type="submit" class="btn btn-dark login mx-auto">Create Your Account
+                                    <button type="submit" class="btn btn-dark login mx-auto">Buat Akun
                                     </button>
                                 </div>
                             </form>
                             <p class="text-center small mt-2">
-                                Already have an account?
+                                Sudah Punya Akun?
                                 <a class="fw-bold text-decoration-none text-dark" href="/admin_toko/login_store">Login</a>
                             </p>
                         </div>

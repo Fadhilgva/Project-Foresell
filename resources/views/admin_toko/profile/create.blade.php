@@ -21,14 +21,8 @@
                     <h5 class="mt-4 mb-2 title">Personal Profile</h5>
                     <div class="col-md-12 my-2">
                         <div class="form-floating-sm">
-                            <label for="name">Full Name</label>
-                            <input type="text" class="form-control form-control-sm" id="name" name="name" placeholder="Enter your full name" >
-                        </div>
-                    </div>
-                    <div class="col-md-6 my-1">
-                        <div class="form-floating-sm">
-                            <label for="email">Email Address</label>
-                            <input type="email" class="form-control form-control-sm" id="email" name="email" placeholder="Enter your email address" >
+                            <label for="name">Nama Toko</label>
+                            <input type="text" class="form-control form-control-sm" id="name" name="name" placeholder=".Enter your Store Name." >
                         </div>
                     </div>
                     <div class="col-md-6 my-1">
@@ -88,7 +82,7 @@
             </div>
         </div>
         <div class="mt-5 text-center">
-            <button type="submit" class="btn btn-dark">Save Profile</button>
+            <a type="submit" class="btn btn-dark" href="/admin_toko/profile">Save Profile</a>
         </div>
     </form>
 </div>

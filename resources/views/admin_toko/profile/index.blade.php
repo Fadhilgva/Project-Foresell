@@ -23,23 +23,29 @@
         </div>
         <div class="col-md-5 mt-3">
             <div class="row g-3">
-                <h5 class="mt-4 mb-2 title">Personal Profile</h5>
+                <h5 class="mt-4 mb-2 title">Profile Toko</h5>
                 <div class="col-md-12 my-2">
                     <div class="form-floating-sm">
-                        <label for="name">Full Name</label>
+                        <label for="name">UserName (permanen)</label>
+                        <p>UserName </p>
+                    </div>
+                </div>
+                <div class="col-md-12 my-2">
+                    <div class="form-floating-sm">
+                        <label for="name">Nama Toko</label>
                         <p>Toko A</p>
                     </div>
                 </div>
                 <div class="col-md-6 my-1">
                     <div class="form-floating-sm">
-                        <label for="email">Email Address</label>
-                        <input type="email" class="form-control form-control-sm" id="email" name="email" placeholder="Enter your email address" >
+                        <label for="email">Email Address (permanen)</label>
+                        <p>tokoA@Gmail.com</p>
                     </div>
                 </div>
                 <div class="col-md-6 my-1">
                     <div class="form-floating-sm">
                         <label for="phone">Phone Number</label>
-                        <input type="phone" class="form-control form-control-sm" id="phone" name="phone" placeholder="Enter your phone number" >
+                        <p>012345678</p>
                     </div>
                 </div>
             </div>
@@ -50,19 +56,19 @@
                 <div class="col-md-6 my-2">
                     <div class="form-floating-sm">
                         <label for="city">City</label>
-                        <input type="text" class="form-control form-control-sm" id="city" name="city" placeholder="Enter your city" >
+                        <p>Jakarta Timur</p>
                     </div>
                 </div>
                 <div class="col-md-6 my-1">
                     <div class="form-floating-sm">
                         <label for="postalcode">Post Code</label>
-                        <input type="text" class="form-control form-control-sm" id="postalcode" name="postalcode" placeholder="Enter your post code" >
+                        <p>131313</p>
                     </div>
                 </div>
                 <div class="col-md-12 my-1">
                     <div class="form-floating-sm">
                         <label for="address">Address</label>
-                        <textarea type="text" class="form-control form-control-sm" id="address" name="address" placeholder="Enter your address" rows="3" ></textarea>
+                        <p>Menurut Rustan, Lorem Ipsum atau lipsum awalnya merupakan cuplikan literatur Latin klasik berjudul “De Finibus Bonorum et Malorum” karya Cicero pada 45 Sebelum Masehi. Berikut contoh teks lipsum yang sering digunakan: “Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                     </div>
                 </div>
             </div>

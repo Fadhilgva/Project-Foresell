@@ -11,8 +11,8 @@
 <form action="/data_produk" method="POST" enctype="multipart/form-data">
 
     <div class="form-group">
-        <label> No. </label>
-        <input type="text" name="produk" class="form-control">
+        <label> Gambar Produk </label>
+        <input type="file" name="gambar_produk" class="form-control">
     </div>
     
     <div class="form-group">
@@ -20,15 +20,18 @@
         <input type="text" name="produk" class="form-control">
     </div>
 
-    <div class="form-group">
-        <label> Product Picture </label>
-        <input type="file" name="gambar_produk" class="form-control">
-    </div>
+    
 
     <div class="form-group">
-        <label> Category </label>
-        <input type="text" name="harga" class="form-control">
-    </div>
+        <label for="exampleFormControlSelect1">Category</label>
+        <select class="form-control" id="exampleFormControlSelect1">
+          <option>Makanan</option>
+          <option>Gadget</option>
+          <option>Kendaraan</option>
+          <option>Mainan</option>
+          <option>lain-lain</option>
+        </select>
+      </div>
 
     <div class="form-group">
         <label>Description</label>
@@ -45,33 +48,31 @@
         <input type="text" name="harga" class="form-control">
     </div>
 
-    <div class="form-group">
-        <label> Status </label><br>
-        <input type="radio" name="status" value="0">Akfif<br>
-        <input type="radio" name="status" value="1">Tidak Akfif
-    </div>
+    <fieldset class="form-group">
+        <div class="row">
+          <legend class="col-form-label col-sm-2 pt-0">Status</legend>
+          <div class="col-sm-10">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+              <label class="form-check-label" for="gridRadios1">
+                Aktif
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+              <label class="form-check-label" for="gridRadios2">
+                Tidak Aktif
+              </label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
 
     <div class="form-group">
         <label> Date Created </label>
         <input type="text" name="harga" class="form-control">
     </div>
 
-{{-- 
-    <div class="form-group">
-        <label> Rating 2</label><br>
-        <select>
-            <optgroup label="rating">
-                <option value="0">1</option>
-                <option value="1">2</option>
-                <option value="2">3</option>
-                <option value="3">4</option>
-                <option value="4">5</option>
-        </select>
-    </div>
-
-     --}}
-
-    
 
      <button type="submit" class="btn btn-primary">Submit</button>
 </form>
