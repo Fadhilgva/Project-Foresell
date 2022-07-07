@@ -178,7 +178,7 @@
                             </div>
                             </form>
                             <p class="text-center small mt-2">
-                                Sudah Punya Akun?
+                                Already have an account?
                                 <a class="fw-bold text-decoration-none text-dark" href="/admin_toko/login_store">Login</a>
                             </p>
                         </div>
