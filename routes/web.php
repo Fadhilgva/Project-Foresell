@@ -102,6 +102,14 @@ Route::group(
         //LOGIN ADMIN
         Route::get('/admin-foresell/login', [AdminAuthenticatedSessionController::class, 'create'])->name('admin.login');
         Route::post('/admin-foresell/login', [AdminAuthenticatedSessionController::class, 'store'])->name('admin.login.store');
+
+        //CRUD Login ADMIN TOKO
+        Route::get('/admin_toko/login_store', [AdminTokoLoginController::class, 'index']);
+        Route::post('/admin_toko/login_store', [AdminTokoLoginController::class, 'store'])->name('store.login');
+
+        //CRUD Register ADMIN TOKO
+        Route::get('/admin_toko/register_store', [AdminTokoRegisterController::class, 'index'])->name('store.index');
+        Route::post('/admin_toko/register_store', [AdminTokoRegisterController::class, 'store'])->name('store.store');
     }
 );
 
@@ -147,14 +155,9 @@ Route::get('/orderdetails', function () {
 * ADMIN TOKO
 *
 */
-//CRUD Login
-Route::get('/admin_toko/login_store', [AdminTokoLoginController::class, 'index']);
 
-//CRUD Register
-Route::get('/admin_toko/register_store', [AdminTokoRegisterController::class, 'index'])->name('store.index');
-Route::post('/admin_toko/register_store', [AdminTokoRegisterController::class, 'store'])->name('store.store');
-
-//CRUD Login
+Route::middleware(['auth', 'role:adminToko'])->group(function () {
+    //CRUD Login
 Route::get('/admin_toko/profile', [ProfileController::class, 'index']);
 Route::get('/admin_toko/profile/create', [ProfileController::class, 'create']);
 
@@ -186,6 +189,8 @@ Route::get('/admin_toko/data_penjualan', [DataPenjualanController::class, 'index
 //CRUD Tambah Diskon
 Route::get('/admin_toko/tambah_diskon', [TambahDiskonController::class, 'index']);
 Route::get('/admin_toko/tambah_diskon/edit', [TambahDiskonController::class, 'edit']);
+
+});
 
 
 //----------------------------------------------------------------------------------------------------
