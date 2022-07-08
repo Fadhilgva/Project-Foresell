@@ -16,8 +16,8 @@ class CreateCartDetailsTable extends Migration
         Schema::create('cart_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->unsignedInteger('total_disc');
-            $table->unsignedInteger('total');
+            $table->unsignedDouble('total_disc');
+            $table->unsignedDouble('total');
             $table->timestamps();
         });
     }

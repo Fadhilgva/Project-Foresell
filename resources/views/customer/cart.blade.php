@@ -40,7 +40,7 @@
                                     <th class="border-0 p-3 h6 title" scope="col">
                                         Price
                                     </th>
-                                    <th class="border-0 p-3 h6 title" scope="col">
+                                    <th class="border-0 p-3 h6 title ps-5" scope="col">
                                         Quantity
                                     </th>
                                     <th class="border-0 p-3 ps-4 h6 title" scope="col">
@@ -63,23 +63,16 @@
                                         <p class="mb-0 small">Rp{{ $cart->product->price * ((100 - $cart->product->discount)/100) }}</p>
                                     </td>
                                     <td class="p-3 align-middle border-0">
-                                        <div class="quantity p-1">
-                                            {{-- <form action="/minusproduct/{{$cart->id}}" method="POST">
-                                                @csrf --}}
-                                                <button class="dec-btn p-1">
-                                                    <i class='bx bx-minus'></i>
-                                                </button>
-                                                {{--
-                                            </form> --}}
-                                            <input class="form-control border-0 shadow-sm-0 p-0 quantity" type="number" value="{{ $cart->qty }}" min="1" max="100" name="quantity" />
-                                            {{-- <form action="/plusproduct/{{$cart->id}}" method="POST">
-                                                @csrf --}}
-                                                <button class="inc-btn p-1">
-                                                    <i class='bx bx-plus'></i>
-                                                </button>
-                                                {{--
-                                            </form> --}}
-                                        </div>
+                                        <form action="/update_cart" method="POST">
+                                            @csrf
+                                            <div class="row">
+                                                <div class="col-5">
+                                                    <input type="hidden" name="cart" value="{{ $cart->id }}">
+                                                    <input type="number" name="quantity" value="{{ $cart->qty }}" class="w-100 ms-5">
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-sm btn-dark ms-5    mt-2" style="margin-right:20px">Update</button>
+                                        </form>
                                     </td>
                                     <td class="p-3 align-middle border-0">
                                         <p class="mb-0 small">Rp{{ $cart->total_product }}</p>
@@ -110,8 +103,7 @@
                                 <li class="d-flex align-items-center justify-content-between mt-3 mb-1">
                                     <strong class="small font-weight-bold">Discount
                                     </strong>
-                                    <span>-Rp{{ $cart->total_disc }}
-                                    </span>
+                                    <span> -Rp{{ $cart->total_disc }}</span>
                                 </li>
                                 <li class="d-flex align-items-center justify-content-between mb-4">
                                     <strong class="small font-weight-bold">Total

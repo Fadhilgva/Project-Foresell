@@ -14,7 +14,7 @@ class CartController extends Controller
     {
         $itemuser = $request->user();
         $cartdetail = CartDetail::where('user_id', $itemuser->id)->get();
-        $cart = Cart::where('user_id', $itemuser->id)->latest()->get();
+        $cart = Cart::where('user_id', $itemuser->id)->get();
 
         return view('customer.cart', [
             'title' => 'Cart',
@@ -134,19 +134,21 @@ class CartController extends Controller
         }
     }
 
-    // public function minusproduct($id)
-    // {
-    //     $cart = Cart::find($id);
-    //     $cart->qty -= 1;
-    //     if ($cart->qty = 0) {
-    //         $cart->delete();
-    //     }
-    //     return back();
-    // }
-    // public function plusproduct($id)
-    // {
-    //     $cart = Cart::find($id);
-    //     $cart->qty += 1;
-    //     return back();
-    // }
+    public function updatecart(Request $request)
+    {
+        $cart = Cart::find($request->cart);
+        if ($cart) {
+            if ($request->quantity < 1) {
+                $cart->delete();
+                return redirect('/cart');
+            }
+
+            $cart->qty = $request->quantity;
+            $cart->save();
+        } else {
+            return redirect('/cart');
+        }
+
+        return redirect('/cart');
+    }
 }

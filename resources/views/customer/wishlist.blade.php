@@ -17,9 +17,6 @@
                     @if($wish->product->discount >= 1)
                     <span class="product-hot-label">{{ $wish->product->discount }}% OFF</span>
                     @endif
-                    {{-- <span href="" class="product-like-icon" data-tip="Add to Wishlist">
-                        <i onclick="myFunction(this)" class="bx bx-heart"></i>
-                    </span> --}}
                     <form action="/delete_wishlist" method="POST">
                         @csrf
                         <input type="hidden" name="id" id="id" value="{{ $wish->id }}">
@@ -27,9 +24,16 @@
                             <i class="bx bxs-heart"></i>
                         </button>
                     </form>
-                    <ul class="product-links">
-                        <li><a href="/cart">Add to Cart</a></li>
-                    </ul>
+                    <form action="/add_cart/{{ $wish->product->id }}" method="POST">
+                        @csrf
+                        <ul class="product-links">
+                            <li>
+                                <a>
+                                    <button type="submit" class="btn btn-link text-decoration-none text-white pb-5">Add to Cart</button>
+                                </a>
+                            </li>
+                        </ul>
+                    </form>
                 </div>
                 <div class="product-content">
                     <ul class="rating row">

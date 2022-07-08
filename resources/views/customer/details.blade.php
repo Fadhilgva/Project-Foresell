@@ -24,57 +24,53 @@
                         <main>
                             <div class="row contacts">
                                 <div class="col invoice-to">
-                                    <h2 class="to title">Muhammad Fadhil</h2>
-                                    <div class="email">muhammadfadhil@if.uai.ac.id</div>
-                                    <div class="address mt-4">DKI Jakarta, Jalan Raya Bekasi 13250
-                                    </div>
-                                    <div>Payment Method : BNI Virtual Account</div>
-                                    <div>Shipping Courier : J&T Express</div>
+                                    <h2 class="to title">{{ $orders->name }}</h2>
+                                    <div class="email">{{ $orders->email }}</div>
+                                    <div class="address mt-4">{{ $orders->address }}</div>
+                                    <div class="my-3"></div>
+                                    <div>Payment Method : {{ $orders->Bank->bankName }}</div>
+                                    <div>Shipping Courier : {{ $orders->Courier->name }}</div>
                                 </div>
                                 <div class="col invoice-details">
-                                    <h1 class="invoice-id">INVOICE 3-2-1</h1>
-                                    <div class="date">Order Date: 01/10/2018</div>
-                                    <div class="date">Order Finished: 05/10/2018</div>
+                                    <h1 class="invoice-id">INVOICE {{ $orders->id }}</h1>
+                                    <div class="date">Order Date: {{ $orders->created_at->toDateTimeString() }}</div>
                                 </div>
                             </div>
                             <table class="table table-striped my-5">
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        <th class="text-left">Product</th>
-                                        <th class="text-center">Price</th>
-                                        <th class="text-center">Quantity</th>
-                                        <th class="text-center">Total Price</th>
+                                        <th class="text-center fw-bold">Product</th>
+                                        <th class="text-center fw-bold">Price</th>
+                                        <th class="text-center fw-bold">Quantity</th>
+                                        <th class="text-center fw-bold">Discount</th>
+                                        <th class="text-center fw-bold">Total Price</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($orderdetails as $detail)
                                     <tr>
-                                        <td>
-                                            <img src="{{ asset('img/customer/img-1.png') }}" width="100">
-                                        </td>
+                                        <td></td>
                                         <td class="text-left">
-                                            <a href="/product" class="text-decoration-none title">Asus TUF Dash F15</a>
+                                            <p class="title">{{ $detail->Product->name }}</p>
                                         </td>
-                                        <td class="unit text-center">Rp18600000</td>
-                                        <td class="qty">2</td>
-                                        <td class="total">Rp37200000</td>
+                                        <td class="text-center">Rp{{ $detail->price }}</td>
+                                        <td class="qty">{{ $detail->qty}}</td>
+                                        <td class="qty">{{ $detail->qty}}</td>
+                                        <td class="total">Rp{{ $detail->price * $detail->qty }}</td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
-                                <tfoot>
+                                <tfoot class="me-0">
                                     <tr>
                                         <td colspan="2"></td>
-                                        <td colspan="2">Subtotal</td>
-                                        <td>Rp37200000</td>
+                                        <td colspan="3">Total Discount</td>
+                                        <td>-Rp{{ $orders->total_disc }}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="2"></td>
-                                        <td colspan="2">Total Discount</td>
-                                        <td>-Rp0</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2"></td>
-                                        <td colspan="2">Grand Total</td>
-                                        <td>Rp37200000</td>
+                                        <td colspan="3">Grand Total</td>
+                                        <td>Rp{{ $orders->total }}</td>
                                     </tr>
                                 </tfoot>
                             </table>
