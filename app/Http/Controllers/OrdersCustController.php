@@ -92,7 +92,7 @@ class OrdersCustController extends Controller
                     OrderDetails::create([
                         'product_id' => $cart->product_id,
                         'order_id' => $order->id,
-                        'price' => $cart->product->price,
+                        'price' => $cart->product->price * (100 - $cart->product->discount),
                         'qty' => $cart->qty,
                         'discount' => $cart->product->discount
                     ]);
@@ -117,6 +117,28 @@ class OrdersCustController extends Controller
     {
         return view('customer.completed', [
             'title' => 'Completed'
+        ]);
+    }
+
+    public function showorders()
+    {
+
+        $orders = Orders::where('user_id', Auth::user()->id)->get();
+
+        return view('customer.orders', [
+            'title' => 'Your Orders',
+            'orders' => $orders
+        ]);
+    }
+
+    public function showordersdetails($id)
+    {
+        $order_details = OrderDetails::where('order_id', $id)->latest()->get();
+        $orders = Orders::find($id);
+        return view('customer.details', [
+            'title' => 'Your Orders',
+            'orderdetails' => $order_details,
+            'orders' => $orders
         ]);
     }
 }

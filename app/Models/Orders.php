@@ -18,7 +18,6 @@ class Orders extends Model
     {
         return $this->belongsTo(AdminBank::class, 'bank_id');
     }
-
     public function Courier()
     {
         return $this->belongsTo(Courier::class, 'courier_id');

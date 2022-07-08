@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('product_id');
             $table->foreignId('order_id');
-            $table->unsignedInteger('price');
+            $table->unsignedDouble('price');
             $table->unsignedInteger('qty');
             $table->unsignedInteger('discount');
             $table->timestamps();
