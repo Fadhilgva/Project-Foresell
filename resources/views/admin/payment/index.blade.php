@@ -25,6 +25,7 @@
                                     Tambah</a>
                             </div>
 
+                            {{-- SEARCH --}}
                             <div class="col-md-9 d-flex justify-content-end">
                                 <form method="GET" action="{{ url('/admin-foresell/list/payment') }}" class="form-inline">
                                     <div class="input-group">

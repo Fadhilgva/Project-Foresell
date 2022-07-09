@@ -12,7 +12,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TokoController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\KurirController;
+use App\Http\Controllers\CourierController;
 use App\Http\Controllers\OrdersCustController;
 use App\Http\Controllers\LoginController;
 
@@ -212,9 +212,11 @@ Route::group(['middleware' => ['auth', 'role:adminForesell']], function () {
     Route::get('/admin-foresell/list/payment/{id}/delete', [PaymentController::class, 'delete']);
 
     // Kurir
-    Route::resource('admin-foresell/list/kurir', KurirController::class);
-    Route::post('/getKabupaten', [KurirController::class, 'getKabupaten'])->name('getKabupaten');
-    Route::post('/getKecamatan', [KurirController::class, 'getKecamatan'])->name('getKecamatan');
+    Route::resource('admin-foresell/list/couriers', CourierController::class);
+    Route::get('/admin-foresell/list/couriers/{id}/confirm', [CourierController::class, 'confirm']);
+    Route::get('/admin-foresell/list/couriers/{id}/delete', [CourierController::class, 'delete']);
+    Route::post('/getKabupaten', [CourierController::class, 'getKabupaten'])->name('getKabupaten');
+    Route::post('/getKecamatan', [CourierController::class, 'getKecamatan'])->name('getKecamatan');
 });
 
 require __DIR__ . '/auth.php';
