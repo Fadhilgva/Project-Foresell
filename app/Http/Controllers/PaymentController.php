@@ -27,10 +27,10 @@ class PaymentController extends Controller
                 ->orWhere('type', 'LIKE', '%'.$keyword.'%')
                 ->orWhere('created_at', 'LIKE', '%'.$keyword.'%')->paginate(10);
 
-        $payment->withPath('/admin-foresell/list/bank');
+        $payment->withPath('/admin-foresell/list/payment');
         $payment->appends($request->all());
 
-        return view('admin.bank.index', compact('payment', 'keyword'));
+        return view('admin.payment.index', compact('payment', 'keyword'));
     }
 
     /**
@@ -49,7 +49,7 @@ class PaymentController extends Controller
         ]);
 
         $logo = time().'-'.$request->logo->getClientOriginalName();
-        $request->logo->move('image\admin\bank', $logo);
+        $request->logo->move('image\admin\payment', $logo);
 
         Payment::create([
             'bankName' => $request->name,
@@ -60,7 +60,7 @@ class PaymentController extends Controller
 
         Alert::success('Success', 'Data berhasil ditambahkan');
 
-        return redirect(route('bank.index'));
+        return redirect(route('payment.index'));
     }
 
     /**
@@ -84,7 +84,7 @@ class PaymentController extends Controller
     {
         $payment = Payment::select('id','logo', 'bankName', 'noRekening', 'created_at')->find($id);
         // $payment = Payment::whereId('')->first();
-        return view('admin.bank.edit', compact('payment'));
+        return view('admin.payment.edit', compact('payment'));
     }
 
     /**
@@ -116,7 +116,7 @@ class PaymentController extends Controller
             File::delete('image/admin/bank/'. $payment->logo);
 
             $logo =  time().'-'.$request->logo->getClientOriginalName();
-            $request->logo->move('image\admin\bank', $logo);
+            $request->logo->move('image\admin\payment', $logo);
 
             $data['logo'] = $logo;
         }
@@ -146,7 +146,7 @@ class PaymentController extends Controller
     public function delete($id)
     {
         $payment = Payment::whereId($id)->firstOrFail();
-        File::delete('image/admin/bank/'. $payment->logo);
+        File::delete('image/admin/payment/'. $payment->logo);
         $payment->delete();
 
         Alert::success('Success', 'Data berhasil dihapus');
