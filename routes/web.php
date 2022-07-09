@@ -208,8 +208,8 @@ Route::group(['middleware' => ['auth', 'role:adminForesell']], function () {
 
     // BANK
     Route::resource('/admin-foresell/list/bank', BankController::class);
-    Route::get('/admin/list/bank/{id}/confirm', [BankController::class, 'confirm']);
-    Route::get('/admin/list/bank/{id}/delete', [BankController::class, 'delete']);
+    Route::get('/admin-foresell/list/bank/{id}/confirm', [BankController::class, 'confirm']);
+    Route::get('/admin-foresell/list/bank/{id}/delete', [BankController::class, 'delete']);
 
     // Kurir
     Route::resource('admin-foresell/list/kurir', KurirController::class);

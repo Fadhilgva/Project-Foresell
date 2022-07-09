@@ -24,14 +24,19 @@
                     @enderror
                 </div>
 
-                {{-- Email --}}
-                <div class="mb-3 form-group">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control mr-5" name="email" value="{{$banks->email }}">
-                    @error('email')
+                {{-- TYPE --}}
+                <div class="form-group mb-3">
+                    <label for="tipe" class="form-label">Type</label>
+                    <select name="type" id="" class="form-control form-select">
+                        <option value="bank">Bank</option>
+                        <option value="gopay">Gopay</option>
+                        <option value="ovo">Ovo</option>
+                    </select>
+                    @error('type')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
+
                 {{-- logo --}}
                 <div class="form-group mb-3">
                     <label for="logo" class="form-label">Logo</label>
@@ -43,20 +48,13 @@
 
                 {{-- Rekening --}}
                 <div class="form-group mb-3">
-                    <label for="noRekening" class="form-label">No Rekening</label>
+                    <label for="noRekening" class="form-label">No ( rekening / gopay / ovo)</label>
                     <input type="text" class="form-control" name="noRekening" id="" value="{{old('noRekening') ? old('noRekening') : $banks->noRekening }}">
                     @error('noRekening')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
-                {{-- No --}}
-                <div class="form-group mb-3">
-                    <label for="phoneNumber" class="form-label">Phone Number</label>
-                    <input type="text" class="form-control" name="phoneNumber" id="" value="{{old('phoneNumber') ? old('phoneNumber') : $banks->phoneNumber }}">
-                    @error('phoneNumber')
-                        <p class="text-danger">{{ $message }}</p>
-                    @enderror
-                </div>
+
                 <button type="submit" class="btn btn-primary">Edit</button>
                 <a href="/admin/list/bank" class="btn btn-secondary">kembali</a>
             </form>

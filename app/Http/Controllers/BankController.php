@@ -16,10 +16,21 @@ class BankController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $banks = AdminBank::select('id','logo', 'bankName', 'noRekening', 'created_at')->get();
-        return view('admin.bank.index', compact('banks'));
+        $keyword = $request->keyword;
+        // $datas = Pegawai::all();
+        // $banks = AdminBank::select('id','logo', 'bankName', 'type', 'noRekening', 'created_at')->get();
+
+        $banks = AdminBank::where('bankName', 'LIKE', '%'.$keyword.'%')
+                ->orWhere('noRekening', 'LIKE', '%'.$keyword.'%')
+                ->orWhere('type', 'LIKE', '%'.$keyword.'%')
+                ->orWhere('created_at', 'LIKE', '%'.$keyword.'%')->paginate(10);
+
+        $banks->withPath('/admin-foresell/list/bank');
+        $banks->appends($request->all());
+
+        return view('admin.bank.index', compact('banks', 'keyword'));
     }
 
     /**
@@ -33,9 +44,8 @@ class BankController extends Controller
         $request->validate([
             'name' => 'required|max:50',
             'logo' => 'required|mimes:jpg,jpeg,png',
-            'email' => 'required',
-            'noRekening' => 'required|numeric' ,
-            'phoneNumber' => ''
+            'type' => 'required',
+            'noRekening' => 'required' ,
         ]);
 
         $logo = time().'-'.$request->logo->getClientOriginalName();
@@ -43,10 +53,9 @@ class BankController extends Controller
 
         AdminBank::create([
             'bankName' => $request->name,
-            'logo' => $request->logo,
-            'email' => $request->email,
+            'logo' => $logo,
+            'type' => $request->type,
             'noRekening' => $request->noRekening,
-            'phoneNumber' => $request->phoneNumber
         ]);
 
         Alert::success('Success', 'Data berhasil ditambahkan');
@@ -73,7 +82,7 @@ class BankController extends Controller
      */
     public function edit($id)
     {
-        $banks = AdminBank::select('id','logo', 'email','phoneNumber', 'bankName', 'noRekening', 'created_at')->find($id);
+        $banks = AdminBank::select('id','logo', 'bankName', 'noRekening', 'created_at')->find($id);
         // $banks = AdminBank::whereId('')->first();
         return view('admin.bank.edit', compact('banks'));
     }
@@ -90,23 +99,21 @@ class BankController extends Controller
         $request->validate([
             'name' => 'required|max:50',
             'logo' => 'mimes:jpg,jpeg,png',
-            'email' => 'required',
-            'noRekening' => 'required|numeric' ,
-            'phoneNumber' => ''
+            'noRekening' => 'required' ,
+
         ]);
 
         $data = [
             'bankName' => $request->name,
-            'email' => $request->email,
+            'type' => $request->type,
             'noRekening' => $request->noRekening,
-            'phoneNumber' => $request->phoneNumber
         ];
 
         $banks = AdminBank::whereId($id)->first();
 
         if($request->logo){
 
-            File::delete('/image/admin/bank/'. $banks->logo);
+            File::delete('image/admin/bank/'. $banks->logo);
 
             $logo =  time().'-'.$request->logo->getClientOriginalName();
             $request->logo->move('image\admin\bank', $logo);
@@ -130,10 +137,10 @@ class BankController extends Controller
     public function confirm($id)
     {
         alert()->question('Perhatian!','Apa kamu yakin ingin menghapus?')
-        ->showConfirmButton('<a href="/admin/list/bank/' . $id . '/delete" class="text-white" style="text-decoration: none"> Delete</a>', '#3085d6')->toHtml()
+        ->showConfirmButton('<a href="/admin-foresell/list/bank/' . $id . '/delete" class="text-white" style="text-decoration: none"> Delete</a>', '#3085d6')->toHtml()
         ->showCancelButton('Cancel', '#aaa')->reverseButtons();
 
-        return redirect('/admin/list/bank');
+        return redirect('/admin-foresell/list/bank');
     }
 
     public function delete($id)
@@ -144,7 +151,7 @@ class BankController extends Controller
 
         Alert::success('Success', 'Data berhasil dihapus');
 
-        return redirect('/admin/list/bank');
+        return redirect('/admin-foresell/list/bank');
     }
 
 }

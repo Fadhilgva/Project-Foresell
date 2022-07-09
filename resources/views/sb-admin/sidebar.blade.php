@@ -34,25 +34,26 @@
           <a class="collapse-item @yield('users')" href="/admin-foresell/list/users">Users</a>
           <a class="collapse-item @yield('toko')" href="/admin-foresell/list/toko">Toko</a>
           <a class="collapse-item @yield('ckategory')" href="/admin-foresell/list/category">Category</a>
+          <a class="collapse-item @yield('bank')" href="/admin-foresell/list/bank">Bank</a>
           <a class="collapse-item @yield('kurir')" href="/admin-foresell/list/kurir">Kurir</a>
         </div>
       </div>
     </li>
 
     <!-- Nav Item - Pages Collapse Payment -->
-    <li class="nav-item @yield('payment-active')">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#main" aria-expanded="true" aria-controls="main">
+    {{-- <li class="nav-item @yield('payment-active')">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#payment" aria-expanded="true" aria-controls="payment">
            <i class="fas fa-fw fa-folder"></i>
           <span>Payment Method</span>
         </a>
-        <div id="main" class="collapse @yield('payment')" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="payment" class="collapse @yield('payment')" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item @yield('bank')" href="/admin-foresell/list/bank">Bank</a>
             <a class="collapse-item @yield('gopay')" href="/admin-foresell/list/gopay">Gopay</a>
             <a class="collapse-item @yield('ovo')" href="/admin-foresell/list/ovo">Ovo</a>
           </div>
         </div>
-    </li>
+    </li> --}}
 
     {{-- <!-- Daftar -->
     <li class="nav-item @yield('daftar-active')">
