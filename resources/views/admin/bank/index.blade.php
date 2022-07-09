@@ -1,6 +1,6 @@
 @extends('sb-admin.app')
-@section('title', 'Bank')
-@section('bank', 'active')
+@section('title', 'payment')
+@section('payment', 'active')
 @section('main', 'show')
 @section('main-active', 'active')
 
@@ -26,7 +26,7 @@
                             </div>
 
                             <div class="col-md-9 d-flex justify-content-end">
-                                <form method="GET" action="{{ url('/admin-foresell/list/bank') }}" class="form-inline">
+                                <form method="GET" action="{{ url('/admin-foresell/list/payment') }}" class="form-inline">
                                     <div class="input-group">
                                         <input type="text" name="keyword" value="{{ $keyword }}" class="form-control border-1 small" placeholder="Search.."/>
                                     </div>
@@ -38,9 +38,6 @@
                                 </form>
                             </div>
                         </div>
-
-
-
                     </p>
                 </div>
                 {{-- TABLE --}}
@@ -59,26 +56,26 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($banks as $bank)
+                                @foreach ($payment as $pay)
                                 <tr>
 
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
                                             <div style="width:87px">
-                                                <a href="{{ route('bank.edit', $bank->id)}}" class="btn btn-warning btn-small btn-edit"
+                                                <a href="{{ route('payment.edit', $pay->id)}}" class="btn btn-warning btn-small btn-edit"
                                                     id="edit"><i class="fas fa-pen"></i></a>
 
-                                                <a href="/admin-foresell/list/bank/{{ $bank->id }}/confirm" class="btn btn-danger btn-small btn-hapus"
+                                                <a href="/admin-foresell/list/payment/{{ $pay->id }}/confirm" class="btn btn-danger btn-small btn-hapus"
                                                     id="delete"><i class="fa fa-trash"></i></a>
                                             </div>
                                         </td>
                                         <td>
-                                            <img src="/image/admin/bank/{{ $bank->logo }}" alt="" width="60" height="50">
+                                            <img src="/image/admin/bank/{{ $pay->logo }}" alt="" width="60" height="50">
                                         </td>
-                                        <td>{{ $bank->bankName }}</td>
-                                        <td>{{ $bank->type }}</td>
-                                        <td>{{ $bank->noRekening }}</td>
-                                        <td>{{ $bank->created_at }}</td>
+                                        <td>{{ $pay->bankName }}</td>
+                                        <td>{{ $pay->type }}</td>
+                                        <td>{{ $pay->noRekening }}</td>
+                                        <td>{{ $pay->created_at->diffForHumans() }}</td>
 
                                 </tr>
                                 @endforeach
@@ -160,7 +157,7 @@
 
                 <div class="modal-body">
 
-                    <form action="{{ Route('bank.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ Route('payment.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
 
@@ -181,6 +178,7 @@
                                 <option value="bank">Bank</option>
                                 <option value="gopay">Gopay</option>
                                 <option value="ovo">Ovo</option>
+                                <option value="cod">COD</option>
                             </select>
                             @error('type')
                                 <p class="text-danger">{{ $message }}</p>

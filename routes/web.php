@@ -7,7 +7,7 @@ use GuzzleHttp\Middleware;
 // CUSTOMER
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BankController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TokoController;
@@ -207,9 +207,9 @@ Route::group(['middleware' => ['auth', 'role:adminForesell']], function () {
     Route::get('/admin-foresell/list/category', [AdminCategoryController::class, 'index']);
 
     // BANK
-    Route::resource('/admin-foresell/list/bank', BankController::class);
-    Route::get('/admin-foresell/list/bank/{id}/confirm', [BankController::class, 'confirm']);
-    Route::get('/admin-foresell/list/bank/{id}/delete', [BankController::class, 'delete']);
+    Route::resource('/admin-foresell/list/payment', PaymentController::class);
+    Route::get('/admin-foresell/list/payment/{id}/confirm', [PaymentController::class, 'confirm']);
+    Route::get('/admin-foresell/list/payment/{id}/delete', [PaymentController::class, 'delete']);
 
     // Kurir
     Route::resource('admin-foresell/list/kurir', KurirController::class);

@@ -1,6 +1,6 @@
 @extends('sb-admin.app')
-@section('title', 'Bank')
-@section('Bank', 'active')
+@section('title', 'payment')
+@section('payment', 'active')
 @section('main', 'show')
 @section('main-active', 'active')
 
@@ -12,13 +12,13 @@
 
     <div class="row">
         <div class="col-md-8">
-            <form action="{{ route('bank.update', $banks->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('payment.update', $payment->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
                 {{-- Name --}}
                 <div class="form-group mb-3">
                     <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" value="{{old('name') ? old('name') : $banks->bankName }}">
+                    <input type="text" class="form-control" id="name" name="name" value="{{old('name') ? old('name') : $payment->bankName }}">
                     @error('name')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
@@ -31,6 +31,7 @@
                         <option value="bank">Bank</option>
                         <option value="gopay">Gopay</option>
                         <option value="ovo">Ovo</option>
+                        <option value="ovo">COD</option>
                     </select>
                     @error('type')
                         <p class="text-danger">{{ $message }}</p>
@@ -49,14 +50,14 @@
                 {{-- Rekening --}}
                 <div class="form-group mb-3">
                     <label for="noRekening" class="form-label">No ( rekening / gopay / ovo)</label>
-                    <input type="text" class="form-control" name="noRekening" id="" value="{{old('noRekening') ? old('noRekening') : $banks->noRekening }}">
+                    <input type="text" class="form-control" name="noRekening" id="" value="{{old('noRekening') ? old('noRekening') : $payment->noRekening }}">
                     @error('noRekening')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
 
                 <button type="submit" class="btn btn-primary">Edit</button>
-                <a href="/admin/list/bank" class="btn btn-secondary">kembali</a>
+                <a href="/admin-foresell/list/payment" class="btn btn-secondary">kembali</a>
             </form>
         </div>
     </div>
