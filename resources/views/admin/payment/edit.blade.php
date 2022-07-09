@@ -7,7 +7,7 @@
 
 @section('content')
 
-    <h1 class="grey">Edit Bank</h1>
+    <h1 class="grey">Edit Payment Method</h1>
     {{-- EDIT --}}
 
     <div class="row">
@@ -18,7 +18,7 @@
                 {{-- Name --}}
                 <div class="form-group mb-3">
                     <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" value="{{old('name') ? old('name') : $payment->bankName }}">
+                    <input type="text" class="form-control" id="name" name="name" value="{{old('name') ? old('name') : $payment->name }}">
                     @error('name')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
@@ -31,7 +31,7 @@
                         <option value="bank">Bank</option>
                         <option value="gopay">Gopay</option>
                         <option value="ovo">Ovo</option>
-                        <option value="ovo">COD</option>
+                        <option value="cod">COD</option>
                     </select>
                     @error('type')
                         <p class="text-danger">{{ $message }}</p>
@@ -47,11 +47,11 @@
                     @enderror
                 </div>
 
-                {{-- Rekening --}}
+                {{-- Payment --}}
                 <div class="form-group mb-3">
-                    <label for="noRekening" class="form-label">No ( rekening / gopay / ovo)</label>
-                    <input type="text" class="form-control" name="noRekening" id="" value="{{old('noRekening') ? old('noRekening') : $payment->noRekening }}">
-                    @error('noRekening')
+                    <label for="noPayment" class="form-label">No ( rekening / gopay / ovo)</label>
+                    <input type="text" class="form-control" name="noPayment" id="" value="{{old('noPayment') ? old('noPayment') : $payment->noPayment }}">
+                    @error('noPayment')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>

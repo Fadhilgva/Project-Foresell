@@ -70,11 +70,11 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <img src="/image/admin/bank/{{ $pay->logo }}" alt="" width="60" height="50">
+                                            <img src="/image/admin/payment/{{ $pay->logo }}" alt="" width="60" height="50">
                                         </td>
-                                        <td>{{ $pay->bankName }}</td>
+                                        <td>{{ $pay->name }}</td>
                                         <td>{{ $pay->type }}</td>
-                                        <td>{{ $pay->noRekening }}</td>
+                                        <td>{{ $pay->noPayment }}</td>
                                         <td>{{ $pay->created_at->diffForHumans() }}</td>
 
                                 </tr>
@@ -194,11 +194,11 @@
                             @enderror
                         </div>
 
-                        {{-- Rekening --}}
+                        {{-- Payment --}}
                         <div class="form-group mb-3">
-                            <label for="noRekening" class="form-label">No ( rekening / gopay / ovo)</label>
-                            <input type="text" class="form-control" name="noRekening" id="">
-                            @error('noRekening')
+                            <label for="noPayment" class="form-label">No ( rekening / gopay / ovo)</label>
+                            <input type="text" class="form-control" name="noPayment" id="">
+                            @error('noPayment')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>

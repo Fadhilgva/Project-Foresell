@@ -22,10 +22,11 @@ class PaymentController extends Controller
         // $datas = Pegawai::all();
         // $banks = AdminBank::select('id','logo', 'bankName', 'type', 'noRekening', 'created_at')->get();
 
-        $payment = Payment::where('bankName', 'LIKE', '%'.$keyword.'%')
-                ->orWhere('noRekening', 'LIKE', '%'.$keyword.'%')
+        $payment = Payment::where('name', 'LIKE', '%'.$keyword.'%')
+                ->orWhere('noPayment', 'LIKE', '%'.$keyword.'%')
                 ->orWhere('type', 'LIKE', '%'.$keyword.'%')
-                ->orWhere('created_at', 'LIKE', '%'.$keyword.'%')->paginate(10);
+                ->orWhere('created_at', 'LIKE', '%'.$keyword.'%')
+                ->orderby('type', 'ASC')->paginate(10);
 
         $payment->withPath('/admin-foresell/list/payment');
         $payment->appends($request->all());
@@ -45,17 +46,17 @@ class PaymentController extends Controller
             'name' => 'required|max:50',
             'logo' => 'required|mimes:jpg,jpeg,png',
             'type' => 'required',
-            'noRekening' => 'required' ,
+            'noPayment' => 'required' ,
         ]);
 
         $logo = time().'-'.$request->logo->getClientOriginalName();
         $request->logo->move('image\admin\payment', $logo);
 
         Payment::create([
-            'bankName' => $request->name,
+            'name' => $request->name,
             'logo' => $logo,
             'type' => $request->type,
-            'noRekening' => $request->noRekening,
+            'noPayment' => $request->noPayment,
         ]);
 
         Alert::success('Success', 'Data berhasil ditambahkan');
@@ -82,7 +83,7 @@ class PaymentController extends Controller
      */
     public function edit($id)
     {
-        $payment = Payment::select('id','logo', 'bankName', 'noRekening', 'created_at')->find($id);
+        $payment = Payment::select('id','logo', 'name', 'noPayment', 'created_at')->find($id);
         // $payment = Payment::whereId('')->first();
         return view('admin.payment.edit', compact('payment'));
     }
@@ -99,21 +100,21 @@ class PaymentController extends Controller
         $request->validate([
             'name' => 'required|max:50',
             'logo' => 'mimes:jpg,jpeg,png',
-            'noRekening' => 'required' ,
+            'noPayment' => 'required' ,
 
         ]);
 
         $data = [
             'bankName' => $request->name,
             'type' => $request->type,
-            'noRekening' => $request->noRekening,
+            'noPayment' => $request->noPayment,
         ];
 
         $payment = Payment::whereId($id)->first();
 
         if($request->logo){
 
-            File::delete('image/admin/bank/'. $payment->logo);
+            File::delete('image/admin/payment/'. $payment->logo);
 
             $logo =  time().'-'.$request->logo->getClientOriginalName();
             $request->logo->move('image\admin\payment', $logo);

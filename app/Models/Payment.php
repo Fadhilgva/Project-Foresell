@@ -9,6 +9,6 @@ class Payment extends Model
 {
     use HasFactory;
 
-    protected $table = 'admin_bank';
+    protected $table = 'payment';
     protected $guarded = ['id'];
 }
