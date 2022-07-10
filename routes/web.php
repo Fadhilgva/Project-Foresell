@@ -204,9 +204,11 @@ Route::group(['middleware' => ['auth', 'role:adminForesell']], function () {
     Route::get('/admin-foresell/list/toko', [TokoController::class, 'index']);
 
     // CATEGORY
-    Route::get('/admin-foresell/list/category', [AdminCategoryController::class, 'index']);
+    Route::resource('/admin-foresell/list/category', AdminCategoryController::class);
+    Route::get('/admin-foresell/list/category/{id}/confirm', [AdminCategoryController::class, 'confirm']);
+    Route::get('/admin-foresell/list/category/{id}/delete', [AdminCategoryController::class, 'delete']);
 
-    // BANK
+    // PAYMENT
     Route::resource('/admin-foresell/list/payment', PaymentController::class);
     Route::get('/admin-foresell/list/payment/{id}/confirm', [PaymentController::class, 'confirm']);
     Route::get('/admin-foresell/list/payment/{id}/delete', [PaymentController::class, 'delete']);
