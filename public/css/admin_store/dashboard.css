@@ -1,0 +1,21 @@
+.title {
+    color: #001135;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.subtitle {
+    color: #001135;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+.btn-dark {
+    background-color: #001135;
+    color: white;
+}
+
+.btn-dark:hover {
+    background-color: #001135;
+    color: white;
+}

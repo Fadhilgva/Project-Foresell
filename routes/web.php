@@ -147,38 +147,38 @@ Route::group(
 
 Route::middleware(['auth', 'role:adminToko'])->group(function () {
     //CRUD Login
-Route::get('/admin_toko/profile', [ProfileController::class, 'index']);
-Route::get('/admin_toko/profile/create', [ProfileController::class, 'create']);
+    Route::get('/admin_toko/profile', [ProfileController::class, 'index']);
+    Route::get('/admin_toko/editprofile', [ProfileController::class, 'create']);
+    Route::post('/admin_toko/editprofile', [ProfileController::class, 'store']);
 
-//CRUD Home
-Route::get('/admin_toko/home_store', [AdminTokoHomeController::class, 'index'])->name('store.home');
+    //CRUD Home
+    Route::get('/admin_toko/home_store', [AdminTokoHomeController::class, 'index'])->name('store.home');
 
-//CRUD Data Produk
-// Route::get('/data_produk','DataProdukController@data_produk');
-Route::get('/admin_toko/data_produk', [DataProdukController::class, 'index']);
-Route::get('/admin_toko/data_produk/create', [DataProdukController::class, 'create']);
-Route::get('/admin_toko/data_produk/edit', [DataProdukController::class, 'edit']);
+    //CRUD Data Produk
+    // Route::get('/data_produk','DataProdukController@data_produk');
+    Route::get('/admin_toko/data_produk', [DataProdukController::class, 'index']);
+    Route::get('/admin_toko/data_produk/create', [DataProdukController::class, 'create']);
+    Route::get('/admin_toko/data_produk/edit', [DataProdukController::class, 'edit']);
 
-//CRUD Data Produk
-Route::get('/admin_toko/kategori', [KategoriController::class, 'index']);
-Route::get('/admin_toko/kategori/create', [KategoriController::class, 'create']);
-Route::get('/admin_toko/kategori/edit', [KategoriController::class, 'edit']);
+    //CRUD Data Produk
+    Route::get('/admin_toko/kategori', [KategoriController::class, 'index']);
+    Route::get('/admin_toko/kategori/create', [KategoriController::class, 'create']);
+    Route::get('/admin_toko/kategori/edit', [KategoriController::class, 'edit']);
 
 
-//CRUD Selesaikan Pesanan
-Route::get('/admin_toko/selesaikan_pesanan', [SelesaikanPesananController::class, 'index']);
+    //CRUD Selesaikan Pesanan
+    Route::get('/admin_toko/selesaikan_pesanan', [SelesaikanPesananController::class, 'index']);
 
-//CRUD Data Order
-Route::get('/admin_toko/data_order', [DataOrderController::class, 'index']);
-Route::get('/admin_toko/data_order/create', [DataOrderController::class, 'create']);
+    //CRUD Data Order
+    Route::get('/admin_toko/data_order', [DataOrderController::class, 'index']);
+    Route::get('/admin_toko/data_order/create', [DataOrderController::class, 'create']);
 
-//CRUD Data Penjualan
-Route::get('/admin_toko/data_penjualan', [DataPenjualanController::class, 'index']);
+    //CRUD Data Penjualan
+    Route::get('/admin_toko/data_penjualan', [DataPenjualanController::class, 'index']);
 
-//CRUD Tambah Diskon
-Route::get('/admin_toko/tambah_diskon', [TambahDiskonController::class, 'index']);
-Route::get('/admin_toko/tambah_diskon/edit', [TambahDiskonController::class, 'edit']);
-
+    //CRUD Tambah Diskon
+    Route::get('/admin_toko/tambah_diskon', [TambahDiskonController::class, 'index']);
+    Route::get('/admin_toko/tambah_diskon/edit', [TambahDiskonController::class, 'edit']);
 });
 
 

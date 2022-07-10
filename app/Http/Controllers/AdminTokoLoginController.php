@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 
 class AdminTokoLoginController extends Controller
 {
@@ -34,12 +35,9 @@ class AdminTokoLoginController extends Controller
 
         if (Auth::user()->hasRole('adminToko')) {
             return redirect()->route('store.home');
-        }
-
-        else{
+        } else {
             return redirect('/login');
         }
-        
     }
 
     /**
@@ -48,14 +46,11 @@ class AdminTokoLoginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Request $request)
+    public function logout(Request $request)
     {
-        Auth::guard('web')->logout();
-
+        Auth::logout();
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
-
         return redirect('/');
     }
 }

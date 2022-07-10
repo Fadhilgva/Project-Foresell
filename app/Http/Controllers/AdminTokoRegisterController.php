@@ -70,8 +70,8 @@ class AdminTokoRegisterController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
-        
-        $logo = time().'-'.$request->logo->getClientOriginalName();
+
+        $logo = time() . '-' . $request->logo->getClientOriginalName();
         $request->logo->move('image\adminToko\logo', $logo);
 
         $store = Store::create([

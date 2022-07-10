@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminTokoHomeController extends Controller
 {
-    public function index(){
-        return view('admin_toko.home.index');
+    public function index()
+    {
+        $store = User::where('users.id', Auth::user()->id)
+            ->join('stores', 'users.id', '=', 'stores.user_id')
+            ->select('stores.name')->get();
+        return view('admin_toko.home.index', [
+            'store' => $store
+        ]);
     }
     /**
      * Show the form for creating a new resource.
