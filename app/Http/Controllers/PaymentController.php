@@ -3,23 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\AdminBank;
+use App\Models\Payment;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 
-class BankController extends Controller
+class PaymentController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $banks = AdminBank::select('id','logo', 'bankName', 'noRekening', 'created_at')->get();
-        return view('admin.bank.index', compact('banks'));
+        $keyword = $request->keyword;
+        // $datas = Pegawai::all();
+        // $banks = AdminBank::select('id','logo', 'bankName', 'type', 'noRekening', 'created_at')->get();
+
+        $payment = Payment::where('name', 'LIKE', '%'.$keyword.'%')
+                ->orWhere('noPayment', 'LIKE', '%'.$keyword.'%')
+                ->orWhere('type', 'LIKE', '%'.$keyword.'%')
+                ->orWhere('created_at', 'LIKE', '%'.$keyword.'%')
+                ->orderby('type', 'ASC')->paginate(10);
+
+        $payment->withPath('/admin-foresell/list/payment');
+        $payment->appends($request->all());
+
+        return view('admin.payment.index', compact('payment', 'keyword'));
     }
 
     /**
@@ -33,25 +45,23 @@ class BankController extends Controller
         $request->validate([
             'name' => 'required|max:50',
             'logo' => 'required|mimes:jpg,jpeg,png',
-            'email' => 'required',
-            'noRekening' => 'required|numeric' ,
-            'phoneNumber' => ''
+            'type' => 'required',
+            'noPayment' => 'required' ,
         ]);
 
         $logo = time().'-'.$request->logo->getClientOriginalName();
-        $request->logo->move('image\admin\bank', $logo);
+        $request->logo->move('image\admin\payment', $logo);
 
-        AdminBank::create([
-            'bankName' => $request->name,
-            'logo' => $request->logo,
-            'email' => $request->email,
-            'noRekening' => $request->noRekening,
-            'phoneNumber' => $request->phoneNumber
+        Payment::create([
+            'name' => $request->name,
+            'logo' => $logo,
+            'type' => $request->type,
+            'noPayment' => $request->noPayment,
         ]);
 
         Alert::success('Success', 'Data berhasil ditambahkan');
 
-        return redirect(route('bank.index'));
+        return redirect(route('payment.index'));
     }
 
     /**
@@ -73,9 +83,9 @@ class BankController extends Controller
      */
     public function edit($id)
     {
-        $banks = AdminBank::select('id','logo', 'email','phoneNumber', 'bankName', 'noRekening', 'created_at')->find($id);
-        // $banks = AdminBank::whereId('')->first();
-        return view('admin.bank.edit', compact('banks'));
+        $payment = Payment::select('id','logo', 'name', 'noPayment', 'created_at')->find($id);
+        // $payment = Payment::whereId('')->first();
+        return view('admin.payment.edit', compact('payment'));
     }
 
     /**
@@ -90,35 +100,33 @@ class BankController extends Controller
         $request->validate([
             'name' => 'required|max:50',
             'logo' => 'mimes:jpg,jpeg,png',
-            'email' => 'required',
-            'noRekening' => 'required|numeric' ,
-            'phoneNumber' => ''
+            'noPayment' => 'required' ,
+
         ]);
 
         $data = [
             'bankName' => $request->name,
-            'email' => $request->email,
-            'noRekening' => $request->noRekening,
-            'phoneNumber' => $request->phoneNumber
+            'type' => $request->type,
+            'noPayment' => $request->noPayment,
         ];
 
-        $banks = AdminBank::whereId($id)->first();
+        $payment = Payment::whereId($id)->first();
 
         if($request->logo){
 
-            File::delete('/image/admin/bank/'. $banks->logo);
+            File::delete('image/admin/payment/'. $payment->logo);
 
             $logo =  time().'-'.$request->logo->getClientOriginalName();
-            $request->logo->move('image\admin\bank', $logo);
+            $request->logo->move('image\admin\payment', $logo);
 
             $data['logo'] = $logo;
         }
 
-        $banks->update($data);
+        $payment->update($data);
 
         Alert::success('Success', 'Data berhasil diperbaharui');
 
-        return redirect()->route('bank.index');
+        return redirect()->route('payment.index');
     }
 
     /**
@@ -130,21 +138,21 @@ class BankController extends Controller
     public function confirm($id)
     {
         alert()->question('Perhatian!','Apa kamu yakin ingin menghapus?')
-        ->showConfirmButton('<a href="/admin/list/bank/' . $id . '/delete" class="text-white" style="text-decoration: none"> Delete</a>', '#3085d6')->toHtml()
+        ->showConfirmButton('<a href="/admin-foresell/list/payment/' . $id . '/delete" class="text-white" style="text-decoration: none"> Delete</a>', '#3085d6')->toHtml()
         ->showCancelButton('Cancel', '#aaa')->reverseButtons();
 
-        return redirect('/admin/list/bank');
+        return redirect('/admin-foresell/list/payment');
     }
 
     public function delete($id)
     {
-        $bank = AdminBank::whereId($id)->firstOrFail();
-        File::delete('image/admin/bank/'. $bank->logo);
-        $bank->delete();
+        $payment = Payment::whereId($id)->firstOrFail();
+        File::delete('image/admin/payment/'. $payment->logo);
+        $payment->delete();
 
         Alert::success('Success', 'Data berhasil dihapus');
 
-        return redirect('/admin/list/bank');
+        return redirect('/admin-foresell/list/payment');
     }
 
 }

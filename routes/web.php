@@ -7,12 +7,12 @@ use GuzzleHttp\Middleware;
 // CUSTOMER
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BankController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TokoController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\KurirController;
+use App\Http\Controllers\CourierController;
 use App\Http\Controllers\OrdersCustController;
 use App\Http\Controllers\LoginController;
 
@@ -204,17 +204,21 @@ Route::group(['middleware' => ['auth', 'role:adminForesell']], function () {
     Route::get('/admin-foresell/list/toko', [TokoController::class, 'index']);
 
     // CATEGORY
-    Route::get('/admin-foresell/list/category', [AdminCategoryController::class, 'index']);
+    Route::resource('/admin-foresell/list/category', AdminCategoryController::class);
+    Route::get('/admin-foresell/list/category/{id}/confirm', [AdminCategoryController::class, 'confirm']);
+    Route::get('/admin-foresell/list/category/{id}/delete', [AdminCategoryController::class, 'delete']);
 
-    // BANK
-    Route::resource('/admin-foresell/list/bank', BankController::class);
-    Route::get('/admin/list/bank/{id}/confirm', [BankController::class, 'confirm']);
-    Route::get('/admin/list/bank/{id}/delete', [BankController::class, 'delete']);
+    // PAYMENT
+    Route::resource('/admin-foresell/list/payment', PaymentController::class);
+    Route::get('/admin-foresell/list/payment/{id}/confirm', [PaymentController::class, 'confirm']);
+    Route::get('/admin-foresell/list/payment/{id}/delete', [PaymentController::class, 'delete']);
 
     // Kurir
-    Route::resource('admin-foresell/list/kurir', KurirController::class);
-    Route::post('/getKabupaten', [KurirController::class, 'getKabupaten'])->name('getKabupaten');
-    Route::post('/getKecamatan', [KurirController::class, 'getKecamatan'])->name('getKecamatan');
+    Route::resource('admin-foresell/list/couriers', CourierController::class);
+    Route::get('/admin-foresell/list/couriers/{id}/confirm', [CourierController::class, 'confirm']);
+    Route::get('/admin-foresell/list/couriers/{id}/delete', [CourierController::class, 'delete']);
+    Route::post('/getKabupaten', [CourierController::class, 'getKabupaten'])->name('getKabupaten');
+    Route::post('/getKecamatan', [CourierController::class, 'getKecamatan'])->name('getKecamatan');
 });
 
 require __DIR__ . '/auth.php';

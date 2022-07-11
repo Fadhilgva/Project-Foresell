@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AdminCategory extends Model
+class Payment extends Model
 {
     use HasFactory;
-    protected $table = 'categories';
-    protected $fillable = ['name', 'image', 'slug'];
 
+    protected $table = 'payment';
+    protected $guarded = ['id'];
 }
