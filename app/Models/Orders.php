@@ -16,7 +16,7 @@ class Orders extends Model
     }
     public function Bank()
     {
-        return $this->belongsTo(AdminBank::class, 'bank_id');
+        return $this->belongsTo(Payment::class, 'bank_id');
     }
     public function Courier()
     {

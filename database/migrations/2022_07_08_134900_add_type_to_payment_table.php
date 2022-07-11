@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('admin_bank', function (Blueprint $table) {
+        Schema::table('payment', function (Blueprint $table) {
             $table->string('type');
         });
     }
@@ -25,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('admin_bank', function (Blueprint $table) {
+        Schema::table('payment', function (Blueprint $table) {
             $table->dropColumn('type');
         });
     }

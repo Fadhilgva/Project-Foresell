@@ -41,14 +41,14 @@
                                         <h2 class="accordion-header" id="flush-headingOne">
                                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                                                 <img src="{{ asset('img/customer/cc.png') }}" width="25" class="me-2">
-                                                {{ $bank->bankName }}
+                                                {{ $bank->name }}
                                             </button>
                                         </h2>
                                         <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                             <div class="form-check my-5 mx-3">
                                                 <input class="form-check-input" type="radio" name="bank" id="bank" value="{{ $bank->id }}" required>
                                                 <div class="accordion-body small">
-                                                    No. Rekening : <strong>{{ $bank->noRekening }}</strong>
+                                                    No. Rekening : <strong>{{ $bank->noPayment }}</strong>
                                                     <br>
                                                     <br>
                                                     Bayarkan pesanan ke nomor rekening di atas <br>dengan Total Pembayaran : <strong>Rp{{ $cartdetail->total }}</strong>
@@ -62,14 +62,14 @@
                                         <h2 class="accordion-header" id="flush-headingTwo">
                                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
                                                 <img src="{{ asset('img/customer/gopay.png') }}" width="25" class="me-2">
-                                                {{ $bank->bankName }}
+                                                {{ $bank->name }}
                                             </button>
                                         </h2>
                                         <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
                                             <div class="form-check my-5 mx-3">
                                                 <input class="form-check-input" type="radio" name="bank" id="bank" value="{{ $bank->id }}" required>
                                                 <div class="accordion-body small">
-                                                    No. Rekening : <strong>{{ $bank->noRekening }}</strong>
+                                                    No. Gopay : <strong>{{ $bank->noPayment }}</strong>
                                                     <br>
                                                     <br>
                                                     Bayarkan pesanan ke Virtual Account di atas <br>dengan Total Pembayaran : <strong>Rp {{ $cartdetail->total }}</strong>
@@ -83,14 +83,14 @@
                                         <h2 class="accordion-header" id="flush-headingThree">
                                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
                                                 <img src="{{ asset('img/customer/ovo.png') }}" width="25" class="me-2">
-                                                {{ $bank->bankName }}
+                                                {{ $bank->name }}
                                             </button>
                                         </h2>
                                         <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
                                             <div class="form-check my-5 mx-3">
                                                 <input class="form-check-input" type="radio" name="bank" id="bank" value="{{ $bank->id }}" required>
                                                 <div class="accordion-body small">
-                                                    No. Rekening : <strong>{{ $bank->noRekening }}</strong>
+                                                    No. Ovo : <strong>{{ $bank->noPayment }}</strong>
                                                     <br>
                                                     <br>
                                                     Bayarkan pesanan ke Virtual Account di atas <br>dengan Total Pembayaran : <strong>Rp{{ $cartdetail->total }}</strong>

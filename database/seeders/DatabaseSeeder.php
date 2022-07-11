@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\AdminBank;
+use App\Models\Payment;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
@@ -89,24 +89,24 @@ class DatabaseSeeder extends Seeder
 
         PromotionBanner::factory(4)->create();
 
-        AdminBank::create([
-            'bankName' => 'BNI Virtual Account',
-            'noRekening' => '8807 0813 5763 8723'
+        Payment::create([
+            'name' => 'BNI Virtual Account',
+            'noPayment' => '8807 0813 5763 8723'
         ]);
 
-        AdminBank::create([
-            'bankName' => 'Gopay',
-            'noRekening' => '0813 5763 8723'
+        payment::create([
+            'name' => 'Gopay',
+            'noPayment' => '0813 5763 8723'
         ]);
 
-        AdminBank::create([
-            'bankName' => 'OVO',
-            'noRekening' => '0813 5763 8723'
+        payment::create([
+            'name' => 'OVO',
+            'noPayment' => '0813 5763 8723'
         ]);
 
-        AdminBank::create([
-            'bankName' => 'Cash On Delivery',
-            'noRekening' => 'Customer membayar pesanan secara langsung ketika pesanan tiba di tangan pembeli.'
+        payment::create([
+            'name' => 'Cash On Delivery',
+            'noPayment' => 'Customer membayar pesanan secara langsung ketika pesanan tiba di tangan pembeli.'
         ]);
 
         Courier::create([

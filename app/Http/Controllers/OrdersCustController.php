@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AdminBank;
+use App\Models\Payment;
 use App\Models\Orders;
 use App\Models\CartDetail;
 use App\Models\Cart;
@@ -49,7 +49,7 @@ class OrdersCustController extends Controller
 
     public function billing()
     {
-        $banks = AdminBank::all();
+        $banks = Payment::all();
         $couriers = Courier::all();
         $cartdetail = CartDetail::where('user_id', Auth()->user()->id)->get();
         $carts = Cart::where('user_id', Auth()->user()->id)->get();
@@ -135,6 +135,7 @@ class OrdersCustController extends Controller
     {
         $order_details = OrderDetails::where('order_id', $id)->latest()->get();
         $orders = Orders::find($id);
+
         return view('customer.details', [
             'title' => 'Your Orders',
             'orderdetails' => $order_details,
