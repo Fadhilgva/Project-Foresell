@@ -55,13 +55,13 @@ class AdminTokoRegisterController extends Controller
             'confirm_password' => ['required']
         ]);
 
-        $logo = time().'-'.$request->logo->getClientOriginalName();
-        $request->logo->move('image\adminToko\logo', $logo);
-
         $user = User::create([
             'name' => $request->name,
             'phone' => $request->phone,
             'email' => $request->email,
+            'address' => $request->address,
+            'city' => $request->city,
+            'postalcode' => $request->postalcode,
             'password' => Hash::make($request->password),
         ]);
 
@@ -70,11 +70,15 @@ class AdminTokoRegisterController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+        
+        $logo = time().'-'.$request->logo->getClientOriginalName();
+        $request->logo->move('image\adminToko\logo', $logo);
 
         $store = Store::create([
             'name' => $request->storeName,
-            'address' => $request->storeName,
+            'address' => $request->address,
             'location' => $request->city,
+            'postalcode' => $request->postalcode,
             'email' => $request->email,
             'image' => $logo,
             'slug' => Str::slug($request->storeName),

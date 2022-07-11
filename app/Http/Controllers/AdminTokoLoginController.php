@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Requests\Auth\LoginRequest;
 
 class AdminTokoLoginController extends Controller
@@ -31,7 +32,14 @@ class AdminTokoLoginController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->route('store.home');
+        if (Auth::user()->hasRole('adminToko')) {
+            return redirect()->route('store.home');
+        }
+
+        else{
+            return redirect('/login');
+        }
+        
     }
 
     /**

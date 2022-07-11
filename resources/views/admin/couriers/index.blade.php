@@ -2,72 +2,79 @@
 @section('ajax')
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
-@section('title', 'Kurir')
-@section('kurir', 'active')
+@section('title', 'List Couriers')
+@section('couriers', 'active')
 @section('main', 'show')
 @section('main-active', 'active')
 
 
 @section('content')
 
-    <h1 class="text-grey">List Kurir</h1>
+    <h1 class="text-grey">List Couriers</h1>
 
     <div class="row">
         <div class="col-md-12">
             <div class="box box-warning">
-                <div class="box-header">
-                    <p>
-                        <button class="btn btn-sm btn-flat btn-warning btn-refresh"><i class="fa fa-refresh"></i>
-                            Refresh</button>
+                <div class="box-header mb-2">
 
-                        <a href="#" class="btn btn-sm btn-flat btn-success btn-filter"><i class="fa fa-filter"></i>
-                            Filter</a>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <button class="btn btn-sm btn-flat btn-warning btn-refresh"><i class="fa fa-refresh"></i>
+                                Refresh</button>
 
-                        <a href="#" class="btn btn-sm btn-flat btn-primary" id="btn-daftar"><i class="fa fa-plus"></i>
-                            Tambah</a>
-                    </p>
+                            {{-- <a href="#" class="btn btn-sm btn-flat btn-success btn-filter"><i class="fa fa-filter"></i>
+                                Filter</a> --}}
+
+                            <a href="#" class="btn btn-sm btn-flat btn-primary" id="btn-daftar"><i class="fa fa-plus"></i>
+                                Tambah</a>
+                            </div>
+
+                        {{-- SEARCH --}}
+                        <div class="col-md-9 d-flex justify-content-end">
+                            <form method="GET" action="{{ url('/admin-foresell/list/couriers') }}" class="form-inline">
+                                <div class="input-group">
+                                    <input type="text" name="keyword" value="{{ $keyword }}" class="form-control border-1 small" placeholder="Search.."/>
+                                </div>
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">
+                                    <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
                 {{-- TABLE --}}
                 <div class="box-body">
                     <div class=" ">
-                        <table class="table tbl-users table-responsive-sm table-hover table-bordered bg-white">
+                        <table class="table tbl-users table-responsive-sm table-hover table-bordered bg-white text-center">
                             <thead class="table-dark">
                                 <tr>
-                                    <th>Action</th>
-                                    <th>Profil</th>
-                                    <th>Nama</th>
-                                    <th>Jenis Kendaraan</th>
-                                    <th>Model</th>
-                                    <th>No. Pol</th>
-                                    <th>Umur</th>
-                                    <th>Gender</th>
-                                    <th>No. Telp</th>
-                                    <th>Created At</th>
+                                    <th scope="col" style="width: 50px">#</th>
+                                    <th scope="col" style="width: 50px">Action</th>
+                                    <th scope="col">Logo</th>
+                                    <th scope="col">Nama</th>
+                                    <th scope="col">Created At</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @for ($i = 1; $i <= 5; $i++)
+                                @foreach ($couriers as $courier)
                                     <tr>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>
-                                            <div style="width:100px">
-                                                <a href="#" class="btn btn-warning btn-small btn-edit"
+                                            <div style="width:90px">
+                                                <a href="{{ route('couriers.edit', $courier->id) }}" class="btn btn-warning btn-small btn-edit"
                                                     id="edit"><i class="fas fa-pen"></i></a>
 
-                                                <button href="#" class="btn btn-danger btn-small btn-hapus"
-                                                    id="delete"><i class="fa fa-trash"></i></button>
+                                                <a href="/admin-foresell/list/couriers/{{ $courier->id }}/confirm" class="btn btn-danger btn-small btn-hapus"
+                                                    id="delete"><i class="fa fa-trash"></i></a>
                                             </div>
                                         </td>
-                                        <td>gambar</td>
-                                        <td>Leo Leo</td>
-                                        <td>Motor</td>
-                                        <td>Honda</td>
-                                        <td>B 0121 CFS</td>
-                                        <td>30</td>
-                                        <td>L</td>
-                                        <td>08123274</td>
-                                        <td>21 Maret 2020</td>
+                                        <td><img src="/image/admin/couriers/{{ $courier->image }}" alt="" width="60" height="50"></td>
+                                        <td>{{ $courier->name }}</td>
+                                        <td>{{ $courier->created_at }}</td>
                                     </tr>
-                                @endfor
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -148,34 +155,27 @@
 
                 <div class="modal-body">
 
-                    <form action="#" method="POST" enctype="multipart/form-data">
+                    <form action="{{ Route('couriers.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        {{-- NAME / TGL LAHIR --}}
-                        <div class="row">
-                            {{-- Name --}}
-                            <div class="col-md-6">
-                                <div class="mb-6">
-                                    <label for="name" class="form-label">Name</label>
-                                    <input type="text" class="form-control" id="name" name="name"
-                                        value="{{ old('name') }}">
-                                    @error('name')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-                            {{-- Tgl Lahir --}}
-                            <div class="col-md-6">
-                                <div class="mb-6">
-                                    <label for="birthday" class="form-label">Birthday</label>
-                                    <input type="date" class="form-control" id="birthday" name="birthday"
-                                        value="{{ old('birthday') }}">
-                                    @error('birthday')
-                                        <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
+
+                        {{-- Name --}}
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name"
+                                value="{{ old('name') }}">
+                            @error('name')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
 
+                        {{-- logo --}}
+                        <div class="mb-3">
+                            <label for="logo" class="form-label ">Logo</label>
+                            <input type="file" class="form-control" id="logo" name="logo">
+                            @error('logo')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
 
                         <button type="submit" class="btn btn-primary">Tambah</button>
                     </form>

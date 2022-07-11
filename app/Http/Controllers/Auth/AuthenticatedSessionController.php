@@ -28,7 +28,14 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect('/');
+        if (Auth::user()->hasRole('user')) {
+            return redirect('/');
+        }
+
+        elseif (Auth::user()->hasRole('adminToko')) {
+            return redirect()->route('store.home');
+        }
+      
     }
 
     public function authenticate(Request $request)

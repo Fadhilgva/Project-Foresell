@@ -5,10 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AdminBank extends Model
+class AdminCourier extends Model
 {
     use HasFactory;
-
-    protected $table = 'admin_bank';
-    protected $guarded = ['id'];
+    protected $table = 'couriers';
+    protected $fillable = ['name', 'image'];
 }

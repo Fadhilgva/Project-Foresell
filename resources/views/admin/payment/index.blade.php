@@ -1,28 +1,44 @@
 @extends('sb-admin.app')
-@section('title', 'Bank')
-@section('bank', 'active')
-@section('payment', 'show')
-@section('payment-active', 'active')
+@section('title', 'payment')
+@section('payment', 'active')
+@section('main', 'show')
+@section('main-active', 'active')
 
 
 @section('content')
 
-    <h1 class="text-grey">List Bank</h1>
+    <h1 class="text-grey">Payment Method</h1>
 
     <div class="row">
         <div class="col-md-12">
             <div class="box box-warning">
                 <div class="box-header">
                     <p>
-                        <button class="btn btn-sm btn-flat btn-warning btn-refresh"><i class="fa fa-refresh"></i>
-                            Refresh</button>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <button class="btn btn-sm btn-flat btn-warning btn-refresh"><i class="fa fa-refresh"></i>
+                                    Refresh</button>
 
-                        <a href="#" class="btn btn-sm btn-flat btn-success btn-filter"><i class="fa fa-filter"></i>
-                            Filter</a>
+                                {{-- <a href="#" class="btn btn-sm btn-flat btn-success btn-filter"><i class="fa fa-filter"></i>
+                                    Filter</a> --}}
+                                <a href="#" class="btn btn-sm btn-flat btn-primary" id="btn-daftar"><i class="fa fa-plus"></i>
+                                    Tambah</a>
+                            </div>
 
-                        <a href="#" class="btn btn-sm btn-flat btn-primary" id="btn-daftar"><i class="fa fa-plus"></i>
-                            Tambah</a>
-
+                            {{-- SEARCH --}}
+                            <div class="col-md-9 d-flex justify-content-end">
+                                <form method="GET" action="{{ url('/admin-foresell/list/payment') }}" class="form-inline">
+                                    <div class="input-group">
+                                        <input type="text" name="keyword" value="{{ $keyword }}" class="form-control border-1 small" placeholder="Search.."/>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit">
+                                          <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </p>
                 </div>
                 {{-- TABLE --}}
@@ -35,28 +51,32 @@
                                     <th scope="col">Action</th>
                                     <th scope="col">Logo</th>
                                     <th scope="col">Nama</th>
-                                    <th scope="col">No Rekening</th>
+                                    <th scope="col">Tipe</th>
+                                    <th scope="col">No (Rekening / Gopay / Ovo)</th>
                                     <th scope="col">Created At</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($banks as $bank)
+                                @foreach ($payment as $pay)
                                 <tr>
 
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
                                             <div style="width:87px">
-                                                <a href="{{ route('bank.edit', $bank->id)}}" class="btn btn-warning btn-small btn-edit"
+                                                <a href="{{ route('payment.edit', $pay->id)}}" class="btn btn-warning btn-small btn-edit"
                                                     id="edit"><i class="fas fa-pen"></i></a>
 
-                                                <a href="/admin/list/bank/{{ $bank->id }}/confirm" class="btn btn-danger btn-small btn-hapus"
+                                                <a href="/admin-foresell/list/payment/{{ $pay->id }}/confirm" class="btn btn-danger btn-small btn-hapus"
                                                     id="delete"><i class="fa fa-trash"></i></a>
                                             </div>
                                         </td>
-                                        <td><img src="/image/admin/bank/{{ $bank->logo }}" alt="" width="60" height="50"></td>
-                                        <td>{{ $bank->bankName }}</td>
-                                        <td>{{ $bank->noRekening }}</td>
-                                        <td>{{ $bank->created_at }}</td>
+                                        <td>
+                                            <img src="/image/admin/payment/{{ $pay->logo }}" alt="" width="60" height="50">
+                                        </td>
+                                        <td>{{ $pay->name }}</td>
+                                        <td>{{ $pay->type }}</td>
+                                        <td>{{ $pay->noPayment }}</td>
+                                        <td>{{ $pay->created_at->diffForHumans() }}</td>
 
                                 </tr>
                                 @endforeach
@@ -138,8 +158,9 @@
 
                 <div class="modal-body">
 
-                    <form action="{{ Route('bank.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ Route('payment.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+
 
                         {{-- Name --}}
                         <div class="mb-3">
@@ -151,39 +172,38 @@
                             @enderror
                         </div>
 
-                        {{-- Email --}}
-                        <div class="mb-3 form-group">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control mr-5" name="email">
-                            @error('email')
+                        {{-- TYPE --}}
+                        <div class="form-group mb-3">
+                            <label for="tipe" class="form-label ">Type</label>
+                            <select name="type" id="" class="form-control form-select">
+                                <option value="bank">Bank</option>
+                                <option value="gopay">Gopay</option>
+                                <option value="ovo">Ovo</option>
+                                <option value="cod">COD</option>
+                            </select>
+                            @error('type')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
+
                         {{-- logo --}}
                         <div class="mb-3">
-                            <label for="logo" class="form-label">Logo</label>
+                            <label for="logo" class="form-label ">Logo</label>
                             <input type="file" class="form-control" id="logo" name="logo">
                             @error('logo')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
 
-                        {{-- Rekening --}}
+                        {{-- Payment --}}
                         <div class="form-group mb-3">
-                            <label for="noRekening" class="form-label">No Rekening</label>
-                            <input type="text" class="form-control" name="noRekening" id="">
-                            @error('noRekening')
+                            <label for="noPayment" class="form-label">No ( rekening / gopay / ovo)</label>
+                            <input type="text" class="form-control" name="noPayment" id="">
+                            @error('noPayment')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
-                        {{-- No --}}
-                        <div class="form-group mb-3">
-                            <label for="phoneNumber" class="form-label">Phone Number</label>
-                            <input type="text" class="form-control" name="phoneNumber" id="">
-                            @error('phoneNumber')
-                                <p class="text-danger">{{ $message }}</p>
-                            @enderror
-                        </div>
+
                         <button type="submit" class="btn btn-primary">Tambah</button>
                     </form>
                 </div>

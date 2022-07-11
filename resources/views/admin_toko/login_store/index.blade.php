@@ -35,7 +35,7 @@
                             </div>
                             @endif
 
-                            <form action="/login" method="POST">
+                            <form action="{{ route('store.login') }}" method="POST">
                                 @csrf
                                 <div class="form-floating mb-4">
                                     <input type="email" name="email" class="form-control
@@ -68,8 +68,8 @@
                             </form>
 
                             <p class="text-center small mt-2">
-                                Belum ada akun?
-                                <a class="fw-bold text-decoration-none text-dark" href="/admin_toko/register_store">Buat Satu</a>
+                                Don't have account yet?
+                                <a class="fw-bold text-decoration-none text-dark" href="/admin_toko/register_store">Create one</a>
                             </p>
                         </div>
                     </div>

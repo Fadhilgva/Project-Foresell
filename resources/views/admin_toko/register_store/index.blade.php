@@ -7,7 +7,7 @@
                 <img src="{{ asset('img/customer/adminregister.gif') }}" width="500">
             </div>
             <div class="col sign_up">
-                <div class="d-flex align-items-center pt-0">
+                <div class="d-flex align-items-center pt-5">
                     <div class="container">
                         <div class="d-flex justify-content-end me-lg-5">
                             <a href="/">
@@ -22,7 +22,7 @@
 
                                 <form action="{{ route('store.store') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
-                                    <div class="row g-3 mb-4">
+                                    <div class="row g-3 mb-4 ">
                                         <h6 class="mb-0 title">Account Information</h6>
 
                                         {{-- NAME TENANT --}}
@@ -171,14 +171,14 @@
                                             </div>
                                         </div>
                                     </div>
-                            </div>
-                            <div class="row align-items-center mt-4">
-                                <button type="submit" class="btn btn-dark login mx-auto">Create Your Account
-                                </button>
-                            </div>
+                            
+                                <div class="row align-items-center mt-4">
+                                    <button type="submit" class="btn btn-dark mx-auto">Create Your Account
+                                    </button>
+                                </div>
                             </form>
                             <p class="text-center small mt-2">
-                                Sudah Punya Akun?
+                                Already have an account?
                                 <a class="fw-bold text-decoration-none text-dark" href="/admin_toko/login_store">Login</a>
                             </p>
                         </div>
