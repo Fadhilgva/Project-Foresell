@@ -26,58 +26,53 @@
     <!-- /.card-header -->
     <div class="card-body">
 	
-    <a href="/admin_toko/kategori/create" class="btn btn-primary my-2">Tambah Kategori</a>
+    <a href="/admin_toko/kategori/create" class="btn btn-primary mb-3">Add Categories</a>
       
 
 	<table id="example1" class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Picture</th>
-                <th>Category</th>
-                <th>Description</th>
-                <th>Action</th>
+                <th scope="col">Id</th>
+                <th scope="col">Picture</th>
+                <th scope="col">Category</th>
+                <th scope="col">Description</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tfoot>
             <tr>
-                <th>Id</th>
-                <th>Picture</th>
-                <th>Category</th>
-                <th>Description</th>
-                <th>Action</th>
+                <th scope="col">Id</th>
+                <th scope="col">Picture</th>
+                <th scope="col">Category</th>
+                <th scope="col">Description</th>
+                <th scope="col">Action</th>
             </tr>
         </tfoot>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td><img src="/img/admin_store/undraw_rocket.svg" width="100" class="img-thumbnail"></td>
-                <td>Makanan</td>
-                <td>Menurut Rustan, Lorem Ipsum atau lipsum awalnya merupakan cuplikan literatur Latin klasik berjudul “De Finibus Bonorum et Malorum” karya Cicero pada 45 Sebelum Masehi. Berikut contoh teks lipsum yang sering digunakan: “Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
-                <td><a type="button" class="btn btn-warning" href="/admin_toko/kategori/edit">Ubah</a> <a type="button" class="btn btn-danger" href="#">Hapus</a></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td><img src="/img/admin_store/undraw_profile_3.svg" width="100" class="img-thumbnail"></td>
-                <td>Gadget</td>
-                <td>Menurut Rustan, Lorem Ipsum atau lipsum awalnya merupakan cuplikan literatur Latin klasik berjudul “De Finibus Bonorum et Malorum” karya Cicero pada 45 Sebelum Masehi. Berikut contoh teks lipsum yang sering digunakan: “Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
-                <td><a type="button" class="btn btn-warning" href="/admin_toko/kategori/edit">Ubah</a> <a type="button" class="btn btn-danger" href="#">Hapus</a></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td><img src="/img/admin_store/undraw_profile_2.svg" width="100" class="img-thumbnail"></td>
-                <td>Kendaraan</td>
-                <td>Menurut Rustan, Lorem Ipsum atau lipsum awalnya merupakan cuplikan literatur Latin klasik berjudul “De Finibus Bonorum et Malorum” karya Cicero pada 45 Sebelum Masehi. Berikut contoh teks lipsum yang sering digunakan: “Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
-                <td><a type="button" class="btn btn-warning" href="/admin_toko/kategori/edit">Ubah</a> <a type="button" class="btn btn-danger" href="#">Hapus</a></td>
-            </tr>
-            
-            <tr>
-                <td>4</td>
-                <td><img src="/img/admin_store/undraw_profile_1.svg" width="100" class="img-thumbnail"></td>
-                <td>Mainan</td>
-                <td>Menurut Rustan, Lorem Ipsum atau lipsum awalnya merupakan cuplikan literatur Latin klasik berjudul “De Finibus Bonorum et Malorum” karya Cicero pada 45 Sebelum Masehi. Berikut contoh teks lipsum yang sering digunakan: “Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
-                <td><a type="button" class="btn btn-warning" href="/admin_toko/kategori/edit">Ubah</a> <a type="button" class="btn btn-danger" href="#">Hapus</a></td>
-            </tr>
+            @forelse ($kategori as $key => $item)
+                <tr>
+                    <td>{{$key + 1}}</td>
+                    <td>{{$item + image}}</td>
+                    <td>{{$item + name}}</td>
+                    <td>{{$item + slug}}</td>
+                    <td>{{$item + desc}}</td>
+                    <td>
+                        <form action="/admin_toko/kategori/{{$item->id}}" method="POST">
+                            <a type="button" class="btn btn-info" href="/admin_toko/kategori/{{$item->id}}", class="btn btn-info btn-sm">Detail</a>
+                            <a type="button" class="btn btn-warning" href="/admin_toko/kategori/{{$item->id}}/edit">Edit</a> 
+
+                            @csrf
+                            @method('delete')
+                            <input type="submit" class="btn btn-danger" value="Delete">
+                        
+                        </form>
+                    </td>
+                </tr>
+            @empty
+                <h2>Empty</h2>
+            @endforelse
+
+
         </tbody>
       </table>
     </div>

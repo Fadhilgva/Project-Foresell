@@ -156,11 +156,18 @@ Route::get('/admin_toko/profile/create', [ProfileController::class, 'create']);
     Route::get('/admin_toko/data_produk/create', [DataProdukController::class, 'create']);
     Route::get('/admin_toko/data_produk/edit', [DataProdukController::class, 'edit']);
 
-    //CRUD Data Produk
-    Route::get('/admin_toko/kategori', [KategoriController::class, 'index']);
-    Route::get('/admin_toko/kategori/create', [KategoriController::class, 'create']);
-    Route::get('/admin_toko/kategori/edit', [KategoriController::class, 'edit']);
-
+    //CRUD Kategori
+    //Create
+    Route::get('/admin_toko/kategori/create', [KategoriController::class, 'create']);// route menuju form kreate
+    Route::post('/admin_toko/kategori/store', [KategoriController::class, 'store']);// route untuk menyimpan data ke database
+    //Read
+    Route::get('/admin_toko/kategori/{kategori_id}', [KategoriController::class, 'show']); //route detail kategori
+    Route::get('/admin_toko/kategori', [KategoriController::class, 'index']); // route list kategori
+    //Update
+    Route::get('/admin_toko/kategori/{kategori_id}/edit', [KategoriController::class, 'edit']);// Route menuju ke form edit
+    Route::put('/admin_toko/kategori/{kategori_id}', [KategoriController::class, 'update']);// Route untuk update data berdasarkan id di database
+    //Delete
+    Route::get('/admin_toko/kategori/{kategori_id}', [KategoriController::class, 'destroy']);// Route untuk hapus data di database
 
     //CRUD Selesaikan Pesanan
     Route::get('/admin_toko/selesaikan_pesanan', [SelesaikanPesananController::class, 'index']);

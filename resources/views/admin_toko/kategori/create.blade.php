@@ -7,22 +7,39 @@
 @endsection
 
 @section('content')
-    <form action="/data_produk" method="POST" enctype="multipart/form-data">
-
+    <form action="/admin_toko/kategori/store" method="POST" enctype="multipart/form-data">
+        @csrf
         <div class="form-group">
-            <label> Gambar kategoru </label>
-            <input type="file" name="gambar_produk" class="form-control">
+            <label> Gambar kategori </label>
+            <input type="file" name="image" class="form-control">
         </div>
+        @error('image')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
 
         <div class="form-group">
             <label> Name </label>
-            <input type="text" name="produk" class="form-control">
+            <input type="text" name="name" class="form-control">
         </div>
+        @error('name')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+
+        <div class="form-group">
+            <label> Slug </label>
+            <input type="text" name="slug" class="form-control">
+        </div>
+        @error('slug')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
 
         <div class="form-group">
             <label> Description </label>
-            <textarea type="textarea" name="harga" class="form-control"></textarea>
+            <textarea type="textarea" name="desc" class="form-control"></textarea>
         </div>
+        @error('desc')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
