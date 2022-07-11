@@ -147,8 +147,12 @@ Route::group(
 
 Route::middleware(['auth', 'role:adminToko'])->group(function () {
     //CRUD Login
-Route::get('/admin_toko/profile', [ProfileController::class, 'index']);
-Route::get('/admin_toko/profile/create', [ProfileController::class, 'create']);
+    Route::get('/admin_toko/profile', [ProfileController::class, 'index']);
+    Route::get('/admin_toko/editprofile', [ProfileController::class, 'create']);
+    Route::post('/admin_toko/editprofile/{store:id}', [ProfileController::class, 'update']);
+
+    //CRUD Home
+    Route::get('/admin_toko/home_store', [AdminTokoHomeController::class, 'index'])->name('store.home');
 
     //CRUD Data Produk
     // Route::get('/data_produk','DataProdukController@data_produk');
@@ -156,18 +160,14 @@ Route::get('/admin_toko/profile/create', [ProfileController::class, 'create']);
     Route::get('/admin_toko/data_produk/create', [DataProdukController::class, 'create']);
     Route::get('/admin_toko/data_produk/edit', [DataProdukController::class, 'edit']);
 
-    //CRUD Kategori
-    //Create
-    Route::get('/admin_toko/kategori/create', [KategoriController::class, 'create']);// route menuju form kreate
-    Route::post('/admin_toko/kategori/store', [KategoriController::class, 'store']);// route untuk menyimpan data ke database
-    //Read
-    Route::get('/admin_toko/kategori/{kategori_id}', [KategoriController::class, 'show']); //route detail kategori
-    Route::get('/admin_toko/kategori', [KategoriController::class, 'index']); // route list kategori
-    //Update
-    Route::get('/admin_toko/kategori/{kategori_id}/edit', [KategoriController::class, 'edit']);// Route menuju ke form edit
-    Route::put('/admin_toko/kategori/{kategori_id}', [KategoriController::class, 'update']);// Route untuk update data berdasarkan id di database
-    //Delete
-    Route::get('/admin_toko/kategori/{kategori_id}', [KategoriController::class, 'destroy']);// Route untuk hapus data di database
+    //CRUD Data Produk
+    Route::get('/admin_toko/kategori', [KategoriController::class, 'index']);
+    Route::get('/admin_toko/kategori/create', [KategoriController::class, 'create']);
+    Route::get('/admin_toko/kategori/edit', [KategoriController::class, 'edit']);
+
+    //CRUD Data Order
+    Route::get('/admin_toko/data_order', [DataOrderController::class, 'index']);
+    Route::get('/admin_toko/data_order/create', [DataOrderController::class, 'create']);
 
     //CRUD Selesaikan Pesanan
     Route::get('/admin_toko/selesaikan_pesanan', [SelesaikanPesananController::class, 'index']);

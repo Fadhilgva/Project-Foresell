@@ -14,9 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::table('stores', function (Blueprint $table) {
-            $table->string('address')->nullable();
-            $table->string('postalcode')->nullable();
-            $table->integer('user_id')->nullable();
+            $table->string('address');
+            $table->string('postalcode');
+            $table->string('banner')->nullable();
+            $table->integer('user_id');
         });
     }
 

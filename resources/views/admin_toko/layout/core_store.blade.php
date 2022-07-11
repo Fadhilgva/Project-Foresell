@@ -9,18 +9,20 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    
+
 
     <!-- Custom fonts for this template-->
     <link href="{{asset('/vendor/admin_store/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap"
-        rel="stylesheet" 
-       
-        >
-    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
     <!-- Custom styles for this template-->
     <link href="{{asset('/css/admin_store/sb-admin-2.min.css')}}" rel="stylesheet">
+
+    <link href="{{asset('/css/admin_store/dashboard.css')}}" rel="stylesheet">
+
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
     @stack('style')
 
@@ -33,48 +35,48 @@
 
         <!-- Sidebar -->
         @include('admin_toko.partial.sidebar_toko')
-        
-                <!-- Content Wrapper -->
-                <div id="content-wrapper" class="d-flex flex-column">
-        
-                    <!-- Main Content -->
-                    <div id="content">
-        
-                        <!-- Topbar -->
-                        @include('admin_toko.partial.nav_toko')
-                        <!-- End of Topbar -->
-        
-                        <!-- Begin Page Content -->
-                        <div class="container-fluid">
-        
-                            <!-- Page Heading -->
-                            <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                <h1 class="h3 mb-0 text-gray-800">@yield('judul')</h1>
-                                
-                            </div>
-        
-                            <!-- Content Row -->
-                            <div class="row">
-                                @yield('content')
-                            </div>
-        
-                        </div>
-                        <!-- /.container-fluid -->
-        
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                @include('admin_toko.partial.nav_toko')
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">@yield('judul')</h1>
+
                     </div>
-                    <!-- End of Main Content -->
-        
-                    <!-- Footer -->
-                    <footer class="sticky-footer bg-white">
-                        <div class="container my-auto">
-                            <div class="copyright text-center my-auto">
-                                <span>Copyright &copy; Your Website 2022</span>
-                            </div>
-                        </div>
-                    </footer>
-                    <!-- End of Footer -->
-        
+
+                    <!-- Content Row -->
+                    <div class="row">
+                        @yield('content')
+                    </div>
+
                 </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2022</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
         <!-- End of Sidebar -->
         <!-- End of Content Wrapper -->
     </div>
@@ -86,8 +88,7 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">

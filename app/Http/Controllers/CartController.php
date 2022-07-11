@@ -76,8 +76,6 @@ class CartController extends Controller
         $product = Product::find($id);
         $userproduct = Cart::where('user_id', $userid)->where('product_id', $product->id)->first();
         $userdetail = CartDetail::where('user_id', $userid)->first();
-
-
         if ($userproduct) {
             $userproduct->qty += $request->quantity;
             $userproduct->total_product += ($product->price * ((100 - $product->discount) / 100)) * $request->quantity;
@@ -142,8 +140,8 @@ class CartController extends Controller
                 $cart->delete();
                 return redirect('/cart');
             }
-
             $cart->qty = $request->quantity;
+            $cart->total_product = ($cart->Product->price * ((100 - $cart->Product->discount) / 100)) * $request->quantity;
             $cart->save();
         } else {
             return redirect('/cart');
