@@ -6,8 +6,7 @@
 @endsection
 
 @section('content')
-
-<div class="container rounded shadow-sm my-3 border">
+<div class="container rounded shadow-sm my-1 border">
     @if (session()->has('updateprofile'))
     <div class="col-6 mx-auto my-2">
         <div class="alert alert-success text-center" role="alert">
@@ -19,8 +18,8 @@
     <form class="mt-3">
         <div class="row">
             @foreach ($stores as $store)
-            <div class="col-md-2 mt-3">
-                <div class="d-flex flex-column align-items-center text-center"><img class="rounded-circle my-0" width="150px" src="{{ asset($store->image) }}">
+            <div class="col-md-2 mt-4">
+                <div class="d-flex flex-column align-items-center text-center"><img class="rounded-circle my-0" width="150px" src='\image\adminToko\logo\{{ $store->image }}'>
                 </div>
             </div>
             <div class="col-md-5 mt-3">
@@ -51,12 +50,11 @@
                     <div class="col-md-12 my-1 mt-5">
                         <div class="mb-3 subtitle">
                             <label for="banner" class="form-label">Banner</label>
-                            {{-- @if($store->banner){
-                            }
-                            @endif --}}
-                            <img src="https://img.freepik.com/free-vector/perfume-spray-bottle-podium-with-clouds-sky-mock-up-banner-glass-flask-mockup-blue-heaven-background-scent-fragrance-cosmetic-product-promotion-advertising-realistic-3d-vector-illustration_107791-4550.jpg?w=2000"
-                                class="img-preview img-fluid mb-3 shadow col-sm-12 d-block">
+                            @if($store->banner)
+                            <img src="\image\adminToko\logo\{{ $store->banner }}" class="img-preview img-fluid mb-4 shadow col-sm-12 d-block">
+                            @else
                             <input class="form-control form-control-sm" id="banner" name="banner" type="file" disabled>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -68,6 +66,4 @@
         </div>
     </form>
 </div>
-
-
 @endsection

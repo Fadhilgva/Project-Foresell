@@ -149,7 +149,7 @@ Route::middleware(['auth', 'role:adminToko'])->group(function () {
     //CRUD Login
     Route::get('/admin_toko/profile', [ProfileController::class, 'index']);
     Route::get('/admin_toko/editprofile', [ProfileController::class, 'create']);
-    Route::post('/admin_toko/editprofile', [ProfileController::class, 'store']);
+    Route::post('/admin_toko/editprofile/{store:id}', [ProfileController::class, 'update']);
 
     //CRUD Home
     Route::get('/admin_toko/home_store', [AdminTokoHomeController::class, 'index'])->name('store.home');

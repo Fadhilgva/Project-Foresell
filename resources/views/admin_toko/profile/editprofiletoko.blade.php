@@ -1,20 +1,29 @@
 @extends('admin_toko.layout.core_store')
 
-<title>Foresell - Profile</title>
+<title>Foresell - Edit Profile</title>
 
 @section('judul')
 @endsection
 
 @section('content')
 
-<div class="container rounded shadow-sm my-3 border">
-    <form action="/admin_toko/editprofile" method="POST" class="mt-3">
+<div class="container rounded shadow-sm my-1 border">
+    @foreach ($stores as $store)
+    <form action="/admin_toko/editprofile/{{ $store->id }}" method="POST" class="mt-3" enctype="multipart/form-data">
         @csrf
-        @foreach ($stores as $store)
         <div class="row">
-            <div class="col-md-2 mt-3">
-                <div class="d-flex flex-column align-items-center text-center"><img class="rounded-circle my-0" width="150px" src="{{ asset($store->image) }}">
+            <div class="col-md-2 mt-4">
+                <div class="d-flex flex-column align-items-center text-center"><img class="rounded-circle my-0" width="150px" src="\image\adminToko\logo\{{ $store->image }}">
                 </div>
+                <input class="form-control form-control-sm subtitle
+                @error('image')
+                is-invalid
+                @enderror" id="image" name="image" type="file">
+                @error('image')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
             </div>
             <div class="col-md-5 mt-3">
                 <div class="row g-3">
@@ -68,25 +77,37 @@
                     <div class="col-md-12 my-1 mt-5">
                         <div class="mb-3 subtitle">
                             <label for="banner" class="form-label">Banner</label>
+                            @if($store->banner)
+                            <img src="\image\adminToko\logo\{{ $store->banner }}" class="img-preview img-fluid mb-4 shadow col-sm-12 d-block">
                             <input class="form-control form-control-sm subtitle
                             @error('banner')
                             is-invalid
-                            @enderror" id="banner" name="banner" type="file" disabled>
+                            @enderror" id="banner" name="banner" type="file">
                             @error('banner')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                             @enderror
+                            @else
+                            <input class="form-control form-control-sm subtitle
+                            @error('banner')
+                            is-invalid
+                            @enderror" id="banner" name="banner" type="file">
+                            @error('banner')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="mt-5 text-center">
-            <input type="hidden" name="id" value="{{ $store->id }}">
             <button type="submit" class="btn btn-dark">Save Profile</button>
         </div>
-        @endforeach
     </form>
+    @endforeach
 </div>
 @endsection

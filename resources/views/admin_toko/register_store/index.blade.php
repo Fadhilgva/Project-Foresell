@@ -107,8 +107,8 @@
                                     {{-- logo --}}
                                     <div class="col-12">
                                         <div class="">
-                                            <input type="file" class="form-control" id="logo" name="logo">
-                                            <label for="logo" class="d-flex justify-content-end"><small>Store Logo</small></label>
+                                            <label for="logo" class="d-flex justify-content-start mb-2">Store Logo</label>
+                                            <input type="file" class="form-control mb-2" id="logo" name="logo">
                                             @error('logo')
                                             <p class="text-danger">{{ $message }}</p>
                                             @enderror

@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Store;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class ProfileController extends Controller
 {
@@ -18,14 +18,9 @@ class ProfileController extends Controller
      */
     public function index()
     {
-
-        // $store = DB::select("SELECT u.name AS userName, u.email AS userEmail, s.name AS name, s.image AS image, s.address AS address, s.postalcode AS postcode FROM stores s, users u 
-        // WHERE s.user_id = u.id");
-
-        // $stores = Store::where('user_id', Auth::user()->id)->first();
         $stores = User::where('users.id', Auth::user()->id)
             ->join('stores', 'users.id', '=', 'stores.user_id')
-            ->select('stores.name AS store', 'stores.image AS image', 'stores.location AS location', 'stores.desc AS desc')->get();
+            ->select('stores.name AS store', 'stores.image AS image', 'stores.location AS location', 'stores.desc AS desc', 'stores.banner AS banner')->get();
         return view('admin_toko.profile.index', compact('stores'));
     }
 
@@ -38,7 +33,7 @@ class ProfileController extends Controller
     {
         $stores = User::where('users.id', Auth::user()->id)
             ->join('stores', 'users.id', '=', 'stores.user_id')
-            ->select('stores.name AS store', 'stores.image AS image', 'stores.location AS location', 'stores.desc AS desc', 'stores.id AS id')->get();
+            ->select('stores.name AS store', 'stores.image AS image', 'stores.location AS location', 'stores.desc AS desc', 'stores.id AS id', 'stores.banner AS banner')->get();
         return view('admin_toko.profile.editprofiletoko', compact('stores'));
     }
 
@@ -50,29 +45,6 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        $store = Store::find($request->id);
-        $validatedData = $request->validate([
-            'name' => 'required|min:3|max:255|',
-            'description' => 'required|min:20|max:50',
-            'location' => 'required|min:5|max:20',
-            // 'banner' => 'required|max:1024'
-        ]);
-
-        // $banner = time() . '-' . $request->banner->getClientOriginalName();
-        // $request->banner->move('image\adminToko\logo', $banner);
-
-        if ($store) {
-            $store->name = $validatedData['name'];
-            $store->slug = Str::slug($validatedData['name']);
-            $store->location = $validatedData['location'];
-            $store->desc = $validatedData['description'];
-            // $store->banner = $validatedData['banner'];
-            $store->save();
-
-            return redirect('/admin_toko/profile')->with('updateprofile', 'Your profile has been successfully updated');
-        } else {
-            return redirect()->back();
-        }
     }
 
     /**
@@ -106,7 +78,44 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $store = Store::find($id);
+        $validatedData = $request->validate([
+            'name' => 'required|min:3|max:255|',
+            'description' => 'required|min:20|max:50',
+            'location' => 'required|min:5|max:20',
+            'banner' => 'mimes:jpg,jpeg,png',
+            'image' => 'mimes:jpg,jpeg,png'
+        ]);
+
+        if ($request->banner) {
+            File::delete(public_path('/image/adminToko/logo/' . $store->banner));
+
+            $banner = time() . '-' . $request->banner->getClientOriginalName();
+            $request->banner->move('image\adminToko\logo', $banner);
+            $store->banner = $banner;
+        }
+
+
+        if ($request->image) {
+            File::delete(public_path('/image/adminToko/logo/' . $store->image));
+
+            $image = time() . '-' . $request->image->getClientOriginalName();
+            $request->image->move('image\adminToko\logo', $image);
+            $store->image = $image;
+        }
+
+
+        if ($store) {
+            $store->name = $validatedData['name'];
+            $store->slug = Str::slug($validatedData['name']);
+            $store->location = $validatedData['location'];
+            $store->desc = $validatedData['description'];
+            $store->save();
+
+            return redirect('/admin_toko/profile')->with('updateprofile', 'Your profile has been successfully updated');
+        } else {
+            return redirect()->back();
+        }
     }
 
     /**

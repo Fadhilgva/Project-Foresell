@@ -13,8 +13,26 @@ class AdminTokoHomeController extends Controller
         $store = User::where('users.id', Auth::user()->id)
             ->join('stores', 'users.id', '=', 'stores.user_id')
             ->select('stores.name')->get();
+
+        $orders = User::where('users.id', Auth::user()->id)
+            ->join('stores', 'users.id', '=', 'stores.user_id')
+            ->join('products', 'stores.id', '=', 'products.store_id')
+            ->join('order_details', 'products.id', '=', 'order_details.product_id')
+            ->select('order_details.product_id')->count();
+
+        $values = User::where('users.id', Auth::user()->id)
+            ->join('stores', 'users.id', '=', 'stores.user_id')
+            ->join('products', 'stores.id', '=', 'products.store_id')
+            ->join('order_details', 'products.id', '=', 'order_details.product_id')
+            ->select('order_details.price', 'order_details.qty')
+            ->get();
+
+        // dd($value);
+
         return view('admin_toko.home.index', [
-            'store' => $store
+            'store' => $store,
+            'orders' => $orders,
+            'values' => $values
         ]);
     }
     /**

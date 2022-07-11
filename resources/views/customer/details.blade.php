@@ -56,7 +56,7 @@
                                         </td>
                                         <td class="text-center">Rp{{ $detail->price }}</td>
                                         <td class="qty">{{ $detail->qty}}</td>
-                                        <td class="qty">{{ $detail->qty}}</td>
+                                        <td class="qty">{{ $detail->discount}} %</td>
                                         <td class="total">Rp{{ $detail->price * $detail->qty }}</td>
                                     </tr>
                                     @endforeach

@@ -186,7 +186,7 @@
                                     @foreach ($carts as $cart)
                                     <li class="d-flex align-items-center justify-content-between my-2">
                                         <strong class="small font-weight-bold">{{ $cart->product->name }}</strong>
-                                        <span class="text-muted small">Rp{{ $cart->product->price }} x {{ $cart->qty }}
+                                        <span class="text-muted small">Rp{{ ($cart->product->price * (100 - ($cart->product->discount))/100) }} x {{ $cart->qty }}
                                         </span>
                                     </li>
                                     @endforeach

@@ -19,11 +19,11 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Pesanan Dalam Proses
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Orders
                             </div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">5</div>
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ $orders }}</div>
                                 </div>
                             </div>
                         </div>
@@ -42,8 +42,8 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                Jumlah Menu</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
+                                Processed Orders</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $orders }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -52,6 +52,8 @@
                 </div>
             </div>
         </div>
+
+        @foreach ($values as $value)
         <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
@@ -59,11 +61,11 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Pendapatan (Bulanan)</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp400.000</div>
+                                Monthly Income</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp{{ $value->price * $value->qty }}</div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -77,8 +79,8 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Pendapatan (Tahunan)</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp2.015.000</div>
+                                Annual Income</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp{{ $value->price * $value->qty }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -87,13 +89,14 @@
                 </div>
             </div>
         </div>
+        @endforeach
     </div>
 
     <!-- Collapsable Card Example -->
     <div class="card shadow mb-4">
         <!-- Card Header - Accordion -->
         <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-            <h6 class="m-0 font-weight-bold text-primary">Selamat Datang di Foresell :)</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Orders</h6>
         </a>
         <!-- Card Content - Collapse -->
         <div class="collapse show" id="collapseCardExample">

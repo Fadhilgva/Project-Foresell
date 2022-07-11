@@ -92,7 +92,7 @@ class OrdersCustController extends Controller
                     OrderDetails::create([
                         'product_id' => $cart->product_id,
                         'order_id' => $order->id,
-                        'price' => $cart->product->price * (100 - $cart->product->discount),
+                        'price' => $cart->product->price * ((100 - $cart->product->discount) / 100),
                         'qty' => $cart->qty,
                         'discount' => $cart->product->discount
                     ]);

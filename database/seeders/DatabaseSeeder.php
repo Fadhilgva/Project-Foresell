@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
             'location' => 'Jakarta Utara',
             'address' => 'Jakarta Utara',
             'postalcode' => '13250',
-            'user_id' => 1,
+            'user_id' => 0,
             'desc' => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, voluptates magni assumenda quam nobis explicabo recusandae iure quo tenetur, corporis provident? Veritatis incidunt sit recusandae distinctio odit temporibus enim debitis? A earum laboriosam quisquam non possimus exercitationem excepturi! Nisi modi, dolores corrupti id officia ipsam. Quidem ea cupiditate reprehenderit libero?"
 
         ]);
@@ -67,7 +67,7 @@ class DatabaseSeeder extends Seeder
             'location' => 'Jakarta Selatan',
             'address' => 'Jakarta Utara',
             'postalcode' => '13250',
-            'user_id' => 1,
+            'user_id' => 0,
             'desc' => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, voluptates magni assumenda quam nobis explicabo recusandae iure quo tenetur, corporis provident? Veritatis incidunt sit recusandae distinctio odit temporibus enim debitis? A earum laboriosam quisquam non possimus exercitationem excepturi! Nisi modi, dolores corrupti id officia ipsam. Quidem ea cupiditate reprehenderit libero?"
 
         ]);
@@ -78,7 +78,7 @@ class DatabaseSeeder extends Seeder
             'location' => 'Jakarta Pusat',
             'address' => 'Jakarta Utara',
             'postalcode' => '13250',
-            'user_id' => 1,
+            'user_id' => 0,
             'desc' => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, voluptates magni assumenda quam nobis explicabo recusandae iure quo tenetur, corporis provident? Veritatis incidunt sit recusandae distinctio odit temporibus enim debitis? A earum laboriosam quisquam non possimus exercitationem excepturi! Nisi modi, dolores corrupti id officia ipsam. Quidem ea cupiditate reprehenderit libero?"
 
         ]);
