@@ -7,74 +7,119 @@
 @endsection
 
 @section('content')
+<form action="/admin_toko/data_produk/{{$data_produk->id}}" method="POST" enctype="multipart/form-data">
+  @csrf
+  @method('PUT')
+  <div class="form-group">
+    <label>Category Name</label> <br>
+    <select name="category_id" class="form-control" id=""  >
+      <option value="">---Choose Category---</option>
 
-<form action="/data_produk" method="POST" enctype="multipart/form-data">
+      @foreach ($category as $item)
+          <option value="{{$item->id}}">{{$item->name}}</option>
+      @endforeach
+  </select>
+  </div>
+  @error('category_id')
+    <div class="alert alert-danger">{{ $message }}</div>
+  @enderror
 
-    <div class="form-group">
-        <label> Gambar Produk </label>
-        <input type="file" name="gambar_produk" class="form-control">
-    </div>
-    
-    <div class="form-group">
-        <label> Product Name </label>
-        <input type="text" name="produk" class="form-control">
-    </div>
 
-    
+  {{-- <div class="form-group">
+    <label>Store Name</label> <br>
+        <select name="store_id" class="form-control" id="">
+            <option value="">---Choose Store---</option>
 
-    <div class="form-group">
-        <label for="exampleFormControlSelect1">Category</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-          <option>Makanan</option>
-          <option>Gadget</option>
-          <option>Kendaraan</option>
-          <option>Mainan</option>
-          <option>lain-lain</option>
+            @foreach ($store as $item)
+              @if ($item->id === $category->user_id)
+
+                  <option value="{{$item->id}}" selected>{{$item->name}}</option>
+              
+              @else
+
+                  <option value="{{$item->id}}">{{$item->name}}</option>
+
+              @endif
+            @endforeach
         </select>
-      </div>
+  </div>
+  @error('store_id')
+    <div class="alert alert-danger">{{ $message }}</div>
+  @enderror --}}
 
-    <div class="form-group">
-        <label>Description</label>
-        <textarea name="deskripsi" class="form-control" id="" cols="190" rows="10"></textarea>
-    </div>
 
-    <div class="form-group">
-        <label> Quantity </label>
-        <input type="text" name="harga" class="form-control">
-    </div>
+  <div class="form-group">
+    <label>Product Image</label>
+    <input type="file" name="image" class="form-control">
+  </div>
+  @error('Image')
+    <div class="alert alert-danger">{{ $message }}</div>
+  @enderror
 
-    <div class="form-group">
-        <label> Price </label>
-        <input type="text" name="harga" class="form-control">
-    </div>
 
-    <fieldset class="form-group">
-        <div class="row">
-          <legend class="col-form-label col-sm-2 pt-0">Status</legend>
-          <div class="col-sm-10">
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-              <label class="form-check-label" for="gridRadios1">
-                Aktif
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-              <label class="form-check-label" for="gridRadios2">
-                Tidak Aktif
-              </label>
-            </div>
-          </div>
-        </div>
-      </fieldset>
+  <div class="form-group">
+      <label>Product Name</label>
+      <input type="text" name="name" class="form-control" value="{{$data_produk->name}}">
+  </div>
+  @error('name')
+      <div class="alert alert-danger">{{ $message }}</div>
+  @enderror
 
-    <div class="form-group">
-        <label> Date Created </label>
-        <input type="text" name="harga" class="form-control">
-    </div>
-    
 
-     <button type="submit" class="btn btn-primary">Submit</button>
+  {{-- <div class="form-group">
+      <label>Slug Name</label>
+      <input type="text" name="slug" class="form-control" value="{{$data_produk->slug}}>
+  </div>
+  @error('slug')
+      <div class="alert alert-danger">{{ $message }}</div>
+  @enderror --}}
+  
+
+  <div class="form-group">
+    <label>Product Price</label>
+    <input type="int" name="price" class="form-control" value="{{$data_produk->price}}>
+  </div>
+  @error('price')
+      <div class="alert alert-danger">{{ $message }}</div>
+  @enderror
+
+
+  <div class="form-group">
+    <label>Product Stock</label>
+    <input type="int" name="stock" class="form-control" value="{{$data_produk->stock}}>
+  </div>
+  @error('stock')
+      <div class="alert alert-danger">{{ $message }}</div>
+  @enderror
+
+
+  {{-- <div class="form-group">
+    <label>Product Sold</label>
+    <input type="int" name="sold" class="form-control" value="{{$data_produk->sold}}>
+  </div>
+  @error('sold')
+      <div class="alert alert-danger">{{ $message }}</div>
+  @enderror --}}
+
+
+  <div class="form-group">
+    <label>Product Discount</label>
+    <input type="text" name="discount" class="form-control" value="{{$data_produk->discount}}>
+  </div>
+  @error('discount')
+      <div class="alert alert-danger">{{ $message }}</div>
+  @enderror
+
+
+  <div class="form-group">
+    <label>Product Description</label>
+    <textarea name="desc" class="form-control" id="" cols="30" rows="10">{{$data_produk->desc}}</textarea>
+  </div>
+  @error('desc')
+      <div class="alert alert-danger">{{ $message }}</div>
+  @enderror
+
+   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
 @endsection

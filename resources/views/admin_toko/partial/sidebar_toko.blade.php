@@ -29,7 +29,7 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item title" href="/admin_toko/data_produk">Data Produk</a>
-                <a class="collapse-item title" href="/admin_toko/kategori">Kategori</a>
+                {{-- <a class="collapse-item title" href="/admin_toko/kategori">Kategori</a> --}}
 
             </div>
         </div>
