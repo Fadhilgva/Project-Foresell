@@ -155,15 +155,23 @@ Route::middleware(['auth', 'role:adminToko'])->group(function () {
     Route::get('/admin_toko/home_store', [AdminTokoHomeController::class, 'index'])->name('store.home');
 
     //CRUD Data Produk
-    // Route::get('/data_produk','DataProdukController@data_produk');
-    Route::get('/admin_toko/data_produk', [DataProdukController::class, 'index']);
-    Route::get('/admin_toko/data_produk/create', [DataProdukController::class, 'create']);
-    Route::get('/admin_toko/data_produk/edit', [DataProdukController::class, 'edit']);
+    //Create
+    Route::get('/admin_toko/data_produk/create', [DataProdukController::class, 'create']);//Route menuju form create
+    Route::post('/admin_toko/data_produk/{id}', [DataProdukController::class, 'store']);//Route untuk menyimpan data ke database
+    //Read
+    Route::get('/admin_toko/data_produk', [DataProdukController::class, 'index']);//Route List Kategori
+    //Update
+    Route::get('/admin_toko/data_produk/{data_produk_id}/edit', [DataProdukController::class, 'edit']);//Route menuju ke form edit
+    Route::put('/admin_toko/data_produk/{data_produk_id}', [DataProdukController::class, 'update']);//Route untuk update data berdasarkan id di database
+    //Delete
+    Route::delete('/admin_toko/data_produk/{data_produk_id}', [DataProdukController::class, 'destroy']);//Route untuk hapus data di database
+    
+    
 
-    //CRUD Data Produk
-    Route::get('/admin_toko/kategori', [KategoriController::class, 'index']);
-    Route::get('/admin_toko/kategori/create', [KategoriController::class, 'create']);
-    Route::get('/admin_toko/kategori/edit', [KategoriController::class, 'edit']);
+    // //CRUD Kategori
+    // Route::get('/admin_toko/kategori', [KategoriController::class, 'index']);
+    // Route::get('/admin_toko/kategori/create', [KategoriController::class, 'create']);
+    // Route::get('/admin_toko/kategori/edit', [KategoriController::class, 'edit']);
 
     //CRUD Data Order
     Route::get('/admin_toko/data_order', [DataOrderController::class, 'index']);
