@@ -102,6 +102,14 @@ Route::group(
         //LOGIN ADMIN
         Route::get('/admin-foresell/login', [AdminAuthenticatedSessionController::class, 'create'])->name('admin.login');
         Route::post('/admin-foresell/login', [AdminAuthenticatedSessionController::class, 'store'])->name('admin.login.store');
+
+        //CRUD Login ADMIN TOKO
+        Route::get('/admin_toko/login_store', [AdminTokoLoginController::class, 'index']);
+        Route::post('/admin_toko/login_store', [AdminTokoLoginController::class, 'store'])->name('store.login');
+
+        //CRUD Register ADMIN TOKO
+        Route::get('/admin_toko/register_store', [AdminTokoRegisterController::class, 'index'])->name('store.index');
+        Route::post('/admin_toko/register_store', [AdminTokoRegisterController::class, 'store'])->name('store.store');
     }
 );
 
@@ -119,73 +127,58 @@ Route::group(
         Route::get('/cart', [CartController::class, 'index']);
         Route::post('/add_cart/{product:id}', [CartController::class, 'store']);
         Route::post('/add_cartproduct/{product:id}', [CartController::class, 'storeproduct']);
-        // Route::post('/minusproduct/{cart:id}', [CartController::class, 'minusproduct']);
-        // Route::post('/plusproduct/{cart:id}', [CartController::class, 'plusproduct']);
         Route::post('/delete_cart', [CartController::class, 'destroy']);
+        Route::post('/update_cart', [CartController::class, 'updatecart']);
         Route::get('/shipping', [OrdersCustController::class, 'index']);
         Route::post('/editshipping', [OrdersCustController::class, 'updateaddress']);
         Route::get('/billing', [OrdersCustController::class, 'billing']);
         Route::post('/billing', [OrdersCustController::class, 'storebilling']);
         Route::get('/completed', [OrdersCustController::class, 'completed']);
+        Route::get('/orders', [OrdersCustController::class, 'showorders']);
+        Route::get('/orderdetails/{order:id}', [OrdersCustController::class, 'showordersdetails']);
     }
 );
-
-Route::get('/orders', function () {
-    return view('customer.orders', [
-        'title' => 'Your Orders'
-    ]);
-});
-
-Route::get('/orderdetails', function () {
-    return view('customer.details', [
-        'title' => 'Your Orders'
-    ]);
-});
 
 //----------------------------------------------------------------------------------------------------
 /*
 * ADMIN TOKO
 *
 */
-//CRUD Login
-Route::get('/admin_toko/login_store', [AdminTokoLoginController::class, 'index']);
 
-//CRUD Register
-Route::get('/admin_toko/register_store', [AdminTokoRegisterController::class, 'index'])->name('store.index');
-Route::post('/admin_toko/register_store', [AdminTokoRegisterController::class, 'store'])->name('store.store');
+Route::middleware(['auth', 'role:adminToko'])->group(function () {
+    //CRUD Login
+    Route::get('/admin_toko/profile', [ProfileController::class, 'index']);
+    Route::get('/admin_toko/profile/create', [ProfileController::class, 'create']);
 
-//CRUD Login
-Route::get('/admin_toko/profile', [ProfileController::class, 'index']);
-Route::get('/admin_toko/profile/create', [ProfileController::class, 'create']);
+    //CRUD Home
+    Route::get('/admin_toko/home_store', [AdminTokoHomeController::class, 'index'])->name('store.home');
 
-//CRUD Home
-Route::get('/admin_toko/home_store', [AdminTokoHomeController::class, 'index'])->name('store.home');
+    //CRUD Data Produk
+    // Route::get('/data_produk','DataProdukController@data_produk');
+    Route::get('/admin_toko/data_produk', [DataProdukController::class, 'index']);
+    Route::get('/admin_toko/data_produk/create', [DataProdukController::class, 'create']);
+    Route::get('/admin_toko/data_produk/edit', [DataProdukController::class, 'edit']);
 
-//CRUD Data Produk
-// Route::get('/data_produk','DataProdukController@data_produk');
-Route::get('/admin_toko/data_produk', [DataProdukController::class, 'index']);
-Route::get('/admin_toko/data_produk/create', [DataProdukController::class, 'create']);
-Route::get('/admin_toko/data_produk/edit', [DataProdukController::class, 'edit']);
-
-//CRUD Data Produk
-Route::get('/admin_toko/kategori', [KategoriController::class, 'index']);
-Route::get('/admin_toko/kategori/create', [KategoriController::class, 'create']);
-Route::get('/admin_toko/kategori/edit', [KategoriController::class, 'edit']);
+    //CRUD Data Produk
+    Route::get('/admin_toko/kategori', [KategoriController::class, 'index']);
+    Route::get('/admin_toko/kategori/create', [KategoriController::class, 'create']);
+    Route::get('/admin_toko/kategori/edit', [KategoriController::class, 'edit']);
 
 
-//CRUD Selesaikan Pesanan
-Route::get('/admin_toko/selesaikan_pesanan', [SelesaikanPesananController::class, 'index']);
+    //CRUD Selesaikan Pesanan
+    Route::get('/admin_toko/selesaikan_pesanan', [SelesaikanPesananController::class, 'index']);
 
-//CRUD Data Order
-Route::get('/admin_toko/data_order', [DataOrderController::class, 'index']);
-Route::get('/admin_toko/data_order/create', [DataOrderController::class, 'create']);
+    //CRUD Data Order
+    Route::get('/admin_toko/data_order', [DataOrderController::class, 'index']);
+    Route::get('/admin_toko/data_order/create', [DataOrderController::class, 'create']);
 
-//CRUD Data Penjualan
-Route::get('/admin_toko/data_penjualan', [DataPenjualanController::class, 'index']);
+    //CRUD Data Penjualan
+    Route::get('/admin_toko/data_penjualan', [DataPenjualanController::class, 'index']);
 
-//CRUD Tambah Diskon
-Route::get('/admin_toko/tambah_diskon', [TambahDiskonController::class, 'index']);
-Route::get('/admin_toko/tambah_diskon/edit', [TambahDiskonController::class, 'edit']);
+    //CRUD Tambah Diskon
+    Route::get('/admin_toko/tambah_diskon', [TambahDiskonController::class, 'index']);
+    Route::get('/admin_toko/tambah_diskon/edit', [TambahDiskonController::class, 'edit']);
+});
 
 
 //----------------------------------------------------------------------------------------------------

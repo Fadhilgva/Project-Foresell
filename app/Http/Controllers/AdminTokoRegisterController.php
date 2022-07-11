@@ -76,7 +76,7 @@ class AdminTokoRegisterController extends Controller
             'address' => $request->storeName,
             'location' => $request->city,
             'email' => $request->email,
-            'iamge' => $request->logo,
+            'image' => $logo,
             'slug' => Str::slug($request->storeName),
             'user_id' => Auth::user()->id,
         ]);

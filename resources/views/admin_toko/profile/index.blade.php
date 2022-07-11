@@ -26,19 +26,8 @@
                 <h5 class="mt-4 mb-2 title">Profile Toko</h5>
                 <div class="col-md-12 my-2">
                     <div class="form-floating-sm">
-<<<<<<< HEAD
-                        <label for="name">UserName (permanen)</label>
-                        <p>UserName </p>
-                    </div>
-                </div>
-                <div class="col-md-12 my-2">
-                    <div class="form-floating-sm">
-                        <label for="name">Nama Toko</label>
-                        <p>Toko A</p>
-=======
                         <label for="name">Full Name</label>
                         <p>{{ $store->name }}</p>
->>>>>>> ef4ea7c4f6b8a5f44b9102bf49cde12cb67e156d
                     </div>
                 </div>
                 <div class="col-md-6 my-1">
