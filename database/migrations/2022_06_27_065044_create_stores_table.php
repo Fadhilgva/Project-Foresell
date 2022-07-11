@@ -19,7 +19,7 @@ class CreateStoresTable extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('location');
-            $table->text('desc');
+            $table->text('desc')->nullable();
             $table->timestamps();
         });
     }

@@ -49,7 +49,7 @@ class AdminTokoRegisterController extends Controller
             'city' => ['required', 'string', 'max:255'],
             'postalcode' => ['required', 'string', 'max:255'],
             'phone' => ['required'],
-            'logo' => 'required|mimes:jpg,jpeg,png',
+            'logo' => ['required', 'mimes:jpg,jpeg,png'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'same:confirm_password'],
             'confirm_password' => ['required']
@@ -70,8 +70,8 @@ class AdminTokoRegisterController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
-        
-        $logo = time().'-'.$request->logo->getClientOriginalName();
+
+        $logo = time() . '-' . $request->logo->getClientOriginalName();
         $request->logo->move('image\adminToko\logo', $logo);
 
         $store = Store::create([
@@ -80,7 +80,7 @@ class AdminTokoRegisterController extends Controller
             'location' => $request->city,
             'postalcode' => $request->postalcode,
             'email' => $request->email,
-            'image' => $request->logo,
+            'image' => $logo,
             'slug' => Str::slug($request->storeName),
             'user_id' => Auth::user()->id,
         ]);
