@@ -12,6 +12,7 @@ use App\Models\ProductStore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class DataProdukController extends Controller
@@ -75,7 +76,7 @@ class DataProdukController extends Controller
             'discount' => 'required',
             'desc' => 'required',
         ]);
-        
+
         // DB::table('categories')->insert([
         //     'category_id' => $request['category_id'],
         // ]);
@@ -86,7 +87,7 @@ class DataProdukController extends Controller
 
         $store_id = User::find(Auth::user()->id)->store;
 
-        $image = time().'.'.$request->image->extension();
+        $image = time().'.'.$request->image->getClientOriginalName();
         $request->image->move(public_path('img/admin_store'),$image);
 
         $data_produk = new Product;
@@ -147,17 +148,17 @@ class DataProdukController extends Controller
         $request->validate([
             'category_id' => 'required',
             // 'store_id' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'name' => 'required',
-            // 'slug' => 'required',
-            'price' => 'required',
-            'stock' => 'required',
-            // 'sold' => 'required',
-            'discount' => 'required',
-            'desc' => 'required',
+            'image' => 'mimes:jpeg,png,jpg|max:2048',
+            'name' => '',
+            // 'slug' => '',
+            'price' => '',
+            'stock' => '',
+            // 'sold' => '',
+            'discount' => '',
+            'desc' => '',
         ]);
 
-        
+
         // DB::table('categories','stores')->insert([
         //     'category_id' => $request['category_id'],
         // ]);
@@ -167,25 +168,35 @@ class DataProdukController extends Controller
         // ]);
 
         $data_produk = Product::find($data_produk);
-
-        $image = time().'.'.$request->image->extension();
-        $request->image->move(public_path('img/admin_store'),$image);
-            
         $store_id = User::find(Auth::user()->id)->store;
-        
-        $data_produk->category_id = $request['category_id'];
-        $data_produk->store_id = $store_id->id;
-        $data_produk->image = $request['image'];
-        $data_produk->name = $request['name'];
-        $data_produk->slug = Str::slug($request->name);
-        $data_produk->price = $request['price'];
-        $data_produk->stock = $request['stock'];
-            // $data_produk->sold = $request->sold;
-        $data_produk->discount = $request['discount'];
-        $data_produk->desc = $request['desc'];
 
-        $data_produk->save();
-        //Alert::success('Update','Data Film Berhasil Diupdate !');
+        $data = [
+            $data_produk->category_id = $request['category_id'],
+            $data_produk->store_id = $store_id->id,
+            // $data_produk->image = $request['image'],
+            $data_produk->name = $request['name'],
+            $data_produk->slug = Str::slug($request->name),
+            $data_produk->price = $request['price'],
+            $data_produk->stock = $request['stock'],
+            // $data_produk->sold = $request->sold;
+            $data_produk->discount = $request['discount'],
+            $data_produk->desc = $request['desc']
+
+        ];
+
+        if($request->image){
+            File::delete('img/admin_store/'. $data_produk->image);
+
+            $image =  time().'-'.$request->image->getClientOriginalName();
+            $request->image->move('img\admin_store', $image);
+
+            $data['image'] = $image;
+        }
+        // $image = time().'.'.$request->image->extension();
+        // $request->image->move(public_path('img/admin_store'),$image);
+
+        $data_produk->update($data);
+        Alert::success('Update','Data Film Berhasil Diupdate !');
         return redirect('/admin_toko/data_produk');
     }
 
@@ -195,11 +206,31 @@ class DataProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($data_produk_id)
+    // public function destroy($data_produk_id)
+    // {
+    //     $data_produk = Product::find($data_produk_id);
+    //     $data_produk->delete();
+
+    //     return redirect('/admin_toko/data_produk');
+    // }
+
+    public function confirm($id)
     {
-        $data_produk = Product::find($data_produk_id);
+        alert()->question('Perhatian!','Apa kamu yakin ingin menghapus?')
+        ->showConfirmButton('<a href="/admin_toko/data_produk/' . $id . '/delete" class="text-white" style="text-decoration: none"> Delete</a>', '#3085d6')->toHtml()
+        ->showCancelButton('Cancel', '#aaa')->reverseButtons();
+
+        return redirect('admin_toko/data_produk');
+    }
+
+    public function delete($id)
+    {
+        $data_produk = Product::find($id);
+        File::delete('img/admin_store/'. $data_produk->image);
         $data_produk->delete();
 
-        return redirect('/admin_toko/data_produk');
+        Alert::success('Success', 'Data berhasil dihapus');
+
+        return redirect('admin_toko/data_produk');
     }
 }

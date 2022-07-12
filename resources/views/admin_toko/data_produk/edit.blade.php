@@ -34,7 +34,7 @@
               @if ($item->id === $category->user_id)
 
                   <option value="{{$item->id}}" selected>{{$item->name}}</option>
-              
+
               @else
 
                   <option value="{{$item->id}}">{{$item->name}}</option>
@@ -73,11 +73,11 @@
   @error('slug')
       <div class="alert alert-danger">{{ $message }}</div>
   @enderror --}}
-  
+
 
   <div class="form-group">
     <label>Product Price</label>
-    <input type="text" name="price" class="form-control" value="{{$data_produk->price}}>
+    <input type="text" name="price" class="form-control" value="{{$data_produk->price}}">
   </div>
   @error('price')
       <div class="alert alert-danger">{{ $message }}</div>
@@ -86,7 +86,7 @@
 
   <div class="form-group">
     <label>Product Stock</label>
-    <input type="text" name="stock" class="form-control" value="{{$data_produk->stock}}>
+    <input type="text" name="stock" class="form-control" value="{{$data_produk->stock}}">
   </div>
   @error('stock')
       <div class="alert alert-danger">{{ $message }}</div>
@@ -95,16 +95,16 @@
 
    <div class="form-group">
     <label>Product Sold</label>
-    <input type="text" name="sold" class="form-control" value="{{$data_produk->sold}}>
+    <input type="text" name="sold" class="form-control" value="{{$data_produk->sold}}">
   </div>
   @error('sold')
       <div class="alert alert-danger">{{ $message }}</div>
-  @enderror 
+  @enderror
 
 
   <div class="form-group">
     <label>Product Discount</label>
-    <input type="text" name="discount" class="form-control" value="{{$data_produk->discount}}>
+    <input type="text" name="discount" class="form-control" value="{{$data_produk->discount}}">
   </div>
   @error('discount')
       <div class="alert alert-danger">{{ $message }}</div>
@@ -112,8 +112,8 @@
 
 
   <div class="form-group">
-    <label>Product Description</label>
-    <textarea name="desc" class="form-control" id="" cols="30" rows="10">{{$data_produk->desc}}</textarea>
+    <label for="editor">Product Description</label>
+    <textarea name="desc" class="form-control" id="editor" cols="30" rows="10">{{$data_produk->desc}}</textarea>
   </div>
   @error('desc')
       <div class="alert alert-danger">{{ $message }}</div>
@@ -122,4 +122,13 @@
    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
+{{-- EDITOR TEXT --}}
+<script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
 @endsection

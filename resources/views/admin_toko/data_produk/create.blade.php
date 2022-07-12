@@ -10,7 +10,7 @@
 
 <form action="/admin_toko/data_produk/{{$store_id->id}}" method="POST" enctype="multipart/form-data">
     @csrf
-    
+
     <div class="form-group">
       <label>Category Name</label> <br>
           <select name="category_id" class="form-control" id=""  >
@@ -66,7 +66,7 @@
     @error('slug')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror --}}
-    
+
 
     <div class="form-group">
       <label>Product Price</label>
@@ -105,8 +105,8 @@
 
 
     <div class="form-group">
-      <label>Product Description</label>
-      <textarea name="desc" class="form-control" id="" cols="30" rows="10"></textarea>
+      <label for="editor">Product Description</label>
+      <textarea name="desc" class="form-control" id="editor" cols="30" rows="10"></textarea>
     </div>
     @error('desc')
         <div class="alert alert-danger">{{ $message }}</div>
@@ -115,4 +115,13 @@
      <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
+{{-- EDITOR TEXT --}}
+<script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
 @endsection

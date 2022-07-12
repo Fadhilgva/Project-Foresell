@@ -15,19 +15,19 @@
   });
 </script>
 @endpush
-    
+
 @push('style')
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.12.1/datatables.min.css"/>
-    
+
 @endpush
 
 @section('content')
 <div class="container-fluid">
     <!-- /.card-header -->
     <div class="card-body">
-	
+
 	<a href="/admin_toko/data_produk/create" class="btn btn-primary mb-3">Add Product</a>
-      
+
 
 	<table id="example1" class="table table-bordered table-striped">
         <thead>
@@ -63,7 +63,7 @@
             </tr>
         </tfoot>
         <tbody>
-            @forelse ($data_produk as $key => $item)   
+            @forelse ($data_produk as $key => $item)
                 <tr>
                     <td>{{$key + 1}}</td>
                     <td>{{$item->category_id}}</td>
@@ -75,27 +75,29 @@
                     <td>{{$item->sold}}</td>
                     <td>{{$item->discount}}</td>
                     <td>{{$item->stock}}</td>
-                    <td> 
+                    <td>
                         <form action="/admin_toko/data_produk/{{$item->id}}" method="POST">
-                            <a type="button" class="btn btn-Info mb-3" href="/admin_toko/data_produk/{{$item->id}}">Detail</a> 
-                            <a type="button" class="btn btn-warning mb-3" href="/admin_toko/data_produk/{{$item->id}}/edit">Edit</a> 
+                            <a type="button" class="btn btn-Info mb-3" href="/admin_toko/data_produk/{{$item->id}}">Detail</a>
+                            <a type="button" class="btn btn-warning mb-3" href="/admin_toko/data_produk/{{$item->id}}/edit">Edit</a>
 
                             @csrf
                             @method('delete')
-                            <input type="submit" class="btn btn-danger mb-3" value="Delete">
-                        
+
+                            <a href="/admin_toko/data_produk/{{ $item->id }}/confirm" class="btn btn-danger mb-3" id="delete">Delete</a>
+                            {{-- <input type="submit" class="btn btn-danger mb-3" value="Delete"> --}}
+
                         </form>
                     </td>
                 </tr>
-                
+
             @empty
                 <h1>No data available in table</h1>
             @endforelse
-           
+
         </tbody>
-  
-        
-  
+
+
+
       </table>
     </div>
   </div>

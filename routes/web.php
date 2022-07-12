@@ -165,9 +165,11 @@ Route::middleware(['auth', 'role:adminToko'])->group(function () {
     Route::get('/admin_toko/data_produk/{data_produk_id}/edit', [DataProdukController::class, 'edit']);//Route menuju ke form edit
     Route::put('/admin_toko/data_produk/{data_produk_id}', [DataProdukController::class, 'update']);//Route untuk update data berdasarkan id di database
     //Delete
-    Route::delete('/admin_toko/data_produk/{data_produk_id}', [DataProdukController::class, 'destroy']);//Route untuk hapus data di database
-    
-    
+    // Route::delete('/admin_toko/data_produk/{data_produk_id}', [DataProdukController::class, 'destroy']);//Route untuk hapus data di database
+    Route::get('/admin_toko/data_produk/{id}/confirm', [DataProdukController::class, 'confirm']);
+    Route::get('/admin_toko/data_produk/{id}/delete', [DataProdukController::class, 'delete']);
+
+
 
     // //CRUD Kategori
     // Route::get('/admin_toko/kategori', [KategoriController::class, 'index']);
