@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use RealRashid\SweetAlert\Facades\Alert;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DataProdukController extends Controller
 {
@@ -70,6 +71,7 @@ class DataProdukController extends Controller
             // 'store_id' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'name' => 'required',
+            'slug' => 'required|unique:products,slug',
             'price' => 'required',
             'stock' => 'required',
             // 'sold' => 'required',
@@ -96,7 +98,7 @@ class DataProdukController extends Controller
         $data_produk->store_id = $store_id->id;
         $data_produk->image = $image;
         $data_produk->name = $request->name;
-        $data_produk->slug = Str::slug($request->name);
+        $data_produk->slug = $request->slug;
         $data_produk->price = $request->price;
         $data_produk->stock = $request->stock;
         // $data_produk->sold = $request->sold;
@@ -150,7 +152,7 @@ class DataProdukController extends Controller
             // 'store_id' => 'required',
             'image' => 'mimes:jpeg,png,jpg|max:2048',
             'name' => '',
-            // 'slug' => '',
+            'slug' => '',
             'price' => '',
             'stock' => '',
             // 'sold' => '',
@@ -175,7 +177,7 @@ class DataProdukController extends Controller
             $data_produk->store_id = $store_id->id,
             // $data_produk->image = $request['image'],
             $data_produk->name = $request['name'],
-            $data_produk->slug = Str::slug($request->name),
+            $data_produk->slug = $request->slug,
             $data_produk->price = $request['price'],
             $data_produk->stock = $request['stock'],
             // $data_produk->sold = $request->sold;
@@ -232,5 +234,15 @@ class DataProdukController extends Controller
         Alert::success('Success', 'Data berhasil dihapus');
 
         return redirect('admin_toko/data_produk');
+    }
+
+    public function checkSlug(Request $request)
+    {
+        $slug = "";
+        if(!empty($request->name)) {
+            $slug = SlugService::createSlug(Product::class, 'slug', $request->name);
+        }
+
+        return response()->json(['slug' => $slug]);
     }
 }

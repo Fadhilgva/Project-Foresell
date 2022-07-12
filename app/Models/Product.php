@@ -5,11 +5,14 @@ namespace App\Models;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Product extends Model
 {
     // use \Cviebrock\EloquentSluggable\Sluggable;
     use HasFactory;
+    use Sluggable;
+    
     protected $guarded = ['id'];
 
     public function scopeFilter($query, array $filters)
@@ -42,5 +45,14 @@ class Product extends Model
     public function Category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
     }
 }

@@ -52,25 +52,25 @@
 
     <div class="form-group">
         <label>Product Name</label>
-        <input type="text" name="name" class="form-control">
+        <input type="text" name="name" class="form-control" id="name" value="{{ old('name') ? old('name') : ''}}">
     </div>
     @error('name')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
 
 
-    {{-- <div class="form-group">
+    <div class="form-group">
         <label>Slug Name</label>
-        <input type="text" name="slug" class="form-control">
+        <input type="text" id="slug" name="slug" class="form-control">
     </div>
     @error('slug')
         <div class="alert alert-danger">{{ $message }}</div>
-    @enderror --}}
+    @enderror
 
 
     <div class="form-group">
       <label>Product Price</label>
-      <input type="int" name="price" class="form-control">
+      <input type="int" name="price" class="form-control" value="{{ old('price') ? old('price') : ''}}">
     </div>
     @error('price')
         <div class="alert alert-danger">{{ $message }}</div>
@@ -79,7 +79,7 @@
 
     <div class="form-group">
       <label>Product Stock</label>
-      <input type="int" name="stock" class="form-control">
+      <input type="int" name="stock" class="form-control" value="{{ old('stock') ? old('stock') : ''}}">
     </div>
     @error('stock')
         <div class="alert alert-danger">{{ $message }}</div>
@@ -97,7 +97,7 @@
 
     <div class="form-group">
       <label>Product Discount</label>
-      <input type="text" name="discount" class="form-control">
+      <input type="text" name="discount" class="form-control" value="{{ old('discount') ? old('discount') : ''}}">
     </div>
     @error('discount')
         <div class="alert alert-danger">{{ $message }}</div>
@@ -106,7 +106,7 @@
 
     <div class="form-group">
       <label for="editor">Product Description</label>
-      <textarea name="desc" class="form-control" id="editor" cols="30" rows="10"></textarea>
+      <textarea name="desc" class="form-control" id="editor" cols="30" rows="10">{{ old('desc') ? old('desc') : ''}}</textarea>
     </div>
     @error('desc')
         <div class="alert alert-danger">{{ $message }}</div>
@@ -123,5 +123,14 @@
         .catch( error => {
             console.error( error );
         } );
+
+    const name = document.querySelector("#name");
+    const slug = document.querySelector("#slug");
+
+    name.addEventListener('change', () => {
+        fetch('/admin_toko/data_produk/checkSlug?name=' + name.value)
+        .then(response => response.json())
+        .then(data => slug.value = data.slug );
+    });
 </script>
 @endsection
