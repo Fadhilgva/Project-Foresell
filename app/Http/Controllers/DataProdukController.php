@@ -32,6 +32,9 @@ class DataProdukController extends Controller
     public function index()
     {
         $data_produk = Product::latest()->get();
+        // $category = Category::latest()->get();
+        // $store = Store::latest()->get();
+
         return view('admin_toko.data_produk.index',compact('data_produk'));
     }
 
@@ -112,9 +115,10 @@ class DataProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($data_produk_id)
     {
-        //
+        $data_produk = Product::where('id', $data_produk_id)->first();
+        return view('admin_toko.data_produk.show',compact('data_produk'));
     }
 
     /**
@@ -142,55 +146,45 @@ class DataProdukController extends Controller
     {
         $request->validate([
             'category_id' => 'required',
-            'store_id' => 'required',
+            // 'store_id' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'name' => 'required',
-            'slug' => 'required',
+            // 'slug' => 'required',
             'price' => 'required',
             'stock' => 'required',
-            'sold' => 'required',
+            // 'sold' => 'required',
             'discount' => 'required',
             'desc' => 'required',
         ]);
 
         
-        DB::table('categories','stores')->insert([
-            'category_id' => $request['category_id'],
-        ]);
+        // DB::table('categories','stores')->insert([
+        //     'category_id' => $request['category_id'],
+        // ]);
 
-        DB::table('stores')->insert([
-            'store_id' => $request['store_id'],
-        ]);
+        // DB::table('stores')->insert([
+        //     'store_id' => $request['store_id'],
+        // ]);
 
         $data_produk = Product::find($data_produk);
 
-        if($request->has('image')){
-            $imageproduct = time().'.'.$request->image->extension();
-            $request->image->move(public_path('img/admin_store'),$imageproduct);
+        $image = time().'.'.$request->image->extension();
+        $request->image->move(public_path('img/admin_store'),$image);
             
-            $data_produk->imageproduct = $request->imageproduct;
-            $data_produk->name = $request->name;
-            $data_produk->slug = $request->slug;
-            $data_produk->price = $request->price;
-            $data_produk->stock = $request->stock;
-            $data_produk->sold = $request->sold;
-            $data_produk->discount = $request->discount;
-            $data_produk->desc = $request->desc;
+        $store_id = User::find(Auth::user()->id)->store;
+        
+        $data_produk->category_id = $request['category_id'];
+        $data_produk->store_id = $store_id->id;
+        $data_produk->image = $request['image'];
+        $data_produk->name = $request['name'];
+        $data_produk->slug = Str::slug($request->name);
+        $data_produk->price = $request['price'];
+        $data_produk->stock = $request['stock'];
+            // $data_produk->sold = $request->sold;
+        $data_produk->discount = $request['discount'];
+        $data_produk->desc = $request['desc'];
 
-        }else{
-            $data_produk->category_id = $request->category_id;
-            $data_produk->store_id = $request->store_id;
-            $data_produk->imageproduct = $request->imageproduct;
-            $data_produk->name = $request->name;
-            $data_produk->slug = $request->slug;
-            $data_produk->price = $request->price;
-            $data_produk->stock = $request->stock;
-            $data_produk->sold = $request->sold;
-            $data_produk->discount = $request->discount;
-            $data_produk->desc = $request->desc;
-        }
-
-        $data_produk->update();
+        $data_produk->save();
         //Alert::success('Update','Data Film Berhasil Diupdate !');
         return redirect('/admin_toko/data_produk');
     }
@@ -203,7 +197,7 @@ class DataProdukController extends Controller
      */
     public function destroy($data_produk_id)
     {
-        $data_produk = ProductStore::find($data_produk_id);
+        $data_produk = Product::find($data_produk_id);
         $data_produk->delete();
 
         return redirect('/admin_toko/data_produk');

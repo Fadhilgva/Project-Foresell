@@ -77,7 +77,7 @@
 
   <div class="form-group">
     <label>Product Price</label>
-    <input type="int" name="price" class="form-control" value="{{$data_produk->price}}>
+    <input type="text" name="price" class="form-control" value="{{$data_produk->price}}>
   </div>
   @error('price')
       <div class="alert alert-danger">{{ $message }}</div>
@@ -86,20 +86,20 @@
 
   <div class="form-group">
     <label>Product Stock</label>
-    <input type="int" name="stock" class="form-control" value="{{$data_produk->stock}}>
+    <input type="text" name="stock" class="form-control" value="{{$data_produk->stock}}>
   </div>
   @error('stock')
       <div class="alert alert-danger">{{ $message }}</div>
   @enderror
 
 
-  {{-- <div class="form-group">
+   <div class="form-group">
     <label>Product Sold</label>
-    <input type="int" name="sold" class="form-control" value="{{$data_produk->sold}}>
+    <input type="text" name="sold" class="form-control" value="{{$data_produk->sold}}>
   </div>
   @error('sold')
       <div class="alert alert-danger">{{ $message }}</div>
-  @enderror --}}
+  @enderror 
 
 
   <div class="form-group">

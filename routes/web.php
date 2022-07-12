@@ -159,7 +159,8 @@ Route::middleware(['auth', 'role:adminToko'])->group(function () {
     Route::get('/admin_toko/data_produk/create', [DataProdukController::class, 'create']);//Route menuju form create
     Route::post('/admin_toko/data_produk/{id}', [DataProdukController::class, 'store']);//Route untuk menyimpan data ke database
     //Read
-    Route::get('/admin_toko/data_produk', [DataProdukController::class, 'index']);//Route List Kategori
+    Route::get('/admin_toko/data_produk', [DataProdukController::class, 'index']);//Route List data produk
+    Route::get('/admin_toko/data_produk/{data_produk_id}', [DataProdukController::class, 'show']);//Route detail data produk
     //Update
     Route::get('/admin_toko/data_produk/{data_produk_id}/edit', [DataProdukController::class, 'edit']);//Route menuju ke form edit
     Route::put('/admin_toko/data_produk/{data_produk_id}', [DataProdukController::class, 'update']);//Route untuk update data berdasarkan id di database

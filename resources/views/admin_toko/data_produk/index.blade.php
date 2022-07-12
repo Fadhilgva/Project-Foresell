@@ -63,7 +63,7 @@
             </tr>
         </tfoot>
         <tbody>
-            @forelse ($data_produk as $key => $item)
+            @forelse ($data_produk as $key => $item)   
                 <tr>
                     <td>{{$key + 1}}</td>
                     <td>{{$item->category_id}}</td>
@@ -77,11 +77,12 @@
                     <td>{{$item->stock}}</td>
                     <td> 
                         <form action="/admin_toko/data_produk/{{$item->id}}" method="POST">
-                            <a type="button" class="btn btn-warning" href="/admin_toko/data_produk/{{$item->id}}/edit">Edit</a> 
+                            <a type="button" class="btn btn-Info mb-3" href="/admin_toko/data_produk/{{$item->id}}">Detail</a> 
+                            <a type="button" class="btn btn-warning mb-3" href="/admin_toko/data_produk/{{$item->id}}/edit">Edit</a> 
 
                             @csrf
                             @method('delete')
-                            <input type="submit" class="btn btn-danger" value="Delete">
+                            <input type="submit" class="btn btn-danger mb-3" value="Delete">
                         
                         </form>
                     </td>
