@@ -23,7 +23,7 @@
                             <tr class="candidates-list shadow-sm">
                                 <div class="row">
                                     <td class="align-items-center">
-                                        <p class="title mb-0">{{ $order->id }}</p>
+                                        <p class="title mb-0">{{ $loop->iteration }}</p>
                                     </td>
                                     <td class="align-items-center p-5">
                                         <p class="title mb-0">Total</p>
@@ -31,7 +31,7 @@
                                     </td>
                                     <td class="align-items-center p-5">
                                         <p class="title mb-0 small">Total Discount</p>
-                                        <span class="small">Rp{{ $order->total_disc }}</span>
+                                        <span class="small">-Rp{{ $order->total_disc }}</span>
                                     </td>
                                     <td class="align-items-center">
                                         @if($order->status = "Processed")

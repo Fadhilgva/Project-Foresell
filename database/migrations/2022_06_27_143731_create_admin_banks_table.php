@@ -18,6 +18,7 @@ class CreateAdminBanksTable extends Migration
             $table->string('bankName');
             $table->string('image')->nullable();
             $table->string('noRekening');
+            $table->string('type')->nullable();
             $table->timestamps();
         });
     }
