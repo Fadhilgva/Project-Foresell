@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::table('stores', function (Blueprint $table) {
             $table->string('address');
             $table->string('postalcode');
-            $table->string('banner')->nullable();
             $table->integer('user_id');
         });
     }
