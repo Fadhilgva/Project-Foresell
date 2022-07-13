@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\AdminCategory;
@@ -23,6 +24,29 @@ class AdminCategoryController extends Controller
 
         $categories->withPath('/admin-foresell/list/catego$category');
         $categories->appends($request->all());
+
+        // $total_harga = Category::select(DB::raw('round(SUM(od.price * od.qty * (100 - od.discount)/ 100),2) AS total'))
+        //                 ->groupBy(DB::raw('Month(created_at)'))->pluck('total');
+
+        // $total_harga = DB::select('SELECT monthname(od.created_at) AS bulan,  c.name AS name, round(SUM(od.price * od.qty * (100 - od.discount)/ 100),2) AS total
+        // FROM order_details AS od, categories AS c, products AS p
+        // WHERE p.id = od.product_id
+        // AND p.category_id = c.id
+        // AND c.id = 3
+        // GROUP BY c.name, monthname(od.created_at);
+        // ');
+
+        $total_harga = DB::table(DB::raw('products'))
+                        ->select(DB::raw('monthname(order_details.created_at) AS bulan,  categories.name AS name, round(SUM(order_details.price * order_details.qty * (100 - order_details.discount)/ 100),2) AS total'))
+                        ->join('order_details', 'products.id', '=', 'order_details.product_id')
+                        ->join('categories', 'products.category_id', '=', 'categories.id')
+                        ->where('categories.id', 3)
+                        ->orderBy('order_details.created_at', 'ASC')
+                        ->groupByRaw('bulan, name')->get();
+
+        // $total_harga = DB::table(DB::raw('products'))->join('order_details', 'products.id', '=', 'order_details.product_id')->get();
+
+        // dd($total_harga);
 
         return view('admin.category.index', compact('categories','keyword'));
     }
@@ -72,9 +96,29 @@ class AdminCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+
+        $categories = AdminCategory::whereId($id)->first();
+        $name = AdminCategory::whereId($id)->select('name')->pluck('name');
+        $total = DB::table(DB::raw('products'))
+                        ->select(DB::raw('monthname(order_details.created_at) AS bulan,  categories.name AS name, round(SUM(order_details.price * order_details.qty * (100 - order_details.discount)/ 100),2) AS total'))
+                        ->join('order_details', 'products.id', '=', 'order_details.product_id')
+                        ->join('categories', 'products.category_id', '=', 'categories.id')
+                        ->where('categories.id', $id)
+                        ->orderBy('order_details.created_at', 'ASC')
+                        ->groupByRaw('bulan, name')->pluck('total');
+
+        $bulan = DB::table(DB::raw('products'))
+                        ->select(DB::raw('monthname(order_details.created_at) AS bulan,  categories.name AS name, round(SUM(order_details.price * order_details.qty * (100 - order_details.discount)/ 100),2) AS total'))
+                        ->join('order_details', 'products.id', '=', 'order_details.product_id')
+                        ->join('categories', 'products.category_id', '=', 'categories.id')
+                        ->where('categories.id', $id)
+                        ->orderBy('order_details.created_at', 'ASC')
+                        ->groupByRaw('bulan, name')->pluck('bulan');
+
+
+        return view('admin.category.show', compact('categories', 'total', 'bulan','name'));
     }
 
     /**
