@@ -9,7 +9,7 @@
             <a href="/categories?category={{ $category->slug }}">
                 <div class="card categories text-white border-0 m-3">
                     @if($category->image)
-                    <img src="" class="card-img" alt="" width="800" height="200">
+                    <img src="\image\admin\category/{{ $category->image }}" class="card-img" alt="" width="800" height="200">
                     @else
                     <img src="https://source.unsplash.com/1519x400?{{ $category->name }}" class="card-img" alt="" width="800" height="200">
                     @endif
