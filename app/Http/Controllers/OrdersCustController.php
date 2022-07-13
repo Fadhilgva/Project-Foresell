@@ -88,7 +88,7 @@ class OrdersCustController extends Controller
 
         if ($carts) {
             foreach ($carts as $cart) {
-                foreach ($orders as $order) {
+                foreach ($orders->take(1) as $order) {
                     OrderDetails::create([
                         'product_id' => $cart->product_id,
                         'order_id' => $order->id,

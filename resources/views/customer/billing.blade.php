@@ -99,6 +99,27 @@
                                         </div>
                                     </div>
                                     @endforeach
+                                    @foreach ($banks->skip(3)->take(1) as $bank)
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="flush-headingFour">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                                                <img src="{{ asset('img/customer/ovo.png') }}" width="25" class="me-2">
+                                                {{ $bank->name }}
+                                            </button>
+                                        </h2>
+                                        <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+                                            <div class="form-check my-5 mx-3">
+                                                <input class="form-check-input" type="radio" name="bank" id="bank" value="{{ $bank->id }}" required>
+                                                <div class="accordion-body small">
+                                                    No. Ovo : <strong>{{ $bank->noPayment }}</strong>
+                                                    <br>
+                                                    <br>
+                                                    Bayarkan pesanan ke Virtual Account di atas <br>dengan Total Pembayaran : <strong>Rp{{ $cartdetail->total }}</strong>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
                                 </div>
                                 @endforeach
                             </div>
