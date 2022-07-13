@@ -224,6 +224,7 @@ Route::group(['middleware' => ['auth', 'role:adminForesell']], function () {
     // CATEGORY
     Route::resource('/admin-foresell/list/category', AdminCategoryController::class);
     Route::get('/admin-foresell/list/category/{id}/confirm', [AdminCategoryController::class, 'confirm']);
+    Route::get('/admin-foresell/list/category/{id}/show', [AdminCategoryController::class, 'show']);
     Route::get('/admin-foresell/list/category/{id}/delete', [AdminCategoryController::class, 'delete']);
 
     // PAYMENT
