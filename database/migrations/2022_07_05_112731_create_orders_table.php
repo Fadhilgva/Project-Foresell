@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('courier_id')->nullable();
             $table->unsignedDouble('total_disc')->nullable();
             $table->unsignedDouble('total')->nullable();
-            $table->string('status')->default('Processed');
+            $table->string('status')->default('Waiting');
             $table->string('name');
             $table->string('email');
             $table->string('phone');

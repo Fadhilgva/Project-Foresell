@@ -4,7 +4,7 @@
 
 @section('judul')
 @foreach ($store as $store)
-<p class="ms-2 title">{{ $store->name }}</p>
+<p class="ms-4 title">{{ $store->name }}</p>
 @endforeach
 @endsection
 

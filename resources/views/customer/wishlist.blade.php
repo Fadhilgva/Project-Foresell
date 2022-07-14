@@ -5,6 +5,14 @@
 <div class="container my-5 px-3">
     @if ($itemwishlist->count() > 0)
     <h1 class="h3 title text-start ">Your Wishlist</h1>
+
+    @if (session()->has('success'))
+    <div class="alert alert-success alert-dismissible fade show text-center mx-auto col-5" role="alert">
+        <small>{{ session('success') }}</small>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+
     <div class="row">
         @foreach ($itemwishlist as $wish)
         <div class="col-md-3 col-sm-6">

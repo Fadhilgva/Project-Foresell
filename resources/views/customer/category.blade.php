@@ -4,7 +4,11 @@
 {{-- Background --}}
 <div>
     @foreach ($products->take(1) as $a)
+    @if($a->category->image)
+    <img src="\image\admin\category/{{ $a->category->image }}" alt="" width="1519" height="400">
+    @else
     <img src="https://source.unsplash.com/1520x400?{{ $a->category->name }}" alt="" width="1519" height="400">
+    @endif
     @endforeach
 </div>
 

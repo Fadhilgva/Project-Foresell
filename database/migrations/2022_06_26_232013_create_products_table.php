@@ -22,8 +22,8 @@
                 $table->string('slug')->unique();
                 $table->unsignedInteger('price');
                 $table->unsignedInteger('stock');
-                $table->unsignedInteger('sold');
-                $table->unsignedInteger('discount');
+                $table->unsignedInteger('sold')->default(0);
+                $table->unsignedInteger('discount')->default(0);
                 $table->text('desc');
                 $table->timestamp('published_at')->nullable();
                 $table->timestamps();
