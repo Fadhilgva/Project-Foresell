@@ -35,53 +35,53 @@ class DatabaseSeeder extends Seeder
         //     'postalcode' => '12110'
         // ]);
 
-        // Category::create([
-        //     'name' => 'Gaming',
-        //     'slug' => 'gaming'
-        // ]);
+        Category::create([
+            'name' => 'Gaming',
+            'slug' => 'gaming'
+        ]);
 
-        // Category::create([
-        //     'name' => 'Mobile Device',
-        //     'slug' => 'mobile-device'
-        // ]);
+        Category::create([
+            'name' => 'Mobile Device',
+            'slug' => 'mobile-device'
+        ]);
 
-        // Category::create([
-        //     'name' => 'Electronic',
-        //     'slug' => 'electronic'
-        // ]);
+        Category::create([
+            'name' => 'Electronic',
+            'slug' => 'electronic'
+        ]);
 
-        // Store::create([
-        //     'name' => 'Asus Official Store',
-        //     'slug' => 'asus-official-store',
-        //     'location' => 'Jakarta Utara',
-        //     'address' => 'Jakarta Utara',
-        //     'postalcode' => '13250',
-        //     'user_id' => 0,
-        //     'desc' => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, voluptates magni assumenda quam nobis explicabo recusandae iure quo tenetur, corporis provident? Veritatis incidunt sit recusandae distinctio odit temporibus enim debitis? A earum laboriosam quisquam non possimus exercitationem excepturi! Nisi modi, dolores corrupti id officia ipsam. Quidem ea cupiditate reprehenderit libero?"
+        Store::create([
+            'name' => 'Asus Official Store',
+            'slug' => 'asus-official-store',
+            'location' => 'Jakarta Utara',
+            'address' => 'Jakarta Utara',
+            'postalcode' => '13250',
+            'user_id' => 0,
+            'desc' => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, voluptates magni assumenda quam nobis explicabo recusandae iure quo tenetur, corporis provident? Veritatis incidunt sit recusandae distinctio odit temporibus enim debitis? A earum laboriosam quisquam non possimus exercitationem excepturi! Nisi modi, dolores corrupti id officia ipsam. Quidem ea cupiditate reprehenderit libero?"
 
-        // ]);
+        ]);
 
-        // Store::create([
-        //     'name' => 'Sony Official Store',
-        //     'slug' => 'sony-official-store',
-        //     'location' => 'Jakarta Selatan',
-        //     'address' => 'Jakarta Utara',
-        //     'postalcode' => '13250',
-        //     'user_id' => 0,
-        //     'desc' => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, voluptates magni assumenda quam nobis explicabo recusandae iure quo tenetur, corporis provident? Veritatis incidunt sit recusandae distinctio odit temporibus enim debitis? A earum laboriosam quisquam non possimus exercitationem excepturi! Nisi modi, dolores corrupti id officia ipsam. Quidem ea cupiditate reprehenderit libero?"
+        Store::create([
+            'name' => 'Sony Official Store',
+            'slug' => 'sony-official-store',
+            'location' => 'Jakarta Selatan',
+            'address' => 'Jakarta Utara',
+            'postalcode' => '13250',
+            'user_id' => 0,
+            'desc' => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, voluptates magni assumenda quam nobis explicabo recusandae iure quo tenetur, corporis provident? Veritatis incidunt sit recusandae distinctio odit temporibus enim debitis? A earum laboriosam quisquam non possimus exercitationem excepturi! Nisi modi, dolores corrupti id officia ipsam. Quidem ea cupiditate reprehenderit libero?"
 
-        // ]);
+        ]);
 
-        // Store::create([
-        //     'name' => 'Samsung Official Store',
-        //     'slug' => 'samsung-official-store',
-        //     'location' => 'Jakarta Pusat',
-        //     'address' => 'Jakarta Utara',
-        //     'postalcode' => '13250',
-        //     'user_id' => 0,
-        //     'desc' => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, voluptates magni assumenda quam nobis explicabo recusandae iure quo tenetur, corporis provident? Veritatis incidunt sit recusandae distinctio odit temporibus enim debitis? A earum laboriosam quisquam non possimus exercitationem excepturi! Nisi modi, dolores corrupti id officia ipsam. Quidem ea cupiditate reprehenderit libero?"
+        Store::create([
+            'name' => 'Samsung Official Store',
+            'slug' => 'samsung-official-store',
+            'location' => 'Jakarta Pusat',
+            'address' => 'Jakarta Utara',
+            'postalcode' => '13250',
+            'user_id' => 0,
+            'desc' => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, voluptates magni assumenda quam nobis explicabo recusandae iure quo tenetur, corporis provident? Veritatis incidunt sit recusandae distinctio odit temporibus enim debitis? A earum laboriosam quisquam non possimus exercitationem excepturi! Nisi modi, dolores corrupti id officia ipsam. Quidem ea cupiditate reprehenderit libero?"
 
-        // ]);
+        ]);
 
         Product::factory(20)->create();
 
