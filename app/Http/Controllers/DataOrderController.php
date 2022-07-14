@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Store;
 use App\Models\Orders;
 use App\Models\Courier;
+use App\Models\Product;
 use App\Models\OrderDetails;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Faker\Provider\ru_RU\Payment;
+use Illuminate\Support\Facades\Auth;
 
 class DataOrderController extends Controller
 {
@@ -16,11 +21,20 @@ class DataOrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        $data_order = Orders::latest()->get();
-        $user_id = User::latest()->get();
-        $courier_id = Courier::latest()->get();
+        $users = user::all();
+        $stores =Store::all();
+        $order_details = OrderDetails::all();
+        $order = Orders::all();
+        $shipping = Payment::bank();
+        
+        return view('admin_toko.data_order.index', [
+            'users' => $users,
+            'stores' => $stores,
+            'order_details' => $order_details,
+            'order' => $order,
+            'shipping' => $shipping,
+        ]);
 
-        return view('admin_toko.data_order.index',compact('user_id','courier_id', 'data_order'));
     }
 
     /**
@@ -30,7 +44,7 @@ class DataOrderController extends Controller
      */
     public function create()
     {
-        return view('admin_toko.data_order.create');
+        // return view('admin_toko.data_order.create');
     }
 
     /**
@@ -41,19 +55,15 @@ class DataOrderController extends Controller
      */
     public function store(Request $request, $id)
     {
-        $request->validate([
-            'user_id' => 'required',
-            'bank_id' => 'required',
-            'courier_id' => 'required',
-            'total_disc' => 'required',
-            'total' => 'required',
-            'status' => 'required',
-            'name' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
-            'address_city' => 'required',
-            'postal_code' => 'required',
-        ]);
+        // $request->validate([
+        //     'name' => 'required',
+        //     'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        //     'name' => 'required|min:5|max:50',
+        //     'slug' => 'required|unique:products,slug',
+        //     'price' => 'required',
+        //     'stock' => 'required',
+        //     'desc' => 'required|min:20|max:200',
+        // ]);
     }
 
     /**
@@ -64,9 +74,9 @@ class DataOrderController extends Controller
      */
     public function show($data_order_id)
     {
-        $data_order = OrderDetails::where('id', $data_order_id)->first();
+        // $data_order = OrderDetails::where('id', $data_order_id)->first();
 
-        return view('admin_toko.data_order.show',compact('data_order'));
+        // return view('admin_toko.data_order.show',compact('data_order'));
     }
 
     /**
@@ -75,9 +85,21 @@ class DataOrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($data_order_id)
     {
-        //
+        $users = user::all();
+        $stores =Store::all();
+        $order_details = OrderDetails::all();
+        $order = Orders::all();
+        $shipping = Payment::bank();
+        
+        return view('admin_toko.data_order.index', [
+            'users' => $users,
+            'stores' => $stores,
+            'order_details' => $order_details,
+            'order' => $order,
+            'shipping' => $shipping,
+        ]);
     }
 
     /**
@@ -87,9 +109,19 @@ class DataOrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $data_order)
     {
-        //
+        $request->validate([
+            'status' => 'required',
+            
+        ]);
+
+        $data_order = Product::find($data_order);
+        
+        $data_order->status = $request['status'];
+
+        $data_order->update($data_order);
+        return redirect('/admin_toko/data_order');
     }
 
     /**
@@ -98,8 +130,12 @@ class DataOrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        $data_order = OrderDetails::find($id);
+        $data_order->delete();
+
+
+        return redirect('admin_toko/data_order');
     }
 }
