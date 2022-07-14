@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\User;
+use App\Models\Store;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\AdminCategory;
+use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use PHPUnit\TextUI\XmlConfiguration\Group;
@@ -14,51 +18,65 @@ class DashboardController extends Controller
     public function index()
     {
 
-        // $result = DB::select(DB::raw("SELECT monthname(created_at) as month, name, SUM(total) as total
-        // FROM `categories`
-        // GROUP BY month, name
-        // ORDER BY month"));
+        $stores = Store::count();
+        $categories = Category::count();
+        $users = User::count();
+        $products = Product::count();
 
-        // $total = DB::select(DB::raw('SELECT total FROM categories ORDER BY month(created_at)'));
-        // $month = DB::select(DB::raw('SELECT monthname(created_at) as month FROM categories GROUP BY month DESC'));
-        // $category = DB::select(DB::raw('SELECT name FROM categories GROUP BY name DESC'));
+        // $countUser = DB::select(DB::raw("
+        //             SELECT r.name AS name, count(u.id) AS countUser
+        //             FROM users u, role_user ru, roles r
+        //             WHERE u.id = ru.user_id
+        //             AND ru.role_id = r.id
+        //             GROUP BY name "));
+        $topUser = User::select(DB::raw('users.id AS id, users.name AS name, count(users.id) AS total'))
+                    ->join('orders', 'orders.user_id', '=', 'users.id')
+                    ->groupByRaw('users.id, users.name')
+                    ->orderBy('total', 'DESC')
+                    ->limit(10)->get();
 
-        // $total = AdminCategory::select('total')->orderBy('created_at', 'ASC')->pluck('total');
-        // $month = DB::select(DB::raw('SELECT monthname(created_at) as month FROM categories GROUP BY month DESC'));
-        // $category = AdminCategory::select('name')->groupBy('name')->pluck('name');
-        // dd($total);
-        // dd($category);
+        $topProduct = Product::select(DB::raw('products.id AS id, products.name, count(order_details.id) AS total'))
+                    ->join('order_details', 'products.id', '=', 'order_details.product_id')
+                    ->groupByRaw('products.id, products.name')
+                    ->orderBy('total', 'DESC')
+                    ->limit(10)->get();
 
-        // $data = " ";
-        // foreach ($result as $item) {
-        //     $data.= "['".$item->month."','".$item->name."',".$item->total."],";
-        // }
+        // $topProduct = DB::select('  SELECT p.name as name, count(od.id) AS total
+        //                             FROM products p, order_details od
+        //                             WHERE p.id = od.product_id
+        //                             GROUP BY p.id, name
+        //                             ORDER BY total DESC
+        //                             LIMIT 10');
+        $countUser = DB::table(DB::raw('users'))
+                    ->select(DB::raw('roles.name AS name, count(users.id) AS countUser'))
+                    ->join('role_user', 'users.id', '=', 'role_user.user_id')
+                    ->join('roles', 'role_user.role_id', '=', 'roles.id')
+                    ->groupByRaw('role_user.role_id, name')->get();
 
-        // dd(gettype($total));
+        // $countUser->toArray();
+        // $countUser = User::select(DB::raw('roles.name AS name, count(users.id) AS countUser'))
+        //             ->join('role_user', 'users.id', '=', 'role_user.user_id')
+        //             ->join('roles', 'role_user.role_id', '=', 'roles.id')
+        //             ->groupByRaw('role_user.role_id, name')->get();
 
-        // $category = Category::select('name')->pluck("name");
+        $total = DB::table(DB::raw('products'))
+                        ->select(DB::raw('monthname(order_details.created_at) AS bulan,  round(SUM(order_details.price * order_details.qty * (100 - order_details.discount)/ 100),2) AS total'))
+                        ->join('order_details', 'products.id', '=', 'order_details.product_id')
+                        ->orderBy('order_details.created_at', 'ASC')
+                        ->groupByRaw('bulan')->pluck('total');
 
-        // $total = Category::select(DB::raw("SUM(total) as total"))->GroupBy(DB::raw('MONTH(created_at)'))->pluck('total');
+        $bulan = DB::table(DB::raw('products'))
+                        ->select(DB::raw('monthname(order_details.created_at) AS bulan, round(SUM(order_details.price * order_details.qty * (100 - order_details.discount)/ 100),2) AS total'))
+                        ->join('order_details', 'products.id', '=', 'order_details.product_id')
+                        ->whereRaw('YEAR(order_details.created_at) = 2022')
+                        ->orderBy('order_details.created_at', 'ASC')
+                        ->groupByRaw('bulan')->pluck('bulan');
 
-        // $month = Category::select(DB::raw("MONTHNAME(created_at) as month"))->GroupBy(DB::raw('month'))->pluck('month');
+        $data = " ";
+        foreach($countUser as $user){
+            $data.= "['".$user->name."', ".$user->countUser."],";
+        }
 
-
-        return view('admin.dashboard');
-
-
-
+        return view('admin.dashboard', compact('stores', 'categories', 'users', 'products', 'total', 'bulan', 'data', 'topUser', 'topProduct'));
     }
 }
-
-// $category = Category::select('name')->pluck("name");
-// // dd($category);
-// $total = Category::select(DB::raw("SUM(total) as total"))->GroupBy(DB::raw('MONTH(created_at)'))->pluck('total');
-// // ->GroupBy(DB :: raw("Month(created_at)"))
-// // ->pluck("total");
-// //dd($total);
-// $bulan = Category::select(DB::raw("MONTHNAME(created_at) as bulan"))->GroupBy(DB::raw('bulan'))->pluck('bulan');
-// // dd($bulan);
-// // $bulan = DB::select("SELECT monthname(created_at) as month FROM `categories` GROUP BY (month)");
-
-// return view('admin.dashboard', compact('category', 'total', 'bulan'));
-//         //return view('admin.dashboard');

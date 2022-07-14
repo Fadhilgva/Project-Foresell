@@ -77,7 +77,7 @@ class DataProdukController extends Controller
             'slug' => 'required|unique:products,slug',
             'price' => 'required',
             'stock' => 'required',
-            'desc' => 'required|min:20|max:200',
+            'desc' => 'required|min:20',
         ]);
 
         // DB::table('categories')->insert([
