@@ -29,6 +29,8 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item title" href="/admin_toko/data_produk">Data Produk</a>
+                <a class="collapse-item title" href="/admin_toko/data_order">Data Order</a>
+                <a class="collapse-item title" href="/admin_toko/data_penjualan">Data Penjualan</a>
                 {{-- <a class="collapse-item title" href="/admin_toko/kategori">Kategori</a> --}}
 
             </div>
@@ -36,7 +38,7 @@
     </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
             <i class="fas fa-fw fa-wrench"></i>
             <span class="title">Transaksi</span>
@@ -44,12 +46,11 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item title" href="/admin_toko/selesaikan_pesanan">Process Payment</a>
-                <a class="collapse-item title" href="/admin_toko/data_order">Data Order</a>
-                <a class="collapse-item title" href="/admin_toko/data_penjualan">Data Penjualan</a>
-                <a class="collapse-item title" href="/admin_toko/tambah_diskon">Tambah Diskon</a>
+                
+                <a class="collapse-item title" href="/admin_toko/tambah_diskon">Tambah Diskon</a> 
             </div>
         </div>
-    </li>
+    </li> --}}
 
     <!-- Divider -->
     <hr class="sidebar-divider">

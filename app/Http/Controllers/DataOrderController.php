@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Orders;
+use App\Models\Courier;
+use App\Models\OrderDetails;
 use Illuminate\Http\Request;
 
 class DataOrderController extends Controller
@@ -12,7 +16,11 @@ class DataOrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        return view('admin_toko.data_order.index');
+        $data_order = Orders::latest()->get();
+        $user_id = User::latest()->get();
+        $courier_id = Courier::latest()->get();
+
+        return view('admin_toko.data_order.index',compact('user_id','courier_id', 'data_order'));
     }
 
     /**
@@ -31,9 +39,21 @@ class DataOrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        $request->validate([
+            'user_id' => 'required',
+            'bank_id' => 'required',
+            'courier_id' => 'required',
+            'total_disc' => 'required',
+            'total' => 'required',
+            'status' => 'required',
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'address_city' => 'required',
+            'postal_code' => 'required',
+        ]);
     }
 
     /**
@@ -42,9 +62,11 @@ class DataOrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($data_order_id)
     {
-        //
+        $data_order = OrderDetails::where('id', $data_order_id)->first();
+
+        return view('admin_toko.data_order.show',compact('data_order'));
     }
 
     /**
