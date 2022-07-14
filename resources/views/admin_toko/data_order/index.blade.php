@@ -52,16 +52,20 @@
                 </tr>
             </tfoot>
             <tbody>
-                @forelse ($order_details as $key => $item)
+                @forelse ($orderstore as $item)
                 <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $users->name }}</td>
-                            <td>{{ $order_details->order_id }}</td>
-                            <td>{{ $stores->name }}</td>
-                            <td>{{ $order_details->price }}</td>
-                            <td>{{ $shipping->name }}</td>
-                            <td>{{ $order->status }}</td>
-                            <td>{{ $order_details->order_id }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td><h2 class="invoice-id">INVOICE
+                                {{ date_format($orders->created_at, 'Y'). '-'
+                                .sprintf("%02d", Auth::user()->id). '-'
+                                .sprintf("%02d", $orders->id) }}
+                            </h2></td>
+                            <td>{{ $store->name }}</td>
+                            <td>{{ $ordersprocess->price }}</td>
+                            <td>{{ $orders->bank_id }}</td>
+                            <td>{{ $orders->status }}</td>
+                            <td>{{ $orderstore->created_at }}</td>
                             <td>
                                 @switch($order->status)
                                 @case($order->status == "Waiting")
