@@ -16,7 +16,7 @@ class CreatePromotionBannersTable extends Migration
         Schema::create('promotion_banners', function (Blueprint $table) {
             $table->id();
             $table->foreignId('store_id');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
