@@ -12,23 +12,41 @@
     <div class="row">
         <div class="col-md-12">
             <div class="box box-warning">
-                <div class="box-header">
-                    <p>
-                        <button class="btn btn-sm btn-flat btn-warning btn-refresh"><i class="fa fa-refresh"></i>
-                            Refresh</button>
+                <div class="box-header mb-2">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <button class="btn btn-sm btn-flat btn-warning btn-refresh"><i class="fa fa-refresh"></i>
+                                Refresh</button>
 
-                        <a href="#" class="btn btn-sm btn-flat btn-success btn-filter"><i class="fa fa-filter"></i>
-                            Filter</a>
+                            {{-- <a href="#" class="btn btn-sm btn-flat btn-success btn-filter"><i class="fa fa-filter"></i>
+                                Filter</a> --}}
+                        </div>
 
-                    </p>
+                        {{-- SEARCH --}}
+                        <div class="col-md-9 d-flex justify-content-end">
+                            <form method="GET" action="{{ url('/admin-foresell/list/users') }}" class="form-inline">
+                                <div class="input-group">
+                                    <input type="text" name="keyword" value="{{ $keyword }}" class="form-control border-1 small"
+                                        placeholder="Search.." />
+                                </div>
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
+
                 {{-- TABLE --}}
                 <div class="box-body">
                     <div class="table-responsive table-hover">
                         <table class="table tbl-users bg-white table-bordered table-hover">
                             <thead class="table-dark">
                                 <tr>
-                                    <th>Action</th>
+                                    <th width="100">Action</th>
+                                    <th>User ID</th>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Role</th>
@@ -38,42 +56,29 @@
 
                                 </tr>
                             </thead>
-                            {{-- <tbody>
-                                @for ($i = 1; $i <= 5; $i++)
-                                    <tr>
-                                        <td>
-                                            <div style="width:50px">
-
-                                                <button href="#" class="btn btn-danger btn-xs btn-hapus" id="delete"><i
-                                                        class="fa fa-trash"></i></button>
-                                            </div>
-                                        </td>
-                                        <td>Adintaa</td>
-                                        <td>adinta@gmail.com</td>
-                                        <td>User</td>
-                                        <td>0895392598133</td>
-                                        <td>Jl. Kebagusan</td>
-                                        <td>null</td>
-                                    </tr>
-                                @endfor
-                            </tbody> --}}
                             <tbody>
                                 @foreach ($users as $user)
-                                <tr>
-                                    <td>
-                                        <div style="width:50px">
+                                    <tr>
+                                        <td>
+                                            <div>
 
-                                            <button href="#" class="btn btn-danger btn-xs btn-hapus" id="delete"><i
-                                                    class="fa fa-trash"></i></button>
-                                        </div>
-                                    </td>
-                                    <td>{{ $user->UserName }}</td>
-                                    <td>{{ $user->Email }}</td>
-                                    <td>{{ $user->RoleName }}</td>
-                                    <td>{{ $user->Phone }}</td>
-                                    <td><small>{{ $user->Address }}</small></td>
-                                    <td>{{ $user->Register }}</td>
-                                </tr>
+                                                <a href="/admin-foresell/list/users/{{ $user->id }}/show"
+                                                    class="btn btn-warning btn-sm btn-eye" id=""><i
+                                                        class="fa fa-eye"></i></a>
+
+                                                <a href="/admin-foresell/list/users/{{ $user->id }}/confirm"
+                                                    class="btn btn-danger btn-hapus btn-sm" id="delete"><i
+                                                        class="fa fa-trash"></i></a>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">{{ $user->id }}</td>
+                                        <td>{{ $user->userName }}</td>
+                                        <td>{{ $user->Email }}</td>
+                                        <td>{{ $user->RoleName }}</td>
+                                        <td>{{ $user->Phone }}</td>
+                                        <td><small>{{ $user->Address }}</small></td>
+                                        <td>{{ $user->Register }}</td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -103,13 +108,15 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Dari Tanggal</label>
                                 <input type="text" class="form-control datepicker" id="exampleInputEmail1"
-                                    placeholder="Dari Tanggal" name="dari" autocomplete="off" value="{{ date('Y-m-d') }}">
+                                    placeholder="Dari Tanggal" name="dari" autocomplete="off"
+                                    value="{{ date('Y-m-d') }}">
                             </div>
 
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Sampai tanggal</label>
-                                <input type="text" class="form-control datepicker" name="sampai" id="exampleInputPassword1"
-                                    placeholder="dari tanggal" autocomplete="off" value="{{ date('Y-m-d') }}">
+                                <input type="text" class="form-control datepicker" name="sampai"
+                                    id="exampleInputPassword1" placeholder="dari tanggal" autocomplete="off"
+                                    value="{{ date('Y-m-d') }}">
                             </div>
 
                             <div class="form-group">

@@ -12,17 +12,31 @@
     <div class="row">
         <div class="col-md-12">
             <div class="box box-warning">
-                <div class="box-header">
-                    <p>
-                        <button class="btn btn-sm btn-flat btn-warning btn-refresh"><i class="fa fa-refresh"></i>
-                            Refresh</button>
+                <div class="box-header mb-2">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <button class="btn btn-sm btn-flat btn-warning btn-refresh"><i class="fa fa-refresh"></i>
+                                Refresh</button>
 
+                            {{-- <a href="#" class="btn btn-sm btn-flat btn-success btn-filter"><i class="fa fa-filter"></i>
+                                Filter</a> --}}
+                        </div>
 
-
-                        <a href="#" class="btn btn-sm btn-flat btn-success btn-filter"><i class="fa fa-filter"></i>
-                            Filter</a>
-
-                    </p>
+                        {{-- SEARCH --}}
+                        <div class="col-md-9 d-flex justify-content-end">
+                            <form method="GET" action="{{ url('/admin-foresell/list/toko') }}" class="form-inline">
+                                <div class="input-group">
+                                    <input type="text" name="keyword" value="{{ $keyword }}" class="form-control border-1 small"
+                                        placeholder="Search.." />
+                                </div>
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
                 {{-- TABLE --}}
                 <div class="box-body">
@@ -31,7 +45,12 @@
                             <thead class="table-dark">
                                 <tr>
                                     <th width="100px">Action</th>
+                                    <th>Store ID</th>
                                     <th>Name</th>
+                                    <th>Slug</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Tenant</th>
                                     <th>Location</th>
                                     <th>Created At</th>
                                 </tr>
@@ -51,7 +70,12 @@
                                                         class="fa fa-pen"></i></a> --}}
                                             </div>
                                         </td>
+                                        <td>#{{ $store->id }}</td>
                                         <td>{{ $store->name }}</td>
+                                        <td>{{ $store->slug }}</td>
+                                        <td>{{ $store->email }}</td>
+                                        <td>{{ $store->phone }}</td>
+                                        <td>{{ $store->userName }}</td>
                                         <td>{{ $store->location }}</td>
                                         <td>{{ $store->created_at }}</td>
                                     </tr>

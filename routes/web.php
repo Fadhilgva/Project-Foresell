@@ -213,6 +213,9 @@ Route::group(['middleware' => ['auth', 'role:adminForesell']], function () {
 
     // USER
     Route::get('/admin-foresell/list/users', [AdminUserController::class, 'index']);
+    Route::get('/admin-foresell/list/users/{id}/show', [AdminUserController::class, 'show']);
+    Route::get('/admin-foresell/list/users/{id}/confirm', [AdminUserController::class, 'confirm']);
+    Route::get('/admin-foresell/list/users/{id}/delete', [AdminUserController::class, 'delete']);
 
     // ORDER
     Route::get('/orders-payment-status', [OrdersController::class, 'statusPayment']);
