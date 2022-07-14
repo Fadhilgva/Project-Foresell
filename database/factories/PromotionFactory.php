@@ -14,8 +14,7 @@ class PromotionFactory extends Factory
     public function definition()
     {
         return [
-            'category_id' => $this->faker->numberBetween(1, 3),
-            'image' => "https://source.unsplash.com/600x600?technology"
+            'category_id' => $this->faker->numberBetween(1, 3)
 
         ];
     }

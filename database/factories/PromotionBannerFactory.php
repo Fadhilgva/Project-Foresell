@@ -14,8 +14,7 @@ class PromotionBannerFactory extends Factory
     public function definition()
     {
         return [
-            'store_id' => $this->faker->numberBetween(1, 3),
-            'image' => "https://source.unsplash.com/1700x700?product"
+            'store_id' => $this->faker->numberBetween(1, 3)
 
         ];
     }

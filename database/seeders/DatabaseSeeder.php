@@ -25,16 +25,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(LaratrustSeeder::class);
 
-        // User::create([
-        //     'name' => 'Fadhil',
-        //     'email' => 'muhammadfadhil@if.uai.ac.id',
-        //     'phone' => '081357638723',
-        //     'password' => bcrypt("fadhil"),
-        //     'address' => 'Masjid Agung Al-Azhar, Jl. Sisingamangaraja No.2, RT.2/RW.1, Selong, Kec. Kby. Baru, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12110',
-        //     'city' => 'DKI Jakarta',
-        //     'postalcode' => '12110'
-        // ]);
-
         Category::create([
             'name' => 'Gaming',
             'slug' => 'gaming'
