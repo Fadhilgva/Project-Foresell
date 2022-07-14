@@ -38,6 +38,9 @@
                                         @case($order->status == "Waiting")
                                         <p class="badge text-bg-danger mt-4">Waiting for Payment</p>
                                         @break
+                                        @case($order->status == "Already")
+                                        <p class="badge text-bg-secondary mt-4">Already Payment</p>
+                                        @break
                                         @case($order->status == "Processed")
                                         <p class="badge text-bg-primary mt-4">Processed</p>
                                         @break
