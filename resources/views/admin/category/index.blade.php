@@ -5,6 +5,7 @@
 @section('main-active', 'active')
 
 
+
 @section('content')
 
     <h1 class="text-grey">List Category</h1>
@@ -51,7 +52,6 @@
                                     <th>Gambar</th>
                                     <th>Nama</th>
                                     <th>Slug</th>
-                                    <th>Total Pendapatan</th>
                                     <th>Created At</th>
                                 </tr>
                             </thead>
@@ -74,7 +74,6 @@
                                         </td>
                                         <td>{{ $cat->name }}</td>
                                         <td>{{ $cat->slug }}</td>
-                                        <td>Not Found</td>
                                         <td>{{ $cat->created_at }}</td>
                                     </tr>
                                 @endforeach

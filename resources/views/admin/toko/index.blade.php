@@ -17,6 +17,8 @@
                         <button class="btn btn-sm btn-flat btn-warning btn-refresh"><i class="fa fa-refresh"></i>
                             Refresh</button>
 
+
+
                         <a href="#" class="btn btn-sm btn-flat btn-success btn-filter"><i class="fa fa-filter"></i>
                             Filter</a>
 
@@ -31,7 +33,6 @@
                                     <th width="100px">Action</th>
                                     <th>Name</th>
                                     <th>Location</th>
-                                    <th>Total Pendapatan</th>
                                     <th>Created At</th>
                                 </tr>
                             </thead>
@@ -40,16 +41,18 @@
                                     <tr>
                                         <td width="50px">
                                             <div>
-                                                <button href="#" class="btn btn-danger btn-sm" id="delete"><i
-                                                        class="fa fa-trash"></i></button>
+                                                <a href="/admin-foresell/list/toko/{{ $store->id }}/confirm" class="btn btn-danger btn-sm btn-hapus"
+                                                    id="delete"><i class="fa fa-trash"></i></a>
 
-                                                <a href="#" class="btn btn-warning btn-sm btn-pen" id="btn-detail"><i
-                                                        class="fa fa-pen"></i></a>
+                                                <a href="/admin-foresell/list/toko/{{ $store->id }}/show" class="btn btn-warning btn-sm btn-eye" id=""><i
+                                                        class="fa fa-eye"></i></a>
+
+                                                {{-- <a href="#" class="btn btn-warning btn-sm btn-pen" id="btn-detail"><i
+                                                        class="fa fa-pen"></i></a> --}}
                                             </div>
                                         </td>
                                         <td>{{ $store->name }}</td>
                                         <td>{{ $store->location }}</td>
-                                        <td>not found</td>
                                         <td>{{ $store->created_at }}</td>
                                     </tr>
                                 @endforeach
