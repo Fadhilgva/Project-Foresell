@@ -36,15 +36,15 @@
                                 @foreach ($cartdetails as $cartdetail)
                                 <h5 class="mt-4 mb-2 title">Payment Method</h5>
                                 <div class="accordion accordion-flush" id="accordionFlushExample">
-                                    @foreach ($banks->take(1) as $bank)
+                                    @foreach ($banks as $bank)
                                     <div class="accordion-item">
-                                        <h2 class="accordion-header" id="flush-headingOne">
-                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                        <h2 class="accordion-header" id="flush-heading{{ $bank->id }}">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ $bank->id }}" aria-expanded="false" aria-controls="flush-collapse{{ $bank->id }}">
                                                 <img src="{{ asset('img/customer/cc.png') }}" width="25" class="me-2">
                                                 {{ $bank->name }}
                                             </button>
                                         </h2>
-                                        <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                        <div id="flush-collapse{{ $bank->id }}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{ $bank->id }}" data-bs-parent="#accordionFlushExample">
                                             <div class="form-check my-5 mx-3">
                                                 <input class="form-check-input" type="radio" name="bank" id="bank" value="{{ $bank->id }}" required>
                                                 <div class="accordion-body small">
@@ -57,7 +57,7 @@
                                         </div>
                                     </div>
                                     @endforeach
-                                    @foreach ($banks->skip(1)->take(1) as $bank)
+                                    {{-- @foreach ($banks->skip(1)->take(1) as $bank)
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="flush-headingTwo">
                                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
@@ -99,6 +99,27 @@
                                         </div>
                                     </div>
                                     @endforeach
+                                    @foreach ($banks->skip(3)->take(1) as $bank)
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="flush-headingFour">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                                                <img src="{{ asset('img/customer/ovo.png') }}" width="25" class="me-2">
+                                                {{ $bank->name }}
+                                            </button>
+                                        </h2>
+                                        <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+                                            <div class="form-check my-5 mx-3">
+                                                <input class="form-check-input" type="radio" name="bank" id="bank" value="{{ $bank->id }}" required>
+                                                <div class="accordion-body small">
+                                                    No. Ovo : <strong>{{ $bank->noPayment }}</strong>
+                                                    <br>
+                                                    <br>
+                                                    Bayarkan pesanan ke Virtual Account di atas <br>dengan Total Pembayaran : <strong>Rp{{ $cartdetail->total }}</strong>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach --}}
                                 </div>
                                 @endforeach
                             </div>

@@ -33,11 +33,15 @@ class DataProdukController extends Controller
     // }
     public function index()
     {
-        $data_produk = Product::latest()->get();
+        $data_produk = Product::join('stores', 'products.store_id', '=', 'stores.id')
+            ->where('stores.user_id', '=', Auth::user()->id)->latest('products.created_at')
+            ->select('products.*')->get();
+
+        // dd($data_produk);
         // $category = Category::latest()->get();
         // $store = Store::latest()->get();
 
-        return view('admin_toko.data_produk.index',compact('data_produk'));
+        return view('admin_toko.data_produk.index', compact('data_produk'));
     }
 
     /**
@@ -55,7 +59,7 @@ class DataProdukController extends Controller
         $store_id = User::find(Auth::user()->id)->store;
 
         // dd($store_id);
-        return view('admin_toko.data_produk.create',compact('store','category', 'store_id'));
+        return view('admin_toko.data_produk.create', compact('store', 'category', 'store_id'));
     }
 
     /**
@@ -68,15 +72,12 @@ class DataProdukController extends Controller
     {
         $request->validate([
             'category_id' => 'required',
-            // 'store_id' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'name' => 'required',
+            'name' => 'required|min:5|max:50',
             'slug' => 'required|unique:products,slug',
             'price' => 'required',
             'stock' => 'required',
-            // 'sold' => 'required',
-            'discount' => 'required',
-            'desc' => 'required',
+            'desc' => 'required|min:20|max:200',
         ]);
 
         // DB::table('categories')->insert([
@@ -89,8 +90,8 @@ class DataProdukController extends Controller
 
         $store_id = User::find(Auth::user()->id)->store;
 
-        $image = time().'.'.$request->image->getClientOriginalName();
-        $request->image->move(public_path('img/admin_store'),$image);
+        $image = time() . '.' . $request->image->getClientOriginalName();
+        $request->image->move(public_path('img/admin_store'), $image);
 
         $data_produk = new Product;
 
@@ -101,8 +102,9 @@ class DataProdukController extends Controller
         $data_produk->slug = $request->slug;
         $data_produk->price = $request->price;
         $data_produk->stock = $request->stock;
-        // $data_produk->sold = $request->sold;
-        $data_produk->discount = $request->discount;
+        if ($request->discount) {
+            $data_produk->discount = $request->discount;
+        }
         $data_produk->desc = $request->desc;
 
         $data_produk->save();
@@ -121,7 +123,7 @@ class DataProdukController extends Controller
     public function show($data_produk_id)
     {
         $data_produk = Product::where('id', $data_produk_id)->first();
-        return view('admin_toko.data_produk.show',compact('data_produk'));
+        return view('admin_toko.data_produk.show', compact('data_produk'));
     }
 
     /**
@@ -135,7 +137,7 @@ class DataProdukController extends Controller
         $data_produk = Product::where('id', $data_produk_id)->first();
         $category = Category::get();
         $store = Store::all();
-        return view('admin_toko.data_produk.edit', compact('data_produk','category','store'));
+        return view('admin_toko.data_produk.edit', compact('data_produk', 'category', 'store'));
     }
 
     /**
@@ -186,10 +188,10 @@ class DataProdukController extends Controller
 
         ];
 
-        if($request->image){
-            File::delete('img/admin_store/'. $data_produk->image);
+        if ($request->image) {
+            File::delete('img/admin_store/' . $data_produk->image);
 
-            $image =  time().'-'.$request->image->getClientOriginalName();
+            $image =  time() . '-' . $request->image->getClientOriginalName();
             $request->image->move('img\admin_store', $image);
 
             $data['image'] = $image;
@@ -198,7 +200,7 @@ class DataProdukController extends Controller
         // $request->image->move(public_path('img/admin_store'),$image);
 
         $data_produk->update($data);
-        Alert::success('Update','Data Film Berhasil Diupdate !');
+        Alert::success('Update', 'Data Film Berhasil Diupdate !');
         return redirect('/admin_toko/data_produk');
     }
 
@@ -218,9 +220,9 @@ class DataProdukController extends Controller
 
     public function confirm($id)
     {
-        alert()->question('Perhatian!','Apa kamu yakin ingin menghapus?')
-        ->showConfirmButton('<a href="/admin_toko/data_produk/' . $id . '/delete" class="text-white" style="text-decoration: none"> Delete</a>', '#3085d6')->toHtml()
-        ->showCancelButton('Cancel', '#aaa')->reverseButtons();
+        alert()->question('Perhatian!', 'Apa kamu yakin ingin menghapus?')
+            ->showConfirmButton('<a href="/admin_toko/data_produk/' . $id . '/delete" class="text-white" style="text-decoration: none"> Delete</a>', '#3085d6')->toHtml()
+            ->showCancelButton('Cancel', '#aaa')->reverseButtons();
 
         return redirect('admin_toko/data_produk');
     }
@@ -228,7 +230,7 @@ class DataProdukController extends Controller
     public function delete($id)
     {
         $data_produk = Product::find($id);
-        File::delete('img/admin_store/'. $data_produk->image);
+        File::delete('img/admin_store/' . $data_produk->image);
         $data_produk->delete();
 
         Alert::success('Success', 'Data berhasil dihapus');
@@ -239,7 +241,7 @@ class DataProdukController extends Controller
     public function checkSlug(Request $request)
     {
         $slug = "";
-        if(!empty($request->name)) {
+        if (!empty($request->name)) {
             $slug = SlugService::createSlug(Product::class, 'slug', $request->name);
         }
 

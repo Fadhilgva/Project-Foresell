@@ -95,7 +95,11 @@
                         <div class="row">
                             <div class="col-1">
                                 <a href="/stores?store={{ $product->store->slug }}">
+                                    @if($product->store->image)
+                                    <img src="\image\adminToko\logo\{{ $product->store->image }}" width=70 height=70 class="rounded-circle border border-dark">
+                                    @else
                                     <img src="{{ asset('img/customer/asus.png') }}" width=70 height=70 class="rounded-circle border border-dark">
+                                    @endif
                                 </a>
                             </div>
                             <div class="col ms-5 my-1">

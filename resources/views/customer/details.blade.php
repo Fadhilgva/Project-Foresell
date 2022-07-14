@@ -32,7 +32,11 @@
                                     <div>Shipping Courier : {{ $orders->Courier->name }}</div>
                                 </div>
                                 <div class="col invoice-details">
-                                    <h1 class="invoice-id">INVOICE {{ $orders->id }}</h1>
+                                    <h2 class="invoice-id">INVOICE
+                                        {{ date_format($orders->created_at, 'Y'). '-'
+                                        .sprintf("%02d", Auth::user()->id). '-'
+                                        .sprintf("%02d", $orders->id) }}
+                                    </h2>
                                     <div class="date">Order Date: {{ $orders->created_at->toDateTimeString() }}</div>
                                 </div>
                             </div>

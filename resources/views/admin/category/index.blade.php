@@ -63,7 +63,7 @@
                                                 <a href="{{ route('category.edit', $cat->id)}}" class="btn btn-warning btn-edit btn-sm"
                                                     id="edit"><i class="fas fa-pen"></i></a>
 
-                                                <a href="#" class="btn btn-warning btn-sm btn-eye" id="btn-detail"><i
+                                                <a href="/admin-foresell/list/category/{{ $cat->id }}/show" class="btn btn-warning btn-sm btn-eye" id=""><i
                                                     class="fa fa-eye"></i></a>
 
                                                 <a href="/admin-foresell/list/category/{{ $cat->id }}/confirm" class="btn btn-danger btn-sm btn-hapus"

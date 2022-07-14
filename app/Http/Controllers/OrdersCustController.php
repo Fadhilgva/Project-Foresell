@@ -11,6 +11,7 @@ use App\Models\Product;
 use App\Models\OrderDetails;
 use Illuminate\Http\Request;
 use  App\Models\User;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
 
 class OrdersCustController extends Controller
@@ -88,7 +89,7 @@ class OrdersCustController extends Controller
 
         if ($carts) {
             foreach ($carts as $cart) {
-                foreach ($orders as $order) {
+                foreach ($orders->take(1) as $order) {
                     OrderDetails::create([
                         'product_id' => $cart->product_id,
                         'order_id' => $order->id,
@@ -141,5 +142,17 @@ class OrdersCustController extends Controller
             'orderdetails' => $order_details,
             'orders' => $orders
         ]);
+    }
+
+    public function confirm($id)
+    {
+        Alert::question('Order Confirmation', 'Have you received the products and have no complaints?')
+            ->showConfirmButton('<a href="/orders/' . $id . '/confirm" class="text-white" style="text-decoration: none"> Confirm</a>', '#3085d6')->toHtml()
+            ->showCancelButton('Cancel', '#aaa')->reverseButtons();
+
+        $order = Orders::find($id);
+        $order->status = 'Finished';
+        $order->save();
+        return back();
     }
 }

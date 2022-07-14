@@ -23,7 +23,7 @@
                             <tr class="candidates-list shadow-sm">
                                 <div class="row">
                                     <td class="align-items-center">
-                                        <p class="title mb-0">{{ $order->id }}</p>
+                                        <p class="title mb-0">{{ $loop->iteration }}</p>
                                     </td>
                                     <td class="align-items-center p-5">
                                         <p class="title mb-0">Total</p>
@@ -31,16 +31,24 @@
                                     </td>
                                     <td class="align-items-center p-5">
                                         <p class="title mb-0 small">Total Discount</p>
-                                        <span class="small">Rp{{ $order->total_disc }}</span>
+                                        <span class="small">-Rp{{ $order->total_disc }}</span>
                                     </td>
                                     <td class="align-items-center">
-                                        @if($order->status = "Processed")
+                                        @switch($order->status)
+                                        @case($order->status == "Waiting")
+                                        <p class="badge text-bg-danger mt-4">Waiting for Payment</p>
+                                        @break
+                                        @case($order->status == "Processed")
                                         <p class="badge text-bg-primary mt-4">Processed</p>
-                                        @elseif($order->status = "Shipping")
+                                        @break
+                                        @case($order->status == "Shipping")
                                         <p class="badge text-bg-warning mt-4">Shipping</p>
-                                        @else
+                                        <a href="/orders/{{ $order->id }}/confirm" class="btn btn-success btn-sm ms-5">Confirm Order</a>
+                                        @break
+                                        @case($order->status == "Finished")
                                         <p class="badge text-bg-success mt-4">Finished</p>
-                                        @endif
+                                        @break
+                                        @endswitch
                                     </td>
                                     <div>
                                         <td></td>

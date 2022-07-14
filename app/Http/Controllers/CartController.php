@@ -135,6 +135,7 @@ class CartController extends Controller
     public function updatecart(Request $request)
     {
         $cart = Cart::find($request->cart);
+        $cartdetails = CartDetail::where('user_id', Auth::user()->id)->first()->get();
         if ($cart) {
             if ($request->quantity < 1) {
                 $cart->delete();
@@ -143,6 +144,12 @@ class CartController extends Controller
             $cart->qty = $request->quantity;
             $cart->total_product = ($cart->Product->price * ((100 - $cart->Product->discount) / 100)) * $request->quantity;
             $cart->save();
+
+            foreach ($cartdetails as $cartdetail) {
+                $cartdetail->total = ($cart->Product->price * ((100 - $cart->Product->discount) / 100)) * $request->quantity;
+                $cartdetail->total_disc = ($cart->Product->price * (($cart->Product->discount) / 100)) * $request->quantity;
+                $cartdetail->save();
+            }
         } else {
             return redirect('/cart');
         }

@@ -5,7 +5,11 @@
 <div>
     @foreach ($products->take(1) as $b)
     <div class="shadow">
+        @if($b->store->banner)
+        <img src="\image\adminToko\logo\{{ $b->store->banner }}" alt="" width="1519" height="400">
+        @else
         <img src="{{ asset('img/customer/banner.jpg') }}" alt="" width="1519" height="400">
+        @endif
     </div>
     <div class="container mt-5">
         <div class="card storepage border-0 shadow">
@@ -13,7 +17,11 @@
                 <div class="col-5">
                     <div class="row">
                         <div class="col-3 icon">
+                            @if($b->store->image)
+                            <img src="\image\adminToko\logo\{{ $b->store->image }}" width=120 height=120 class="rounded-circle border border-dark">
+                            @else
                             <img src="{{ asset('img/customer/asus.png') }}" width=120 height=120 class="rounded-circle border border-dark">
+                            @endif
                         </div>
                         <div class="col ms-4 mt-lg-auto">
                             <p class="store_name"><img src="{{ asset('img/customer/bxs-check-shield.svg') }}" class="d-inline-block align-text-center" width="23"> {{ $b->store->name }}</p>
