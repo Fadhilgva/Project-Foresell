@@ -155,4 +155,15 @@ class OrdersCustController extends Controller
         $order->save();
         return back();
     }
+
+    public function delete($id)
+    {
+        Alert::question('Order Confirmation', 'Have you received the products and have no complaints?')
+            ->showConfirmButton('<a href="/orders/' . $id . '/confirm" class="text-white" style="text-decoration: none"> Confirm</a>', '#3085d6')->toHtml()
+            ->showCancelButton('Cancel', '#aaa')->reverseButtons();
+
+        $order = Orders::find($id);
+        $order->delete();
+        return back();
+    }
 }
