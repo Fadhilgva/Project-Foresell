@@ -4,7 +4,19 @@
 @section('main', 'show')
 @section('main-active', 'active')
 
+@push('script')
+    <script src="{{ asset('/vendor/admin_store/datatables/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('/vendor/admin_store/datatables/dataTables.bootstrap4.js') }}"></script>
+    <script>
+        $(function() {
+            $("#example1").DataTable();
+        });
+    </script>
+@endpush
 
+@push('style')
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.12.1/datatables.min.css" />
+@endpush
 
 @section('content')
 
@@ -13,7 +25,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="box box-warning">
-                <div class="box-header mb-2">
+                <div class="box-header mb-3">
                     <div class="row">
                         <div class="col-md-3">
                             <button class="btn btn-sm btn-flat btn-warning btn-refresh"><i class="fa fa-refresh"></i>
@@ -25,27 +37,13 @@
                                     class="fa fa-plus"></i>
                                 Tambah</a>
                         </div>
-
-                        {{-- SEARCH --}}
-                        <div class="col-md-9 d-flex justify-content-end">
-                            <form method="GET" action="{{ url('/admin-foresell/list/category') }}" class="form-inline">
-                                <div class="input-group">
-                                    <input type="text" name="keyword" value="{{ $keyword }}" class="form-control border-1 small"
-                                        placeholder="Search.." />
-                                </div>
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit">
-                                        <i class="fas fa-search fa-sm"></i>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
                     </div>
                 </div>
                 {{-- TABLE --}}
                 <div class="box-body">
                     <div class="">
-                        <table class="table tbl-users table-responsive-sm table-hover table-bordered bg-white">
+                        <table id="example1"
+                            class="table tbl-users table-responsive-sm table-hover table-bordered bg-white">
                             <thead class="table-dark">
                                 <tr>
                                     <th style="width: 12.5%">Action</th>
@@ -60,17 +58,21 @@
                                     <tr>
                                         <td>
                                             <div class="">
-                                                <a href="{{ route('category.edit', $cat->id)}}" class="btn btn-warning btn-edit btn-sm"
-                                                    id="edit"><i class="fas fa-pen"></i></a>
+                                                <a href="{{ route('category.edit', $cat->id) }}"
+                                                    class="btn btn-warning btn-edit btn-sm" id="edit"><i
+                                                        class="fas fa-pen"></i></a>
 
-                                                <a href="/admin-foresell/list/category/{{ $cat->id }}/show" class="btn btn-warning btn-sm btn-eye" id=""><i
-                                                    class="fa fa-eye"></i></a>
+                                                <a href="/admin-foresell/list/category/{{ $cat->id }}/show"
+                                                    class="btn btn-warning btn-sm btn-eye" id=""><i
+                                                        class="fa fa-eye"></i></a>
 
-                                                <a href="/admin-foresell/list/category/{{ $cat->id }}/confirm" class="btn btn-danger btn-sm btn-hapus"
-                                                    id="delete"><i class="fa fa-trash"></i></a>
+                                                <a href="/admin-foresell/list/category/{{ $cat->id }}/confirm"
+                                                    class="btn btn-danger btn-sm btn-hapus" id="delete"><i
+                                                        class="fa fa-trash"></i></a>
                                             </div>
                                         </td>
-                                        <td><img src="/image/admin/category/{{ $cat->image }}" alt="gambar" width="50" height="50">
+                                        <td><img src="/image/admin/category/{{ $cat->image }}" alt="gambar"
+                                                width="50" height="50">
                                         </td>
                                         <td>{{ $cat->name }}</td>
                                         <td>{{ $cat->slug }}</td>

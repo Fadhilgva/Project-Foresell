@@ -7,18 +7,17 @@ use GuzzleHttp\Middleware;
 // CUSTOMER
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TokoController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\CourierController;
-use App\Http\Controllers\OrdersCustController;
 use App\Http\Controllers\LoginController;
-
-//ADMIN TOKO
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\CourierController;
+
+//ADMIN TOKO
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
@@ -28,11 +27,13 @@ use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataOrderController;
+use App\Http\Controllers\AdminOrderController;
 use App\Http\Controllers\DataProdukController;
 
 
 // ADMIN
 use App\Http\Controllers\LoginAdminController;
+use App\Http\Controllers\OrdersCustController;
 use App\Http\Controllers\TambahDiskonController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminTokoHomeController;
@@ -218,6 +219,7 @@ Route::group(['middleware' => ['auth', 'role:adminForesell']], function () {
     Route::get('/admin-foresell/list/users/{id}/delete', [AdminUserController::class, 'delete']);
 
     // ORDER
+    Route::get('/admin-foresell/list/orders', [AdminOrderController::class, 'index']);
     Route::get('/orders-payment-status', [OrdersController::class, 'statusPayment']);
     Route::get('/orders-ship-status', [OrdersController::class, 'statusShip']);
 

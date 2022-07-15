@@ -36,6 +36,7 @@
           <a class="collapse-item @yield('category')" href="/admin-foresell/list/category">Category</a>
           <a class="collapse-item @yield('payment')" href="/admin-foresell/list/payment">Payment</a>
           <a class="collapse-item @yield('couriers')" href="/admin-foresell/list/couriers">Couriers</a>
+          <a class="collapse-item @yield('orders')" href="/admin-foresell/list/orders">Orders</a>
         </div>
       </div>
     </li>
