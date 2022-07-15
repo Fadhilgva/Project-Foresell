@@ -132,14 +132,14 @@
 {{-- EDITOR TEXT --}}
 <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
 <script>
-  ClassicEditor
-        .create( document.querySelector( '#editor' ) )
-        .catch( error => {
-            console.error( error );
-        } );
+    ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
 
-    const name = document.querySelector("#name");
-    const slug = document.querySelector("#slug");
+        const name = document.querySelector("#name");
+        const slug = document.querySelector("#slug");
 
     name.addEventListener('change', () => {
         fetch('/admin_toko/data_produk/checkSlug?name=' + name.value)

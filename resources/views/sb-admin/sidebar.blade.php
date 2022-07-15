@@ -43,19 +43,18 @@
     </li>
 
     <!-- Nav Item - Pages Collapse Payment -->
-    {{-- <li class="nav-item @yield('payment-active')">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#payment" aria-expanded="true" aria-controls="payment">
+    <li class="nav-item @yield('payment-active')">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#banner" aria-expanded="true" aria-controls="banner">
            <i class="fas fa-fw fa-folder"></i>
-          <span>Payment Method</span>
+          <span>Promotion Banner</span>
         </a>
-        <div id="payment" class="collapse @yield('payment')" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="banner" class="collapse @yield('banner')" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item @yield('bank')" href="/admin-foresell/list/bank">Bank</a>
-            <a class="collapse-item @yield('gopay')" href="/admin-foresell/list/gopay">Gopay</a>
-            <a class="collapse-item @yield('ovo')" href="/admin-foresell/list/ovo">Ovo</a>
+            <a class="collapse-item @yield('bannerStore')" href="/admin-foresell/list/banner-store">Store</a>
+            <a class="collapse-item @yield('bannerCategory')" href="/admin-foresell/list/banner-category">Category</a>
           </div>
         </div>
-    </li> --}}
+    </li>
 
     {{-- <!-- Daftar -->
     <li class="nav-item @yield('daftar-active')">

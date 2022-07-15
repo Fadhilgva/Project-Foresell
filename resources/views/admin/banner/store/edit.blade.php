@@ -1,8 +1,8 @@
 @extends('sb-admin.app')
 @section('title', 'Edit Store Banner Promotion')
-@section('banner-store', 'active')
-@section('main', 'show')
-@section('main-active', 'active')
+@section('bannerStore', 'active')
+@section('banner', 'show')
+@section('banner-active', 'active')
 
 @section('content')
 
@@ -38,7 +38,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Edit</button>
-                <a href="/admin-foresell/list/banner" class="btn btn-secondary">kembali</a>
+                <a href="/admin-foresell/list/banner-store" class="btn btn-secondary">kembali</a>
             </form>
         </div>
     </div>

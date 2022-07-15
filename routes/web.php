@@ -42,6 +42,7 @@ use App\Http\Controllers\AdminTokoLoginController;
 use App\Http\Controllers\AdminBannerStoreController;
 use App\Http\Controllers\AdminTokoRegisterController;
 use App\Http\Controllers\SelesaikanPesananController;
+use App\Http\Controllers\AdminBannerCategoryController;
 use App\Http\Controllers\Auth\RegisteredTokoController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\RegisteredAdminController;
@@ -228,6 +229,14 @@ Route::group(['middleware' => ['auth', 'role:adminForesell']], function () {
     Route::patch('/admin-foresell/list/banner-store/{id}/update', [AdminBannerStoreController::class, 'update'])->name('bannerStore.update');
     Route::get('/admin-foresell/list/banner-store/{id}/confirm', [AdminBannerStoreController::class, 'confirm']);
     Route::get('/admin-foresell/list/banner-store/{id}/delete', [AdminBannerStoreController::class, 'delete']);
+
+    // BANNER CATEGORY
+    Route::get('/admin-foresell/list/banner-category/', [AdminBannerCategoryController::class, 'index'])->name('bannerCategory.index');
+    Route::post('/admin-foresell/list/banner-category/store/', [AdminBannerCategoryController::class, 'store'])->name('bannerCategory.store');
+    Route::get('/admin-foresell/list/banner-category/{id}/edit', [AdminBannerCategoryController::class, 'edit'])->name('bannerCategory.edit');
+    Route::patch('/admin-foresell/list/banner-category/{id}/update', [AdminBannerCategoryController::class, 'update'])->name('bannerCategory.update');
+    Route::get('/admin-foresell/list/banner-category/{id}/confirm', [AdminBannerCategoryController::class, 'confirm']);
+    Route::get('/admin-foresell/list/banner-category/{id}/delete', [AdminBannerCategoryController::class, 'delete']);
 
     // ORDER
     Route::get('/admin-foresell/list/orders', [AdminOrderController::class, 'index']);

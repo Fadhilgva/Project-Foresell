@@ -1,6 +1,6 @@
 @extends('sb-admin.app')
-@section('title', 'Store Banner Promotion')
-@section('bannerStore', 'active')
+@section('title', 'Category Banner Promotion')
+@section('bannerCategory', 'active')
 @section('banner', 'show')
 @section('banner-active', 'active')
 
@@ -20,7 +20,7 @@
 
 @section('content')
 
-    <h1 class="text-grey">Store Banner Promotion</h1>
+    <h1 class="text-grey">Category Banner Promotion</h1>
 
     <div class="row">
         <div class="col-md-12">
@@ -47,8 +47,8 @@
                             <thead class="table-dark">
                                 <tr>
                                     <th>Action</th>
+                                    <th>Category ID</th>
                                     <th>Image</th>
-                                    <th>Store ID</th>
                                     <th>Name</th>
                                     <th>Created At</th>
                                 </tr>
@@ -57,18 +57,19 @@
                                 @foreach ($banner as $item)
                                     <tr>
                                         <td>
-                                            <a href="{{ route('bannerStore.edit', $item->id) }}"
-                                                class="btn btn-warning btn-edit btn-sm" id="edit"><i
+                                            <a href="/admin-foresell/list/banner-category/{{ $item->id }}/edit"
+                                                class="btn btn-warning btn-edit btn-sm" id="btn-edit"><i
                                                     class="fas fa-pen"></i></a>
 
-                                            <a href="/admin-foresell/list/banner-store/{{ $item->id }}/confirm"
+                                            <a href="/admin-foresell/list/banner-category/{{ $item->id }}/confirm"
                                                 class="btn btn-danger btn-sm btn-hapus" id="delete"><i
                                                     class="fa fa-trash"></i></a>
                                         </td>
-                                        <td><img src="/image/admin/banner/store/{{ $item->image }}" alt="gambar"
-                                            width="50" height="50">
+                                        <td>#{{ $item->category_id }}</td>
+                                        <td>
+                                            <img src="/image/admin/banner/category/{{ $item->image }}" alt="gambar"
+                                                width="50" height="50">
                                         </td>
-                                        <td>#{{ $item->store_id }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->created_at }}</td>
 
@@ -96,17 +97,26 @@
                 </div>
 
                 <div class="modal-body">
-                    <form action="{{ Route('bannerStore.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ Route('bannerCategory.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        {{-- Store --}}
+                        {{-- Category --}}
                         <div class="mb-3">
-                            <label for="store" class="form-label">Store</label>
-                            <select name="store" class="form-control form-select">
-                                @foreach ($store as $item)
+                            <label for="category" class="form-label">category</label>
+                            <select name="category" class="form-control form-select">
+                                @foreach ($category as $item)
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach
                             </select>
-                            @error('store')
+                            @error('category')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        {{-- DESC --}}
+                        <div class="mb-3">
+                            <label for="editor" class="form-label ">Description</label>
+                            <textarea name="desc" class="form-control" id="editor">{{ old('desc') ? old('desc') : '' }}</textarea>
+                            @error('desc')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
@@ -127,6 +137,8 @@
         </div>
     </div>
     </div>
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
 
@@ -136,12 +148,29 @@
                 $('.preloader').fadeIn();
                 location.reload();
             })
-
             $("#btn-daftar").click(function(e) {
                 e.preventDefault();
 
                 $('#modal-daftar').modal();
             })
         });
+
+        ClassicEditor
+            .create(document.querySelector('#editor'), {
+                fontFamily: {
+                    options: [
+                        'default',
+                        'Ubuntu, Arial, sans-serif',
+                        'Ubuntu Mono, Courier New, Courier, monospace'
+                    ]
+                },
+                toolbar: [
+                    'heading', 'fontFamily', 'bold', 'italic', 'undo', 'redo'
+                ]
+            })
+
+            .catch(error => {
+                console.error(error);
+            });
     </script>
 @endsection
