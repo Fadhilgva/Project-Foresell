@@ -3,7 +3,7 @@
 <title>Foresell - Data Produk Edit</title>
 
 @section('judul')
-    Edit Data Produk
+Edit Data Produk
 @endsection
 
 @section('content')
@@ -12,76 +12,76 @@
   @method('PUT')
   <div class="form-group">
     <label>Category Name</label> <br>
-    <select name="category_id" class="form-control" id=""  >
+    <select name="category_id" class="form-control" id="">
 
-     @if (old('category_id') == $data_produk->Category->id || $data_produk->Category->id)
-        <option  value="{{$data_produk->Category->id}}">{{$data_produk->Category->name}}</option>
+      @if (old('category_id') == $data_produk->Category->id || $data_produk->Category->id)
+      <option value="{{$data_produk->Category->id}}">{{$data_produk->Category->name}}</option>
 
-        @foreach ($category as $item)
-            <option  value="{{$item->id}}">{{$item->name}}</option>
-        @endforeach
-     @else
-        <option  value="">---Choose Category---</option>
+      @foreach ($category as $item)
+      <option value="{{$item->id}}">{{$item->name}}</option>
+      @endforeach
+      @else
+      <option value="">---Choose Category---</option>
 
-        @foreach ($category as $item)
-            <option  value="{{$item->id}}">{{$item->name}}</option>
-        @endforeach
-     @endif
+      @foreach ($category as $item)
+      <option value="{{$item->id}}">{{$item->name}}</option>
+      @endforeach
+      @endif
 
-  </select>
+    </select>
   </div>
   @error('category_id')
-    <div class="alert alert-danger">{{ $message }}</div>
+  <div class="alert alert-danger">{{ $message }}</div>
   @enderror
 
-
-  {{-- <div class="form-group">
-    <label>Store Name</label> <br>
-        <select name="store_id" class="form-control" id="">
-            <option value="">---Choose Store---</option>
-
-            @foreach ($store as $item)
-              @if ($item->id === $category->user_id)
-
-                  <option value="{{$item->id}}" selected>{{$item->name}}</option>
-
-              @else
-
-                  <option value="{{$item->id}}">{{$item->name}}</option>
-
-              @endif
-            @endforeach
-        </select>
-  </div>
-  @error('store_id')
-    <div class="alert alert-danger">{{ $message }}</div>
-  @enderror --}}
-
-
   <div class="form-group">
-    <label>Product Image</label>
+    <label>Cover Image</label>
     <input type="file" name="image" class="form-control">
   </div>
   @error('Image')
-    <div class="alert alert-danger">{{ $message }}</div>
+  <div class="alert alert-danger">{{ $message }}</div>
+  @enderror
+
+  <div class="form-group">
+    <label>Product Image 1</label>
+    <input type="file" name="image1" class="form-control">
+  </div>
+  @error('Image')
+  <div class="alert alert-danger">{{ $message }}</div>
+  @enderror
+
+  <div class="form-group">
+    <label>Product Image 2</label>
+    <input type="file" name="image2" class="form-control">
+  </div>
+  @error('Image')
+  <div class="alert alert-danger">{{ $message }}</div>
+  @enderror
+
+  <div class="form-group">
+    <label>Product Image 3</label>
+    <input type="file" name="image3" class="form-control">
+  </div>
+  @error('Image')
+  <div class="alert alert-danger">{{ $message }}</div>
   @enderror
 
 
   <div class="form-group">
-      <label>Product Name</label>
-      <input type="text" id="name" name="name" class="form-control" value="{{ old('name') ? old('name') : $data_produk->name}}">
+    <label>Product Name</label>
+    <input type="text" id="name" name="name" class="form-control" value="{{ old('name') ? old('name') : $data_produk->name}}">
   </div>
   @error('name')
-      <div class="alert alert-danger">{{ $message }}</div>
+  <div class="alert alert-danger">{{ $message }}</div>
   @enderror
 
 
   <div class="form-group">
-      <label>Slug Name</label>
-      <input type="text" id="slug" name="slug" class="form-control" value="{{old('slug') ? old('slug') : $data_produk->slug}}">
+    <label>Slug Name</label>
+    <input type="text" id="slug" name="slug" class="form-control" value="{{old('slug') ? old('slug') : $data_produk->slug}}">
   </div>
   @error('slug')
-      <div class="alert alert-danger">{{ $message }}</div>
+  <div class="alert alert-danger">{{ $message }}</div>
   @enderror
 
 
@@ -90,7 +90,7 @@
     <input type="text" name="price" class="form-control" value="{{old('price') ? old('price') :$data_produk->price}}">
   </div>
   @error('price')
-      <div class="alert alert-danger">{{ $message }}</div>
+  <div class="alert alert-danger">{{ $message }}</div>
   @enderror
 
 
@@ -99,16 +99,16 @@
     <input type="text" name="stock" class="form-control" value="{{ old('stock') ? old('stock') : $data_produk->stock}}">
   </div>
   @error('stock')
-      <div class="alert alert-danger">{{ $message }}</div>
+  <div class="alert alert-danger">{{ $message }}</div>
   @enderror
 
 
-   <div class="form-group">
+  <div class="form-group">
     <label>Product Sold</label>
     <input type="text" name="sold" class="form-control" value="{{old('sold') ? old('sold') : $data_produk->sold}}">
   </div>
   @error('sold')
-      <div class="alert alert-danger">{{ $message }}</div>
+  <div class="alert alert-danger">{{ $message }}</div>
   @enderror
 
 
@@ -117,7 +117,7 @@
     <input type="text" name="discount" class="form-control" value="{{old('discount') ? old('discount') : $data_produk->discount}}">
   </div>
   @error('discount')
-      <div class="alert alert-danger">{{ $message }}</div>
+  <div class="alert alert-danger">{{ $message }}</div>
   @enderror
 
 
@@ -126,16 +126,16 @@
     <textarea name="desc" class="form-control" id="editor" cols="30" rows="10">{{old('desc') ? old('desc') : $data_produk->desc}}</textarea>
   </div>
   @error('desc')
-      <div class="alert alert-danger">{{ $message }}</div>
+  <div class="alert alert-danger">{{ $message }}</div>
   @enderror
 
-   <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
 {{-- EDITOR TEXT --}}
 <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
 <script>
-    ClassicEditor
+  ClassicEditor
         .create( document.querySelector( '#editor' ) )
         .catch( error => {
             console.error( error );

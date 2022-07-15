@@ -17,14 +17,15 @@
                     <ul id="thumbnail">
                         @if($product->image)
                         <li><img onclick="changeImage(this)" class="rounded" src="/img/admin_store/{{ $product->image }}" width="80" /></li>
-                        <li><img onclick="changeImage(this)" class="rounded" src="{{ asset('img/customer/img-2.png') }}" width="80" /></li>
-                        <li><img onclick="changeImage(this)" class="rounded" src="https://source.unsplash.com/600x600?technology" width="80" /></li>
-                        <li><img onclick="changeImage(this)" class="rounded" src="https://source.unsplash.com/600x600?data" width="80" /></li>
-                        @else
-                        <li><img onclick="changeImage(this)" class="rounded" src="{{ asset('img/customer/img-1.png') }}" width="80" /></li>
-                        <li><img onclick="changeImage(this)" class="rounded" src="{{ asset('img/customer/img-2.png') }}" width="80" /></li>
-                        <li><img onclick="changeImage(this)" class="rounded" src="https://source.unsplash.com/600x600?technology" width="80" /></li>
-                        <li><img onclick="changeImage(this)" class="rounded" src="https://source.unsplash.com/600x600?data" width="80" /></li>
+                        @endif
+                        @if($product->image1)
+                        <li><img onclick="changeImage(this)" class="rounded" src="/img/admin_store/{{ $product->image1 }}" width="80" /></li>
+                        @endif
+                        @if($product->image2)
+                        <li><img onclick="changeImage(this)" class="rounded" src="/img/admin_store/{{ $product->image2 }}" width="80" /></li>
+                        @endif
+                        @if($product->image3)
+                        <li><img onclick="changeImage(this)" class="rounded" src="/img/admin_store/{{ $product->image3 }}" width="80" /></li>
                         @endif
                     </ul>
                 </div>
