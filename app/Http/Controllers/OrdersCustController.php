@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use  App\Models\User;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request as FacadesRequest;
 
 class OrdersCustController extends Controller
 {
@@ -164,6 +165,14 @@ class OrdersCustController extends Controller
 
         $order = Orders::find($id);
         $order->delete();
+        return back();
+    }
+
+    public function update(Request $request, $id)
+    {
+        $order = Orders::find($id);
+        $order->status = $request->status;
+        $order->save();
         return back();
     }
 }

@@ -28,15 +28,15 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item title" href="/admin_toko/data_produk">Data Produk</a>
-                {{-- <a class="collapse-item title" href="/admin_toko/kategori">Kategori</a> --}}
-
+                <a class="collapse-item title" href="/admin_toko/data_produk">Products</a>
+                <a class="collapse-item title" href="/admin_toko/data_order">Orders</a>
+                <a class="collapse-item title" href="/admin_toko/data_penjualan">Sales</a>
             </div>
         </div>
     </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
             <i class="fas fa-fw fa-wrench"></i>
             <span class="title">Orders</span>
@@ -55,5 +55,5 @@
     <hr class="sidebar-divider">
 
     <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
+    <hr class="sidebar-divider d-none d-md-block"> --}}
 </ul>
