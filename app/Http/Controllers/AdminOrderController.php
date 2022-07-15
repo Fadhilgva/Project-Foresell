@@ -25,4 +25,12 @@ class AdminOrderController extends Controller
 
         return view('admin.order.index', compact('orders'));
     }
+
+    public function update(Request $request, $id)
+    {
+        $order = Orders::find($id);
+        $order->status = $request->status;
+        $order->save();
+        return back();
+    }
 }

@@ -36,67 +36,71 @@
                     </div>
                 </div>
                 {{-- TABLE --}}
-                <div class="box-body">
-                    <div class="">
-                        <table id="example1" style="overflow: scroll;"
-                            class="table tbl-users table-responsive-sm table-hover table-bordered table-sm">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th width="100">Action</th>
-                                    <th>Order ID</th>
-                                    <th>Name</th>
-                                    <th>User ID</th>
-                                    <th>Product</th>
-                                    <th>Qty</th>
-                                    <th>Total</th>
-                                    <th>Status</th>
-                                    <th>Payment</th>
-                                    <th>Courier</th>
-                                    <th>Address</th>
-                                    <th>Created At</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($orders as $data)
-                                <tr>
-                                    <td>
-                                        <div>
-                                            <a href="/admin-foresell/list/toko//confirm"
-                                                class="btn btn-danger btn-sm btn-hapus" id="delete"><i
-                                                    class="fa fa-trash"></i></a>
-
-                                            <a href="/admin-foresell/list/toko//show" class="btn btn-warning btn-sm btn-eye"
-                                                id=""><i class="fa fa-eye"></i></a>
-
-                                            {{-- <a href="#" class="btn btn-warning btn-sm btn-pen" id="btn-detail"><i
-                                                        class="fa fa-pen"></i></a> --}}
-                                        </div>
-                                    </td>
-                                    <td>#{{ $data->id }}</td>
-                                    <td>{{ $data->name }}</td>
-                                    <td>#{{ $data->userId }}</td>
-                                    <td>{{ $data->productName }}</td>
-                                    <td>{{ $data->qty }}</td>
-                                    <td>Rp {{ $data->total }}</td>
-                                    @if ($data->status == "Proccessed")
-                                        <td><span class="badge bg-primary">{{ $data->status }}</span></td>
-                                    @elseif ($data->status == "Waiting")
-                                        <td><a href="#" class="btn"><span id="update-status" class="badge bg-danger">{{ $data->status }}</span></a></td>
-                                    @elseif ($data->status == "Already")
-                                        <td><span class="badge bg-info">{{ $data->status }}</span></td>
-                                    @elseif ($data->status == "Shipping")
-                                        <td><span class="badge bg-warning">{{ $data->status }}</span></td>
-                                    @else
-                                        <td><span class="badge bg-success">{{ $data->status }}</span></td>
-                                    @endif
-                                    <td>{{ $data->paymentName }}</td>
-                                    <td>{{ $data->courierName }}</td>
-                                    <td>{{ $data->address }}</td>
-                                    <td>{{ $data->dateOrder }}</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Accordion -->
+                    <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample">
+                        <h6 class="m-0 font-weight-bold text-primary">Your Store Orders</h6>
+                    </a>
+                    <div class="collapse show" id="collapseCardExample">
+                        <div class="card-body">
+                            <table id="example1" style="overflow: scroll;"
+                                class="table tbl-users table-responsive-sm table-hover table-bordered table-sm bg-white">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th width="100">Action</th>
+                                        <th>Order ID</th>
+                                        <th>Name</th>
+                                        <th>User ID</th>
+                                        <th>Product</th>
+                                        <th>Qty</th>
+                                        <th>Total</th>
+                                        <th>Status</th>
+                                        <th>Payment</th>
+                                        <th>Courier</th>
+                                        <th>Address</th>
+                                        <th>Created At</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="">
+                                    @foreach ($orders as $data)
+                                    <tr>
+                                        <td class="text-center">
+                                            <div>
+                                                @if ($data->status == "Waiting")
+                                                    <form action="/admin-foresell/list/orders/{{ $data->id }}/update" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="status" value="Already">
+                                                        <button type="submit" class="btn btn-dark btn-sm">Update</button>
+                                                    </form>
+                                                @endif
+                                            </div>
+                                        </td>
+                                        <td>#{{ $data->id }}</td>
+                                        <td>{{ $data->name }}</td>
+                                        <td>#{{ $data->userId }}</td>
+                                        <td>{{ $data->productName }}</td>
+                                        <td>{{ $data->qty }}</td>
+                                        <td>Rp {{ $data->total }}</td>
+                                        @if ($data->status == "Proccessed")
+                                            <td class="text-center"><span class="badge bg-primary">{{ $data->status }}</span></td>
+                                        @elseif ($data->status == "Waiting")
+                                            <td class="text-center"><span class="badge bg-danger">{{ $data->status }}</span></td>
+                                        @elseif ($data->status == "Already")
+                                            <td class="text-center"><span class="badge bg-info">{{ $data->status }}</span></td>
+                                        @elseif ($data->status == "Shipping")
+                                            <td class="text-center"><span class="badge bg-warning">{{ $data->status }}</span></td>
+                                        @else
+                                            <td class="text-center"><span class="badge bg-success">{{ $data->status }}</span></td>
+                                        @endif
+                                        <td>{{ $data->paymentName }}</td>
+                                        <td>{{ $data->courierName }}</td>
+                                        <td>{{ $data->address }}</td>
+                                        <td><p class="fs-6">{{ $data->dateOrder }}</p></td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

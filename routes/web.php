@@ -222,6 +222,7 @@ Route::group(['middleware' => ['auth', 'role:adminForesell']], function () {
 
     // ORDER
     Route::get('/admin-foresell/list/orders', [AdminOrderController::class, 'index']);
+    Route::post('/admin-foresell/list/orders/{id}/update', [AdminOrderController::class, 'update']);
     Route::get('/orders-payment-status', [OrdersController::class, 'statusPayment']);
     Route::get('/orders-ship-status', [OrdersController::class, 'statusShip']);
 
