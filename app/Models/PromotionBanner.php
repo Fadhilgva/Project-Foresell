@@ -12,6 +12,6 @@ class PromotionBanner extends Model
 
     public function Store()
     {
-        return $this->belongsTo(Store::class, 'store_id');
+        return $this->belongsTo(Store::class);
     }
 }

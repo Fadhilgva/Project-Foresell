@@ -63,7 +63,7 @@
                                                         class="fas fa-pen"></i></a>
 
                                                 <a href="/admin-foresell/list/category/{{ $cat->id }}/show"
-                                                    class="btn btn-warning btn-sm btn-eye" id=""><i
+                                                    class="btn btn-info btn-sm btn-eye" id=""><i
                                                         class="fa fa-eye"></i></a>
 
                                                 <a href="/admin-foresell/list/category/{{ $cat->id }}/confirm"

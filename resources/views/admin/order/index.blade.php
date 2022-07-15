@@ -39,7 +39,7 @@
                 <div class="card shadow mb-4">
                     <!-- Card Header - Accordion -->
                     <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample">
-                        <h6 class="m-0 font-weight-bold text-primary">Your Store Orders</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Orders</h6>
                     </a>
                     <div class="collapse show" id="collapseCardExample">
                         <div class="card-body">
@@ -65,7 +65,7 @@
                                     @foreach ($orders as $data)
                                     <tr>
                                         <td class="text-center">
-                                            <div>
+                                            <div class="d-flex align-items-center">
                                                 @if ($data->status == "Waiting")
                                                     <form action="/admin-foresell/list/orders/{{ $data->id }}/update" method="POST">
                                                         @csrf
@@ -75,11 +75,11 @@
                                                 @endif
                                             </div>
                                         </td>
-                                        <td>#{{ $data->id }}</td>
+                                        <td class="text-center">#{{ $data->id }}</td>
                                         <td>{{ $data->name }}</td>
-                                        <td>#{{ $data->userId }}</td>
+                                        <td class="text-center">#{{ $data->userId }}</td>
                                         <td>{{ $data->productName }}</td>
-                                        <td>{{ $data->qty }}</td>
+                                        <td class="text-center">{{ $data->qty }}</td>
                                         <td>Rp {{ $data->total }}</td>
                                         @if ($data->status == "Proccessed")
                                             <td class="text-center"><span class="badge bg-primary">{{ $data->status }}</span></td>
