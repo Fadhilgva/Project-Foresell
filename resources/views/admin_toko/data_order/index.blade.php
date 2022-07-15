@@ -3,12 +3,12 @@
 <title>Foresell - Data Order</title>
 
 @section('judul')
-Data Order
+<p class="ms-4 title">Orders</p>
 @endsection
 
 @push('script')
-<script src="{{asset('admin_store/vendor/datatables/jquery.dataTables.js')}}"></script>
-<script src="{{asset('admin_store/vendor/datatables/dataTables.bootstrap4.js')}}"></script>
+<script src="{{asset('/vendor/admin_store/datatables/jquery.dataTables.js')}}"></script>
+<script src="{{asset('/vendor/admin_store/datatables/dataTables.bootstrap4.js')}}"></script>
 <script>
     $(function () {
     $("#example1").DataTable();
@@ -18,7 +18,6 @@ Data Order
 
 @push('style')
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.12.1/datatables.min.css" />
-
 @endpush
 
 @section('content')
