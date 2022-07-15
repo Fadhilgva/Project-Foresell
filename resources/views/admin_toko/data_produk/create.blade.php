@@ -39,8 +39,32 @@
   @enderror --}}
 
   <div class="form-group">
-    <label>Product Image</label>
+    <label>Cover Image</label>
     <input type="file" name="image" class="form-control">
+  </div>
+  @error('image')
+  <div class="alert alert-danger">{{ $message }}</div>
+  @enderror
+
+  <div class="form-group">
+    <label>Product Image 1</label>
+    <input type="file" name="image1" class="form-control">
+  </div>
+  @error('image')
+  <div class="alert alert-danger">{{ $message }}</div>
+  @enderror
+
+  <div class="form-group">
+    <label>Product Image 2</label>
+    <input type="file" name="image2" class="form-control">
+  </div>
+  @error('image')
+  <div class="alert alert-danger">{{ $message }}</div>
+  @enderror
+
+  <div class="form-group">
+    <label>Product Image 3</label>
+    <input type="file" name="image3" class="form-control">
   </div>
   @error('image')
   <div class="alert alert-danger">{{ $message }}</div>

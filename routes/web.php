@@ -137,6 +137,8 @@ Route::group(
         Route::get('/completed', [OrdersCustController::class, 'completed']);
         Route::get('/orders', [OrdersCustController::class, 'showorders']);
         Route::get('/orders/{orders:id}/confirm', [OrdersCustController::class, 'confirm']);
+        Route::post('/orders/{orders:id}/delete', [OrdersCustController::class, 'delete']);
+        Route::post('/orders/{orders:id}/update', [OrdersCustController::class, 'update']);
         Route::get('/orderdetails/{order:id}', [OrdersCustController::class, 'showordersdetails']);
     }
 );

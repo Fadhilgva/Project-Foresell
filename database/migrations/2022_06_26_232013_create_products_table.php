@@ -18,6 +18,9 @@
                 $table->foreignId('category_id');
                 $table->foreignId('store_id');
                 $table->string('image')->nullable();
+                $table->string('image1')->nullable();
+                $table->string('image2')->nullable();
+                $table->string('image3')->nullable();
                 $table->string('name');
                 $table->string('slug')->unique();
                 $table->unsignedInteger('price');

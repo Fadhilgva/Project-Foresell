@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Orders;
 
 class DataOrderController extends Controller
 {
@@ -11,8 +13,17 @@ class DataOrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
-        return view('admin_toko.data_order.index');
+    public function index()
+    {
+        $orderstore = Orders::join('order_details', 'orders.id', '=', 'order_details.order_id')
+            ->join('products', 'order_details.product_id', '=', 'products.id')
+            ->join('stores', 'products.store_id', '=', 'stores.id')
+            ->where('stores.user_id', '=', Auth::user()->id)
+            ->select('orders.*')->latest()->get();
+
+        return view('admin_toko.data_order.index', [
+            'orderstore' => $orderstore
+        ]);
     }
 
     /**
