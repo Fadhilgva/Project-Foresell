@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Store;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class DataPenjualanController extends Controller
 {
@@ -12,7 +15,45 @@ class DataPenjualanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        return view('admin_toko.data_penjualan.index');
+
+
+        $store = Store::whereId(Auth::user()->store->id)->first();
+        $name = Store::whereId(Auth::user()->store->id)->select('name')->pluck('name');
+        $total2022 = Store::join('products', 'products.store_id', '=', 'stores.id')
+            ->join('order_details', 'order_details.product_id', '=', 'products.id')
+            ->where('stores.id', Auth::user()->store->id)
+            ->whereYear('order_details.created_at', 2022)
+            ->select(DB::raw('  monthname(order_details.created_at) AS bulan, YEAR(order_details.created_at) AS tahun,
+                                round(SUM(order_details.price * order_details.qty),2) AS total'))
+            ->groupByRaw('YEAR(order_details.created_at), MONTH(order_details.created_at)')->pluck('total');
+
+
+        $bulan2022 = Store::join('products', 'products.store_id', '=', 'stores.id')
+            ->join('order_details', 'order_details.product_id', '=', 'products.id')
+            ->where('stores.id', Auth::user()->store->id)
+            ->whereYear('order_details.created_at', 2022)
+            ->select(DB::raw('  monthname(order_details.created_at) AS bulan, YEAR(order_details.created_at) AS tahun,
+                                round(SUM(order_details.price * order_details.qty),2) AS total'))
+            ->groupByRaw('YEAR(order_details.created_at), MONTH(order_details.created_at)')->pluck('bulan');
+
+        $total2021 = Store::join('products', 'products.store_id', '=', 'stores.id')
+            ->join('order_details', 'order_details.product_id', '=', 'products.id')
+            ->where('stores.id', Auth::user()->store->id)
+            ->whereYear('order_details.created_at', 2021)
+            ->select(DB::raw('  monthname(order_details.created_at) AS bulan, YEAR(order_details.created_at) AS tahun,
+                                round(SUM(order_details.price * order_details.qty),2) AS total'))
+            ->groupByRaw('YEAR(order_details.created_at), MONTH(order_details.created_at)')->pluck('total');
+
+
+        $bulan2021 = Store::join('products', 'products.store_id', '=', 'stores.id')
+            ->join('order_details', 'order_details.product_id', '=', 'products.id')
+            ->where('stores.id', Auth::user()->store->id)
+            ->whereYear('order_details.created_at', 2021)
+            ->select(DB::raw('  monthname(order_details.created_at) AS bulan, YEAR(order_details.created_at) AS tahun,
+                                round(SUM(order_details.price * order_details.qty),2) AS total'))
+            ->groupByRaw('YEAR(order_details.created_at), MONTH(order_details.created_at)')->pluck('bulan');
+
+        return view('admin_toko.data_penjualan.index', compact('store', 'total2022', 'bulan2022', 'name', 'total2021', 'bulan2021'));
     }
 
     /**
