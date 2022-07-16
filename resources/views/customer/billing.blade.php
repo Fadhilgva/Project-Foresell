@@ -40,7 +40,11 @@
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="flush-heading{{ $bank->id }}">
                                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ $bank->id }}" aria-expanded="false" aria-controls="flush-collapse{{ $bank->id }}">
+                                                @if($bank->image)
+                                                <img src="image\admin\payment\{{ $bank->image }}" width="25" class="me-2">
+                                                @else
                                                 <img src="{{ asset('img/customer/cc.png') }}" width="25" class="me-2">
+                                                @endif
                                                 {{ $bank->name }}
                                             </button>
                                         </h2>
@@ -129,65 +133,17 @@
                                 <h5 class="mt-4 mb-4 title">Shipping Courier</h5>
                                 <table class="table">
                                     <tbody>
-                                        @foreach ($couriers->take(1) as $courier)
+                                        @foreach ($couriers as $courier)
                                         <tr>
                                             <th scope="row">
                                                 <label class="list-group-item d-flex gap-2 my-2">
-                                                    <input class="form-check-input flex-shrink-0" type="radio" name="courier" id="listGroupRadios1" value="{{ $courier->id }}" checked />
+                                                    <input class="form-check-input flex-shrink-0" type="radio" name="courier" id="listGroupRadios1" value="{{ $courier->id }}" />
                                                     <span>
+                                                        @if($courier->image)
+                                                        <img src="image\admin\couriers\{{ $courier->image }}" class="rounded-circle me-1" width="30">
+                                                        @else
                                                         <img src="{{ asset('img/customer/jnt.png') }}" class="rounded-circle me-1" width="30">
-                                                        {{ $courier->name }}
-                                                    </span>
-                                                </label>
-                                            </th>
-                                        </tr>
-                                        @endforeach
-                                        @foreach ($couriers->skip(1)->take(1) as $courier)
-                                        <tr>
-                                            <th scope="row">
-                                                <label class="list-group-item d-flex gap-2 my-2">
-                                                    <input class="form-check-input flex-shrink-0" type="radio" name="courier" id="listGroupRadios2" value="{{ $courier->id }}" />
-                                                    <span>
-                                                        <img src="{{ asset('img/customer/ninja.png') }}" class="rounded-circle me-1" width="30">
-                                                        {{ $courier->name }}
-                                                    </span>
-                                                </label>
-                                            </th>
-                                        </tr>
-                                        @endforeach
-                                        @foreach ($couriers->skip(2)->take(1) as $courier)
-                                        <tr>
-                                            <th scope="row">
-                                                <label class="list-group-item d-flex gap-2 my-2">
-                                                    <input class="form-check-input flex-shrink-0" type="radio" name="courier" id="listGroupRadios3" value="{{ $courier->id }}" />
-                                                    <span>
-                                                        <img src="{{ asset('img/customer/sicepat.png') }}" class="rounded-circle me-1" width="30">
-                                                        {{ $courier->name }}
-                                                    </span>
-                                                </label>
-                                            </th>
-                                        </tr>
-                                        @endforeach
-                                        @foreach ($couriers->skip(3)->take(1) as $courier)
-                                        <tr>
-                                            <th scope="row">
-                                                <label class="list-group-item d-flex gap-2 my-2">
-                                                    <input class="form-check-input flex-shrink-0" type="radio" name="courier" id="listGroupRadios3" value="{{ $courier->id }}" />
-                                                    <span>
-                                                        <img src="{{ asset('img/customer/lion.png') }}" class="rounded-circle me-1" width="30">
-                                                        {{ $courier->name }}
-                                                    </span>
-                                                </label>
-                                            </th>
-                                        </tr>
-                                        @endforeach
-                                        @foreach ($couriers->skip(4)->take(1) as $courier)
-                                        <tr>
-                                            <th scope="row">
-                                                <label class="list-group-item d-flex gap-2 my-2">
-                                                    <input class="form-check-input flex-shrink-0" type="radio" name="courier" id="listGroupRadios3" value="{{ $courier->id }}" />
-                                                    <span>
-                                                        <img src="{{ asset('img/customer/jne.png') }}" class="rounded-circle me-1" width="30">
+                                                        @endif
                                                         {{ $courier->name }}
                                                     </span>
                                                 </label>

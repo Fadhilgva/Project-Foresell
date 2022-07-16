@@ -158,11 +158,11 @@ class OrdersCustController extends Controller
     {
         $order = Orders::find($id);
 
-
-        // $order->OrderDetail->delete(); Mau pake ini biar sekalian di order_detail ke delete juga tapi error
+        $order_details = OrderDetails::where('order_id', '=', $order->id)->get();
+        foreach ($order_details as $order_detail) {
+            $order_detail->delete();
+        }
         $order->delete();
-
-
 
         Alert::success('Success', 'Your order has been canceled');
         return back();
