@@ -18,20 +18,9 @@ class PaymentController extends Controller
      */
     public function index(Request $request)
     {
-        $keyword = $request->keyword;
-        // $datas = Pegawai::all();
-        // $banks = AdminBank::select('id','logo', 'bankName', 'type', 'noRekening', 'created_at')->get();
+        $payment = Payment::get();
 
-        $payment = Payment::where('name', 'LIKE', '%'.$keyword.'%')
-                ->orWhere('noPayment', 'LIKE', '%'.$keyword.'%')
-                ->orWhere('type', 'LIKE', '%'.$keyword.'%')
-                ->orWhere('created_at', 'LIKE', '%'.$keyword.'%')
-                ->orderby('type', 'ASC')->paginate(10);
-
-        $payment->withPath('/admin-foresell/list/payment');
-        $payment->appends($request->all());
-
-        return view('admin.payment.index', compact('payment', 'keyword'));
+        return view('admin.payment.index', compact('payment'));
     }
 
     /**
@@ -54,7 +43,7 @@ class PaymentController extends Controller
 
         Payment::create([
             'name' => $request->name,
-            'logo' => $logo,
+            'image' => $logo,
             'type' => $request->type,
             'noPayment' => $request->noPayment,
         ]);
@@ -83,7 +72,7 @@ class PaymentController extends Controller
      */
     public function edit($id)
     {
-        $payment = Payment::select('id','logo', 'name', 'noPayment', 'created_at')->find($id);
+        $payment = Payment::select('id','image', 'name', 'noPayment', 'created_at')->find($id);
         // $payment = Payment::whereId('')->first();
         return view('admin.payment.edit', compact('payment'));
     }
@@ -119,7 +108,7 @@ class PaymentController extends Controller
             $logo =  time().'-'.$request->logo->getClientOriginalName();
             $request->logo->move('image\admin\payment', $logo);
 
-            $data['logo'] = $logo;
+            $data['image'] = $logo;
         }
 
         $payment->update($data);
@@ -147,7 +136,7 @@ class PaymentController extends Controller
     public function delete($id)
     {
         $payment = Payment::whereId($id)->firstOrFail();
-        File::delete('image/admin/payment/'. $payment->logo);
+        File::delete('image/admin/payment/'. $payment->image);
         $payment->delete();
 
         Alert::success('Success', 'Data berhasil dihapus');

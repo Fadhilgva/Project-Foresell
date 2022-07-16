@@ -85,7 +85,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <img src="/image/admin/payment/{{ $pay->logo }}" alt="" width="60" height="50">
+                                            <img src="/image/admin/payment/{{ $pay->image }}" alt="" width="60" height="50">
                                         </td>
                                         <td>{{ $pay->name }}</td>
                                         <td>{{ $pay->type }}</td>
