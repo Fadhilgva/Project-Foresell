@@ -79,11 +79,9 @@
     </div>
 </div>
 
-                @empty
                 
-                @endforelse
 
-            </tbody>
+            
 
 
 
