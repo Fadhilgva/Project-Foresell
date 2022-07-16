@@ -79,7 +79,7 @@ class DataProdukController extends Controller
             'name' => 'required|min:5|max:50',
             'slug' => 'required|unique:products,slug',
             'price' => 'required',
-            'discount' => 'numeric|min:0|max:90',
+            'discount' => 'min:0|max:90',
             'stock' => 'required',
             'desc' => 'required|min:20',
         ]);

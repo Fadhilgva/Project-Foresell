@@ -68,7 +68,7 @@ class AdminCategoryController extends Controller
         $image = time() . '-' . $request->image->getClientOriginalName();
         $request->image->move('image\admin\category', $image);
 
-        AdminCategory::create([
+        Category::create([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
             'image' => $image,
@@ -171,7 +171,7 @@ class AdminCategoryController extends Controller
             'slug' => Str::slug($request->name)
         ];
 
-        $category = AdminCategory::whereId($id)->first();
+        $category = Category::whereId($id)->first();
 
         if ($request->image) {
 
