@@ -81,7 +81,7 @@ class ProfileController extends Controller
         $store = Store::find($id);
         $validatedData = $request->validate([
             'name' => 'required|min:3|max:255|',
-            'description' => 'required|min:20|max:50',
+            'description' => 'required|min:20|max:150',
             'location' => 'required|min:5|max:20',
             'banner' => 'mimes:jpg,jpeg,png',
             'image' => 'mimes:jpg,jpeg,png'
