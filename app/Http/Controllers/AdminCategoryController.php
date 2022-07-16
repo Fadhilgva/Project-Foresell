@@ -19,15 +19,15 @@ class AdminCategoryController extends Controller
         $keyword = $request->keyword;
 
 
-        $categories = AdminCategory::where('name', 'LIKE', '%'.$keyword.'%')
-        ->orWhere('slug', 'LIKE', '%'.$keyword.'%')
-        ->orWhere('created_at', 'LIKE', '%'.$keyword.'%')
-        ->orderby('name', 'ASC')->paginate(10);
+        $categories = AdminCategory::where('name', 'LIKE', '%' . $keyword . '%')
+            ->orWhere('slug', 'LIKE', '%' . $keyword . '%')
+            ->orWhere('created_at', 'LIKE', '%' . $keyword . '%')
+            ->orderby('name', 'ASC')->paginate(10);
 
         $categories->withPath('/admin-foresell/list/catego$category');
         $categories->appends($request->all());
 
-        return view('admin.category.index', compact('categories','keyword'));
+        return view('admin.category.index', compact('categories', 'keyword'));
     }
 
 
@@ -55,10 +55,10 @@ class AdminCategoryController extends Controller
             'image' => 'required|mimes:jpg,jpeg,png',
         ]);
 
-        $image = time().'-'.$request->image->getClientOriginalName();
+        $image = time() . '-' . $request->image->getClientOriginalName();
         $request->image->move('image\admin\category', $image);
 
-        AdminCategory::create([
+        Category::create([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
             'image' => $image,
@@ -78,26 +78,26 @@ class AdminCategoryController extends Controller
     public function show(Request $request, $id)
     {
 
-        $categories = AdminCategory::whereId($id)->first();
-        $name = AdminCategory::whereId($id)->select('name')->pluck('name');
+        $categories = Category::whereId($id)->first();
+        $name = Category::whereId($id)->select('name')->pluck('name');
         $total = DB::table(DB::raw('products'))
-                        ->select(DB::raw('monthname(order_details.created_at) AS bulan,  categories.name AS name, round(SUM(order_details.price * order_details.qty * (100 - order_details.discount)/ 100),2) AS total'))
-                        ->join('order_details', 'products.id', '=', 'order_details.product_id')
-                        ->join('categories', 'products.category_id', '=', 'categories.id')
-                        ->where('categories.id', $id)
-                        ->orderBy('order_details.created_at', 'ASC')
-                        ->groupByRaw('bulan, name')->pluck('total');
+            ->select(DB::raw('monthname(order_details.created_at) AS bulan,  categories.name AS name, round(SUM(order_details.price * order_details.qty * (100 - order_details.discount)/ 100),2) AS total'))
+            ->join('order_details', 'products.id', '=', 'order_details.product_id')
+            ->join('categories', 'products.category_id', '=', 'categories.id')
+            ->where('categories.id', $id)
+            ->orderBy('order_details.created_at', 'ASC')
+            ->groupByRaw('bulan, name')->pluck('total');
 
         $bulan = DB::table(DB::raw('products'))
-                        ->select(DB::raw('monthname(order_details.created_at) AS bulan,  categories.name AS name, round(SUM(order_details.price * order_details.qty * (100 - order_details.discount)/ 100),2) AS total'))
-                        ->join('order_details', 'products.id', '=', 'order_details.product_id')
-                        ->join('categories', 'products.category_id', '=', 'categories.id')
-                        ->where('categories.id', $id)
-                        ->orderBy('order_details.created_at', 'ASC')
-                        ->groupByRaw('bulan, name')->pluck('bulan');
+            ->select(DB::raw('monthname(order_details.created_at) AS bulan,  categories.name AS name, round(SUM(order_details.price * order_details.qty * (100 - order_details.discount)/ 100),2) AS total'))
+            ->join('order_details', 'products.id', '=', 'order_details.product_id')
+            ->join('categories', 'products.category_id', '=', 'categories.id')
+            ->where('categories.id', $id)
+            ->orderBy('order_details.created_at', 'ASC')
+            ->groupByRaw('bulan, name')->pluck('bulan');
 
 
-        return view('admin.category.show', compact('categories', 'total', 'bulan','name'));
+        return view('admin.category.show', compact('categories', 'total', 'bulan', 'name'));
     }
 
     /**
@@ -108,7 +108,7 @@ class AdminCategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = AdminCategory::select('id','image', 'name')->find($id);
+        $category = Category::select('id', 'image', 'name')->find($id);
 
         return view('admin.category.edit', compact('category'));
     }
@@ -132,13 +132,13 @@ class AdminCategoryController extends Controller
             'slug' => Str::slug($request->name)
         ];
 
-        $category = AdminCategory::whereId($id)->first();
+        $category = Category::whereId($id)->first();
 
-        if($request->image){
+        if ($request->image) {
 
-            File::delete('image/admin/category/'. $category->image);
+            File::delete('image/admin/category/' . $category->image);
 
-            $image =  time().'-'.$request->image->getClientOriginalName();
+            $image =  time() . '-' . $request->image->getClientOriginalName();
             $request->image->move('image\admin\category', $image);
 
             $data['image'] = $image;
@@ -164,17 +164,17 @@ class AdminCategoryController extends Controller
 
     public function confirm($id)
     {
-        alert()->question('Perhatian!','Apa kamu yakin ingin menghapus?')
-        ->showConfirmButton('<a href="/admin-foresell/list/category/' . $id . '/delete" class="text-white" style="text-decoration: none"> Delete</a>', '#3085d6')->toHtml()
-        ->showCancelButton('Cancel', '#aaa')->reverseButtons();
+        alert()->question('Perhatian!', 'Apa kamu yakin ingin menghapus?')
+            ->showConfirmButton('<a href="/admin-foresell/list/category/' . $id . '/delete" class="text-white" style="text-decoration: none"> Delete</a>', '#3085d6')->toHtml()
+            ->showCancelButton('Cancel', '#aaa')->reverseButtons();
 
         return redirect('/admin-foresell/list/category');
     }
 
     public function delete($id)
     {
-        $category = AdminCategory::whereId($id)->firstOrFail();
-        File::delete('image/admin/category/'. $category->logo);
+        $category = Category::whereId($id)->firstOrFail();
+        File::delete('image/admin/category/' . $category->logo);
         $category->delete();
 
         Alert::success('Success', 'Data berhasil dihapus');
