@@ -37,10 +37,10 @@
                                         @switch($order->status)
                                         @case($order->status == "Waiting")
                                         <p class="badge text-bg-danger mt-4">Waiting for Payment</p>
-                                        <form action="/orders/{{ $order->id }}/delete" method="POST">
-                                            @csrf
+                                        <a href="/orders/{{ $order->id }}/confirm" class="btn btn-warning btn-sm ms-3">Cancel Order</a>
+                                            {{-- @csrf
                                             <button type="submit" class="btn btn-warning btn-sm ms-3">Cancel Order</button>
-                                        </form>
+                                        </form> --}}
                                         @break
                                         @case($order->status == "Already")
                                         <p class="badge text-bg-secondary mt-4">Already Payment</p>

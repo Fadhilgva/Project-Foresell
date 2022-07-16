@@ -79,7 +79,7 @@ class DataProdukController extends Controller
             'name' => 'required|min:5|max:50',
             'slug' => 'required|unique:products,slug',
             'price' => 'required',
-            'discount' => 'numeric|min:0|max:90',
+            'discount' => 'min:0|max:90',
             'stock' => 'required',
             'desc' => 'required|min:20',
         ]);
@@ -226,7 +226,7 @@ class DataProdukController extends Controller
             $data['image1'] = $image1;
         }
 
-        if ($validatedData['image2']) {
+        if ($request->image2) {
             File::delete('img/admin_store/' . $data_produk->image2);
 
             $image2 =  time() . '-' . $validatedData['image2']->getClientOriginalName();
@@ -235,7 +235,7 @@ class DataProdukController extends Controller
             $data['image2'] = $image2;
         }
 
-        if ($validatedData['image3']) {
+        if ($request->image3) {
             File::delete('img/admin_store/' . $data_produk->image3);
 
             $image3 =  time() . '-' . $validatedData['image3']->getClientOriginalName();

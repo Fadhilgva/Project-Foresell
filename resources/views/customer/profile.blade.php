@@ -11,11 +11,11 @@
     @endif
 
     <div class="row">
-        <div class="col-md-2 mt-3">
+        {{-- <div class="col-md-2 mt-3">
             <div class="d-flex flex-column align-items-center text-center"><img class="rounded-circle my-0" width="150px" src="https://source.unsplash.com/150x150?technology">
             </div>
-        </div>
-        <div class="col-md-5 mt-3">
+        </div> --}}
+        <div class="col-md-7 mt-3">
             <div class="row g-3">
                 <h5 class="mt-4 mb-2 title">Personal Profile</h5>
                 <div class="col-md-12 my-2">

@@ -4,13 +4,15 @@
 {{-- Carousel --}}
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
-        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active bg-secondary" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" class="bg-secondary"></button>
+        @foreach ($promotionbanners as $promotionbanner)
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="{{ $loop->index }}" class="active bg-secondary" aria-current="true" aria-label="Slide {{ $loop->index }}"></button>
+        @endforeach
+        {{-- <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" class="bg-secondary"></button>
         <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" class="bg-secondary"></button>
-        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" aria-label="Slide 4" class="bg-secondary"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" aria-label="Slide 4" class="bg-secondary"></button> --}}
     </div>
     <div class="carousel-inner" style="height: 590px; width: 1600">
-        @foreach ($promotionbanners->take(4) as $promotionbanner)
+        @foreach ($promotionbanners as $promotionbanner)
         <div class="carousel-item active">
             <a href="/stores?store={{ $promotionbanner->store->slug }}">
                 @if($promotionbanner->image)
@@ -111,9 +113,9 @@
                             <div class="product-grid shadow-sm">
                                 <div class="product-image">
                                     <a href="/products/{{ $product->slug }}" class="image">
-                                        @if($product->image1 & $product->image2)
-                                        <img class="img-1" src="{{ $product->image1 }}" width="500" height="500">
-                                        <img class="img-2" src="{{ $product->image2 }}" width="500" height="500">
+                                        @if($product->image & $product->image1)
+                                        <img class="img-1" src="img/admin_store/{{ $product->image }}" width="500" height="500">
+                                        <img class="img-2" src="img/admin_store/{{ $product->image1 }}" width="500" height="500">
                                         @else
                                         <img class="img-1" src="{{ asset('img/customer/img-1.png') }}" width="500" height="500">
                                         <img class="img-2" src="{{ asset('img/customer/img-2.png') }}" width="500" height="500">
@@ -180,9 +182,9 @@
                             <div class="product-grid shadow-sm">
                                 <div class="product-image">
                                     <a href="/products/{{ $product->slug }}" class="image">
-                                        @if($product->image1 & $product->image2)
-                                        <img class="img-1" src="{{ $product->image1 }}" width="500" height="500">
-                                        <img class="img-2" src="{{ $product->image2 }}" width="500" height="500">
+                                        @if($product->image & $product->image1)
+                                        <img class="img-1" src="{{ $product->image }}" width="500" height="500">
+                                        <img class="img-2" src="{{ $product->image1 }}" width="500" height="500">
                                         @else
                                         <img class="img-1" src="{{ asset('img/customer/img-1.png') }}" width="500" height="500">
                                         <img class="img-2" src="{{ asset('img/customer/img-2.png') }}" width="500" height="500">
@@ -249,9 +251,9 @@
                             <div class="product-grid shadow-sm">
                                 <div class="product-image">
                                     <a href="/products/{{ $product->slug }}" class="image">
-                                        @if($product->image1 & $product->image2)
-                                        <img class="img-1" src="{{ $product->image1 }}" width="500" height="500">
-                                        <img class="img-2" src="{{ $product->image2 }}" width="500" height="500">
+                                        @if($product->image & $product->image1)
+                                        <img class="img-1" src="{{ $product->image }}" width="500" height="500">
+                                        <img class="img-2" src="{{ $product->image1 }}" width="500" height="500">
                                         @else
                                         <img class="img-1" src="{{ asset('img/customer/img-1.png') }}" width="500" height="500">
                                         <img class="img-2" src="{{ asset('img/customer/img-2.png') }}" width="500" height="500">

@@ -23,68 +23,64 @@
                             Stores</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $stores }}</div>
                     </div>
-                    <div class="col-auto">
-                        <i class="fas fa-solid fa-store fa-2x text-gray-300"></i>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+        <!-- CATEGORIES -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Categories</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $categories }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-solid fa-clipboard-list fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <!-- CATEGORIES -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-success shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            Categories</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $categories }}</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-solid fa-clipboard-list fa-2x text-gray-300"></i>
+        <!-- USER-->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                Users </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $users }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-solid fa-user fa-2x text-gray-300"></i>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- USER-->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-info shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                            Users </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $users }}</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-solid fa-user fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- PRODUCTS -->
-    <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-left-warning shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                            Products </div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $products }}</div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-solid fa-tags fa-2x text-gray-300"></i>
+        <!-- PRODUCTS -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Products </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $products }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-solid fa-tags fa-2x text-gray-300"></i>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 {{-- 3D CHART --}}
 <div class="row">
@@ -122,7 +118,7 @@
                 @foreach ($topProduct as $tProduct)
                 <div class="row mb-5" style=" height: 70px;">
                     <div class="col-md-4 mb-3">
-                        <img width="100px" height="100px" src="https://images.unsplash.com/photo-1644982649363-fae51da44eac?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="">
+                        <img width="100px" height="100px" src="/img/admin_store/{{ $tProduct->image }}" alt="">
                     </div>
                     <div class="col-md-5 mb-3 ">
                         <h5 class="text-dark fw-bold">{{ $tProduct->name }}</h5>
@@ -144,11 +140,8 @@
             <h5 class="card-header fw-bold">Top Customer</h5>
             <div class="card-body overflow-auto" style=" height: 500px;">
                 @foreach ($topUser as $tUser)
-                <div class="row mb-5" style=" height: 70px;">
-                    <div class="col-md-4 mb-3">
-                        <img width="80px" height="80px" src="https://images.unsplash.com/photo-1644982649363-fae51da44eac?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="">
-                    </div>
-                    <div class="col-md-5 mb-3">
+                <div class="row mb-3" style=" height: 70px;">
+                    <div class="col-md-9 mb-3">
                         <h5 class="text-dark fw-bold">{{ $tUser->name }}</h5>
                         <p>Customer ID #{{ $tUser->id }}</p>
                     </div>
@@ -200,59 +193,6 @@
 
             chart.draw(data, options);
         }
-        // Highcharts.chart('container', {
-        //     chart: {
-        //         plotBackgroundColor: null,
-        //         plotBorderWidth: null,
-        //         plotShadow: false,
-        //         type: 'pie'
-        //     },
-        //     title: {
-        //         text: 'Browser market shares in January, 2018'
-        //     },
-        //     tooltip: {
-        //         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        //     },
-        //     accessibility: {
-        //         point: {
-        //             valueSuffix: '%'
-        //         }
-        //     },
-        //     plotOptions: {
-        //         pie: {
-        //             allowPointSelect: true,
-        //             cursor: 'pointer',
-        //             dataLabels: {
-        //                 enabled: false
-        //             },
-        //             showInLegend: true
-        //         }
-        //     },
-        //     series: [{
-        //         name: 'Brands',
-        //         colorByPoint: true,
-        //         data: [{
-        //             name: 'Chrome',
-        //             y: 61.41,
-
-        //         }, {
-        //             name: 'Internet Explorer',
-        //             y: 11.84
-        //         }, {
-        //             name: 'Firefox',
-        //             y: 10.85
-        //         }, {
-        //             name: 'Edge',
-        //             y: 4.67
-        //         }, {
-        //             name: 'Safari',
-        //             y: 4.18
-        //         }, {
-        //             name: 'Other',
-        //             y: 7.05
-        //         }]
-        //     }]
-        // });
 
         // 3D CHART
         const total = <?php echo json_encode($total); ?>;
@@ -271,7 +211,7 @@
                 }
             },
             title: {
-                text: 'Monthly Revenue of Foreshell'
+                text: 'Monthly Revenue of Foreshell 2022'
             },
             subtitle: {
                 text: ''
