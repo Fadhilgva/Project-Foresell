@@ -1,5 +1,5 @@
 @extends('sb-admin.app')
-@section('title', 'Users')
+@section('title', 'List Users')
 @section('users', 'active')
 @section('main', 'show')
 @section('main-active', 'active')

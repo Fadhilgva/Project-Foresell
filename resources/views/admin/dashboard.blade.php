@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{{ asset('css/admin/dashboard.css') }}">
 <link rel="stylesheet" href="{{ asset('css/admin/pieChart.css') }}">
 @endsection
-@section('title', 'Dashboard')
+@section('title', 'Admin | Dashboard')
 @section('dashboard', 'active')
 
 

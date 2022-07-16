@@ -19,23 +19,11 @@ class AdminUserController extends Controller
                                  users.created_at as Register'))
             ->get();
 
-
-
-        // dd($users);
         return view('admin.users.index', compact('users'));
     }
 
     public function show(Request $request, $id)
     {
-        // SELECT monthname(od.created_at) AS bulan,  u.name AS name,
-        // round(SUM(od.price * od.qty * (100 - od.discount)/ 100),2) AS total
-        // FROM order_details od, users u, products p, orders o
-        // WHERE u.id = o.user_id
-        // AND o.id = od.order_id
-        // AND p.id = od.product_id
-        // GROUP BY bulan, o.user_id
-        // ORDER BY MONTH(od.created_at) ASC
-
         $user = User::whereId($id)->first();
         $name = User::whereId($id)->select('name')->pluck('name');
         $total2022 = DB::table(DB::raw('users'))
@@ -87,7 +75,7 @@ class AdminUserController extends Controller
 
     public function confirm($id)
     {
-        alert()->question('Perhatian!', 'Apa kamu yakin ingin menghapus?')
+        alert()->question('Warning!', 'If you delete a user with the store admin role, the store will also be deleted. Are you sure you want to delete?')
             ->showConfirmButton('<a href="/admin-foresell/list/users/' . $id . '/delete" class="text-white" style="text-decoration: none"> Delete</a>', '#3085d6')->toHtml()
             ->showCancelButton('Cancel', '#aaa')->reverseButtons();
 
@@ -111,7 +99,7 @@ class AdminUserController extends Controller
         } else {
             $user->delete();
 
-            Alert::success('Success', 'Data berhasil dihapus');
+            Alert::success('Success', 'Data deleted successfully');
             return redirect('/admin-foresell/list/users');
         }
     }
