@@ -42,9 +42,9 @@
                         <h6 class="m-0 font-weight-bold text-primary">Orders</h6>
                     </a>
                     <div class="collapse show" id="collapseCardExample">
-                        <div class="card-body">
-                            <table id="example1" style="overflow: scroll;"
-                                class="table tbl-users table-responsive-sm table-hover table-bordered table-sm bg-white">
+                        <div class="card-body" style="overflow-x: auto; overflow: scroll;">
+                            <table id="example1" style=""
+                                class="table tbl-users table-responsive-sm table-hover table-bordered table-condensed table-sm bg-white">
                                 <thead class="table-dark">
                                     <tr>
                                         <th width="100">Action</th>

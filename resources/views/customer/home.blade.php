@@ -113,9 +113,9 @@
                             <div class="product-grid shadow-sm">
                                 <div class="product-image">
                                     <a href="/products/{{ $product->slug }}" class="image">
-                                        @if($product->image1 & $product->image2)
-                                        <img class="img-1" src="{{ $product->image1 }}" width="500" height="500">
-                                        <img class="img-2" src="{{ $product->image2 }}" width="500" height="500">
+                                        @if($product->image & $product->image1)
+                                        <img class="img-1" src="{{ $product->image }}" width="500" height="500">
+                                        <img class="img-2" src="{{ $product->image1 }}" width="500" height="500">
                                         @else
                                         <img class="img-1" src="{{ asset('img/customer/img-1.png') }}" width="500" height="500">
                                         <img class="img-2" src="{{ asset('img/customer/img-2.png') }}" width="500" height="500">
@@ -182,9 +182,9 @@
                             <div class="product-grid shadow-sm">
                                 <div class="product-image">
                                     <a href="/products/{{ $product->slug }}" class="image">
-                                        @if($product->image1 & $product->image2)
-                                        <img class="img-1" src="{{ $product->image1 }}" width="500" height="500">
-                                        <img class="img-2" src="{{ $product->image2 }}" width="500" height="500">
+                                        @if($product->image & $product->image1)
+                                        <img class="img-1" src="{{ $product->image }}" width="500" height="500">
+                                        <img class="img-2" src="{{ $product->image1 }}" width="500" height="500">
                                         @else
                                         <img class="img-1" src="{{ asset('img/customer/img-1.png') }}" width="500" height="500">
                                         <img class="img-2" src="{{ asset('img/customer/img-2.png') }}" width="500" height="500">
@@ -251,9 +251,9 @@
                             <div class="product-grid shadow-sm">
                                 <div class="product-image">
                                     <a href="/products/{{ $product->slug }}" class="image">
-                                        @if($product->image1 & $product->image2)
-                                        <img class="img-1" src="{{ $product->image1 }}" width="500" height="500">
-                                        <img class="img-2" src="{{ $product->image2 }}" width="500" height="500">
+                                        @if($product->image & $product->image1)
+                                        <img class="img-1" src="{{ $product->image }}" width="500" height="500">
+                                        <img class="img-2" src="{{ $product->image1 }}" width="500" height="500">
                                         @else
                                         <img class="img-1" src="{{ asset('img/customer/img-1.png') }}" width="500" height="500">
                                         <img class="img-2" src="{{ asset('img/customer/img-2.png') }}" width="500" height="500">

@@ -10,6 +10,7 @@
     <script>
         $(function() {
             $("#example1").DataTable();
+            $("#revenue").DataTable();
         });
     </script>
 @endpush
@@ -29,25 +30,7 @@
                         <div class="col-md-3">
                             <button class="btn btn-sm btn-flat btn-warning btn-refresh"><i class="fa fa-refresh"></i>
                                 Refresh</button>
-
-                            {{-- <a href="#" class="btn btn-sm btn-flat btn-success btn-filter"><i class="fa fa-filter"></i>
-                                Filter</a> --}}
                         </div>
-
-                        {{-- SEARCH --}}
-                        {{-- <div class="col-md-9 d-flex justify-content-end">
-                            <form method="GET" action="{{ url('/admin-foresell/list/toko') }}" class="form-inline">
-                                <div class="input-group">
-                                    <input type="text" name="keyword" value="{{ $keyword }}" class="form-control border-1 small"
-                                        placeholder="Search.." />
-                                </div>
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit">
-                                        <i class="fas fa-search fa-sm"></i>
-                                    </button>
-                                </div>
-                            </form>
-                        </div> --}}
                     </div>
                 </div>
                 {{-- TABLE --}}
@@ -95,6 +78,46 @@
                                 @endforeach
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-warning">
+                {{-- TABLE --}}
+                <div class="card mb-4">
+                    <!-- Card Header - Accordion -->
+                    <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="collapseCardExample">
+                        <h6 class="m-0 font-weight-bold text-primary">Revenue</h6>
+                    </a>
+                    <div class="collapse show" id="collapseCardExample">
+                        <div class="card-body">
+                            <table id="revenue"
+                                class="table table-responsive-sm table-hover table-bordered bg-white">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Year</th>
+                                        <th>Month</th>
+                                        <th>Name</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($revenue_store as $store)
+                                        <tr>
+                                            <td>{{ $store->tahun }}</td>
+                                            <td>{{ $store->bulan }}</td>
+                                            <td>{{ $store->name }}</td>
+                                            <td>Rp {{ $store->total }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

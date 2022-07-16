@@ -11,6 +11,10 @@
         $(function() {
             $("#example1").DataTable();
         });
+
+        $(function() {
+            $("#revenue").DataTable();
+        });
     </script>
 @endpush
 
@@ -22,7 +26,7 @@
 
     <h1 class="text-grey">List Category</h1>
 
-    <div class="row">
+    <div class="row mb-3">
         <div class="col-md-12">
             <div class="box box-warning">
                 <div class="box-header mb-3">
@@ -81,6 +85,46 @@
                                 @endforeach
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-md-12 mb-3">
+            <div class="box box-warning">
+                {{-- TABLE --}}
+                <div class="card mb-4">
+                    <!-- Card Header - Accordion -->
+                    <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="collapseCardExample">
+                        <h6 class="m-0 font-weight-bold text-primary">Revenue</h6>
+                    </a>
+                    <div class="collapse show" id="collapseCardExample">
+                        <div class="card-body">
+                            <table id="revenue"
+                                class="table table-responsive-sm table-hover table-bordered bg-white">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Year</th>
+                                        <th>Month</th>
+                                        <th>Name</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($revenue as $cat)
+                                        <tr>
+                                            <td>{{ $cat->tahun }}</td>
+                                            <td>{{ $cat->bulan }}</td>
+                                            <td>{{ $cat->name }}</td>
+                                            <td>Rp {{ $cat->total }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
