@@ -114,8 +114,8 @@
                                 <div class="product-image">
                                     <a href="/products/{{ $product->slug }}" class="image">
                                         @if($product->image & $product->image1)
-                                        <img class="img-1" src="{{ $product->image }}" width="500" height="500">
-                                        <img class="img-2" src="{{ $product->image1 }}" width="500" height="500">
+                                        <img class="img-1" src="img/admin_store/{{ $product->image }}" width="500" height="500">
+                                        <img class="img-2" src="img/admin_store/{{ $product->image1 }}" width="500" height="500">
                                         @else
                                         <img class="img-1" src="{{ asset('img/customer/img-1.png') }}" width="500" height="500">
                                         <img class="img-2" src="{{ asset('img/customer/img-2.png') }}" width="500" height="500">
