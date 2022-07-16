@@ -42,7 +42,7 @@
 <div class="container my-5">
     <div class="h3 mb-3 text-center title">Featured Store</div>
     <div class="d-flex flex-row justify-content-around">
-        @foreach ($stores as $store)
+        @foreach ($stores->take(5) as $store)
         <div class="btn">
             <a href="/stores?store={{ $store->slug }}" class="mx-4">
                 @if($store->image)
