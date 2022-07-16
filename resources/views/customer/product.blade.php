@@ -6,13 +6,35 @@
     <div class="row gx-lg-5 pt-3">
         <div class="col-md-5">
             <div class="col-md-12 mx-auto my-auto">
-                <div class="main_image"><img src="{{ asset('img/customer/img-1.png') }}" id="main_product_image" class="card-img-top img-fluid shadow-sm rounded" width="600" height="600" /></div>
+                <div class="main_image">
+                    @if($product->image)
+                    <img src="/img/admin_store/{{ $product->image }}" id="main_product_image" class="card-img-top img-fluid shadow-sm rounded" width="600" height="600" />
+                    @else
+                    <img src="{{ asset('img/customer/img-1.png') }}" id="main_product_image" class="card-img-top img-fluid shadow-sm rounded" width="600" height="600" />
+                    @endif
+                </div>
                 <div class="thumbnail_images">
                     <ul id="thumbnail">
+                        @if($product->image)
+                        <li><img onclick="changeImage(this)" class="rounded" src="/img/admin_store/{{ $product->image }}" width="80" /></li>
+                        @else
                         <li><img onclick="changeImage(this)" class="rounded" src="{{ asset('img/customer/img-1.png') }}" width="80" /></li>
-                        <li><img onclick="changeImage(this)" class="rounded" src="{{ asset('img/customer/img-2.png') }}" width="80" /></li>
-                        <li><img onclick="changeImage(this)" class="rounded" src="https://source.unsplash.com/600x600?technology" width="80" /></li>
-                        <li><img onclick="changeImage(this)" class="rounded" src="https://source.unsplash.com/600x600?data" width="80" /></li>
+                        @endif
+                        @if($product->image1)
+                        <li><img onclick="changeImage(this)" class="rounded" src="/img/admin_store/{{ $product->image1 }}" width="80" /></li>
+                        @else
+                        <li><img onclick="changeImage(this)" class="rounded" src="https://source.unsplash.com/700x700?technology" width="80" /></li>
+                        @endif
+                        @if($product->image2)
+                        <li><img onclick="changeImage(this)" class="rounded" src="/img/admin_store/{{ $product->image2 }}" width="80" /></li>
+                        @else
+                        <li><img onclick="changeImage(this)" class="rounded" src="https://source.unsplash.com/700x700?life" width="80" /></li>
+                        @endif
+                        @if($product->image3)
+                        <li><img onclick="changeImage(this)" class="rounded" src="/img/admin_store/{{ $product->image3 }}" width="80" /></li>
+                        @else
+                        <li><img onclick="changeImage(this)" class="rounded" src="https://source.unsplash.com/700x700?health" width="80" /></li>
+                        @endif
                     </ul>
                 </div>
             </div>

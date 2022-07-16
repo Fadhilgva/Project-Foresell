@@ -3,7 +3,7 @@
 <title>Foresell - Data Order</title>
 
 @section('judul')
-<p class="ms-4 title">Data Order</p>
+<p class="ms-4 title">Orders</p>
 @endsection
 
 @push('script')
@@ -27,77 +27,57 @@
         <table id="example1" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th scope="col">No</th>
-                    <th scope="col">Customer</th>
-                    <th scope="col">Invoice</th>
-                    <th scope="col">Nama Toko</th>
-                    <th scope="col">Total Harga</th>
-                    <th scope="col">Jenis Pembayaran</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Tanggal Pesan</th>
-                    <th scope="col">Action</th>
+                    <th>No</th>
+                    <th>Customer</th>
+                    <th>Total Price</th>
+                    <th>Payment</th>
+                    <th>Status</th>
+                    <th>Order Date</th>
                 </tr>
             </thead>
-            <tfoot>
-                <tr>
-                    <th scope="col">No</th>
-                    <th scope="col">Customer</th>
-                    <th scope="col">Invoice</th>
-                    <th scope="col">Nama Toko</th>
-                    <th scope="col">Total Harga</th>
-                    <th scope="col">Jenis Pembayaran</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Tanggal Pesan</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </tfoot>
             <tbody>
-                @forelse ($orderstore as $item)
+                @foreach($orderstore->take(10) as $order)
                 <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td><h2 class="invoice-id">INVOICE
-                                {{ date_format($orders->created_at, 'Y'). '-'
-                                .sprintf("%02d", Auth::user()->id). '-'
-                                .sprintf("%02d", $orders->id) }}
-                            </h2></td>
-                            <td>{{ $store->name }}</td>
-                            <td>{{ $ordersprocess->price }}</td>
-                            <td>{{ $orders->bank_id }}</td>
-                            <td>{{ $orders->status }}</td>
-                            <td>{{ $orderstore->created_at }}</td>
-                            <td>
-                                @switch($order->status)
-                                @case($order->status == "Waiting")
-                                <p class="badge text-bg-danger mt-4">Waiting for Payment</p>
-                                @break
-                                @case($order->status == "Already")
-                                <p class="badge text-bg-secondary mt-4">Already Payment</p>
-                                @break
-                                @case($order->status == "Processed")
-                                <p class="badge text-bg-primary mt-4">Processed</p>
-                                @break
-                                @case($order->status == "Shipping")
-                                <p class="badge text-bg-warning mt-4">Shipping</p>
-                                <a href="/orders/{{ $order->id }}/confirm" class="btn btn-success btn-sm ms-5">Confirm Order</a>
-                                @break
-                                @case($order->status == "Finished")
-                                <p class="badge text-bg-success mt-4">Finished</p>
-                                @break
-                                @endswitch
-                            </td>
-                            {{-- <td>{{ $order->created_at->toDateTimeString() }}</td> --}}
-                            <td>
-                                <form action="/admin_toko/data_order/{{$item->id}}" method="POST">
-                                    <a type="button" class="btn btn-warning mb-3" href="/admin_toko/data_order/{{$item->id}}/edit">Edit</a>
-        
-                                    @csrf
-                                    @method('delete')
-        
-                                    <a href="/admin_toko/data_order/{{ $item->id }}/confirm" class="btn btn-danger mb-3" id="delete">Delete</a>
-                                </form>
-                            </td>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $order->name }}</td>
+                    <td>Rp{{ $order->total }}</td>
+                    <td>{{ $order->Bank->name }}</td>
+                    <td>
+                        @switch($order->status)
+                        @case($order->status == "Waiting")
+                        <p class="badge text-bg-danger">Waiting for Payment</p>
+                        @break
+                        @case($order->status == "Already")
+                        <p class="badge text-bg-secondary">Already Payment</p>
+                        <form action="/orders/{{ $order->id }}/update" method="POST">
+                            @csrf
+                            <input type="hidden" name="status" value="Processed">
+                            <button type="submit" class="btn btn-dark btn-sm">Processed</button>
+                        </form>
+                        @break
+                        @case($order->status == "Processed")
+                        <p class="badge text-bg-primary">Processed</p>
+                        <form action="/orders/{{ $order->id }}/update" method="POST">
+                            @csrf
+                            <input type="hidden" name="status" value="Shipping">
+                            <button type="submit" class="btn btn-dark btn-sm">Shipping</button>
+                        </form>
+                        @break
+                        @case($order->status == "Shipping")
+                        <p class="badge text-bg-warning">Shipping</p>
+                        @break
+                        @case($order->status == "Finished")
+                        <p class="badge text-bg-success">Finished</p>
+                        @break
+                        @endswitch
+                    </td>
+                    <td>{{ $order->created_at->toDateTimeString() }}</td>
                 </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
 
                 @empty
                 

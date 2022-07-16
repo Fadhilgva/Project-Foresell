@@ -105,12 +105,9 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th></th>
-                            <th>Product</th>
                             <th>Customer</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Discount</th>
+                            <th>Total Price</th>
+                            <th>Payment</th>
                             <th>Status</th>
                             <th>Order Date</th>
                         </tr>
@@ -119,29 +116,44 @@
                         @foreach($orderstore->take(10) as $order)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>
-                                <img src="{{ asset('img/customer/img-1.png') }}" width="40" alt="{{ $order->Product->name }}">
-                            </td>
-                            <td>{{ $order->Product->name }}</td>
                             <td>{{ $order->name }}</td>
-                            <td>{{ $order->price }}</td>
-                            <td>{{ $order->qty }}</td>
-                            <td>{{ $order->discount }} %</td>
+                            <td>Rp{{ $order->total }}</td>
+                            <td>{{ $order->Bank->name }}</td>
                             <td>
-                                @if($order->status = "Processed")
+                                @switch($order->status)
+                                @case($order->status == "Waiting")
+                                <p class="badge text-bg-danger">Waiting for Payment</p>
+                                @break
+                                @case($order->status == "Already")
+                                <p class="badge text-bg-secondary">Already Payment</p>
+                                <form action="/orders/{{ $order->id }}/update" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="status" value="Processed">
+                                    <button type="submit" class="btn btn-dark btn-sm">Processed</button>
+                                </form>
+                                @break
+                                @case($order->status == "Processed")
                                 <p class="badge text-bg-primary">Processed</p>
-                                @elseif($order->status = "Shipping")
+                                <form action="/orders/{{ $order->id }}/update" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="status" value="Shipping">
+                                    <button type="submit" class="btn btn-dark btn-sm">Shipping</button>
+                                </form>
+                                @break
+                                @case($order->status == "Shipping")
                                 <p class="badge text-bg-warning">Shipping</p>
-                                @else
+                                @break
+                                @case($order->status == "Finished")
                                 <p class="badge text-bg-success">Finished</p>
-                                @endif
+                                @break
+                                @endswitch
                             </td>
                             <td>{{ $order->created_at->toDateTimeString() }}</td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
-                <a href="/halaman-orders" class="btn bg-primary text-white font-weight-bold">View All Orders</a>
+                <a href="/admin_toko/data_order" class="btn bg-primary text-white font-weight-bold">View All Orders</a>
             </div>
         </div>
     </div>

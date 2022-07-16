@@ -7,6 +7,19 @@
 @section('main', 'show')
 @section('main-active', 'active')
 
+@push('script')
+    <script src="{{ asset('/vendor/admin_store/datatables/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('/vendor/admin_store/datatables/dataTables.bootstrap4.js') }}"></script>
+    <script>
+        $(function() {
+            $("#example1").DataTable();
+        });
+    </script>
+@endpush
+
+@push('style')
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.12.1/datatables.min.css" />
+@endpush
 
 @section('content')
 
@@ -30,7 +43,7 @@
                             </div>
 
                         {{-- SEARCH --}}
-                        <div class="col-md-9 d-flex justify-content-end">
+                        {{-- <div class="col-md-9 d-flex justify-content-end">
                             <form method="GET" action="{{ url('/admin-foresell/list/couriers') }}" class="form-inline">
                                 <div class="input-group">
                                     <input type="text" name="keyword" value="{{ $keyword }}" class="form-control border-1 small" placeholder="Search.."/>
@@ -41,13 +54,14 @@
                                     </button>
                                 </div>
                             </form>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 {{-- TABLE --}}
                 <div class="box-body">
-                    <div class=" ">
-                        <table class="table tbl-users table-responsive-sm table-hover table-bordered bg-white text-center">
+                    <div class="">
+                        <table id="example1"
+                            class="table tbl-users table-responsive-sm table-hover table-bordered bg-white">
                             <thead class="table-dark">
                                 <tr>
                                     <th scope="col" style="width: 50px">#</th>

@@ -4,7 +4,19 @@
 @section('main', 'show')
 @section('main-active', 'active')
 
+@push('script')
+    <script src="{{ asset('/vendor/admin_store/datatables/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('/vendor/admin_store/datatables/dataTables.bootstrap4.js') }}"></script>
+    <script>
+        $(function() {
+            $("#example1").DataTable();
+        });
+    </script>
+@endpush
 
+@push('style')
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.12.1/datatables.min.css" />
+@endpush
 @section('content')
 
     <h1 class="text-grey">List Toko</h1>
@@ -12,26 +24,47 @@
     <div class="row">
         <div class="col-md-12">
             <div class="box box-warning">
-                <div class="box-header">
-                    <p>
-                        <button class="btn btn-sm btn-flat btn-warning btn-refresh"><i class="fa fa-refresh"></i>
-                            Refresh</button>
+                <div class="box-header mb-2">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <button class="btn btn-sm btn-flat btn-warning btn-refresh"><i class="fa fa-refresh"></i>
+                                Refresh</button>
 
-                        <a href="#" class="btn btn-sm btn-flat btn-success btn-filter"><i class="fa fa-filter"></i>
-                            Filter</a>
+                            {{-- <a href="#" class="btn btn-sm btn-flat btn-success btn-filter"><i class="fa fa-filter"></i>
+                                Filter</a> --}}
+                        </div>
 
-                    </p>
+                        {{-- SEARCH --}}
+                        {{-- <div class="col-md-9 d-flex justify-content-end">
+                            <form method="GET" action="{{ url('/admin-foresell/list/toko') }}" class="form-inline">
+                                <div class="input-group">
+                                    <input type="text" name="keyword" value="{{ $keyword }}" class="form-control border-1 small"
+                                        placeholder="Search.." />
+                                </div>
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div> --}}
+                    </div>
                 </div>
                 {{-- TABLE --}}
                 <div class="box-body">
-                    <div class=" ">
-                        <table class="table tbl-users table-responsive-sm table-hover table-bordered bg-white">
+                    <div class="">
+                        <table id="example1"
+                            class="table tbl-users table-responsive-sm table-hover table-bordered bg-white">
                             <thead class="table-dark">
                                 <tr>
                                     <th width="100px">Action</th>
+                                    <th>Store ID</th>
                                     <th>Name</th>
+                                    <th>Slug</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Tenant</th>
                                     <th>Location</th>
-                                    <th>Total Pendapatan</th>
                                     <th>Created At</th>
                                 </tr>
                             </thead>
@@ -40,16 +73,23 @@
                                     <tr>
                                         <td width="50px">
                                             <div>
-                                                <button href="#" class="btn btn-danger btn-sm" id="delete"><i
-                                                        class="fa fa-trash"></i></button>
+                                                <a href="/admin-foresell/list/toko/{{ $store->id }}/confirm" class="btn btn-danger btn-sm btn-hapus"
+                                                    id="delete"><i class="fa fa-trash"></i></a>
 
-                                                <a href="#" class="btn btn-warning btn-sm btn-pen" id="btn-detail"><i
-                                                        class="fa fa-pen"></i></a>
+                                                <a href="/admin-foresell/list/toko/{{ $store->id }}/show" class="btn btn-warning btn-sm btn-eye" id=""><i
+                                                        class="fa fa-eye"></i></a>
+
+                                                {{-- <a href="#" class="btn btn-warning btn-sm btn-pen" id="btn-detail"><i
+                                                        class="fa fa-pen"></i></a> --}}
                                             </div>
                                         </td>
+                                        <td>#{{ $store->id }}</td>
                                         <td>{{ $store->name }}</td>
+                                        <td>{{ $store->slug }}</td>
+                                        <td>{{ $store->email }}</td>
+                                        <td>{{ $store->phone }}</td>
+                                        <td>{{ $store->userName }}</td>
                                         <td>{{ $store->location }}</td>
-                                        <td>not found</td>
                                         <td>{{ $store->created_at }}</td>
                                     </tr>
                                 @endforeach

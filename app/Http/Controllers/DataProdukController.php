@@ -72,12 +72,16 @@ class DataProdukController extends Controller
     {
         $request->validate([
             'category_id' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048|dimensions:ratio=1/1',
+            'image1' => 'required|image|mimes:jpeg,png,jpg|max:2048|dimensions:ratio=1/1',
+            'image2' => 'image|mimes:jpeg,png,jpg|max:2048|dimensions:ratio=1/1',
+            'image3' => 'image|mimes:jpeg,png,jpg|max:2048|dimensions:ratio=1/1',
             'name' => 'required|min:5|max:50',
             'slug' => 'required|unique:products,slug',
             'price' => 'required',
+            'discount' => 'numeric|min:0|max:90',
             'stock' => 'required',
-            'desc' => 'required|min:20|max:200',
+            'desc' => 'required|min:20',
         ]);
 
         // DB::table('categories')->insert([
@@ -92,12 +96,32 @@ class DataProdukController extends Controller
 
         $image = time() . '.' . $request->image->getClientOriginalName();
         $request->image->move(public_path('img/admin_store'), $image);
+        $image1 = time() . '.' . $request->image1->getClientOriginalName();
+        $request->image1->move(public_path('img/admin_store'), $image1);
+
+        if ($request->image2) {
+            $image2 = time() . '.' . $request->image2->getClientOriginalName();
+            $request->image2->move(public_path('img/admin_store'), $image2);
+        }
+
+        if ($request->image3) {
+            $image3 = time() . '.' . $request->image3->getClientOriginalName();
+            $request->image3->move(public_path('img/admin_store'), $image3);
+        }
 
         $data_produk = new Product;
 
         $data_produk->category_id = $request->category_id;
         $data_produk->store_id = $store_id->id;
         $data_produk->image = $image;
+        $data_produk->image1 = $image1;
+        if ($request->image2) {
+            $data_produk->image2 = $image2;
+        }
+
+        if ($request->image3) {
+            $data_produk->image3 = $image3;
+        }
         $data_produk->name = $request->name;
         $data_produk->slug = $request->slug;
         $data_produk->price = $request->price;
@@ -149,58 +173,81 @@ class DataProdukController extends Controller
      */
     public function update(Request $request, $data_produk)
     {
-        $request->validate([
+        $rules = [
             'category_id' => 'required',
-            // 'store_id' => 'required',
-            'image' => 'mimes:jpeg,png,jpg|max:2048',
-            'name' => '',
-            'slug' => '',
-            'price' => '',
-            'stock' => '',
-            // 'sold' => '',
-            'discount' => '',
-            'desc' => '',
-        ]);
-
-
-        // DB::table('categories','stores')->insert([
-        //     'category_id' => $request['category_id'],
-        // ]);
-
-        // DB::table('stores')->insert([
-        //     'store_id' => $request['store_id'],
-        // ]);
+            'image' => 'image|mimes:jpeg,png,jpg|max:2048|dimensions:ratio=1/1',
+            'image1' => 'image|mimes:jpeg,png,jpg|max:2048|dimensions:ratio=1/1',
+            'image2' => 'image|mimes:jpeg,png,jpg|max:2048|dimensions:ratio=1/1',
+            'image3' => 'image|mimes:jpeg,png,jpg|max:2048|dimensions:ratio=1/1',
+            'name' => 'required|min:5|max:50',
+            'price' => 'required',
+            'stock' => 'required',
+            'discount' => 'numeric|min:0|max:90',
+            'desc' => 'required|min:20',
+        ];
 
         $data_produk = Product::find($data_produk);
         $store_id = User::find(Auth::user()->id)->store;
 
-        $data = [
-            $data_produk->category_id = $request['category_id'],
-            $data_produk->store_id = $store_id->id,
-            // $data_produk->image = $request['image'],
-            $data_produk->name = $request['name'],
-            $data_produk->slug = $request->slug,
-            $data_produk->price = $request['price'],
-            $data_produk->stock = $request['stock'],
-            // $data_produk->sold = $request->sold;
-            $data_produk->discount = $request['discount'],
-            $data_produk->desc = $request['desc']
+        if ($data_produk->slug != $request->slug) {
+            $rules['slug'] = 'required|unique:products';
+        } else {
+            $rules['slug'] = 'required';
+        }
 
+        $validatedData = $request->validate($rules);
+
+        $data = [
+            $data_produk->category_id = $validatedData['category_id'],
+            $data_produk->store_id = $store_id->id,
+            $data_produk->name = $validatedData['name'],
+            $data_produk->slug = $validatedData['slug'],
+            $data_produk->price = $validatedData['price'],
+            $data_produk->stock = $validatedData['stock'],
+            $data_produk->discount = $validatedData['discount'],
+            $data_produk->desc = $validatedData['desc']
         ];
 
-        if ($request->image) {
+        if ($validatedData['image']) {
             File::delete('img/admin_store/' . $data_produk->image);
 
-            $image =  time() . '-' . $request->image->getClientOriginalName();
-            $request->image->move('img\admin_store', $image);
+            $image =  time() . '-' . $validatedData['image']->getClientOriginalName();
+            $validatedData['image']->move('img\admin_store', $image);
 
             $data['image'] = $image;
+        }
+
+        if ($validatedData['image1']) {
+            File::delete('img/admin_store/' . $data_produk->image1);
+
+            $image1 =  time() . '-' . $validatedData['image1']->getClientOriginalName();
+            $validatedData['image1']->move('img\admin_store', $image1);
+
+            $data['image1'] = $image1;
+        }
+
+        if ($validatedData['image2']) {
+            File::delete('img/admin_store/' . $data_produk->image2);
+
+            $image2 =  time() . '-' . $validatedData['image2']->getClientOriginalName();
+            $validatedData['image2']->move('img\admin_store', $image2);
+
+            $data['image2'] = $image2;
+        }
+
+        if ($validatedData['image3']) {
+            File::delete('img/admin_store/' . $data_produk->image3);
+
+            $image3 =  time() . '-' . $validatedData['image3']->getClientOriginalName();
+            $validatedData['image3']->move('img\admin_store', $image3);
+
+            $data['image3'] = $image3;
         }
         // $image = time().'.'.$request->image->extension();
         // $request->image->move(public_path('img/admin_store'),$image);
 
         $data_produk->update($data);
-        Alert::success('Update', 'Data Film Berhasil Diupdate !');
+        Alert::success('Update', 'Product Berhasil Diupdate !');
         return redirect('/admin_toko/data_produk');
     }
 
@@ -231,6 +278,13 @@ class DataProdukController extends Controller
     {
         $data_produk = Product::find($id);
         File::delete('img/admin_store/' . $data_produk->image);
+        File::delete('img/admin_store/' . $data_produk->image1);
+        if ($data_produk->image2) {
+            File::delete('img/admin_store/' . $data_produk->image2);
+        }
+        if ($data_produk->image3) {
+            File::delete('img/admin_store/' . $data_produk->image3);
+        }
         $data_produk->delete();
 
         Alert::success('Success', 'Data berhasil dihapus');

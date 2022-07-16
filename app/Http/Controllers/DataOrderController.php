@@ -9,8 +9,6 @@ use App\Models\Courier;
 use App\Models\Product;
 use App\Models\OrderDetails;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
-use Faker\Provider\ru_RU\Payment;
 use Illuminate\Support\Facades\Auth;
 
 class DataOrderController extends Controller
@@ -20,54 +18,17 @@ class DataOrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
-        $store = User::where('users.id', Auth::user()->id)
-            ->join('stores', 'users.id', '=', 'stores.user_id')
-            ->select('stores.name')->get();
-
-        $orders = Orders::join('order_details', 'orders.id', '=', 'order_details.order_id')
+    public function index()
+    {
+        $orderstore = Orders::join('order_details', 'orders.id', '=', 'order_details.order_id')
             ->join('products', 'order_details.product_id', '=', 'products.id')
             ->join('stores', 'products.store_id', '=', 'stores.id')
             ->where('stores.user_id', '=', Auth::user()->id)
-            ->count('order_details.id');
+            ->select('orders.*')->latest()->get();
 
-        $ordersprocess = Orders::join('order_details', 'orders.id', '=', 'order_details.order_id')
-            ->join('products', 'order_details.product_id', '=', 'products.id')
-            ->join('stores', 'products.store_id', '=', 'stores.id')
-            ->where('stores.user_id', '=', Auth::user()->id)
-            ->where('orders.status', '=', 'Processed')
-            ->count('order_details.id');
-
-        $valueMonth = Store::where('stores.user_id', Auth::user()->id)
-            ->join('products', 'stores.id', '=', 'products.store_id')
-            ->join('order_details', 'products.id', '=', 'order_details.product_id')
-            ->join('orders', 'order_details.order_id', '=', 'orders.id')
-            ->whereMonth('orders.created_at', Carbon::now()->format('m'))
-            ->sum('orders.total');
-
-        $valueYear = Store::where('stores.user_id', Auth::user()->id)
-            ->join('products', 'stores.id', '=', 'products.store_id')
-            ->join('order_details', 'products.id', '=', 'order_details.product_id')
-            ->join('orders', 'order_details.order_id', '=', 'orders.id')
-            ->whereYear('orders.created_at', date("Y"))
-            ->sum('orders.total');
-
-        $orderstore = OrderDetails::join('products', 'order_details.product_id', '=', 'products.id')
-            ->join('orders', 'order_details.order_id', '=', 'orders.id')
-            ->join('stores', 'products.store_id', '=', 'stores.id')
-            ->where('stores.user_id', '=', Auth::user()->id)
-            ->select('order_details.price AS price', 'order_details.qty AS qty', 'order_details.discount AS discount', 'order_details.created_at AS created_at', 'orders.status AS status', 'order_details.*', 'orders.name')->latest()->get();
-        
         return view('admin_toko.data_order.index', [
-            'store' => $store,
-            'orders' => $orders,
-            'ordersprocess' => $ordersprocess,
-            'valueMonth' => $valueMonth,
-            'valueYear' => $valueYear,
             'orderstore' => $orderstore
-
         ]);
-
     }
 
     /**

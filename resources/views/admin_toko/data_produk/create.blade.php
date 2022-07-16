@@ -39,8 +39,32 @@
   @enderror --}}
 
   <div class="form-group">
-    <label>Product Image</label>
+    <label>Cover Image</label>
     <input type="file" name="image" class="form-control">
+  </div>
+  @error('image')
+  <div class="alert alert-danger">{{ $message }}</div>
+  @enderror
+
+  <div class="form-group">
+    <label>Product Image 1</label>
+    <input type="file" name="image1" class="form-control">
+  </div>
+  @error('image')
+  <div class="alert alert-danger">{{ $message }}</div>
+  @enderror
+
+  <div class="form-group">
+    <label>Product Image 2</label>
+    <input type="file" name="image2" class="form-control">
+  </div>
+  @error('image')
+  <div class="alert alert-danger">{{ $message }}</div>
+  @enderror
+
+  <div class="form-group">
+    <label>Product Image 3</label>
+    <input type="file" name="image3" class="form-control">
   </div>
   @error('image')
   <div class="alert alert-danger">{{ $message }}</div>
@@ -108,14 +132,14 @@
 {{-- EDITOR TEXT --}}
 <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
 <script>
-  ClassicEditor
-        .create( document.querySelector( '#editor' ) )
-        .catch( error => {
-            console.error( error );
-        } );
+    ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
 
-    const name = document.querySelector("#name");
-    const slug = document.querySelector("#slug");
+        const name = document.querySelector("#name");
+        const slug = document.querySelector("#slug");
 
     name.addEventListener('change', () => {
         fetch('/admin_toko/data_produk/checkSlug?name=' + name.value)

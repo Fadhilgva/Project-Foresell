@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use  App\Models\User;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request as FacadesRequest;
 
 class OrdersCustController extends Controller
 {
@@ -152,6 +153,25 @@ class OrdersCustController extends Controller
 
         $order = Orders::find($id);
         $order->status = 'Finished';
+        $order->save();
+        return back();
+    }
+
+    public function delete($id)
+    {
+        Alert::question('Order Confirmation', 'Have you received the products and have no complaints?')
+            ->showConfirmButton('<a href="/orders/' . $id . '/confirm" class="text-white" style="text-decoration: none"> Confirm</a>', '#3085d6')->toHtml()
+            ->showCancelButton('Cancel', '#aaa')->reverseButtons();
+
+        $order = Orders::find($id);
+        $order->delete();
+        return back();
+    }
+
+    public function update(Request $request, $id)
+    {
+        $order = Orders::find($id);
+        $order->status = $request->status;
         $order->save();
         return back();
     }

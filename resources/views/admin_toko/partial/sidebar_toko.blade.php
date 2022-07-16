@@ -28,11 +28,9 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item title" href="/admin_toko/data_produk">Data Produk</a>
-                <a class="collapse-item title" href="/admin_toko/data_order">Data Order</a>
-                <a class="collapse-item title" href="/admin_toko/data_penjualan">Data Penjualan</a>
-                {{-- <a class="collapse-item title" href="/admin_toko/kategori">Kategori</a> --}}
-
+                <a class="collapse-item title" href="/admin_toko/data_produk">Products</a>
+                <a class="collapse-item title" href="/admin_toko/data_order">Orders</a>
+                <a class="collapse-item title" href="/admin_toko/data_penjualan">Sales</a>
             </div>
         </div>
     </li>
@@ -56,5 +54,5 @@
     <hr class="sidebar-divider">
 
     <!-- Divider -->
-    <hr class="sidebar-divider d-none d-md-block">
+    <hr class="sidebar-divider d-none d-md-block"> --}}
 </ul>

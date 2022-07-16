@@ -7,18 +7,17 @@ use GuzzleHttp\Middleware;
 // CUSTOMER
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TokoController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\CourierController;
-use App\Http\Controllers\OrdersCustController;
 use App\Http\Controllers\LoginController;
-
-//ADMIN TOKO
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\CourierController;
+
+//ADMIN TOKO
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
@@ -28,18 +27,22 @@ use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataOrderController;
+use App\Http\Controllers\AdminOrderController;
 use App\Http\Controllers\DataProdukController;
 
 
 // ADMIN
 use App\Http\Controllers\LoginAdminController;
+use App\Http\Controllers\OrdersCustController;
 use App\Http\Controllers\TambahDiskonController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminTokoHomeController;
 use App\Http\Controllers\DataPenjualanController;
 use App\Http\Controllers\AdminTokoLoginController;
+use App\Http\Controllers\AdminBannerStoreController;
 use App\Http\Controllers\AdminTokoRegisterController;
 use App\Http\Controllers\SelesaikanPesananController;
+use App\Http\Controllers\AdminBannerCategoryController;
 use App\Http\Controllers\Auth\RegisteredTokoController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\RegisteredAdminController;
@@ -136,6 +139,8 @@ Route::group(
         Route::get('/completed', [OrdersCustController::class, 'completed']);
         Route::get('/orders', [OrdersCustController::class, 'showorders']);
         Route::get('/orders/{orders:id}/confirm', [OrdersCustController::class, 'confirm']);
+        Route::post('/orders/{orders:id}/delete', [OrdersCustController::class, 'delete']);
+        Route::post('/orders/{orders:id}/update', [OrdersCustController::class, 'update']);
         Route::get('/orderdetails/{order:id}', [OrdersCustController::class, 'showordersdetails']);
     }
 );
@@ -216,19 +221,44 @@ Route::group(['middleware' => ['auth', 'role:adminForesell']], function () {
 
     // USER
     Route::get('/admin-foresell/list/users', [AdminUserController::class, 'index']);
+    Route::get('/admin-foresell/list/users/{id}/show', [AdminUserController::class, 'show']);
+    Route::get('/admin-foresell/list/users/{id}/confirm', [AdminUserController::class, 'confirm']);
+    Route::get('/admin-foresell/list/users/{id}/delete', [AdminUserController::class, 'delete']);
+
+    // BANNER STORE
+    Route::get('/admin-foresell/list/banner-store/', [AdminBannerStoreController::class, 'index'])->name('bannerStore.index');
+    Route::post('/admin-foresell/list/banner-store/store/', [AdminBannerStoreController::class, 'store'])->name('bannerStore.store');
+    Route::get('/admin-foresell/list/banner-store/{id}/edit', [AdminBannerStoreController::class, 'edit'])->name('bannerStore.edit');
+    Route::patch('/admin-foresell/list/banner-store/{id}/update', [AdminBannerStoreController::class, 'update'])->name('bannerStore.update');
+    Route::get('/admin-foresell/list/banner-store/{id}/confirm', [AdminBannerStoreController::class, 'confirm']);
+    Route::get('/admin-foresell/list/banner-store/{id}/delete', [AdminBannerStoreController::class, 'delete']);
+
+    // BANNER CATEGORY
+    Route::get('/admin-foresell/list/banner-category/', [AdminBannerCategoryController::class, 'index'])->name('bannerCategory.index');
+    Route::post('/admin-foresell/list/banner-category/store/', [AdminBannerCategoryController::class, 'store'])->name('bannerCategory.store');
+    Route::get('/admin-foresell/list/banner-category/{id}/edit', [AdminBannerCategoryController::class, 'edit'])->name('bannerCategory.edit');
+    Route::patch('/admin-foresell/list/banner-category/{id}/update', [AdminBannerCategoryController::class, 'update'])->name('bannerCategory.update');
+    Route::get('/admin-foresell/list/banner-category/{id}/confirm', [AdminBannerCategoryController::class, 'confirm']);
+    Route::get('/admin-foresell/list/banner-category/{id}/delete', [AdminBannerCategoryController::class, 'delete']);
 
     // ORDER
+    Route::get('/admin-foresell/list/orders', [AdminOrderController::class, 'index']);
+    Route::post('/admin-foresell/list/orders/{id}/update', [AdminOrderController::class, 'update']);
     Route::get('/orders-payment-status', [OrdersController::class, 'statusPayment']);
     Route::get('/orders-ship-status', [OrdersController::class, 'statusShip']);
 
     // TOKO
     Route::get('/admin-foresell/list/toko', [TokoController::class, 'index']);
+    Route::get('/admin-foresell/list/toko/{id}/show', [TokoController::class, 'show']);
+    Route::get('/admin-foresell/list/toko/{id}/confirm', [TokoController::class, 'confirm']);
+    Route::get('/admin-foresell/list/toko/{id}/delete', [TokoController::class, 'delete']);
 
     // CATEGORY
     Route::resource('/admin-foresell/list/category', AdminCategoryController::class);
     Route::get('/admin-foresell/list/category/{id}/confirm', [AdminCategoryController::class, 'confirm']);
     Route::get('/admin-foresell/list/category/{id}/show', [AdminCategoryController::class, 'show']);
     Route::get('/admin-foresell/list/category/{id}/delete', [AdminCategoryController::class, 'delete']);
+
 
     // PAYMENT
     Route::resource('/admin-foresell/list/payment', PaymentController::class);

@@ -10,43 +10,14 @@
         <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" aria-label="Slide 4" class="bg-secondary"></button>
     </div>
     <div class="carousel-inner" style="height: 590px; width: 1600">
-        @foreach ($promotionbanners->take(1) as $promotionbanner)
+        @foreach ($promotionbanners->take(4) as $promotionbanner)
         <div class="carousel-item active">
             <a href="/stores?store={{ $promotionbanner->store->slug }}">
-                <img src="{{ $promotionbanner->image }}" class="img-fluid">
-                <div class="container">
-                    <div class="carousel-caption text-start">
-                    </div>
-                </div>
-            </a>
-        </div>
-        @endforeach
-        @foreach ($promotionbanners->skip(1)->take(1) as $promotionbanner)
-        <div class="carousel-item active">
-            <a href="/stores?store={{ $promotionbanner->store->slug }}">
-                <img src="{{ $promotionbanner->image }}" class="img-fluid">
-                <div class="container">
-                    <div class="carousel-caption text-start">
-                    </div>
-                </div>
-            </a>
-        </div>
-        @endforeach
-        @foreach ($promotionbanners->skip(2)->take(1) as $promotionbanner)
-        <div class="carousel-item active">
-            <a href="/stores?store={{ $promotionbanner->store->slug }}">
-                <img src="{{ $promotionbanner->image }}" class="img-fluid">
-                <div class="container">
-                    <div class="carousel-caption text-start">
-                    </div>
-                </div>
-            </a>
-        </div>
-        @endforeach
-        @foreach ($promotionbanners->skip(2)->take(1) as $promotionbanner)
-        <div class="carousel-item active">
-            <a href="/stores?store={{ $promotionbanner->store->slug }}">
-                <img src="{{ $promotionbanner->image }}" class="img-fluid">
+                @if($promotionbanner->image)
+                <img src="image\admin\banner\store\{{ $promotionbanner->image }}" class="img-fluid">
+                @else
+                <img src="https://source.unsplash.com/1700x700?product" class="img-fluid">
+                @endif
                 <div class="container">
                     <div class="carousel-caption text-start">
                     </div>
@@ -67,39 +38,19 @@
 
 {{-- Featured Brand --}}
 <div class="container my-5">
-    <div class="h3 mb-3 text-center title">Featured Brand</div>
+    <div class="h3 mb-3 text-center title">Featured Store</div>
     <div class="d-flex flex-row justify-content-around">
+        @foreach ($stores as $store)
         <div class="btn">
-            @foreach ($stores->take(1) as $store)
             <a href="/stores?store={{ $store->slug }}" class="mx-4">
+                @if($store->image)
+                <img src="image\adminToko\logo\{{ $store->image }}" alt="" width="130">
+                @else
                 <img src="{{ asset('img/customer/asus.png') }}" alt="" width="130">
-            </a>
-            @endforeach
-        </div>
-        <div class="btn">
-            @foreach ($stores->skip(1)->take(1) as $store)
-            <a href="/stores?store={{ $store->slug }}" class="mx-4">
-                <img src="{{ asset('img/customer/lenovo.jpg') }}" alt="" width="130">
-            </a>
-            @endforeach
-        </div>
-        <div class="btn">
-            @foreach ($stores->skip(2)->take(1) as $store)
-            <a href="/stores?store={{ $store->slug }}" class="mx-4">
-                <img src="{{ asset('img/customer/acer.jpg') }}" alt="" width="130">
-            </a>
-            @endforeach
-        </div>
-        <div class="btn">
-            <a href="" class="mx-4">
-                <img src="{{ asset('img/customer/corsair.jpg') }}" alt="" width="130">
+                @endif
             </a>
         </div>
-        <div class="btn">
-            <a href="" class="mx-4">
-                <img src="{{ asset('img/customer/steelseries.jpg') }}" alt="" width="130">
-            </a>
-        </div>
+        @endforeach
     </div>
 </div>
 
@@ -108,12 +59,16 @@
     @foreach ($promotions->take(1) as $promotion)
     <div class="row featurette mt-5">
         <div class="col-md-7 mt-lg-auto mb-lg-auto text-start">
-            <h2 class="featurette-heading fw-normal">6.6 Greatest Mid-Year<span class="text-muted"></span></h2>
-            <p class="lead">Get discount up to 70%</p>
-            <p><a class="btn btn-sm details" href="/categories?category={{ $promotion->category->slug }}">View details &raquo;</a></p>
+            <h2 class="featurette-heading fw-normal">{!! $promotion->desc !!}<span class="text-muted"></span></h2>
+            <p class="small">For more information click button below</p>
+            <p><a class="btn btn-sm details mt-0" href="/categories?category={{ $promotion->category->slug }}">View details &raquo;</a></p>
         </div>
         <div class="col-md-5">
-            <img src=" {{ $promotion->image }}" class="img-fluid rounded shadow-sm">
+            @if($promotion->image)
+            <img src="image\admin\banner\category\{{ $promotion->image }}" class="img-fluid rounded shadow-sm">
+            @else
+            <img src="https://source.unsplash.com/700x700?product" class="img-fluid rounded shadow-sm">
+            @endif
         </div>
     </div>
     @endforeach
@@ -121,13 +76,16 @@
     @foreach ($promotions->skip(1)->take(1) as $promotion)
     <div class="row featurette mt-5">
         <div class="col-md-5">
-            <img src=" {{ $promotion->image }}" class="img-fluid rounded shadow-sm">
-
+            @if($promotion->image)
+            <img src="image\admin\banner\category\{{ $promotion->image }}" class="img-fluid rounded shadow-sm">
+            @else
+            <img src="https://source.unsplash.com/700x700?technology" class="img-fluid rounded shadow-sm">
+            @endif
         </div>
         <div class="col-md-7 mt-lg-auto mb-lg-auto text-end">
-            <h2 class="featurette-heading fw-normal">6.6 Greatest Mid-Year<span class="text-muted"></span></h2>
-            <p class="lead">Get discount up to 70%</p>
-            <p><a class="btn btn-sm details" href="/categories?category={{ $promotion->category->slug }}">View details &laquo;</a></p>
+            <h2 class="featurette-heading fw-normal">{!! $promotion->desc !!}<span class="text-muted"></span></h2>
+            <p class="small">For more information click button below</p>
+            <p><a class="btn btn-sm details mt-0" href="/categories?category={{ $promotion->category->slug }}">View details &laquo;</a></p>
         </div>
     </div>
     @endforeach
@@ -153,8 +111,13 @@
                             <div class="product-grid shadow-sm">
                                 <div class="product-image">
                                     <a href="/products/{{ $product->slug }}" class="image">
+                                        @if($product->image1 & $product->image2)
+                                        <img class="img-1" src="{{ $product->image1 }}" width="500" height="500">
+                                        <img class="img-2" src="{{ $product->image2 }}" width="500" height="500">
+                                        @else
                                         <img class="img-1" src="{{ asset('img/customer/img-1.png') }}" width="500" height="500">
                                         <img class="img-2" src="{{ asset('img/customer/img-2.png') }}" width="500" height="500">
+                                        @endif
                                     </a>
                                     @if($product->discount >= 1)
                                     <span class="product-hot-label">{{ $product->discount }}% OFF</span>
@@ -217,8 +180,13 @@
                             <div class="product-grid shadow-sm">
                                 <div class="product-image">
                                     <a href="/products/{{ $product->slug }}" class="image">
+                                        @if($product->image1 & $product->image2)
+                                        <img class="img-1" src="{{ $product->image1 }}" width="500" height="500">
+                                        <img class="img-2" src="{{ $product->image2 }}" width="500" height="500">
+                                        @else
                                         <img class="img-1" src="{{ asset('img/customer/img-1.png') }}" width="500" height="500">
                                         <img class="img-2" src="{{ asset('img/customer/img-2.png') }}" width="500" height="500">
+                                        @endif
                                     </a>
                                     @if($product->discount >= 1)
                                     <span class="product-hot-label">{{ $product->discount }}% OFF</span>
@@ -281,8 +249,13 @@
                             <div class="product-grid shadow-sm">
                                 <div class="product-image">
                                     <a href="/products/{{ $product->slug }}" class="image">
+                                        @if($product->image1 & $product->image2)
+                                        <img class="img-1" src="{{ $product->image1 }}" width="500" height="500">
+                                        <img class="img-2" src="{{ $product->image2 }}" width="500" height="500">
+                                        @else
                                         <img class="img-1" src="{{ asset('img/customer/img-1.png') }}" width="500" height="500">
                                         <img class="img-2" src="{{ asset('img/customer/img-2.png') }}" width="500" height="500">
+                                        @endif
                                     </a>
                                     @if($product->discount >= 1)
                                     <span class="product-hot-label">{{ $product->discount }}% OFF</span>

@@ -22,14 +22,14 @@ class AdminTokoHomeController extends Controller
             ->join('products', 'order_details.product_id', '=', 'products.id')
             ->join('stores', 'products.store_id', '=', 'stores.id')
             ->where('stores.user_id', '=', Auth::user()->id)
-            ->count('order_details.id');
+            ->count('orders.id');
 
         $ordersprocess = Orders::join('order_details', 'orders.id', '=', 'order_details.order_id')
             ->join('products', 'order_details.product_id', '=', 'products.id')
             ->join('stores', 'products.store_id', '=', 'stores.id')
             ->where('stores.user_id', '=', Auth::user()->id)
             ->where('orders.status', '=', 'Processed')
-            ->count('order_details.id');
+            ->count('orders.id');
 
         $valueMonth = Store::where('stores.user_id', Auth::user()->id)
             ->join('products', 'stores.id', '=', 'products.store_id')
@@ -45,11 +45,11 @@ class AdminTokoHomeController extends Controller
             ->whereYear('orders.created_at', date("Y"))
             ->sum('orders.total');
 
-        $orderstore = OrderDetails::join('products', 'order_details.product_id', '=', 'products.id')
-            ->join('orders', 'order_details.order_id', '=', 'orders.id')
+        $orderstore = Orders::join('order_details', 'orders.id', '=', 'order_details.order_id')
+            ->join('products', 'order_details.product_id', '=', 'products.id')
             ->join('stores', 'products.store_id', '=', 'stores.id')
             ->where('stores.user_id', '=', Auth::user()->id)
-            ->select('order_details.price AS price', 'order_details.qty AS qty', 'order_details.discount AS discount', 'order_details.created_at AS created_at', 'orders.status AS status', 'order_details.*', 'orders.name')->latest()->get();
+            ->select('orders.*')->latest()->get();
 
         return view('admin_toko.home.index', [
             'store' => $store,
