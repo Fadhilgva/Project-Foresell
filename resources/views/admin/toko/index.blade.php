@@ -22,7 +22,7 @@
 
     <h1 class="text-grey">List Toko</h1>
 
-    <div class="row">
+    <div class="row mb-4">
         <div class="col-md-12">
             <div class="box box-warning">
                 <div class="box-header mb-2">

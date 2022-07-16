@@ -213,7 +213,7 @@ class AdminCategoryController extends Controller
     public function delete($id)
     {
         $category = AdminCategory::whereId($id)->firstOrFail();
-        File::delete('image/admin/category/' . $category->logo);
+        File::delete('image/admin/category/' . $category->image);
         $category->delete();
 
         Alert::success('Success', 'Data berhasil dihapus');
