@@ -1,7 +1,7 @@
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav sidebar bg-gradient-success sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center mt-5 mb-5 ml-3" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center mt-3 mb-3 ml-3" href="index.html">
       <div class="sidebar-brand-icon">
         <img src={{asset('image/admin/logo/forshell.png')}} alt="" width="150">
       </div>
@@ -34,7 +34,6 @@
           <a class="collapse-item @yield('users')" href="/admin-foresell/list/users">Users</a>
           <a class="collapse-item @yield('toko')" href="/admin-foresell/list/toko">Toko</a>
           <a class="collapse-item @yield('category')" href="/admin-foresell/list/category">Category</a>
-          <a class="collapse-item @yield('bannerStore')" href="/admin-foresell/list/banner-store">Banner</a>
           <a class="collapse-item @yield('payment')" href="/admin-foresell/list/payment">Payment</a>
           <a class="collapse-item @yield('couriers')" href="/admin-foresell/list/couriers">Couriers</a>
           <a class="collapse-item @yield('orders')" href="/admin-foresell/list/orders">Orders</a>
@@ -114,8 +113,8 @@
     <hr class="sidebar-divider d-none d-md-block">
 
     <!-- Sidebar Toggler (Sidebar) -->
-    <div class="text-center d-none d-md-inline">
+    {{-- <div class="text-center d-none d-md-inline">
       <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div>
+    </div> --}}
 
 </ul>

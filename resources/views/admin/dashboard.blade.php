@@ -55,7 +55,7 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                 Users </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $users }}</div>
                         </div>
@@ -123,7 +123,7 @@
                         <div class="row mb-5" style=" height: 70px;">
                             <div class="col-md-4 mb-3">
                                 <img width="100px" height="100px"
-                                    src="https://images.unsplash.com/photo-1644982649363-fae51da44eac?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+                                    src="/img/admin_store/{{ $tProduct->image }}"
                                     alt="">
                             </div>
                             <div class="col-md-5 mb-3 ">
@@ -146,17 +146,12 @@
                 <h5 class="card-header fw-bold">Top Customer</h5>
                 <div class="card-body overflow-auto" style=" height: 500px;">
                     @foreach ($topUser as $tUser)
-                        <div class="row mb-5" style=" height: 70px;">
-                            <div class="col-md-4 mb-3">
-                                <img width="80px" height="80px"
-                                    src="https://images.unsplash.com/photo-1644982649363-fae51da44eac?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-                                    alt="">
-                            </div>
-                            <div class="col-md-5 mb-3">
+                        <div class="row mb-2" style=" height: 70px;">
+                            <div class="col-md-9 mb-1">
                                 <h5 class="text-dark fw-bold">{{  $tUser->name }}</h5>
                                 <p>Customer ID #{{ $tUser->id }}</p>
                             </div>
-                            <div class="col-md-2 mb-3">
+                            <div class="col-md-3 mb-2">
                                 <span class="badge bg-success">{{ $tUser->total }} Order</span>
                             </div>
                         </div>
