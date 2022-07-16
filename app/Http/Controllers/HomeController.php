@@ -21,7 +21,11 @@ class HomeController extends Controller
                 'title' => 'Foresell | Situs Jual Beli Online',
                 'promotionbanners' => PromotionBanner::with(['store'])->get(),
                 'promotions' => Promotion::with(['category'])->get(),
-                'stores' => Store::latest()->get(),
+                'stores' => Store::join('products', 'stores.id', '=', 'products.store_id')
+                    ->select([Store::raw("SUM(products.sold) as sold"), 'stores.*'])
+                    ->groupBy('stores.id')
+                    ->orderByDesc('sold')
+                    ->get(),
                 'products' => Product::with(['store', 'category'])->orderByDesc('sold')->get(),
                 'itemwishlist' => $itemwishlist
             ]);

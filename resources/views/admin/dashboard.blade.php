@@ -1,190 +1,186 @@
 @extends('sb-admin.app')
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/admin/dashboard.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/admin/pieChart.css') }}">
+<link rel="stylesheet" href="{{ asset('css/admin/dashboard.css') }}">
+<link rel="stylesheet" href="{{ asset('css/admin/pieChart.css') }}">
 @endsection
 @section('title', 'Dashboard')
 @section('dashboard', 'active')
 
 
 @section('content')
-    <h1 class="gray">Dashboard</h1>
+<h1 class="gray">Dashboard</h1>
 
-    <!-- Content Row -->
-    <div class="row">
+<!-- Content Row -->
+<div class="row">
 
-        <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Stores</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $stores }}</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-solid fa-store fa-2x text-gray-300"></i>
-                        </div>
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Stores</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $stores }}</div>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- CATEGORIES -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Categories</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $categories }}</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-solid fa-clipboard-list fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- USER-->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Users </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $users }}</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-solid fa-user fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- PRODUCTS -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-warning shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                Products </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $products }}</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-solid fa-tags fa-2x text-gray-300"></i>
-                        </div>
+                    <div class="col-auto">
+                        <i class="fas fa-solid fa-store fa-2x text-gray-300"></i>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    {{-- 3D CHART --}}
-    <div class="row">
-        <div class="col-md-6">
-            <figure class="highcharts-figure ">
-                <div id="revenueMonth"></div>
-                <p class="highcharts-description">
-
-                </p>
-            </figure>
-        </div>
-
-        {{-- PIE CHART --}}
-        <div class="col-md-6 mt-3">
-            <div id="piechart" style="height: 400px"></div>
-        </div>
-
-        {{-- <div class="col-md-3">
-            <figure class="highcharts-figure2">
-                <div id="container"></div>
-                <p class="highcharts-description">
-                    This pie chart shows how the chart legend can be used to provide
-                    information about the individual slices.
-                </p>
-            </figure>
-        </div> --}}
-    </div>
-
-    {{-- TOP PRODUCT --}}
-    <div class="row mb-4">
-        <div class="col-md-4 mr-3">
-            <div class="card">
-                <h5 class="card-header fw-bold">Top Product</h5>
-                <div class="card-body overflow-auto" style=" height: 500px;">
-                    @foreach ($topProduct as $tProduct)
-                        <div class="row mb-5" style=" height: 70px;">
-                            <div class="col-md-4 mb-3">
-                                <img width="100px" height="100px"
-                                    src="https://images.unsplash.com/photo-1644982649363-fae51da44eac?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-                                    alt="">
-                            </div>
-                            <div class="col-md-5 mb-3 ">
-                                <h5 class="text-dark fw-bold">{{ $tProduct->name }}</h5>
-                                <p>Product ID #{{ $tProduct->id }}</p>
-                            </div>
-                            <div class="col-md-2 mb-3">
-                                <span class="badge bg-success">{{ $tProduct->total }} Order</span>
-                            </div>
-                        </div>
-                        <hr>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-
-        {{-- TOP Customer --}}
-        <div class="col-md-4">
-            <div class="card">
-                <h5 class="card-header fw-bold">Top Customer</h5>
-                <div class="card-body overflow-auto" style=" height: 500px;">
-                    @foreach ($topUser as $tUser)
-                        <div class="row mb-5" style=" height: 70px;">
-                            <div class="col-md-4 mb-3">
-                                <img width="80px" height="80px"
-                                    src="https://images.unsplash.com/photo-1644982649363-fae51da44eac?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-                                    alt="">
-                            </div>
-                            <div class="col-md-5 mb-3">
-                                <h5 class="text-dark fw-bold">{{  $tUser->name }}</h5>
-                                <p>Customer ID #{{ $tUser->id }}</p>
-                            </div>
-                            <div class="col-md-2 mb-3">
-                                <span class="badge bg-success">{{ $tUser->total }} Order</span>
-                            </div>
-                        </div>
-                        <hr>
-                    @endforeach
+    <!-- CATEGORIES -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            Categories</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $categories }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-solid fa-clipboard-list fa-2x text-gray-300"></i>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- USER-->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            Users </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $users }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-solid fa-user fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRODUCTS -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            Products </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $products }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-solid fa-tags fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- 3D CHART --}}
+<div class="row">
+    <div class="col-md-6">
+        <figure class="highcharts-figure ">
+            <div id="revenueMonth"></div>
+            <p class="highcharts-description">
+
+            </p>
+        </figure>
+    </div>
+
+    {{-- PIE CHART --}}
+    <div class="col-md-6 mt-3">
+        <div id="piechart" style="height: 400px"></div>
+    </div>
+
+    {{-- <div class="col-md-3">
+        <figure class="highcharts-figure2">
+            <div id="container"></div>
+            <p class="highcharts-description">
+                This pie chart shows how the chart legend can be used to provide
+                information about the individual slices.
+            </p>
+        </figure>
+    </div> --}}
+</div>
+
+{{-- TOP PRODUCT --}}
+<div class="row my-3">
+    <div class="col-md-6">
+        <div class="card">
+            <h5 class="card-header fw-bold">Top Product</h5>
+            <div class="card-body overflow-auto" style=" height: 500px;">
+                @foreach ($topProduct as $tProduct)
+                <div class="row mb-5" style=" height: 70px;">
+                    <div class="col-md-4 mb-3">
+                        <img width="100px" height="100px" src="https://images.unsplash.com/photo-1644982649363-fae51da44eac?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="">
+                    </div>
+                    <div class="col-md-5 mb-3 ">
+                        <h5 class="text-dark fw-bold">{{ $tProduct->name }}</h5>
+                        <p>Product ID #{{ $tProduct->id }}</p>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <span class="badge bg-success">{{ $tProduct->total }} Order</span>
+                    </div>
+                </div>
+                <hr>
+                @endforeach
+            </div>
+        </div>
+    </div>
+
+    {{-- TOP Customer --}}
+    <div class="col-md-6">
+        <div class="card">
+            <h5 class="card-header fw-bold">Top Customer</h5>
+            <div class="card-body overflow-auto" style=" height: 500px;">
+                @foreach ($topUser as $tUser)
+                <div class="row mb-5" style=" height: 70px;">
+                    <div class="col-md-4 mb-3">
+                        <img width="80px" height="80px" src="https://images.unsplash.com/photo-1644982649363-fae51da44eac?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="">
+                    </div>
+                    <div class="col-md-5 mb-3">
+                        <h5 class="text-dark fw-bold">{{ $tUser->name }}</h5>
+                        <p>Customer ID #{{ $tUser->id }}</p>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <span class="badge bg-success">{{ $tUser->total }} Order</span>
+                    </div>
+                </div>
+                <hr>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
 @section('javascript')
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
-
-
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-3d.js"></script>
 
 
-    <script>
-        google.charts.load('current', {
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+<script>
+    google.charts.load('current', {
             'packages': ['corechart']
         });
         google.charts.setOnLoadCallback(drawChart);
@@ -315,7 +311,7 @@
         }));
 
         showValues();
-    </script>
+</script>
 @endsection
 
 @endsection
