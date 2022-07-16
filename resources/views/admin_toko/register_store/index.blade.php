@@ -55,7 +55,7 @@
                                     <div class="col-12">
                                         <div class="form-floating">
                                             <input type="text" name="address" class="form-control
-                                            @error('address') is-invalid @enderror" id="address" placeholder="name@example.com" required value="" />
+                                            @error('address') is-invalid @enderror" id="address" placeholder="name@example.com" required value="{{ old('address') }}" />
                                             <label for="address">Address</label>
                                             @error('address')
                                             <div class="invalid-feedback">

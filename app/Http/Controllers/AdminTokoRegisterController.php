@@ -48,7 +48,7 @@ class AdminTokoRegisterController extends Controller
             'address' => ['required', 'string', 'max:255'],
             'city' => ['required', 'string', 'max:255'],
             'postalcode' => ['required', 'string', 'max:255'],
-            'phone' => ['required'],
+            'phone' => ['required', 'unique:users'],
             'logo' => ['required', 'mimes:jpg,jpeg,png'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'same:confirm_password'],
