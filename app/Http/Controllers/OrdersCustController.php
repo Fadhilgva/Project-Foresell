@@ -148,23 +148,23 @@ class OrdersCustController extends Controller
     public function confirm($id)
     {
         Alert::question('Order Confirmation', 'Have you received the products and have no complaints?')
-            ->showConfirmButton('<a href="/orders/' . $id . '/confirm" class="text-white" style="text-decoration: none"> Confirm</a>', '#3085d6')->toHtml()
+            ->showConfirmButton('<a href="/orders/' . $id . '/delete" class="text-white" style="text-decoration: none"> Confirm</a>', '#3085d6')->toHtml()
             ->showCancelButton('Cancel', '#aaa')->reverseButtons();
 
-        $order = Orders::find($id);
-        $order->status = 'Finished';
-        $order->save();
         return back();
     }
 
     public function delete($id)
     {
-        Alert::question('Order Confirmation', 'Have you received the products and have no complaints?')
-            ->showConfirmButton('<a href="/orders/' . $id . '/confirm" class="text-white" style="text-decoration: none"> Confirm</a>', '#3085d6')->toHtml()
-            ->showCancelButton('Cancel', '#aaa')->reverseButtons();
-
         $order = Orders::find($id);
+
+
+        // $order->OrderDetail->delete(); Mau pake ini biar sekalian di order_detail ke delete juga tapi error
         $order->delete();
+
+
+
+        Alert::success('Success', 'Your order has been canceled');
         return back();
     }
 
@@ -173,6 +173,7 @@ class OrdersCustController extends Controller
         $order = Orders::find($id);
         $order->status = $request->status;
         $order->save();
+
         return back();
     }
 }
