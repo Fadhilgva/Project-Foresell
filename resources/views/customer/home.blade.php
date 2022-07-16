@@ -14,7 +14,7 @@
         <div class="carousel-item active">
             <a href="/stores?store={{ $promotionbanner->store->slug }}">
                 @if($promotionbanner->image)
-                <img src="{{ $promotionbanner->image }}" class="img-fluid">
+                <img src="image\admin\banner\store\{{ $promotionbanner->image }}" class="img-fluid">
                 @else
                 <img src="https://source.unsplash.com/1700x700?product" class="img-fluid">
                 @endif
@@ -38,7 +38,7 @@
 
 {{-- Featured Brand --}}
 <div class="container my-5">
-    <div class="h3 mb-3 text-center title">Newest Store</div>
+    <div class="h3 mb-3 text-center title">Featured Store</div>
     <div class="d-flex flex-row justify-content-around">
         @foreach ($stores as $store)
         <div class="btn">
@@ -59,13 +59,13 @@
     @foreach ($promotions->take(1) as $promotion)
     <div class="row featurette mt-5">
         <div class="col-md-7 mt-lg-auto mb-lg-auto text-start">
-            <h2 class="featurette-heading fw-normal">6.6 Greatest Mid-Year<span class="text-muted"></span></h2>
-            <p class="lead">Get discount up to 70%</p>
-            <p><a class="btn btn-sm details" href="/categories?category={{ $promotion->category->slug }}">View details &raquo;</a></p>
+            <h2 class="featurette-heading fw-normal">{!! $promotion->desc !!}<span class="text-muted"></span></h2>
+            <p class="small">For more information click button below</p>
+            <p><a class="btn btn-sm details mt-0" href="/categories?category={{ $promotion->category->slug }}">View details &raquo;</a></p>
         </div>
         <div class="col-md-5">
             @if($promotion->image)
-            <img src="{{ $promotion->image }}" class="img-fluid rounded shadow-sm">
+            <img src="image\admin\banner\category\{{ $promotion->image }}" class="img-fluid rounded shadow-sm">
             @else
             <img src="https://source.unsplash.com/700x700?product" class="img-fluid rounded shadow-sm">
             @endif
@@ -77,15 +77,15 @@
     <div class="row featurette mt-5">
         <div class="col-md-5">
             @if($promotion->image)
-            <img src="{{ $promotion->image }}" class="img-fluid rounded shadow-sm">
+            <img src="image\admin\banner\category\{{ $promotion->image }}" class="img-fluid rounded shadow-sm">
             @else
             <img src="https://source.unsplash.com/700x700?technology" class="img-fluid rounded shadow-sm">
             @endif
         </div>
         <div class="col-md-7 mt-lg-auto mb-lg-auto text-end">
-            <h2 class="featurette-heading fw-normal">6.6 Greatest Mid-Year<span class="text-muted"></span></h2>
-            <p class="lead">Get discount up to 70%</p>
-            <p><a class="btn btn-sm details" href="/categories?category={{ $promotion->category->slug }}">View details &laquo;</a></p>
+            <h2 class="featurette-heading fw-normal">{!! $promotion->desc !!}<span class="text-muted"></span></h2>
+            <p class="small">For more information click button below</p>
+            <p><a class="btn btn-sm details mt-0" href="/categories?category={{ $promotion->category->slug }}">View details &laquo;</a></p>
         </div>
     </div>
     @endforeach

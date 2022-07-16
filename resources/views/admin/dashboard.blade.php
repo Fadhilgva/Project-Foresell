@@ -1,36 +1,32 @@
 @extends('sb-admin.app')
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/admin/dashboard.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/admin/pieChart.css') }}">
+<link rel="stylesheet" href="{{ asset('css/admin/dashboard.css') }}">
+<link rel="stylesheet" href="{{ asset('css/admin/pieChart.css') }}">
 @endsection
 @section('title', 'Dashboard')
 @section('dashboard', 'active')
 
 
 @section('content')
-    <h1 class="gray">Dashboard</h1>
+<h1 class="gray">Dashboard</h1>
 
-    <!-- Content Row -->
-    <div class="row">
+<!-- Content Row -->
+<div class="row">
 
-        <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Stores</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $stores }}</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-solid fa-store fa-2x text-gray-300"></i>
-                        </div>
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Stores</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $stores }}</div>
                     </div>
                 </div>
             </div>
         </div>
-
+    </div>
         <!-- CATEGORIES -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-success shadow h-100 py-2">
@@ -86,100 +82,98 @@
         </div>
     </div>
 
-    {{-- 3D CHART --}}
-    <div class="row">
-        <div class="col-md-6">
-            <figure class="highcharts-figure ">
-                <div id="revenueMonth"></div>
-                <p class="highcharts-description">
+{{-- 3D CHART --}}
+<div class="row">
+    <div class="col-md-6">
+        <figure class="highcharts-figure ">
+            <div id="revenueMonth"></div>
+            <p class="highcharts-description">
 
-                </p>
-            </figure>
-        </div>
-
-        {{-- PIE CHART --}}
-        <div class="col-md-6 mt-3">
-            <div id="piechart" style="height: 400px"></div>
-        </div>
-
-        {{-- <div class="col-md-3">
-            <figure class="highcharts-figure2">
-                <div id="container"></div>
-                <p class="highcharts-description">
-                    This pie chart shows how the chart legend can be used to provide
-                    information about the individual slices.
-                </p>
-            </figure>
-        </div> --}}
+            </p>
+        </figure>
     </div>
 
-    {{-- TOP PRODUCT --}}
-    <div class="row mb-4">
-        <div class="col-md-4 mr-3">
-            <div class="card">
-                <h5 class="card-header fw-bold">Top Product</h5>
-                <div class="card-body overflow-auto" style=" height: 500px;">
-                    @foreach ($topProduct as $tProduct)
-                        <div class="row mb-5" style=" height: 70px;">
-                            <div class="col-md-4 mb-3">
-                                <img width="100px" height="100px"
-                                    src="/img/admin_store/{{ $tProduct->image }}"
-                                    alt="">
-                            </div>
-                            <div class="col-md-5 mb-3 ">
-                                <h5 class="text-dark fw-bold">{{ $tProduct->name }}</h5>
-                                <p>Product ID #{{ $tProduct->id }}</p>
-                            </div>
-                            <div class="col-md-2 mb-3">
-                                <span class="badge bg-success">{{ $tProduct->total }} Order</span>
-                            </div>
-                        </div>
-                        <hr>
-                    @endforeach
-                </div>
-            </div>
-        </div>
+    {{-- PIE CHART --}}
+    <div class="col-md-6 mt-3">
+        <div id="piechart" style="height: 400px"></div>
+    </div>
 
-        {{-- TOP Customer --}}
-        <div class="col-md-4">
-            <div class="card">
-                <h5 class="card-header fw-bold">Top Customer</h5>
-                <div class="card-body overflow-auto" style=" height: 500px;">
-                    @foreach ($topUser as $tUser)
-                        <div class="row mb-2" style=" height: 70px;">
-                            <div class="col-md-9 mb-1">
-                                <h5 class="text-dark fw-bold">{{  $tUser->name }}</h5>
-                                <p>Customer ID #{{ $tUser->id }}</p>
-                            </div>
-                            <div class="col-md-3 mb-2">
-                                <span class="badge bg-success">{{ $tUser->total }} Order</span>
-                            </div>
-                        </div>
-                        <hr>
-                    @endforeach
+    {{-- <div class="col-md-3">
+        <figure class="highcharts-figure2">
+            <div id="container"></div>
+            <p class="highcharts-description">
+                This pie chart shows how the chart legend can be used to provide
+                information about the individual slices.
+            </p>
+        </figure>
+    </div> --}}
+</div>
+
+{{-- TOP PRODUCT --}}
+<div class="row my-3">
+    <div class="col-md-6">
+        <div class="card">
+            <h5 class="card-header fw-bold">Top Product</h5>
+            <div class="card-body overflow-auto" style=" height: 500px;">
+                @foreach ($topProduct as $tProduct)
+                <div class="row mb-5" style=" height: 70px;">
+                    <div class="col-md-4 mb-3">
+                        <img width="100px" height="100px" src="/img/admin_store/{{ $tProduct->image }}" alt="">
+                    </div>
+                    <div class="col-md-5 mb-3 ">
+                        <h5 class="text-dark fw-bold">{{ $tProduct->name }}</h5>
+                        <p>Product ID #{{ $tProduct->id }}</p>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <span class="badge bg-success">{{ $tProduct->total }} Order</span>
+                    </div>
                 </div>
+                <hr>
+                @endforeach
             </div>
         </div>
     </div>
+
+    {{-- TOP Customer --}}
+    <div class="col-md-6">
+        <div class="card">
+            <h5 class="card-header fw-bold">Top Customer</h5>
+            <div class="card-body overflow-auto" style=" height: 500px;">
+                @foreach ($topUser as $tUser)
+                <div class="row mb-3" style=" height: 70px;">
+                    <div class="col-md-9 mb-3">
+                        <h5 class="text-dark fw-bold">{{ $tUser->name }}</h5>
+                        <p>Customer ID #{{ $tUser->id }}</p>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <span class="badge bg-success">{{ $tUser->total }} Order</span>
+                    </div>
+                </div>
+                <hr>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
 @section('javascript')
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
-
-
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-3d.js"></script>
 
 
-    <script>
-        google.charts.load('current', {
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+<script>
+    google.charts.load('current', {
             'packages': ['corechart']
         });
         google.charts.setOnLoadCallback(drawChart);
@@ -199,59 +193,6 @@
 
             chart.draw(data, options);
         }
-        // Highcharts.chart('container', {
-        //     chart: {
-        //         plotBackgroundColor: null,
-        //         plotBorderWidth: null,
-        //         plotShadow: false,
-        //         type: 'pie'
-        //     },
-        //     title: {
-        //         text: 'Browser market shares in January, 2018'
-        //     },
-        //     tooltip: {
-        //         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        //     },
-        //     accessibility: {
-        //         point: {
-        //             valueSuffix: '%'
-        //         }
-        //     },
-        //     plotOptions: {
-        //         pie: {
-        //             allowPointSelect: true,
-        //             cursor: 'pointer',
-        //             dataLabels: {
-        //                 enabled: false
-        //             },
-        //             showInLegend: true
-        //         }
-        //     },
-        //     series: [{
-        //         name: 'Brands',
-        //         colorByPoint: true,
-        //         data: [{
-        //             name: 'Chrome',
-        //             y: 61.41,
-
-        //         }, {
-        //             name: 'Internet Explorer',
-        //             y: 11.84
-        //         }, {
-        //             name: 'Firefox',
-        //             y: 10.85
-        //         }, {
-        //             name: 'Edge',
-        //             y: 4.67
-        //         }, {
-        //             name: 'Safari',
-        //             y: 4.18
-        //         }, {
-        //             name: 'Other',
-        //             y: 7.05
-        //         }]
-        //     }]
-        // });
 
         // 3D CHART
         const total = <?php echo json_encode($total); ?>;
@@ -270,7 +211,7 @@
                 }
             },
             title: {
-                text: 'Monthly Revenue of Foreshell'
+                text: 'Monthly Revenue of Foreshell 2022'
             },
             subtitle: {
                 text: ''
@@ -310,7 +251,7 @@
         }));
 
         showValues();
-    </script>
+</script>
 @endsection
 
 @endsection
