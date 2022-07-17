@@ -58,10 +58,10 @@
                                         <td class="text-left">
                                             <p class="title">{{ $detail->Product->name }}</p>
                                         </td>
-                                        <td class="text-center">Rp{{ $detail->price }}</td>
+                                        <td class="text-center">Rp{{ number_format($detail->price, 0,",",".") }}</td>
                                         <td class="qty">{{ $detail->qty}}</td>
-                                        <td class="qty">{{ $detail->discount}} %</td>
-                                        <td class="total">Rp{{ $detail->price * $detail->qty }}</td>
+                                        <td class="qty">{{ number_format($detail->discount, 0,",",".")}} %</td>
+                                        <td class="total">Rp{{ number_format(($detail->price * $detail->qty), 0,",",".") }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -69,12 +69,12 @@
                                     <tr>
                                         <td colspan="2"></td>
                                         <td colspan="3">Total Discount</td>
-                                        <td>-Rp{{ $orders->total_disc }}</td>
+                                        <td>-Rp{{ number_format($orders->total_disc, 0,",",".") }}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="2"></td>
                                         <td colspan="3">Grand Total</td>
-                                        <td>Rp{{ $orders->total }}</td>
+                                        <td>Rp{{ number_format($orders->total, 0,",",".") }}</td>
                                     </tr>
                                 </tfoot>
                             </table>

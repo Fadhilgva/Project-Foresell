@@ -27,19 +27,19 @@
                                     </td>
                                     <td class="align-items-center p-5">
                                         <p class="title mb-0">Total</p>
-                                        <span>Rp{{ $order->total }}</span>
+                                        <span>Rp{{ number_format($order->total, 0,",",".") }}</span>
                                     </td>
                                     <td class="align-items-center p-5">
                                         <p class="title mb-0 small">Total Discount</p>
-                                        <span class="small">-Rp{{ $order->total_disc }}</span>
+                                        <span class="small">-Rp{{ number_format($order->total_disc, 0,",",".") }}</span>
                                     </td>
                                     <td class="align-items-center">
                                         @switch($order->status)
                                         @case($order->status == "Waiting")
                                         <p class="badge text-bg-danger mt-4">Waiting for Payment</p>
                                         <a href="/orders/{{ $order->id }}/confirm" class="btn btn-warning btn-sm ms-3">Cancel Order</a>
-                                            {{-- @csrf
-                                            <button type="submit" class="btn btn-warning btn-sm ms-3">Cancel Order</button>
+                                        {{-- @csrf
+                                        <button type="submit" class="btn btn-warning btn-sm ms-3">Cancel Order</button>
                                         </form> --}}
                                         @break
                                         @case($order->status == "Already")

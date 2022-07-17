@@ -55,7 +55,7 @@
                                                     No. Rekening : <strong>{{ $bank->noPayment }}</strong>
                                                     <br>
                                                     <br>
-                                                    Bayarkan pesanan ke nomor rekening di atas <br>dengan Total Pembayaran : <strong>Rp{{ $cartdetail->total }}</strong>
+                                                    Bayarkan pesanan ke nomor rekening di atas <br>dengan Total Pembayaran : <strong>Rp{{ number_format($cartdetail->total, 0,",",".") }}</strong>
                                                 </div>
                                             </div>
                                         </div>
@@ -163,7 +163,7 @@
                                     @foreach ($carts as $cart)
                                     <li class="d-flex align-items-center justify-content-between my-2">
                                         <strong class="small font-weight-bold">{{ $cart->product->name }}</strong>
-                                        <span class="text-muted small">Rp{{ ($cart->product->price * (100 - ($cart->product->discount))/100) }} x {{ $cart->qty }}
+                                        <span class="text-muted small">Rp{{ number_format(($cart->product->price * (100 - ($cart->product->discount))/100), 0,",",".") }} x {{ $cart->qty }}
                                         </span>
                                     </li>
                                     @endforeach
@@ -172,13 +172,13 @@
                                     <li class="d-flex align-items-center justify-content-between mt-3 mb-1">
                                         <strong class="small font-weight-bold">Total Discount
                                         </strong>
-                                        <span>-Rp{{ $cartdetail->total_disc }}
+                                        <span>-Rp{{ number_format($cartdetail->total_disc, 0,",",".") }}
                                         </span>
                                     </li>
                                     <li class="d-flex align-items-center justify-content-between">
                                         <strong class="small font-weight-bold">Total
                                         </strong>
-                                        <span>Rp{{ $cartdetail->total }}
+                                        <span>Rp{{ number_format($cartdetail->total, 0,",",".") }}
                                         </span>
                                     </li>
                                     @endforeach

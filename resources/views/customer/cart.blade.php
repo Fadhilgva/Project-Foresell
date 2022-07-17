@@ -60,7 +60,7 @@
                                         </div>
                                     </td>
                                     <td class="p-3 align-middle border-0">
-                                        <p class="mb-0 small">Rp{{ $cart->product->price * ((100 - $cart->product->discount)/100) }}</p>
+                                        <p class="mb-0 small">Rp{{ number_format(($cart->product->price * ((100 - $cart->product->discount)/100)), 0,",",".") }}</p>
                                     </td>
                                     <td class="p-3 align-middle border-0">
                                         <form action="/update_cart" method="POST">
@@ -75,7 +75,7 @@
                                         </form>
                                     </td>
                                     <td class="p-3 align-middle border-0">
-                                        <p class="mb-0 small">Rp{{ $cart->total_product }}</p>
+                                        <p class="mb-0 small">Rp{{ number_format($cart->total_product, 0,",",".") }}</p>
                                     </td>
                                     <td class="p-3 align-middle border-0">
                                         <form action="/delete_cart" method="post">
@@ -103,12 +103,12 @@
                                 <li class="d-flex align-items-center justify-content-between mt-3 mb-1">
                                     <strong class="small font-weight-bold">Discount
                                     </strong>
-                                    <span> -Rp{{ $cart->total_disc }}</span>
+                                    <span> -Rp{{ number_format($cart->total_disc, 0,",",".") }}</span>
                                 </li>
                                 <li class="d-flex align-items-center justify-content-between mb-4">
                                     <strong class="small font-weight-bold">Total
                                     </strong>
-                                    <span>Rp{{ $cart->total }}
+                                    <span>Rp{{ number_format($cart->total, 0,",",".") }}
                                     </span>
                                 </li>
                             </ul>
