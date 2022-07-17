@@ -58,8 +58,13 @@
             <div class="product-grid shadow-sm">
                 <div class="product-image">
                     <a href="/products/{{ $product->slug }}" class="image">
+                        @if($product->image & $product->image1)
+                        <img class="img-1" src="img/admin_store/{{ $product->image }}" width="500" height="500">
+                        <img class="img-2" src="img/admin_store/{{ $product->image1 }}" width="500" height="500">
+                        @else
                         <img class="img-1" src="{{ asset('img/customer/img-1.png') }}" width="500" height="500">
                         <img class="img-2" src="{{ asset('img/customer/img-2.png') }}" width="500" height="500">
+                        @endif
                     </a>
                     @if($product->discount >= 1)
                     <span class="product-hot-label">{{ $product->discount }}% OFF</span>
@@ -101,13 +106,13 @@
                     </ul>
                     <h3 class="title"><a href="/products/{{ $product->slug }}">{{ $product->name }}</a></h3>
                     @if($product->discount >= 1)
-                    <div class="price_ mt-2">Rp{{ $product->price * ((100 - $product->discount)/100) }}</div>
+                    <div class="price_ mt-2">Rp{{ number_format($product->price * ((100 - $product->discount)/100), 0,",",".") }}</div>
                     <div class="small text-secondary text-decoration-line-through diskon">
-                        <sub class="mb-2">Rp{{ $product->price }}</sub>
+                        <sub class="mb-2">Rp{{ number_format($product->price, 0,",",".") }}</sub>
                     </div>
 
                     @else
-                    <div class="price_ mt-2">Rp{{ $product->price }}</div>
+                    <div class="price_ mt-2">Rp{{ number_format($product->price, 0,",",".") }}</div>
                     @endif
                 </div>
             </div>

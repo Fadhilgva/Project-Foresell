@@ -76,7 +76,7 @@ class DataProdukController extends Controller
             'image1' => 'required|image|mimes:jpeg,png,jpg|max:2048|dimensions:ratio=1/1',
             'image2' => 'image|mimes:jpeg,png,jpg|max:2048|dimensions:ratio=1/1',
             'image3' => 'image|mimes:jpeg,png,jpg|max:2048|dimensions:ratio=1/1',
-            'name' => 'required|min:5|max:50',
+            'name' => 'required|min:5|max:100',
             'slug' => 'required|unique:products,slug',
             'price' => 'required',
             'discount' => 'min:0|max:90',
@@ -175,11 +175,11 @@ class DataProdukController extends Controller
     {
         $rules = [
             'category_id' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg|max:2048|dimensions:ratio=1/1',
-            'image1' => 'image|mimes:jpeg,png,jpg|max:2048|dimensions:ratio=1/1',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048|dimensions:ratio=1/1',
+            'image1' => 'required|image|mimes:jpeg,png,jpg|max:2048|dimensions:ratio=1/1',
             'image2' => 'image|mimes:jpeg,png,jpg|max:2048|dimensions:ratio=1/1',
             'image3' => 'image|mimes:jpeg,png,jpg|max:2048|dimensions:ratio=1/1',
-            'name' => 'required|min:5|max:50',
+            'name' => 'required|min:5|max:100',
             'price' => 'required',
             'stock' => 'required',
             'discount' => 'numeric|min:0|max:90',

@@ -29,7 +29,7 @@
                 <tr>
                     <th>No</th>
                     <th>Customer</th>
-                    <th>Total Price</th>
+                    <th>Total Price (Rupiah)</th>
                     <th>Payment</th>
                     <th>Status</th>
                     <th>Order Date</th>
@@ -40,7 +40,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $order->name }}</td>
-                    <td>Rp{{ $order->total }}</td>
+                    <td>{{ number_format($order->total, 0,",",".") }}</td>
                     <td>{{ $order->Bank->name }}</td>
                     <td>
                         @switch($order->status)
