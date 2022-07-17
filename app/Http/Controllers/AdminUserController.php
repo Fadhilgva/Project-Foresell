@@ -26,25 +26,91 @@ class AdminUserController extends Controller
     {
         $user = User::whereId($id)->first();
         $name = User::whereId($id)->select('name')->pluck('name');
-        $total2022 = DB::table(DB::raw('users'))
+        $total2017 = DB::table(DB::raw('users'))
             ->select(DB::raw('monthname(order_details.created_at) AS bulan,  users.name AS name, round(SUM(order_details.price * order_details.qty),2) AS total'))
             ->join('orders', 'users.id', '=', 'orders.user_id')
             ->join('order_details', 'orders.id', '=', 'order_details.order_id')
             ->join('products', 'products.id', '=', 'order_details.product_id')
             ->where('orders.status', 'Finished')
             ->where('users.id', $id)
-            ->whereYear('order_details.created_at', '=', 2022)
+            ->whereYear('order_details.created_at', '=', 2017)
             ->groupByRaw('bulan, users.id')
             ->orderBy('order_details.created_at', 'ASC')->pluck('total');
 
-        $bulan2022 = DB::table(DB::raw('users'))
+        $bulan2017 = DB::table(DB::raw('users'))
             ->select(DB::raw('monthname(order_details.created_at) AS bulan,  users.name AS name, round(SUM(order_details.price * order_details.qty),2) AS total'))
             ->join('orders', 'users.id', '=', 'orders.user_id')
             ->join('order_details', 'orders.id', '=', 'order_details.order_id')
             ->join('products', 'products.id', '=', 'order_details.product_id')
             ->where('orders.status', 'Finished')
             ->where('users.id', $id)
-            ->whereYear('order_details.created_at', '=', 2022)
+            ->whereYear('order_details.created_at', '=', 2017)
+            ->groupByRaw('bulan, users.id')
+            ->orderBy('order_details.created_at', 'ASC')->pluck('bulan');
+
+        $total2018 = DB::table(DB::raw('users'))
+            ->select(DB::raw('monthname(order_details.created_at) AS bulan,  users.name AS name, round(SUM(order_details.price * order_details.qty),2) AS total'))
+            ->join('orders', 'users.id', '=', 'orders.user_id')
+            ->join('order_details', 'orders.id', '=', 'order_details.order_id')
+            ->join('products', 'products.id', '=', 'order_details.product_id')
+            ->where('orders.status', 'Finished')
+            ->where('users.id', $id)
+            ->whereYear('order_details.created_at', '=', 2018)
+            ->groupByRaw('bulan, users.id')
+            ->orderBy('order_details.created_at', 'ASC')->pluck('total');
+
+        $bulan2018 = DB::table(DB::raw('users'))
+            ->select(DB::raw('monthname(order_details.created_at) AS bulan,  users.name AS name, round(SUM(order_details.price * order_details.qty),2) AS total'))
+            ->join('orders', 'users.id', '=', 'orders.user_id')
+            ->join('order_details', 'orders.id', '=', 'order_details.order_id')
+            ->join('products', 'products.id', '=', 'order_details.product_id')
+            ->where('orders.status', 'Finished')
+            ->where('users.id', $id)
+            ->whereYear('order_details.created_at', '=', 2018)
+            ->groupByRaw('bulan, users.id')
+            ->orderBy('order_details.created_at', 'ASC')->pluck('bulan');
+
+        $total2019 = DB::table(DB::raw('users'))
+            ->select(DB::raw('monthname(order_details.created_at) AS bulan,  users.name AS name, round(SUM(order_details.price * order_details.qty),2) AS total'))
+            ->join('orders', 'users.id', '=', 'orders.user_id')
+            ->join('order_details', 'orders.id', '=', 'order_details.order_id')
+            ->join('products', 'products.id', '=', 'order_details.product_id')
+            ->where('orders.status', 'Finished')
+            ->where('users.id', $id)
+            ->whereYear('order_details.created_at', '=', 2019)
+            ->groupByRaw('bulan, users.id')
+            ->orderBy('order_details.created_at', 'ASC')->pluck('total');
+
+        $bulan2019 = DB::table(DB::raw('users'))
+            ->select(DB::raw('monthname(order_details.created_at) AS bulan,  users.name AS name, round(SUM(order_details.price * order_details.qty),2) AS total'))
+            ->join('orders', 'users.id', '=', 'orders.user_id')
+            ->join('order_details', 'orders.id', '=', 'order_details.order_id')
+            ->join('products', 'products.id', '=', 'order_details.product_id')
+            ->where('orders.status', 'Finished')
+            ->where('users.id', $id)
+            ->whereYear('order_details.created_at', '=', 2019)
+            ->groupByRaw('bulan, users.id')
+            ->orderBy('order_details.created_at', 'ASC')->pluck('bulan');
+
+        $total2020 = DB::table(DB::raw('users'))
+            ->select(DB::raw('monthname(order_details.created_at) AS bulan,  users.name AS name, round(SUM(order_details.price * order_details.qty),2) AS total'))
+            ->join('orders', 'users.id', '=', 'orders.user_id')
+            ->join('order_details', 'orders.id', '=', 'order_details.order_id')
+            ->join('products', 'products.id', '=', 'order_details.product_id')
+            ->where('orders.status', 'Finished')
+            ->where('users.id', $id)
+            ->whereYear('order_details.created_at', '=', 2020)
+            ->groupByRaw('bulan, users.id')
+            ->orderBy('order_details.created_at', 'ASC')->pluck('total');
+
+        $bulan2020 = DB::table(DB::raw('users'))
+            ->select(DB::raw('monthname(order_details.created_at) AS bulan,  users.name AS name, round(SUM(order_details.price * order_details.qty),2) AS total'))
+            ->join('orders', 'users.id', '=', 'orders.user_id')
+            ->join('order_details', 'orders.id', '=', 'order_details.order_id')
+            ->join('products', 'products.id', '=', 'order_details.product_id')
+            ->where('orders.status', 'Finished')
+            ->where('users.id', $id)
+            ->whereYear('order_details.created_at', '=', 2020)
             ->groupByRaw('bulan, users.id')
             ->orderBy('order_details.created_at', 'ASC')->pluck('bulan');
 
@@ -70,7 +136,30 @@ class AdminUserController extends Controller
             ->groupByRaw('bulan, users.id')
             ->orderBy('order_details.created_at', 'ASC')->pluck('bulan');
 
-        return view('admin.users.show', compact('user', 'total2021', 'bulan2021', 'total2022', 'bulan2022', 'name'));
+        $total2022 = DB::table(DB::raw('users'))
+            ->select(DB::raw('monthname(order_details.created_at) AS bulan,  users.name AS name, round(SUM(order_details.price * order_details.qty),2) AS total'))
+            ->join('orders', 'users.id', '=', 'orders.user_id')
+            ->join('order_details', 'orders.id', '=', 'order_details.order_id')
+            ->join('products', 'products.id', '=', 'order_details.product_id')
+            ->where('orders.status', 'Finished')
+            ->where('users.id', $id)
+            ->whereYear('order_details.created_at', '=', 2022)
+            ->groupByRaw('bulan, users.id')
+            ->orderBy('order_details.created_at', 'ASC')->pluck('total');
+
+        $bulan2022 = DB::table(DB::raw('users'))
+            ->select(DB::raw('monthname(order_details.created_at) AS bulan,  users.name AS name, round(SUM(order_details.price * order_details.qty),2) AS total'))
+            ->join('orders', 'users.id', '=', 'orders.user_id')
+            ->join('order_details', 'orders.id', '=', 'order_details.order_id')
+            ->join('products', 'products.id', '=', 'order_details.product_id')
+            ->where('orders.status', 'Finished')
+            ->where('users.id', $id)
+            ->whereYear('order_details.created_at', '=', 2022)
+            ->groupByRaw('bulan, users.id')
+            ->orderBy('order_details.created_at', 'ASC')->pluck('bulan');
+
+        // dd($total2019);
+        return view('admin.users.show', compact('user','total2020', 'bulan2020', 'total2021', 'bulan2022', 'total2022', 'bulan2021', 'total2019', 'bulan2019', 'total2018', 'bulan2018', 'total2017', 'bulan2017', 'name'));
     }
 
     public function confirm($id)

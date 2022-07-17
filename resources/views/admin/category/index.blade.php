@@ -49,8 +49,8 @@
                         <thead class="table-dark">
                             <tr>
                                 <th style="width: 12.5%">Action</th>
-                                <th>Gambar</th>
-                                <th>Nama</th>
+                                <th>Image</th>
+                                <th>Name</th>
                                 <th>Slug</th>
                                 <th>Created At</th>
                             </tr>
@@ -108,7 +108,7 @@
                                     <td>{{ $cat->tahun }}</td>
                                     <td>{{ $cat->bulan }}</td>
                                     <td>{{ $cat->name }}</td>
-                                    <td>{{ number_format($cat->total, 0,",",".") }}</td>
+                                    <td>Rp {{ number_format($cat->total, 0,",",".") }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>

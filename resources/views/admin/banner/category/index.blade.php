@@ -47,8 +47,8 @@
                             <thead class="table-dark">
                                 <tr>
                                     <th>Action</th>
-                                    <th>Category ID</th>
                                     <th>Image</th>
+                                    <th style="width: 100px;">Category ID</th>
                                     <th>Name</th>
                                     <th>Created At</th>
                                 </tr>
@@ -65,11 +65,11 @@
                                                 class="btn btn-danger btn-sm btn-hapus" id="delete"><i
                                                     class="fa fa-trash"></i></a>
                                         </td>
-                                        <td>#{{ $item->category_id }}</td>
                                         <td>
                                             <img src="/image/admin/banner/category/{{ $item->image }}" alt="gambar"
                                                 width="50" height="50">
                                         </td>
+                                        <td>#{{ $item->category_id }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->created_at }}</td>
 
