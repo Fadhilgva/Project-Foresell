@@ -1,4 +1,4 @@
-<ul class="navbar-nav sidebar sidebar-light border-end accordion text-black" id="accordionSidebar" >
+<ul class="navbar-nav sidebar sidebar-light border-end accordion text-black" id="accordionSidebar">
 
   <!-- Sidebar - Brand -->
   <a class="sidebar-brand d-flex align-items-center justify-content-center mt-3 mb-3 ml-3" href="/">
@@ -32,7 +32,7 @@
     <div id="main" class="collapse @yield('main')" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <a class="collapse-item @yield('users')" href="/admin-foresell/list/users">Users</a>
-        <a class="collapse-item @yield('toko')" href="/admin-foresell/list/toko">Toko</a>
+        <a class="collapse-item @yield('toko')" href="/admin-foresell/list/toko">Store</a>
         <a class="collapse-item @yield('category')" href="/admin-foresell/list/category">Category</a>
         <a class="collapse-item @yield('payment')" href="/admin-foresell/list/payment">Payment</a>
         <a class="collapse-item @yield('couriers')" href="/admin-foresell/list/couriers">Couriers</a>

@@ -5,76 +5,109 @@
 @section('main-active', 'active')
 
 @push('script')
-    <script src="{{ asset('/vendor/admin_store/datatables/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('/vendor/admin_store/datatables/dataTables.bootstrap4.js') }}"></script>
-    <script>
-        $(function() {
+<script src="{{ asset('/vendor/admin_store/datatables/jquery.dataTables.js') }}"></script>
+<script src="{{ asset('/vendor/admin_store/datatables/dataTables.bootstrap4.js') }}"></script>
+<script>
+    $(function() {
             $("#example1").DataTable();
             $("#revenue").DataTable();
         });
-    </script>
+</script>
 @endpush
 
 @push('style')
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.12.1/datatables.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.12.1/datatables.min.css" />
 @endpush
 @section('content')
 
-    <h1 class="text-grey">List Toko</h1>
+<h1 class="text-grey">List Toko</h1>
 
-    <div class="row mb-4">
-        <div class="col-md-12">
-            <div class="box box-warning">
-                <div class="box-header mb-2">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <button class="btn btn-sm btn-flat btn-warning btn-refresh"><i class="fa fa-refresh"></i>
-                                Refresh</button>
-                        </div>
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="box box-warning">
+            <div class="box-header mb-2">
+                <div class="row">
+                    <div class="col-md-3">
+                        <button class="btn btn-sm btn-flat btn-warning btn-refresh"><i class="fa fa-refresh"></i>
+                            Refresh</button>
                     </div>
                 </div>
-                {{-- TABLE --}}
-                <div class="box-body">
-                    <div class="">
-                        <table id="example1"
-                            class="table tbl-users table-responsive-sm table-hover table-bordered bg-white">
+            </div>
+            {{-- TABLE --}}
+            <div class="box-body">
+                <div class="">
+                    <table id="example1" class="table tbl-users table-responsive-sm table-hover table-bordered bg-white">
+                        <thead class="table-dark">
+                            <tr>
+                                <th width="100px">Action</th>
+                                <th>Store ID</th>
+                                <th>Name</th>
+                                <th>Slug</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Tenant</th>
+                                <th>Location</th>
+                                <th>Created At</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($stores as $store)
+                            <tr>
+                                <td width="50px">
+                                    <div>
+                                        <a href="/admin-foresell/list/toko/{{ $store->id }}/confirm" class="btn btn-danger btn-sm btn-hapus" id="delete"><i class="fa fa-trash"></i></a>
+
+                                        <a href="/admin-foresell/list/toko/{{ $store->id }}/show" class="btn btn-warning btn-sm btn-eye" id=""><i class="fa fa-eye"></i></a>
+
+                                        {{-- <a href="#" class="btn btn-warning btn-sm btn-pen" id="btn-detail"><i class="fa fa-pen"></i></a> --}}
+                                    </div>
+                                </td>
+                                <td>#{{ $store->id }}</td>
+                                <td>{{ $store->name }}</td>
+                                <td>{{ $store->slug }}</td>
+                                <td>{{ $store->email }}</td>
+                                <td>{{ $store->phone }}</td>
+                                <td>{{ $store->userName }}</td>
+                                <td>{{ $store->location }}</td>
+                                <td>{{ $store->created_at }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-warning">
+            {{-- TABLE --}}
+            <div class="card mb-4">
+                <!-- Card Header - Accordion -->
+                <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample">
+                    <h6 class="m-0 font-weight-bold text-primary">Revenue</h6>
+                </a>
+                <div class="collapse show" id="collapseCardExample">
+                    <div class="card-body">
+                        <table id="revenue" class="table table-responsive-sm table-hover table-bordered bg-white">
                             <thead class="table-dark">
                                 <tr>
-                                    <th width="100px">Action</th>
-                                    <th>Store ID</th>
+                                    <th>Year</th>
+                                    <th>Month</th>
                                     <th>Name</th>
-                                    <th>Slug</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Tenant</th>
-                                    <th>Location</th>
-                                    <th>Created At</th>
+                                    <th>Total (Rupiah)</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($stores as $store)
-                                    <tr>
-                                        <td width="50px">
-                                            <div>
-                                                <a href="/admin-foresell/list/toko/{{ $store->id }}/confirm" class="btn btn-danger btn-sm btn-hapus"
-                                                    id="delete"><i class="fa fa-trash"></i></a>
-
-                                                <a href="/admin-foresell/list/toko/{{ $store->id }}/show" class="btn btn-warning btn-sm btn-eye" id=""><i
-                                                        class="fa fa-eye"></i></a>
-
-                                                {{-- <a href="#" class="btn btn-warning btn-sm btn-pen" id="btn-detail"><i
-                                                        class="fa fa-pen"></i></a> --}}
-                                            </div>
-                                        </td>
-                                        <td>#{{ $store->id }}</td>
-                                        <td>{{ $store->name }}</td>
-                                        <td>{{ $store->slug }}</td>
-                                        <td>{{ $store->email }}</td>
-                                        <td>{{ $store->phone }}</td>
-                                        <td>{{ $store->userName }}</td>
-                                        <td>{{ $store->location }}</td>
-                                        <td>{{ $store->created_at }}</td>
-                                    </tr>
+                                @foreach ($revenue_store as $store)
+                                <tr>
+                                    <td>{{ $store->tahun }}</td>
+                                    <td>{{ $store->bulan }}</td>
+                                    <td>{{ $store->name }}</td>
+                                    <td>{{ number_format($store->total, 0,",",".") }}</td>
+                                </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -83,147 +116,101 @@
             </div>
         </div>
     </div>
+</div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box box-warning">
-                {{-- TABLE --}}
-                <div class="card mb-4">
-                    <!-- Card Header - Accordion -->
-                    <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button"
-                        aria-expanded="false" aria-controls="collapseCardExample">
-                        <h6 class="m-0 font-weight-bold text-primary">Revenue</h6>
-                    </a>
-                    <div class="collapse show" id="collapseCardExample">
-                        <div class="card-body">
-                            <table id="revenue"
-                                class="table table-responsive-sm table-hover table-bordered bg-white">
-                                <thead class="table-dark">
-                                    <tr>
-                                        <th>Year</th>
-                                        <th>Month</th>
-                                        <th>Name</th>
-                                        <th>Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($revenue_store as $store)
-                                        <tr>
-                                            <td>{{ $store->tahun }}</td>
-                                            <td>{{ $store->bulan }}</td>
-                                            <td>{{ $store->name }}</td>
-                                            <td>Rp {{ $store->total }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+
+{{-- MODAL --}}
+<div class="modal fade" id="modal-filter" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+    <div class="modal-dialog modal-default modal-dialog-centered " role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h6 class="modal-title" id="modal-title-notification">Your attention is required</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <form role="form" action="#" method="get">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Dari Tanggal</label>
+                            <input type="text" class="form-control datepicker" id="exampleInputEmail1" placeholder="Dari Tanggal" name="dari" autocomplete="off" value="{{ date('Y-m-d') }}">
                         </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Sampai tanggal</label>
+                            <input type="text" class="form-control datepicker" name="sampai" id="exampleInputPassword1" placeholder="dari tanggal" autocomplete="off" value="{{ date('Y-m-d') }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Role</label>
+                            <select class="form-control" name="role">
+                                <option value="all" selected>All Role</option>
+                                <option value="4">Customer</option>
+                                <option value="3">Admin</option>
+                            </select>
+                        </div>
+
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                    <!-- /.box-body -->
 
-
-    {{-- MODAL --}}
-    <div class="modal fade" id="modal-filter" tabindex="-1" role="dialog" aria-labelledby="modal-notification"
-        aria-hidden="true">
-        <div class="modal-dialog modal-default modal-dialog-centered " role="document">
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <h6 class="modal-title" id="modal-title-notification">Your attention is required</h6>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-
-                <div class="modal-body">
-
-                    <form role="form" action="#" method="get">
-                        <div class="box-body">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Dari Tanggal</label>
-                                <input type="text" class="form-control datepicker" id="exampleInputEmail1"
-                                    placeholder="Dari Tanggal" name="dari" autocomplete="off"
-                                    value="{{ date('Y-m-d') }}">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Sampai tanggal</label>
-                                <input type="text" class="form-control datepicker" name="sampai"
-                                    id="exampleInputPassword1" placeholder="dari tanggal" autocomplete="off"
-                                    value="{{ date('Y-m-d') }}">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Role</label>
-                                <select class="form-control" name="role">
-                                    <option value="all" selected>All Role</option>
-                                    <option value="4">Customer</option>
-                                    <option value="3">Admin</option>
-                                </select>
-                            </div>
-
-                        </div>
-                        <!-- /.box-body -->
-
-                        <div class="box-footer">
-                            <button type="submit" class="btn btn-primary ml-3 mb-4">Submit</button>
-                        </div>
-                    </form>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- MODAL CHART --}}
-    <div class="modal fade p-2" id="modal-chart" tabindex="-1" role="dialog" aria-labelledby="modal-notification"
-        aria-hidden="true">
-        <div class="modal-dialog modal-default modal-dialog-centered " role="document">
-            <div class="modal-content">
-                {{-- Revenue Month Chart 3d --}}
-                <figure class="highcharts-figure">
-                    <div id="revenueMonth"></div>
-                    <p class="highcharts-description">
-                        Description
-                    </p>
-                    <div id="sliders">
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td><label for="alpha">Alpha Angle</label></td>
-                                    <td><input id="alpha" type="range" min="0" max="45" value="0">
-                                        <span id="alpha-value" class="value"></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><label for="beta">Beta Angle</label></td>
-                                    <td><input id="beta" type="range" min="-45" max="45" value="0">
-                                        <span id="beta-value" class="value"></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><label for="depth">Depth</label></td>
-                                    <td><input id="depth" type="range" min="20" max="100"
-                                            value="50">
-                                        <span id="depth-value" class="value"></span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary ml-3 mb-4">Submit</button>
                     </div>
-                </figure>
+                </form>
+
             </div>
         </div>
     </div>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
+</div>
+{{-- MODAL CHART --}}
+<div class="modal fade p-2" id="modal-chart" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+    <div class="modal-dialog modal-default modal-dialog-centered " role="document">
+        <div class="modal-content">
+            {{-- Revenue Month Chart 3d --}}
+            <figure class="highcharts-figure">
+                <div id="revenueMonth"></div>
+                <p class="highcharts-description">
+                    Description
+                </p>
+                <div id="sliders">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td><label for="alpha">Alpha Angle</label></td>
+                                <td><input id="alpha" type="range" min="0" max="45" value="0">
+                                    <span id="alpha-value" class="value"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="beta">Beta Angle</label></td>
+                                <td><input id="beta" type="range" min="-45" max="45" value="0">
+                                    <span id="beta-value" class="value"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="depth">Depth</label></td>
+                                <td><input id="depth" type="range" min="20" max="100" value="50">
+                                    <span id="depth-value" class="value"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </figure>
+        </div>
+    </div>
+</div>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
 
             // btn refresh
             $('.btn-refresh').click(function(e) {
@@ -312,5 +299,5 @@
         }));
 
         showValues();
-    </script>
+</script>
 @endsection

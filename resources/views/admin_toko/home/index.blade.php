@@ -63,7 +63,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Monthly Income</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp{{ $valueMonth }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp{{ number_format($valueMonth, 0,",",".") }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -81,7 +81,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Annual Income</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp{{ $valueYear }}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp{{ number_format($valueYear, 0,",",".") }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
