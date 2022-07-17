@@ -7,9 +7,9 @@
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">Apakah anda yakin ingin keluar.</div>
+        <div class="modal-body">are you sure you want to logout?</div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
           {{-- <a class="btn btn-primary" href="login.html">Logout</a> --}}
            <a class="btn btn-primary" href="{{ route('logout') }}"
                 onclick="event.preventDefault();

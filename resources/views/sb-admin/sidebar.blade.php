@@ -1,4 +1,4 @@
-<ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
+<ul class="navbar-nav sidebar sidebar-light border-end accordion text-black" id="accordionSidebar" >
 
   <!-- Sidebar - Brand -->
   <a class="sidebar-brand d-flex align-items-center justify-content-center mt-3 mb-3 ml-3" href="/">

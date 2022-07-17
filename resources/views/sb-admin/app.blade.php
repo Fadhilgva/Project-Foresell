@@ -24,7 +24,7 @@
         @include('sb-admin.topbar')
 
         <!-- Begin Page Content -->
-        <div class="container-fluid">
+        <div class="container-fluid py-4" style="background-color: #f0f8fa">
 
          @yield('content')
 

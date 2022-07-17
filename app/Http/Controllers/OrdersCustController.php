@@ -168,6 +168,26 @@ class OrdersCustController extends Controller
         return back();
     }
 
+    public function confirmOrder($id)
+    {
+        Alert::question('Order Confirmation', 'Have you received the products and have no complaints?')
+            ->showConfirmButton('<a href="/orders/' . $id . '/finish-order" class="text-white" style="text-decoration: none"> Confirm</a>', '#3085d6')->toHtml()
+            ->showCancelButton('Cancel', '#aaa')->reverseButtons();
+
+        return back();
+    }
+
+    public function finishOrder($id)
+    {
+        $order = Orders::find($id);
+        
+        $order->status = "Finished";
+        $order->save();
+
+        Alert::success('Success', 'Thank you for making a purchase');
+        return back();
+    }
+
     public function update(Request $request, $id)
     {
         $order = Orders::find($id);

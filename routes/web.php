@@ -140,6 +140,8 @@ Route::group(
         Route::get('/orders', [OrdersCustController::class, 'showorders']);
         Route::get('/orders/{orders:id}/confirm', [OrdersCustController::class, 'confirm']);
         Route::get('/orders/{orders:id}/delete', [OrdersCustController::class, 'delete']);
+        Route::get('/orders/{orders:id}/confirm-order', [OrdersCustController::class, 'confirmOrder']);
+        Route::get('/orders/{orders:id}/finish-order', [OrdersCustController::class, 'finishOrder']);
         Route::post('/orders/{orders:id}/update', [OrdersCustController::class, 'update']);
         Route::get('/orderdetails/{order:id}', [OrdersCustController::class, 'showordersdetails']);
     }

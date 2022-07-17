@@ -50,7 +50,7 @@
                                         @break
                                         @case($order->status == "Shipping")
                                         <p class="badge text-bg-warning mt-4">Shipping</p>
-                                        <a href="/orders/{{ $order->id }}/confirm" class="btn btn-success btn-sm ms-5">Confirm Order</a>
+                                        <a href="/orders/{{ $order->id }}/confirm-order" class="btn btn-success btn-sm ms-5">Confirm Order</a>
                                         @break
                                         @case($order->status == "Finished")
                                         <p class="badge text-bg-success mt-4">Finished</p>
