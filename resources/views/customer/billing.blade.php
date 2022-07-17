@@ -52,10 +52,35 @@
                                             <div class="form-check my-5 mx-3">
                                                 <input class="form-check-input" type="radio" name="bank" id="bank" value="{{ $bank->id }}" required>
                                                 <div class="accordion-body small">
+                                                    @switch($bank->type)
+                                                    @case($bank->type == "bank")
                                                     No. Rekening : <strong>{{ $bank->noPayment }}</strong>
+                                                    @break
+                                                    @case($bank->type == "gopay")
+                                                    No. Gopay : <strong>{{ $bank->noPayment }}</strong>
+                                                    @break
+                                                    @case($bank->type == "ovo")
+                                                    No. Ovo : <strong>{{ $bank->noPayment }}</strong>
+                                                    @break
+                                                    @case($bank->type == "cod")
+                                                    <strong>{{ $bank->noPayment }}</strong>
+                                                    @break
+                                                    @endswitch
                                                     <br>
                                                     <br>
-                                                    Bayarkan pesanan ke nomor rekening di atas <br>dengan Total Pembayaran : <strong>Rp{{ number_format($cartdetail->total, 0,",",".") }}</strong>
+                                                    Bayarkan pesanan ke nomor
+                                                    @switch($bank->type)
+                                                    @case($bank->type == "bank")
+                                                    Rekening
+                                                    @break
+                                                    @case($bank->type == "gopay")
+                                                    Gopay
+                                                    @break
+                                                    @case($bank->type == "ovo")
+                                                    Ovo
+                                                    @break
+                                                    @endswitch
+                                                    di atas <br>dengan Total Pembayaran : <strong>Rp{{ number_format($cartdetail->total, 0,",",".") }}</strong>
                                                 </div>
                                             </div>
                                         </div>
