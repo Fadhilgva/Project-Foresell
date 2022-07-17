@@ -64,8 +64,8 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Action</th>
                                     <th scope="col">Logo</th>
-                                    <th scope="col">Nama</th>
-                                    <th scope="col">Tipe</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Type</th>
                                     <th scope="col">No (Rekening / Gopay / Ovo)</th>
                                     <th scope="col">Created At</th>
                                 </tr>
@@ -90,7 +90,7 @@
                                         <td>{{ $pay->name }}</td>
                                         <td>{{ $pay->type }}</td>
                                         <td>{{ $pay->noPayment }}</td>
-                                        <td>{{ $pay->created_at->diffForHumans() }}</td>
+                                        <td>{{ $pay->created_at }}</td>
 
                                 </tr>
                                 @endforeach

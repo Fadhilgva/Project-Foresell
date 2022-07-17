@@ -180,7 +180,7 @@ class OrdersCustController extends Controller
     public function finishOrder($id)
     {
         $order = Orders::find($id);
-        
+
         $order->status = "Finished";
         $order->save();
 
@@ -197,3 +197,7 @@ class OrdersCustController extends Controller
         return back();
     }
 }
+
+
+
+

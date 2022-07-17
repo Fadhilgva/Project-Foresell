@@ -52,7 +52,7 @@
                                     <th>User ID</th>
                                     <th>Product</th>
                                     <th>Qty</th>
-                                    <th>Total (Rupiah)</th>
+                                    <th>Total</th>
                                     <th>Status</th>
                                     <th>Payment</th>
                                     <th>Courier</th>
@@ -79,7 +79,7 @@
                                     <td class="text-center">#{{ $data->userId }}</td>
                                     <td>{{ $data->productName }}</td>
                                     <td class="text-center">{{ $data->qty }}</td>
-                                    <td>{{ number_format($data->total, 0,",",".") }}</td>
+                                    <td>Rp {{ number_format($data->total, 0,",",".") }}</td>
                                     @if ($data->status == "Proccessed")
                                     <td class="text-center"><span class="badge bg-primary">{{ $data->status }}</span></td>
                                     @elseif ($data->status == "Waiting")

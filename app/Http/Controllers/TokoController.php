@@ -26,6 +26,8 @@ class TokoController extends Controller
 
         $revenue_store = Store::join('products', 'products.store_id', '=', 'stores.id')
             ->join('order_details', 'order_details.product_id', '=', 'products.id')
+            ->join('orders', 'order_details.order_id', '=', 'orders.id')
+            ->where('orders.status', '=', 'Finished')
             ->select(DB::raw('  monthname(order_details.created_at) AS bulan, YEAR(order_details.created_at) AS tahun,
                                 stores.name AS name,
                                 round(SUM(order_details.price * order_details.qty),2) AS total'))
@@ -66,25 +68,93 @@ class TokoController extends Controller
 
         $store = Store::whereId($id)->first();
         $name = Store::whereId($id)->select('name')->pluck('name');
-        $total2022 = Store::join('products', 'products.store_id', '=', 'stores.id')
+        $total2017 = Store::join('products', 'products.store_id', '=', 'stores.id')
             ->join('order_details', 'order_details.product_id', '=', 'products.id')
+            ->join('orders', 'order_details.order_id', '=', 'orders.id')
+            ->where('orders.status', '=', 'Finished')
             ->where('stores.id', $id)
-            ->whereYear('order_details.created_at', 2022)
+            ->whereYear('order_details.created_at', 2017)
+            ->select(DB::raw('  monthname(order_details.created_at) AS bulan, YEAR(order_details.created_at) AS tahun,
+                                round(SUM(order_details.price * order_details.qty),2) AS total'))
+            ->groupByRaw('YEAR(order_details.created_at), MONTH(order_details.created_at)')->pluck('total');
+
+        $bulan2017 = Store::join('products', 'products.store_id', '=', 'stores.id')
+            ->join('order_details', 'order_details.product_id', '=', 'products.id')
+            ->join('orders', 'order_details.order_id', '=', 'orders.id')
+            ->where('orders.status', '=', 'Finished')
+            ->where('stores.id', $id)
+            ->whereYear('order_details.created_at', 2017)
+            ->select(DB::raw('  monthname(order_details.created_at) AS bulan, YEAR(order_details.created_at) AS tahun,
+                                round(SUM(order_details.price * order_details.qty),2) AS total'))
+            ->groupByRaw('YEAR(order_details.created_at), MONTH(order_details.created_at)')->pluck('bulan');
+
+        $total2018 = Store::join('products', 'products.store_id', '=', 'stores.id')
+            ->join('order_details', 'order_details.product_id', '=', 'products.id')
+            ->join('orders', 'order_details.order_id', '=', 'orders.id')
+            ->where('orders.status', '=', 'Finished')
+            ->where('stores.id', $id)
+            ->whereYear('order_details.created_at', 2018)
             ->select(DB::raw('  monthname(order_details.created_at) AS bulan, YEAR(order_details.created_at) AS tahun,
                                 round(SUM(order_details.price * order_details.qty),2) AS total'))
             ->groupByRaw('YEAR(order_details.created_at), MONTH(order_details.created_at)')->pluck('total');
 
 
-        $bulan2022 = Store::join('products', 'products.store_id', '=', 'stores.id')
+        $bulan2018 = Store::join('products', 'products.store_id', '=', 'stores.id')
             ->join('order_details', 'order_details.product_id', '=', 'products.id')
+            ->join('orders', 'order_details.order_id', '=', 'orders.id')
+            ->where('orders.status', '=', 'Finished')
             ->where('stores.id', $id)
-            ->whereYear('order_details.created_at', 2022)
+            ->whereYear('order_details.created_at', 2018)
+            ->select(DB::raw('  monthname(order_details.created_at) AS bulan, YEAR(order_details.created_at) AS tahun,
+                                round(SUM(order_details.price * order_details.qty),2) AS total'))
+            ->groupByRaw('YEAR(order_details.created_at), MONTH(order_details.created_at)')->pluck('bulan');
+
+        $total2019 = Store::join('products', 'products.store_id', '=', 'stores.id')
+            ->join('order_details', 'order_details.product_id', '=', 'products.id')
+            ->join('orders', 'order_details.order_id', '=', 'orders.id')
+            ->where('orders.status', '=', 'Finished')
+            ->where('stores.id', $id)
+            ->whereYear('order_details.created_at', 2019)
+            ->select(DB::raw('  monthname(order_details.created_at) AS bulan, YEAR(order_details.created_at) AS tahun,
+                                round(SUM(order_details.price * order_details.qty),2) AS total'))
+            ->groupByRaw('YEAR(order_details.created_at), MONTH(order_details.created_at)')->pluck('total');
+
+
+        $bulan2019 = Store::join('products', 'products.store_id', '=', 'stores.id')
+            ->join('order_details', 'order_details.product_id', '=', 'products.id')
+            ->join('orders', 'order_details.order_id', '=', 'orders.id')
+            ->where('orders.status', '=', 'Finished')
+            ->where('stores.id', $id)
+            ->whereYear('order_details.created_at', 2019)
+            ->select(DB::raw('  monthname(order_details.created_at) AS bulan, YEAR(order_details.created_at) AS tahun,
+                                round(SUM(order_details.price * order_details.qty),2) AS total'))
+            ->groupByRaw('YEAR(order_details.created_at), MONTH(order_details.created_at)')->pluck('bulan');
+
+        $total2020 = Store::join('products', 'products.store_id', '=', 'stores.id')
+            ->join('order_details', 'order_details.product_id', '=', 'products.id')
+            ->join('orders', 'order_details.order_id', '=', 'orders.id')
+            ->where('orders.status', '=', 'Finished')
+            ->where('stores.id', $id)
+            ->whereYear('order_details.created_at', 2020)
+            ->select(DB::raw('  monthname(order_details.created_at) AS bulan, YEAR(order_details.created_at) AS tahun,
+                                round(SUM(order_details.price * order_details.qty),2) AS total'))
+            ->groupByRaw('YEAR(order_details.created_at), MONTH(order_details.created_at)')->pluck('total');
+
+
+        $bulan2020 = Store::join('products', 'products.store_id', '=', 'stores.id')
+            ->join('order_details', 'order_details.product_id', '=', 'products.id')
+            ->join('orders', 'order_details.order_id', '=', 'orders.id')
+            ->where('orders.status', '=', 'Finished')
+            ->where('stores.id', $id)
+            ->whereYear('order_details.created_at', 2020)
             ->select(DB::raw('  monthname(order_details.created_at) AS bulan, YEAR(order_details.created_at) AS tahun,
                                 round(SUM(order_details.price * order_details.qty),2) AS total'))
             ->groupByRaw('YEAR(order_details.created_at), MONTH(order_details.created_at)')->pluck('bulan');
 
         $total2021 = Store::join('products', 'products.store_id', '=', 'stores.id')
             ->join('order_details', 'order_details.product_id', '=', 'products.id')
+            ->join('orders', 'order_details.order_id', '=', 'orders.id')
+            ->where('orders.status', '=', 'Finished')
             ->where('stores.id', $id)
             ->whereYear('order_details.created_at', 2021)
             ->select(DB::raw('  monthname(order_details.created_at) AS bulan, YEAR(order_details.created_at) AS tahun,
@@ -94,13 +164,36 @@ class TokoController extends Controller
 
         $bulan2021 = Store::join('products', 'products.store_id', '=', 'stores.id')
             ->join('order_details', 'order_details.product_id', '=', 'products.id')
+            ->join('orders', 'order_details.order_id', '=', 'orders.id')
+            ->where('orders.status', '=', 'Finished')
             ->where('stores.id', $id)
             ->whereYear('order_details.created_at', 2021)
             ->select(DB::raw('  monthname(order_details.created_at) AS bulan, YEAR(order_details.created_at) AS tahun,
                                 round(SUM(order_details.price * order_details.qty),2) AS total'))
             ->groupByRaw('YEAR(order_details.created_at), MONTH(order_details.created_at)')->pluck('bulan');
 
-        return view('admin.toko.show', compact('store', 'total2022', 'bulan2022', 'name', 'total2021', 'bulan2021'));
+        $total2022 = Store::join('products', 'products.store_id', '=', 'stores.id')
+            ->join('order_details', 'order_details.product_id', '=', 'products.id')
+            ->join('orders', 'order_details.order_id', '=', 'orders.id')
+            ->where('orders.status', '=', 'Finished')
+            ->where('stores.id', $id)
+            ->whereYear('order_details.created_at', 2022)
+            ->select(DB::raw('  monthname(order_details.created_at) AS bulan, YEAR(order_details.created_at) AS tahun,
+                                round(SUM(order_details.price * order_details.qty),2) AS total'))
+            ->groupByRaw('YEAR(order_details.created_at), MONTH(order_details.created_at)')->pluck('total');
+
+
+        $bulan2022 = Store::join('products', 'products.store_id', '=', 'stores.id')
+            ->join('order_details', 'order_details.product_id', '=', 'products.id')
+            ->join('orders', 'order_details.order_id', '=', 'orders.id')
+            ->where('orders.status', '=', 'Finished')
+            ->where('stores.id', $id)
+            ->whereYear('order_details.created_at', 2022)
+            ->select(DB::raw('  monthname(order_details.created_at) AS bulan, YEAR(order_details.created_at) AS tahun,
+                                round(SUM(order_details.price * order_details.qty),2) AS total'))
+            ->groupByRaw('YEAR(order_details.created_at), MONTH(order_details.created_at)')->pluck('bulan');
+
+        return view('admin.toko.show', compact('store', 'name', 'total2020', 'bulan2020', 'total2021', 'bulan2022', 'total2022', 'bulan2021', 'total2019', 'bulan2019', 'total2018', 'bulan2018', 'total2017', 'bulan2017'));
     }
 
     /**

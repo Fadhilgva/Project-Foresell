@@ -91,7 +91,7 @@ class AdminCategoryController extends Controller
         $categories = AdminCategory::whereId($id)->first();
         $name = AdminCategory::whereId($id)->select('name')->pluck('name');
         $total2022 = Category::select(DB::raw('monthname(order_details.created_at) AS bulan,  categories.name AS name,
-        round(SUM(order_details.price * order_details.qty),2) AS total'))
+                                              round(SUM(order_details.price * order_details.qty),2) AS total'))
             ->join('products', 'products.category_id', '=', 'categories.id')
             ->join('order_details', 'order_details.product_id', '=', 'products.id')
             ->join('orders', 'orders.id', '=', 'order_details.order_id')
@@ -134,9 +134,97 @@ class AdminCategoryController extends Controller
             ->orderBy('order_details.created_at', 'ASC')
             ->groupByRaw('categories.id, bulan')->pluck('bulan');
 
+        $total2020 = Category::select(DB::raw('monthname(order_details.created_at) AS bulan,  categories.name AS name,
+            round(SUM(order_details.price * order_details.qty),2) AS total'))
+            ->join('products', 'products.category_id', '=', 'categories.id')
+            ->join('order_details', 'order_details.product_id', '=', 'products.id')
+            ->join('orders', 'orders.id', '=', 'order_details.order_id')
+            ->where('orders.status', 'Finished')
+            ->where('categories.id', $id)
+            ->WhereYear('order_details.created_at', 2020)
+            ->groupByRaw('categories.id, MONTH(order_details.created_at)')
+            ->orderBy('order_details.created_at', 'ASC')->pluck('total');
+
+        $bulan2020 = DB::table(DB::raw('products'))
+            ->select(DB::raw('monthname(order_details.created_at) AS bulan,  categories.name AS name, round(SUM(order_details.price * order_details.qty),2) AS total'))
+            ->join('order_details', 'products.id', '=', 'order_details.product_id')
+            ->join('categories', 'products.category_id', '=', 'categories.id')
+            ->join('orders', 'orders.id', '=', 'order_details.order_id')
+            ->where('orders.status', 'Finished')
+            ->where('categories.id', $id)
+            ->WhereYear('order_details.created_at', '=', 2020)
+            ->orderBy('order_details.created_at', 'ASC')
+            ->groupByRaw('categories.id, bulan')->pluck('bulan');
+
+        $total2019 = Category::select(DB::raw('monthname(order_details.created_at) AS bulan,  categories.name AS name,
+                            round(SUM(order_details.price * order_details.qty),2) AS total'))
+            ->join('products', 'products.category_id', '=', 'categories.id')
+            ->join('order_details', 'order_details.product_id', '=', 'products.id')
+            ->join('orders', 'orders.id', '=', 'order_details.order_id')
+            ->where('orders.status', 'Finished')
+            ->where('categories.id', $id)
+            ->WhereYear('order_details.created_at', 2019)
+            ->groupByRaw('categories.id, MONTH(order_details.created_at)')
+            ->orderBy('order_details.created_at', 'ASC')->pluck('total');
+
+        $bulan2019 = DB::table(DB::raw('products'))
+            ->select(DB::raw('monthname(order_details.created_at) AS bulan,  categories.name AS name, round(SUM(order_details.price * order_details.qty),2) AS total'))
+            ->join('order_details', 'products.id', '=', 'order_details.product_id')
+            ->join('categories', 'products.category_id', '=', 'categories.id')
+            ->join('orders', 'orders.id', '=', 'order_details.order_id')
+            ->where('orders.status', 'Finished')
+            ->where('categories.id', $id)
+            ->WhereYear('order_details.created_at', '=', 2019)
+            ->orderBy('order_details.created_at', 'ASC')
+            ->groupByRaw('categories.id, bulan')->pluck('bulan');
+
+        $total2018 = Category::select(DB::raw('monthname(order_details.created_at) AS bulan,  categories.name AS name,
+                round(SUM(order_details.price * order_details.qty),2) AS total'))
+            ->join('products', 'products.category_id', '=', 'categories.id')
+            ->join('order_details', 'order_details.product_id', '=', 'products.id')
+            ->join('orders', 'orders.id', '=', 'order_details.order_id')
+            ->where('orders.status', 'Finished')
+            ->where('categories.id', $id)
+            ->WhereYear('order_details.created_at', 2018)
+            ->groupByRaw('categories.id, MONTH(order_details.created_at)')
+            ->orderBy('order_details.created_at', 'ASC')->pluck('total');
+
+        $bulan2018 = DB::table(DB::raw('products'))
+            ->select(DB::raw('monthname(order_details.created_at) AS bulan,  categories.name AS name, round(SUM(order_details.price * order_details.qty),2) AS total'))
+            ->join('order_details', 'products.id', '=', 'order_details.product_id')
+            ->join('categories', 'products.category_id', '=', 'categories.id')
+            ->join('orders', 'orders.id', '=', 'order_details.order_id')
+            ->where('orders.status', 'Finished')
+            ->where('categories.id', $id)
+            ->WhereYear('order_details.created_at', '=', 2018)
+            ->orderBy('order_details.created_at', 'ASC')
+            ->groupByRaw('categories.id, bulan')->pluck('bulan');
+
+        $total2017 = Category::select(DB::raw('monthname(order_details.created_at) AS bulan,  categories.name AS name,
+                                round(SUM(order_details.price * order_details.qty),2) AS total'))
+            ->join('products', 'products.category_id', '=', 'categories.id')
+            ->join('order_details', 'order_details.product_id', '=', 'products.id')
+            ->join('orders', 'orders.id', '=', 'order_details.order_id')
+            ->where('orders.status', 'Finished')
+            ->where('categories.id', $id)
+            ->WhereYear('order_details.created_at', 2017)
+            ->groupByRaw('categories.id, MONTH(order_details.created_at)')
+            ->orderBy('order_details.created_at', 'ASC')->pluck('total');
+
+        $bulan2017 = DB::table(DB::raw('products'))
+            ->select(DB::raw('monthname(order_details.created_at) AS bulan,  categories.name AS name, round(SUM(order_details.price * order_details.qty),2) AS total'))
+            ->join('order_details', 'products.id', '=', 'order_details.product_id')
+            ->join('categories', 'products.category_id', '=', 'categories.id')
+            ->join('orders', 'orders.id', '=', 'order_details.order_id')
+            ->where('orders.status', 'Finished')
+            ->where('categories.id', $id)
+            ->WhereYear('order_details.created_at', '=', 2017)
+            ->orderBy('order_details.created_at', 'ASC')
+            ->groupByRaw('categories.id, bulan')->pluck('bulan');
+
         // dd($total);
 
-        return view('admin.category.show', compact('categories', 'total2022', 'bulan2022', 'name', 'total2021', 'bulan2021'));
+        return view('admin.category.show', compact('categories', 'name', 'total2020', 'bulan2020', 'total2021', 'bulan2022', 'total2022', 'bulan2021', 'total2019', 'bulan2019', 'total2018', 'bulan2018', 'total2017', 'bulan2017'));
     }
 
     /**

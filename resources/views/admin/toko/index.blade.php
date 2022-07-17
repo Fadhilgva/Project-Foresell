@@ -97,7 +97,7 @@
                                     <th>Year</th>
                                     <th>Month</th>
                                     <th>Name</th>
-                                    <th>Total (Rupiah)</th>
+                                    <th>Total</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -106,7 +106,7 @@
                                     <td>{{ $store->tahun }}</td>
                                     <td>{{ $store->bulan }}</td>
                                     <td>{{ $store->name }}</td>
-                                    <td>{{ number_format($store->total, 0,",",".") }}</td>
+                                    <td>Rp {{ number_format($store->total, 0,",",".") }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
