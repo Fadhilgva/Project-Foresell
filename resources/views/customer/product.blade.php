@@ -199,9 +199,9 @@
                                         </ul>
                                         <h3 class="title"><a href="/products/{{ $product->slug }}">{{ $product->name }}</a></h3>
                                         @if($product->discount >= 1)
-                                        <div class="price_ mt-2">Rp{{ $product->price * ((100 - $product->discount)/100) }}</div>
+                                        <div class="price_ mt-2">Rp{{ number_format(($product->price * ((100 - $product->discount)/100)), 0,",",".") }}</div>
                                         <div class="small text-secondary text-decoration-line-through diskon">
-                                            <sub class="mb-2">Rp{{ $product->price }}</sub>
+                                            <sub class="mb-2">Rp{{ number_format($product->price, 0,",",".") }}</sub>
                                         </div>
 
                                         @else
@@ -268,13 +268,13 @@
                                         </ul>
                                         <h3 class="title"><a href="/products/{{ $product->slug }}">{{ $product->name }}</a></h3>
                                         @if($product->discount >= 1)
-                                        <div class="price_ mt-2">Rp{{ $product->price * ((100 - $product->discount)/100) }}</div>
+                                        <div class="price_ mt-2">Rp{{ number_format(($product->price * ((100 - $product->discount)/100)), 0,",",".") }}</div>
                                         <div class="small text-secondary text-decoration-line-through diskon">
-                                            <sub class="mb-2">Rp{{ $product->price }}</sub>
+                                            <sub class="mb-2">Rp{{ number_format($product->price, 0,",",".") }}</sub>
                                         </div>
 
                                         @else
-                                        <div class="price_ mt-2">Rp{{ $product->price }}</div>
+                                        <div class="price_ mt-2">Rp{{ number_format($product->price, 0,",",".") }}</div>
                                         @endif
                                     </div>
                                 </div>
@@ -337,13 +337,13 @@
                                         </ul>
                                         <h3 class="title"><a href="/products/{{ $product->slug }}">{{ $product->name }}</a></h3>
                                         @if($product->discount >= 1)
-                                        <div class="price_ mt-2">Rp{{ $product->price * ((100 - $product->discount)/100) }}</div>
+                                        <div class="price_ mt-2">Rp{{ number_format(($product->price * ((100 - $product->discount)/100)), 0,",",".") }}</div>
                                         <div class="small text-secondary text-decoration-line-through diskon">
-                                            <sub class="mb-2">Rp{{ $product->price }}</sub>
+                                            <sub class="mb-2">Rp{{ number_format($product->price, 0,",",".") }}</sub>
                                         </div>
 
                                         @else
-                                        <div class="price_ mt-2">Rp{{ $product->price }}</div>
+                                        <div class="price_ mt-2">Rp{{ number_format($product->price, 0,",",".") }}</div>
                                         @endif
                                     </div>
                                 </div>
@@ -425,13 +425,13 @@
                                         </ul>
                                         <h3 class="title"><a href="/products/{{ $product->slug }}">{{ $product->name }}</a></h3>
                                         @if($product->discount >= 1)
-                                        <div class="price_ mt-2">Rp{{ $product->price * ((100 - $product->discount)/100) }}</div>
+                                        <div class="price_ mt-2">Rp{{ number_format(($product->price * ((100 - $product->discount)/100)), 0,",",".") }}</div>
                                         <div class="small text-secondary text-decoration-line-through diskon">
-                                            <sub class="mb-2">Rp{{ $product->price }}</sub>
+                                            <sub class="mb-2">Rp{{ number_format($product->price, 0,",",".") }}</sub>
                                         </div>
 
                                         @else
-                                        <div class="price_ mt-2">Rp{{ $product->price }}</div>
+                                        <div class="price_ mt-2">Rp{{ number_format($product->price, 0,",",".") }}</div>
                                         @endif
                                     </div>
                                 </div>
@@ -494,13 +494,13 @@
                                         </ul>
                                         <h3 class="title"><a href="/products/{{ $product->slug }}">{{ $product->name }}</a></h3>
                                         @if($product->discount >= 1)
-                                        <div class="price_ mt-2">Rp{{ $product->price * ((100 - $product->discount)/100) }}</div>
+                                        <div class="price_ mt-2">Rp{{ number_format(($product->price * ((100 - $product->discount)/100)), 0,",",".") }}</div>
                                         <div class="small text-secondary text-decoration-line-through diskon">
-                                            <sub class="mb-2">Rp{{ $product->price }}</sub>
+                                            <sub class="mb-2">Rp{{ number_format($product->price, 0,",",".") }}</sub>
                                         </div>
 
                                         @else
-                                        <div class="price_ mt-2">Rp{{ $product->price }}</div>
+                                        <div class="price_ mt-2">Rp{{ number_format($product->price, 0,",",".") }}</div>
                                         @endif
                                     </div>
                                 </div>
@@ -563,13 +563,13 @@
                                         </ul>
                                         <h3 class="title"><a href="/products/{{ $product->slug }}">{{ $product->name }}</a></h3>
                                         @if($product->discount >= 1)
-                                        <div class="price_ mt-2">Rp{{ $product->price * ((100 - $product->discount)/100) }}</div>
+                                        <div class="price_ mt-2">Rp{{ number_format(($product->price * ((100 - $product->discount)/100)), 0,",",".") }}</div>
                                         <div class="small text-secondary text-decoration-line-through diskon">
-                                            <sub class="mb-2">Rp{{ $product->price }}</sub>
+                                            <sub class="mb-2">Rp{{ number_format($product->price, 0,",",".") }}</sub>
                                         </div>
 
                                         @else
-                                        <div class="price_ mt-2">Rp{{ $product->price }}</div>
+                                        <div class="price_ mt-2">Rp{{ number_format($product->price, 0,",",".") }}</div>
                                         @endif
                                     </div>
                                 </div>

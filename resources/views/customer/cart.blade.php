@@ -74,7 +74,7 @@
                                             <div class="row">
                                                 <div class="col-5">
                                                     <input type="hidden" name="cart" value="{{ $cart->id }}">
-                                                    <input type="number" name="quantity" value="{{ $cart->qty }}" class="w-100 ms-5">
+                                                    <input type="number" name="quantity" value="{{ $cart->qty }}" class="w-100 ms-5" min="0" max="{{ $cart->product->stock }}">
                                                 </div>
                                             </div>
                                             <button type="submit" class="btn btn-sm btn-dark ms-5    mt-2" style="margin-right:20px">Update</button>
