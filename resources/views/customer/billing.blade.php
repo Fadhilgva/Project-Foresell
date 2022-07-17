@@ -162,7 +162,7 @@
                                         <tr>
                                             <th scope="row">
                                                 <label class="list-group-item d-flex gap-2 my-2">
-                                                    <input class="form-check-input flex-shrink-0" type="radio" name="courier" id="listGroupRadios1" value="{{ $courier->id }}" />
+                                                    <input class="form-check-input flex-shrink-0" type="radio" name="courier" id="listGroupRadios1" value="{{ $courier->id }}" required />
                                                     <span>
                                                         @if($courier->image)
                                                         <img src="image\admin\couriers\{{ $courier->image }}" class="rounded-circle me-1" width="30">
