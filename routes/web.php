@@ -184,22 +184,25 @@ Route::middleware(['auth', 'role:adminToko'])->group(function () {
     // Route::get('/admin_toko/kategori/edit', [KategoriController::class, 'edit']);
 
     //CRUD Data Order
-    Route::get('/admin_toko/data_order', [DataOrderController::class, 'index']);
-    Route::get('/admin_toko/data_order/create', [DataOrderController::class, 'create']);
+    //Read
+    Route::get('/admin_toko/data_order', [DataOrderController::class, 'index']);//Route List data order
+    Route::get('/admin_toko/data_order/{data_order_id}', [DataOrderController::class, 'show']);//Route detail data order
+    //Update
+    Route::get('/admin_toko/data_order/{data_order_id}/edit', [DataProdukController::class, 'edit']); //Route menuju ke form edit
+    Route::put('/admin_toko/data_order/{data_order_id}', [DataProdukController::class, 'update']); //Route untuk update data berdasarkan id di database
+    //Delete
+    Route::get('/admin_toko/data_order/{id}/delete', [DataProdukController::class, 'delete']);
 
     //CRUD Selesaikan Pesanan
-    Route::get('/admin_toko/selesaikan_pesanan', [SelesaikanPesananController::class, 'index']);
+    // Route::get('/admin_toko/selesaikan_pesanan', [SelesaikanPesananController::class, 'index']);
 
-    //CRUD Data Order
-    Route::get('/admin_toko/data_order', [DataOrderController::class, 'index']);
-    Route::get('/admin_toko/data_order/create', [DataOrderController::class, 'create']);
 
     //CRUD Data Penjualan
     Route::get('/admin_toko/data_penjualan', [DataPenjualanController::class, 'index']);
 
     //CRUD Tambah Diskon
-    Route::get('/admin_toko/tambah_diskon', [TambahDiskonController::class, 'index']);
-    Route::get('/admin_toko/tambah_diskon/edit', [TambahDiskonController::class, 'edit']);
+    // Route::get('/admin_toko/tambah_diskon', [TambahDiskonController::class, 'index']);
+    // Route::get('/admin_toko/tambah_diskon/edit', [TambahDiskonController::class, 'edit']);
 });
 
 

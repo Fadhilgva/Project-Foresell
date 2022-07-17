@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Store;
+use App\Models\Orders;
+use App\Models\Courier;
+use App\Models\Product;
+use App\Models\OrderDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Orders;
 
 class DataOrderController extends Controller
 {
@@ -33,7 +38,7 @@ class DataOrderController extends Controller
      */
     public function create()
     {
-        return view('admin_toko.data_order.create');
+        
     }
 
     /**
@@ -42,9 +47,9 @@ class DataOrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        
     }
 
     /**
@@ -53,9 +58,9 @@ class DataOrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        
     }
 
     /**
@@ -64,9 +69,20 @@ class DataOrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($data_order_id)
     {
-        //
+        $orders = Orders::join('order_details', 'orders.id', '=', 'order_details.order_id')
+            ->join('products', 'order_details.product_id', '=', 'products.id')
+            ->join('stores', 'products.store_id', '=', 'stores.id')
+            ->where('stores.user_id', '=', Auth::user()->id)
+            ->count('order_details.id');
+
+        $orders = Orders::where('id', $data_order_id)->first();
+        
+        return view('admin_toko.data_order.index', [
+            'orders' => $orders,
+
+        ]);
     }
 
     /**
@@ -76,9 +92,28 @@ class DataOrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $request->validate([
+            'status' => 'required',
+            
+        ]);
+
+        $orders = Orders::join('order_details', 'orders.id', '=', 'order_details.order_id')
+            ->join('products', 'order_details.product_id', '=', 'products.id')
+            ->join('stores', 'products.store_id', '=', 'stores.id')
+            ->where('stores.user_id', '=', Auth::user()->id)
+            ->count('order_details.id');
+        
+        // $orders = Orders::find($data_order_id);
+
+        $orders->status = $request['status'];
+
+        $orders->save();
+        return view('admin_toko.data_order', [
+            'orders' => $orders,
+
+        ]);
     }
 
     /**
@@ -87,8 +122,12 @@ class DataOrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        $orders = Orders::find($id);
+
+        $orders->delete();
+
+        return redirect('admin_toko.data_order');
     }
 }

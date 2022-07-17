@@ -44,12 +44,11 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item title" href="/admin_toko/selesaikan_pesanan">Process Payment</a>
-                <a class="collapse-item title" href="/admin_toko/data_order">Data Order</a>
-                <a class="collapse-item title" href="/admin_toko/data_penjualan">Data Penjualan</a>
-                <a class="collapse-item title" href="/admin_toko/tambah_diskon">Tambah Diskon</a>
+                
+                <a class="collapse-item title" href="/admin_toko/tambah_diskon">Tambah Diskon</a> 
             </div>
         </div>
-    </li>
+    </li> --}}
 
     <!-- Divider -->
     <hr class="sidebar-divider">
