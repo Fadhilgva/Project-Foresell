@@ -28,7 +28,7 @@
                                     <div class="email">{{ $orders->email }}</div>
                                     <div class="address mt-4">{{ $orders->address }}</div>
                                     <div class="my-3"></div>
-                                    <div>Payment Method : {{ $orders->Bank->bankName }}</div>
+                                    <div>Payment Method : {{ $orders->Bank->name }}</div>
                                     <div>Shipping Courier : {{ $orders->Courier->name }}</div>
                                 </div>
                                 <div class="col invoice-details">
