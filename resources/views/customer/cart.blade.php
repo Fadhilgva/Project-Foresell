@@ -53,7 +53,13 @@
                                 <tr>
                                     <td class="p-3 border-0">
                                         <div class="d-flex align-items-center">
-                                            <a class="reset-anchor d-block animsition-link" href="/products/{{ $cart->product->slug }}"><img src="{{ asset('img/customer/img-1.png') }}" width="70" /></a>
+                                            <a class="reset-anchor d-block animsition-link" href="/products/{{ $cart->product->slug }}">
+                                                @if($cart->product->image)
+                                                <img src="img/admin_store/{{ $cart->product->image }}" width="70" />
+                                                @else
+                                                <img src="{{ asset('img/customer/img-1.png') }}" width="70" />
+                                                @endif
+                                            </a>
                                             <div class="ms-3">
                                                 <a class="reset-anchor animsition-link title text-decoration-none" href="/products/{{ $cart->product->slug }}">{{ $cart->product->name }}</a>
                                             </div>
