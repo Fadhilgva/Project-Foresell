@@ -1,5 +1,5 @@
 @extends('sb-admin.app')
-@section('title', 'payment')
+@section('title', 'Edit Payment')
 @section('payment', 'active')
 @section('main', 'show')
 @section('main-active', 'active')
