@@ -13,6 +13,10 @@
     $(function () {
     $("#example1").DataTable();
   });
+
+  $('#example1').DataTable({
+        "order": [[5, "desc"]]
+    });
 </script>
 @endpush
 
