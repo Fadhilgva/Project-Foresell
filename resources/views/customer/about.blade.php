@@ -6,7 +6,7 @@
         <div class="row h-100 align-items-center">
             <div class="col-lg-6">
                 <h1 class="display-4 title">About Foresell</h1>
-                <p class="lead text-muted mb-0">Foresell adalah platform Multi-vendor marketplace yang dibuat menggunakan Framework Laravel, dibuat oleh Muhammad Fadhil, Muhammad Yazid Baihaqi dan Muhammad Mubarok Azzam. </p>
+                <p class="lead text-muted mb-0">Foresell adalah platform Multi-vendor marketplace yang dibuat menggunakan bahasa pemrograman PHP dan Framework Laravel.</p>
             </div>
             <div class="col-lg-6 d-none d-lg-block"><img src="{{ asset('img/customer/about1.gif') }}" alt="" class="img-fluid"></div>
         </div>
@@ -61,10 +61,10 @@
                     <h5 class="mb-1">Muhammad Yazid Baihaqi</h5>
                     <span class="small text-muted">Mahasiswa UAI</span>
                     <ul class="social mb-0 list-inline mt-3">
-                        <li class="list-inline-item"><a href="#" target="_blank" class="social-link"><i class='bx bxl-linkedin-square'></i></a></li>
-                        <li class="list-inline-item"><a href="#" target="_blank" class="social-link"><i class='bx bxl-instagram-alt'></i></a></li>
-                        <li class="list-inline-item"><a href="#" target="_blank" class="social-link"><i class='bx bxl-gmail'></i></a></li>
-                        <li class="list-inline-item"><a href="#" target="_blank" class="social-link"><i class='bx bxl-blogger'></i></a></li>
+                        <li class="list-inline-item"><a href="https://www.linkedin.com/in/muhammad-yazid-baihaqi/" target="_blank" class="social-link"><i class='bx bxl-linkedin-square'></i></a></li>
+                        <li class="list-inline-item"><a href="https://www.instagram.com/myazidbaihaqi/?igshid=YmMyMTA2M2Y%3D" target="_blank" class="social-link"><i class='bx bxl-instagram-alt'></i></a></li>
+                        <li class="list-inline-item"><a href="mailto:baihaqiyazid16@gmail.com" target="_blank" class="social-link"><i class='bx bxl-gmail'></i></a></li>
+                        <li class="list-inline-item"><a href="https://medium.com/@baihaqiyazid16" target="_blank" class="social-link"><i class='bx bxl-blogger'></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -74,10 +74,10 @@
                     <h5 class="mb-1">Muhammad Azzam</h5>
                     <span class="small text-muted">Mahasiswa UAI</span>
                     <ul class="social mb-0 list-inline mt-3">
-                        <li class="list-inline-item"><a href="#" target="_blank" class="social-link"><i class='bx bxl-linkedin-square'></i></a></li>
-                        <li class="list-inline-item"><a href="#" target="_blank" class="social-link"><i class='bx bxl-instagram-alt'></i></a></li>
-                        <li class="list-inline-item"><a href="#" target="_blank" class="social-link"><i class='bx bxl-gmail'></i></a></li>
-                        <li class="list-inline-item"><a href="#" target="_blank" class="social-link"><i class='bx bxl-blogger'></i></a></li>
+                        <li class="list-inline-item"><a href="https://www.linkedin.com/in/muhammad-mubarok-azzam-711a65237/" target="_blank" class="social-link"><i class='bx bxl-linkedin-square'></i></a></li>
+                        <li class="list-inline-item"><a href="https://www.instagram.com/mubarok2586/" target="_blank" class="social-link"><i class='bx bxl-instagram-alt'></i></a></li>
+                        <li class="list-inline-item"><a href="mailto:mmazzam4@gmail.com" target="_blank" class="social-link"><i class='bx bxl-gmail'></i></a></li>
+                        <li class="list-inline-item"><a href="https://mubarokazzamaja.wordpress.com/" target="_blank" class="social-link"><i class='bx bxl-blogger'></i></a></li>
                     </ul>
                 </div>
             </div>
