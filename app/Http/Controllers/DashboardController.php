@@ -40,12 +40,12 @@ class DashboardController extends Controller
         // ORDER BY total DESC
         // LIMIT 10
 
-        $topUser = User::select(DB::raw('users.id AS id, users.name AS name, count(users.id) AS total'))
+        $topUser = User::select(DB::raw('users.id AS id, users.name AS name, count(users.id) AS total, sum(order_details.price * order_details.qty) AS nilai'))
             ->join('orders', 'orders.user_id', '=', 'users.id')
             ->join('order_details', 'orders.id', '=', 'order_details.order_id')
             ->where('orders.status', 'Finished')
             ->groupByRaw('users.id')
-            ->orderBy('total', 'DESC')
+            ->orderBy('nilai', 'DESC')
             ->limit(10)->get();
 
         $topProduct = Product::select(DB::raw('products.image AS image, products.id AS id, products.name, sum(order_details.qty) AS total'))

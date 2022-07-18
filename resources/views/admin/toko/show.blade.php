@@ -132,12 +132,12 @@
     const bulan2022 = <?php echo json_encode($bulan2022); ?>;
 
     const name = <?php echo json_encode($name); ?>;
-    // console.log("2017 = " + total2017);
-    // console.log("2018 = " + total2018);
-    // console.log("2019 = " + total2019);
-    // console.log("2020 = " + total2020);
-    // console.log("2021 = " + total2021);
-    // console.log("2022 = " + total2022);
+    console.log("2017 = " + total2017);
+    console.log("2018 = " + total2018);
+    console.log("2019 = " + total2019);
+    console.log("2020 = " + total2020);
+    console.log("2021 = " + total2021);
+    console.log("2022 = " + total2022);
 
     // 2017
     const chart = new Highcharts.Chart({

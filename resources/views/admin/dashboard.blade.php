@@ -117,14 +117,17 @@
             <div class="card-body overflow-auto" style=" height: 500px;">
                 @foreach ($topProduct as $tProduct)
                 <div class="row mb-5" style=" height: 70px;">
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-2 mb-3">
+                        <h6>#{{ $loop->iteration }}</h6>
+                    </div>
+                    <div class="col-md-3 mb-3">
                         <img width="100px" height="100px" src="/img/admin_store/{{ $tProduct->image }}" alt="">
                     </div>
                     <div class="col-md-5 mb-3 ">
                         <h5 class="text-dark fw-bold">{{ $tProduct->name }}</h5>
                         <p>Product ID #{{ $tProduct->id }}</p>
                     </div>
-                    <div class="col-md-2 mb-3">
+                    <div class="col-md-1 mb-3">
                         <span class="badge bg-success">{{ $tProduct->total }} Order</span>
                     </div>
                 </div>
@@ -141,12 +144,16 @@
             <div class="card-body overflow-auto" style=" height: 500px;">
                 @foreach ($topUser as $tUser)
                 <div class="row mb-3" style=" height: 70px;">
-                    <div class="col-md-9 mb-3">
+                    <div class="col-md-2 mb-3">
+                        <p>#{{ $loop->iteration }}</p>
+                    </div>
+                    <div class="col-md-7 mb-3">
                         <h5 class="text-dark fw-bold">{{ $tUser->name }}</h5>
                         <p>Customer ID #{{ $tUser->id }}</p>
                     </div>
                     <div class="col-md-2 mb-3">
-                        <span class="badge bg-success">{{ $tUser->total }} Order</span>
+                        <h5><span class="badge bg-success">Rp{{ number_format($tUser->nilai, 0,",",".") }}</span></h5>
+                        <span class="badge bg-info">{{ $tUser->total }} Order</span>
                     </div>
                 </div>
                 <hr>
