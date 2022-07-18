@@ -20,9 +20,9 @@ class AdminOrderController extends Controller
                                         round(SUM(order_details.price * order_details.qty),2) AS total,
                                         orders.status AS status, payment.name AS paymentName, couriers.name AS courierName,
                                         orders.address AS address, orders.created_at AS dateOrder'))
+                       ->orderByRaw('dateOrder DESC')
                        ->groupByRaw('id')->get();
-
-
+    
         return view('admin.order.index', compact('orders'));
     }
 

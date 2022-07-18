@@ -10,7 +10,11 @@
 <script>
     $(function() {
             $("#example1").DataTable();
-        });
+    });
+
+    $('#example1').DataTable({
+        "order": [[7, "desc"]]
+    });
 </script>
 @endpush
 
