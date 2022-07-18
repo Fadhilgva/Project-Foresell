@@ -51,7 +51,7 @@
                             <thead class="table-dark">
                                 <tr>
                                     <th width="100">Action</th>
-                                    <th>Order ID</th>
+                                    <th>Invoice</th>
                                     <th>Name</th>
                                     <th>User ID</th>
                                     <th>Product</th>
@@ -80,7 +80,9 @@
                                             @endif
                                         </div>
                                     </td>
-                                    <td class="text-center">#{{ $data->id }}</td>
+                                    <td class="text-center">
+                                        {{ date_format($data->created_at, 'Y'). '-' .sprintf("%02d", $data->userId). '-' .sprintf("%02d", $data->id) }} 
+                                    </td>
                                     <td>{{ $data->name }}</td>
                                     <td class="text-center">#{{ $data->userId }}</td>
                                     <td>{{ $data->productName }}</td>
