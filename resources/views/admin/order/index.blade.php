@@ -13,7 +13,7 @@
     });
 
     $('#example1').DataTable({
-        "order": [[7, "desc"]]
+        "order": [[8, "desc"]]
     });
 </script>
 @endpush
@@ -55,6 +55,7 @@
                                     <th>Name</th>
                                     <th>User ID</th>
                                     <th>Product</th>
+                                    <th>Store</th>
                                     <th>Qty</th>
                                     <th>Total</th>
                                     <th>Status</th>
@@ -82,6 +83,7 @@
                                     <td>{{ $data->name }}</td>
                                     <td class="text-center">#{{ $data->userId }}</td>
                                     <td>{{ $data->productName }}</td>
+                                    <td>{{ $data->storeName }}</td>
                                     <td class="text-center">{{ $data->qty }}</td>
                                     <td>Rp {{ number_format($data->total, 0,",",".") }}</td>
                                     @if ($data->status == "Proccessed")
