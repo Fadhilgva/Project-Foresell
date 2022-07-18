@@ -36,8 +36,27 @@
                                     <td class="align-items-center">
                                         @switch($order->status)
                                         @case($order->status == "Waiting")
-                                        <p class="badge text-bg-danger mt-4">Waiting for Payment</p>
+                                        
+                                        @if (!$order->upload)
+                                        <p class="badge text-bg-danger mt-4">Waiting For Payment</p>
                                         <a href="/orders/{{ $order->id }}/confirm" class="btn btn-warning btn-sm ms-3">Cancel Order</a>
+                                            <form action="/orders/{{ $order->id }}/upload" method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            <div>
+                                                <input type="file" class="form-control" id="image" name="image">
+                                                @error('image')
+                                                <p class="text-danger">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+
+                                            <h6><button type="submit" class="btn btn-primary btn-sm mt-2">Upload</button></h6>
+                                        </form>
+                                         
+                                        @else
+                                            <p class="badge text-bg-danger mt-4">Waiting</p>
+                                        @endif
+                                       
+                                        
                                         {{-- @csrf
                                         <button type="submit" class="btn btn-warning btn-sm ms-3">Cancel Order</button>
                                         </form> --}}

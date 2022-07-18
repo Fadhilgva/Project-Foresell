@@ -196,6 +196,25 @@ class OrdersCustController extends Controller
 
         return back();
     }
+
+    public function upload(Request $request, $id)
+    {
+        $request->validate([
+            'image' => 'required|mimes:jpg,jpeg,png',
+        ]);
+
+        $order = Orders::find($id);
+
+        $image = time() . '-' . $request->image->getClientOriginalName();
+        $request->image->move('image\upload', $image);
+
+        $order->upload = $image;
+        $order->save();
+
+        return back();
+    }
+
+    
 }
 
 

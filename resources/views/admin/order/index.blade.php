@@ -59,6 +59,7 @@
                                     <th>Qty</th>
                                     <th>Total</th>
                                     <th>Status</th>
+                                    <th>Proof of payment</th>
                                     <th>Payment</th>
                                     <th>Courier</th>
                                     <th>Address</th>
@@ -97,6 +98,7 @@
                                     @else
                                     <td class="text-center"><span class="badge bg-success">{{ $data->status }}</span></td>
                                     @endif
+                                    <td><img src="/image/upload/{{ $data->bukti }}" width="50" alt="null"/></td>
                                     <td>{{ $data->paymentName }}</td>
                                     <td>{{ $data->courierName }}</td>
                                     <td>{{ $data->address }}</td>
