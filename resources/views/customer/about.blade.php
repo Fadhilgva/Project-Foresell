@@ -5,10 +5,8 @@
     <div class="container">
         <div class="row h-100 align-items-center">
             <div class="col-lg-6">
-                <h1 class="display-4 title">About us Foresell</h1>
-                <p class="lead text-muted mb-0">Create a minimal about us page using Bootstrap 4.</p>
-                <p class="lead text-muted">Snippet by Bootstrapious
-                </p>
+                <h1 class="display-4 title">About Foresell</h1>
+                <p class="lead text-muted mb-0">Foresell adalah platform Multi-vendor marketplace yang dibuat menggunakan bahasa pemrograman PHP dan Framework Laravel.</p>
             </div>
             <div class="col-lg-6 d-none d-lg-block"><img src="{{ asset('img/customer/about1.gif') }}" alt="" class="img-fluid"></div>
         </div>
@@ -20,14 +18,15 @@
         <div class="row align-items-center mb-5">
             <div class="col-lg-6 px-5"><img src="{{ asset('img/customer/about3.png') }}" width="700" height="700" alt="" class="img-fluid mb-4 mb-lg-0"></div>
             <div class="col-lg-6 text-start">
-                <h2 class="font-weight-light title">Lorem ipsum dolor sit amet</h2>
-                <p class="font-italic text-muted mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <h2 class="font-weight-light title">Multi-vendor Marketplace</h2>
+                <p class="font-italic text-muted mb-4">Multi-vendor marketplace adalah platform yang memungkinkan banyak vendor atau penjual untuk membuat toko online atau profil mereka sendiri dan memasang produk untuk dijual.</p>
             </div>
         </div>
         <div class="row align-items-center ">
             <div class="col-lg-6 order-2 order-lg-1 text-end">
-                <h2 class="font-weight-light title">Lorem ipsum dolor sit amet</h2>
-                <p class="font-italic text-muted mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <h2 class="font-weight-light title">Our Service</h2>
+                <p class="font-italic text-muted mb-4">Foresell menawarkan transaksi jual beli online yang menyenangkan dan terpercaya. Ayo bergabung dengan mulai mendaftarkan produk jualan dan berbelanja berbagai penawaran menarik kapan saja, di mana
+                    saja dan tentu saja Keamanan transaksi kamu terjamin.</p>
             </div>
             <div class="col-lg-6 px-5 mx-auto order-1 order-lg-2"><img src="{{ asset('img/customer/about2.png') }}" width="700" height="700" alt="" class="img-fluid mb-4 mb-lg-0"></div>
         </div>
@@ -62,23 +61,23 @@
                     <h5 class="mb-1">Muhammad Yazid Baihaqi</h5>
                     <span class="small text-muted">Mahasiswa UAI</span>
                     <ul class="social mb-0 list-inline mt-3">
-                        <li class="list-inline-item"><a href="#" target="_blank" class="social-link"><i class='bx bxl-linkedin-square'></i></a></li>
-                        <li class="list-inline-item"><a href="#" target="_blank" class="social-link"><i class='bx bxl-instagram-alt'></i></a></li>
-                        <li class="list-inline-item"><a href="#" target="_blank" class="social-link"><i class='bx bxl-gmail'></i></a></li>
-                        <li class="list-inline-item"><a href="#" target="_blank" class="social-link"><i class='bx bxl-blogger'></i></a></li>
+                        <li class="list-inline-item"><a href="https://www.linkedin.com/in/muhammad-yazid-baihaqi/" target="_blank" class="social-link"><i class='bx bxl-linkedin-square'></i></a></li>
+                        <li class="list-inline-item"><a href="https://www.instagram.com/myazidbaihaqi/?igshid=YmMyMTA2M2Y%3D" target="_blank" class="social-link"><i class='bx bxl-instagram-alt'></i></a></li>
+                        <li class="list-inline-item"><a href="mailto:baihaqiyazid16@gmail.com" target="_blank" class="social-link"><i class='bx bxl-gmail'></i></a></li>
+                        <li class="list-inline-item"><a href="https://medium.com/@baihaqiyazid16" target="_blank" class="social-link"><i class='bx bxl-blogger'></i></a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="col-xl-3 col-sm-6">
-                <div class="bg-white rounded shadow-sm py-5 px-4"><img src="https://bootstrapious.com/i/snippets/sn-about/avatar-4.png" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                <div class="bg-white rounded shadow-sm py-5 px-4"><img src="https://bootstrapious.com/i/snippets/sn-about/avatar-3.png" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
                     <h5 class="mb-1">Muhammad Azzam</h5>
                     <span class="small text-muted">Mahasiswa UAI</span>
                     <ul class="social mb-0 list-inline mt-3">
-                        <li class="list-inline-item"><a href="#" target="_blank" class="social-link"><i class='bx bxl-linkedin-square'></i></a></li>
-                        <li class="list-inline-item"><a href="#" target="_blank" class="social-link"><i class='bx bxl-instagram-alt'></i></a></li>
-                        <li class="list-inline-item"><a href="#" target="_blank" class="social-link"><i class='bx bxl-gmail'></i></a></li>
-                        <li class="list-inline-item"><a href="#" target="_blank" class="social-link"><i class='bx bxl-blogger'></i></a></li>
+                        <li class="list-inline-item"><a href="https://www.linkedin.com/in/muhammad-mubarok-azzam-711a65237/" target="_blank" class="social-link"><i class='bx bxl-linkedin-square'></i></a></li>
+                        <li class="list-inline-item"><a href="https://www.instagram.com/mubarok2586/" target="_blank" class="social-link"><i class='bx bxl-instagram-alt'></i></a></li>
+                        <li class="list-inline-item"><a href="mailto:mmazzam4@gmail.com" target="_blank" class="social-link"><i class='bx bxl-gmail'></i></a></li>
+                        <li class="list-inline-item"><a href="https://mubarokazzamaja.wordpress.com/" target="_blank" class="social-link"><i class='bx bxl-blogger'></i></a></li>
                     </ul>
                 </div>
             </div>
