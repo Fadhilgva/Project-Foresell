@@ -33,7 +33,7 @@
                     {{-- <th scope="col">Store</th> --}}
                     <th scope="col">Product Picture</th>
                     <th scope="col">Product Name</th>
-                    <th scope="col">Price (Rupiah)</th>
+                    <th scope="col">Price</th>
                     <th scope="col">Sold</th>
                     <th scope="col">Discount</th>
                     <th scope="col">Stock</th>
@@ -46,7 +46,7 @@
                     <th scope="col">Category</th>
                     <th scope="col">Product Picture</th>
                     <th scope="col">Product Name</th>
-                    <th scope="col">Price (Rupiah)</th>
+                    <th scope="col">Price</th>
                     <th scope="col">Sold</th>
                     <th scope="col">Discount</th>
                     <th scope="col">Stock</th>
@@ -60,7 +60,7 @@
                     <td>{{$item->Category->name}}</td>
                     <td><img src="\img\admin_store\{{$item->image}}" alt="" width="50" height="50"></td>
                     <td>{{$item->name}}</td>
-                    <td>{{number_format($item->price, 0,",",".")}}</td>
+                    <td>Rp{{number_format($item->price, 0,",",".")}}</td>
                     <td>{{$item->sold}}</td>
                     <td>{{$item->discount}}</td>
                     <td>{{$item->stock}}</td>

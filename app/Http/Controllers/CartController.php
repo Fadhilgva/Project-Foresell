@@ -139,6 +139,11 @@ class CartController extends Controller
         if ($cart) {
             if ($request->quantity < 1) {
                 $cart->delete();
+                foreach ($cartdetails as $cartdetail) {
+                    $cartdetail->total_disc = 0;
+                    $cartdetail->total = 0;
+                    $cartdetail->save();
+                }
                 return redirect('/cart');
             }
             $cart->qty = $request->quantity;
