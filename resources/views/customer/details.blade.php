@@ -25,11 +25,26 @@
                             <div class="row contacts">
                                 <div class="col invoice-to">
                                     <h2 class="to title">{{ $orders->name }}</h2>
-                                    <div class="email">{{ $orders->email }}</div>
-                                    <div class="address mt-4">{{ $orders->address }}</div>
+                                    <div class="email mt-2">Email : {{ $orders->email }}</div>
+                                    <div class="address">Alamat : {{ $orders->address }}</div>
                                     <div class="my-3"></div>
-                                    <div>Payment Method : {{ $orders->Bank->name }}</div>
-                                    <div>Shipping Courier : {{ $orders->Courier->name }}</div>
+                                    <div>Payment Method : <strong>{{ $orders->Bank->name }}</strong></div>
+                                    @switch($orders->bank->type)
+                                    @case($orders->bank->type == "bank")
+                                    No. Rekening : <strong>{{ $orders->bank->noPayment }}</strong>
+                                    @break
+                                    @case($orders->bank->type == "gopay")
+                                    No. Gopay : <strong>{{ $orders->bank->noPayment }}</strong>
+                                    @break
+                                    @case($orders->bank->type == "ovo")
+                                    No. Ovo : <strong>{{ $orders->bank->noPayment }}</strong>
+                                    @break
+                                    @case($orders->bank->type == "cod")
+                                    <strong>{{ $orders->bank->noPayment }}</strong>
+                                    @break
+                                    @endswitch
+                                    <br>
+                                    <div>Shipping Courier : <strong>{{ $orders->Courier->name }}</strong></div>
                                 </div>
                                 <div class="col invoice-details">
                                     <h2 class="invoice-id">INVOICE
