@@ -20,7 +20,7 @@
 @endpush
 @section('content')
 
-<h1 class="text-grey">List Toko</h1>
+<h1 class="text-grey">List Store</h1>
 
 <div class="row mb-4">
     <div class="col-md-12">
@@ -53,11 +53,11 @@
                         <tbody>
                             @foreach ($stores as $store)
                             <tr>
-                                <td width="50px">
+                                <td width="">
                                     <div>
-                                        <a href="/admin-foresell/list/toko/{{ $store->id }}/confirm" class="btn btn-danger btn-sm btn-hapus" id="delete"><i class="fa fa-trash"></i></a>
+                                        {{-- <a href="/admin-foresell/list/toko/{{ $store->id }}/confirm" class="btn btn-danger btn-sm btn-hapus" id="delete"><i class="fa fa-trash"></i></a> --}}
 
-                                        <a href="/admin-foresell/list/toko/{{ $store->id }}/show" class="btn btn-warning btn-sm btn-eye" id=""><i class="fa fa-eye"></i></a>
+                                        <a href="/admin-foresell/list/toko/{{ $store->id }}/show" class="btn btn-warning btn btn-eye" id=""><i class="fa fa-eye"></i></a>
 
                                         {{-- <a href="#" class="btn btn-warning btn-sm btn-pen" id="btn-detail"><i class="fa fa-pen"></i></a> --}}
                                     </div>

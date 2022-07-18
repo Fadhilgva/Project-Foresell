@@ -77,12 +77,12 @@
                                             <div>
 
                                                 <a href="/admin-foresell/list/users/{{ $user->id }}/show"
-                                                    class="btn btn-warning btn-sm btn-eye" id=""><i
+                                                    class="btn btn-warning btn btn-eye" id=""><i
                                                         class="fa fa-eye"></i></a>
 
-                                                <a href="/admin-foresell/list/users/{{ $user->id }}/confirm"
+                                                {{-- <a href="/admin-foresell/list/users/{{ $user->id }}/confirm"
                                                     class="btn btn-danger btn-hapus btn-sm" id="delete"><i
-                                                        class="fa fa-trash"></i></a>
+                                                        class="fa fa-trash"></i></a> --}}
                                             </div>
                                         </td>
                                         <td class="text-center">{{ $user->id }}</td>

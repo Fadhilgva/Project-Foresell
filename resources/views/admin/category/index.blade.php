@@ -48,7 +48,7 @@
                     <table id="example1" class="table tbl-users table-responsive-sm table-hover table-bordered bg-white">
                         <thead class="table-dark">
                             <tr>
-                                <th style="width: 12.5%">Action</th>
+                                <th style="">Action</th>
                                 <th>Image</th>
                                 <th>Name</th>
                                 <th>Slug</th>
@@ -60,11 +60,10 @@
                             <tr>
                                 <td>
                                     <div class="">
-                                        <a href="{{ route('category.edit', $cat->id) }}" class="btn btn-warning btn-edit btn-sm" id="edit"><i class="fas fa-pen"></i></a>
+                                        <a href="{{ route('category.edit', $cat->id) }}" class="btn btn-warning btn-edit " id="edit"><i class="fas fa-pen"></i></a>
 
-                                        <a href="/admin-foresell/list/category/{{ $cat->id }}/show" class="btn btn-info btn-sm btn-eye" id=""><i class="fa fa-eye"></i></a>
+                                        <a href="/admin-foresell/list/category/{{ $cat->id }}/show" class="btn btn-info  btn-eye" id=""><i class="fa fa-eye"></i></a>
 
-                                        <a href="/admin-foresell/list/category/{{ $cat->id }}/confirm" class="btn btn-danger btn-sm btn-hapus" id="delete"><i class="fa fa-trash"></i></a>
                                     </div>
                                 </td>
                                 <td><img src="/image/admin/category/{{ $cat->image }}" alt="gambar" width="50" height="50">

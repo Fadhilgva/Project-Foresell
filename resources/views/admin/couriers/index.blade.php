@@ -65,7 +65,7 @@
                             <thead class="table-dark">
                                 <tr>
                                     <th scope="col" style="width: 50px">#</th>
-                                    <th scope="col" style="width: 50px">Action</th>
+                                    <th scope="col">Action</th>
                                     <th scope="col">Logo</th>
                                     <th scope="col">Nama</th>
                                     <th scope="col">Created At</th>
@@ -77,11 +77,11 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
                                             <div style="width:90px">
-                                                <a href="{{ route('couriers.edit', $courier->id) }}" class="btn btn-warning btn-small btn-edit"
+                                                <a href="{{ route('couriers.edit', $courier->id) }}" class="btn btn-warning btn btn-edit"
                                                     id="edit"><i class="fas fa-pen"></i></a>
 
-                                                <a href="/admin-foresell/list/couriers/{{ $courier->id }}/confirm" class="btn btn-danger btn-small btn-hapus"
-                                                    id="delete"><i class="fa fa-trash"></i></a>
+                                                {{-- <a href="/admin-foresell/list/couriers/{{ $courier->id }}/confirm" class="btn btn-danger btn-small btn-hapus"
+                                                    id="delete"><i class="fa fa-trash"></i></a> --}}
                                             </div>
                                         </td>
                                         <td><img src="/image/admin/couriers/{{ $courier->image }}" alt="" width="60" height="50"></td>

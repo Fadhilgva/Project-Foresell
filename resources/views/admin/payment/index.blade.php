@@ -77,11 +77,11 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
                                             <div style="width:87px">
-                                                <a href="{{ route('payment.edit', $pay->id)}}" class="btn btn-warning btn-small btn-edit"
+                                                <a href="{{ route('payment.edit', $pay->id)}}" class="btn btn-warning btn btn-edit"
                                                     id="edit"><i class="fas fa-pen"></i></a>
 
-                                                <a href="/admin-foresell/list/payment/{{ $pay->id }}/confirm" class="btn btn-danger btn-small btn-hapus"
-                                                    id="delete"><i class="fa fa-trash"></i></a>
+                                                {{-- <a href="/admin-foresell/list/payment/{{ $pay->id }}/confirm" class="btn btn-danger btnbtn-hapus"
+                                                    id="delete"><i class="fa fa-trash"></i></a> --}}
                                             </div>
                                         </td>
                                         <td>
