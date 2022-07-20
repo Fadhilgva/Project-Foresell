@@ -14,7 +14,7 @@ class CartController extends Controller
     {
         $itemuser = $request->user();
         $cartdetail = CartDetail::where('user_id', $itemuser->id)->get();
-        $cart = Cart::where('user_id', $itemuser->id)->get();
+        $cart = Cart::where('user_id', $itemuser->id)->with(['product'])->get();
 
         return view('customer.cart', [
             'title' => 'Cart',

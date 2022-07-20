@@ -31,7 +31,13 @@
             <div class="row">
                 <div class="col-lg-9 my-3">
                     <div class="table-responsive mb-4">
-                        <table class="table">
+                        @foreach ($carts as $cart)
+                        <h6 class="ms-3 mb-0 mt-1">
+                            <a href="/stores?store={{ $cart->Product->store->slug }}" class="text-decoration-none title small">
+                                {{ $cart->product->store->name }}
+                            </a>
+                        </h6>
+                        <table class="table mb-4">
                             <thead>
                                 <tr>
                                     <th class="border-0 p-3 h6 title" scope="col">
@@ -49,7 +55,6 @@
                                 </tr>
                             </thead>
                             <tbody class="border-0">
-                                @foreach ($carts as $cart)
                                 <tr>
                                     <td class="p-3 border-0">
                                         <div class="d-flex align-items-center">
@@ -95,9 +100,9 @@
                                         </form>
                                     </td>
                                 </tr>
-                                @endforeach
                             </tbody>
                         </table>
+                        @endforeach
                     </div>
                 </div>
                 <div class="col-lg-3 my-3">
