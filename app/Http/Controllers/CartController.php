@@ -10,19 +10,21 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-public function index(Request $request)
-{
-    $itemuser = $request->user();
-    // $cartdetail = CartDetail::where('user_id', $itemuser->id)->get();
-    $cart = Cart::where('user_id', $itemuser->id)->get();
-    $carts = $cart->groupBy(fn ($i) => $i->Product->Store->name);
+    public function index(Request $request)
+    {
+        $itemuser = $request->user();
+        // $cartdetail = CartDetail::where('user_id', $itemuser->id)->get();
+        $cart = Cart::where('user_id', $itemuser->id)->get();
+        $carts = $cart->groupBy(fn ($i) => $i->Product->Store->name);
+        $carts_ = $cart->groupBy(fn ($i) => $i->Product->Store->slug);
 
-    return view('customer.cart', [
-        'title' => 'Cart',
-        'carts' => $carts,
-        // 'cartdetail' => $cartdetail
-    ]);
-}
+        return view('customer.cart', [
+            'title' => 'Cart',
+            'carts' => $carts,
+            'carts_' => $carts_,
+            // 'cartdetail' => $cartdetail
+        ]);
+    }
 
     public function store($id)
     {
