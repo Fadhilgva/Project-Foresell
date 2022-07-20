@@ -16,12 +16,10 @@ class CartController extends Controller
         // $cartdetail = CartDetail::where('user_id', $itemuser->id)->get();
         $cart = Cart::where('user_id', $itemuser->id)->get();
         $carts = $cart->groupBy(fn ($i) => $i->Product->Store->name);
-        $carts_ = $cart->groupBy(fn ($i) => $i->Product->Store->slug);
 
         return view('customer.cart', [
             'title' => 'Cart',
-            'carts' => $carts,
-            'carts_' => $carts_,
+            'carts' => $carts
             // 'cartdetail' => $cartdetail
         ]);
     }

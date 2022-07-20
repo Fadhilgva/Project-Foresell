@@ -31,12 +31,9 @@
                 <div class="col-lg-9 my-3">
                     <div class="table-responsive mb-4">
                         @foreach ($carts as $cart => $items)
-                        @foreach ($carts_->take(1) as $car => $items)
-                        <h5>
-                            <a href="/stores?store={{ $car }}" class="text-decoration-none title">{{ $cart }}
-                            </a>
+                        <h5 class="text-decoration-none title">
+                            {{ $cart }}
                         </h5>
-                        @endforeach
                         {{-- TABLE --}}
                         <table class="table">
                             {{-- HEAD --}}
@@ -121,7 +118,6 @@
                             <a class="btn btn-dark" href="/shipping/{{ $cart->store_id }}"> Checkout <i class='bx bx-basket'> </i> </a>
                         </div>
                         @endforeach
-
                     </div>
                 </div>
                 <div class="col-lg-3 my-3">
