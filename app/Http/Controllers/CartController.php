@@ -14,7 +14,7 @@ class CartController extends Controller
     {
         $itemuser = $request->user();
         $cartdetail = CartDetail::where('user_id', $itemuser->id)->get();
-        $cart = Cart::where('user_id', $itemuser->id)->get();
+        $cart = Cart::where('user_id', $itemuser->id)->groupBy('user_id', 'store_id')->get();
 
         return view('customer.cart', [
             'title' => 'Cart',
@@ -27,9 +27,10 @@ class CartController extends Controller
     {
         $userid = auth()->user()->id;
         $product = Product::find($id);
-        $userproduct = Cart::where('user_id', $userid)->where('product_id', $product->id)->first();
+        $store = $product->Store;
+        $userproduct = Cart::where('user_id', $userid)->where('product_id', $product->id)->where('store_id', $store->id)->first();
+        // dd($userproduct);
         $userdetail = CartDetail::where('user_id', $userid)->first();
-
 
         if ($userproduct) {
             $userproduct->qty += 1;
@@ -51,6 +52,7 @@ class CartController extends Controller
         } else {
             $input['user_id'] = $userid;
             $input['product_id'] = $product->id;
+            $input['store_id'] = $store->id;
             $input['qty'] = 1;
             $input['total_product'] = ($product->price * ((100 - $product->discount) / 100)) * 1;
             $itemcart = Cart::create($input);

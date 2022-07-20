@@ -31,73 +31,79 @@
             <div class="row">
                 <div class="col-lg-9 my-3">
                     <div class="table-responsive mb-4">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th class="border-0 p-3 h6 title" scope="col">
-                                        Product
-                                    </th>
-                                    <th class="border-0 p-3 h6 title" scope="col">
-                                        Price
-                                    </th>
-                                    <th class="border-0 p-3 h6 title ps-5" scope="col">
-                                        Quantity
-                                    </th>
-                                    <th class="border-0 p-3 ps-4 h6 title" scope="col">
-                                        Total
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody class="border-0">
-                                @foreach ($carts as $cart)
-                                <tr>
-                                    <td class="p-3 border-0">
-                                        <div class="d-flex align-items-center">
-                                            <a class="reset-anchor d-block animsition-link" href="/products/{{ $cart->product->slug }}">
-                                                @if($cart->product->image)
-                                                <img src="img/admin_store/{{ $cart->product->image }}" width="70" />
-                                                @else
-                                                <img src="{{ asset('img/customer/img-1.png') }}" width="70" />
-                                                @endif
-                                            </a>
-                                            <div class="ms-3">
-                                                <a class="reset-anchor animsition-link title text-decoration-none" href="/products/{{ $cart->product->slug }}">{{ $cart->product->name }}</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="p-3 align-middle border-0">
-                                        <p class="mb-0 small">Rp{{ number_format(($cart->product->price * ((100 - $cart->product->discount)/100)), 0,",",".") }}</p>
-                                    </td>
-                                    <td class="p-3 align-middle border-0">
-                                        <form action="/update_cart" method="POST">
-                                            @csrf
-                                            <div class="row">
-                                                <div class="col-5">
-                                                    <input type="hidden" name="cart" value="{{ $cart->id }}">
-                                                    <input type="number" name="quantity" value="{{ $cart->qty }}" class="w-100 ms-5" min="0" max="{{ $cart->product->stock }}">
+                        @foreach ($carts as $cart)
+                            <h3>{{ $cart->Product->Store->name }}</h3>
+                            {{-- TABLE --}}
+                            <table class="table">
+                                {{-- HEAD --}}
+                                <thead>
+                                    <tr>
+                                        <th class="border-0 p-3 h6 title" scope="col">
+                                            Product
+                                        </th>
+                                        <th class="border-0 p-3 h6 title" scope="col">
+                                            Price
+                                        </th>
+                                        <th class="border-0 p-3 h6 title ps-5" scope="col">
+                                            Quantity
+                                        </th>
+                                        <th class="border-0 p-3 ps-4 h6 title" scope="col">
+                                            Total
+                                        </th>
+                                    </tr>
+                                </thead>
+                                {{-- CONTENT --}}
+                                <tbody class="border-0">
+                                    @foreach ($carts as $cart)
+                                    <tr>
+                                        <td class="p-3 border-0">
+                                            <div class="d-flex align-items-center">
+                                                <a class="reset-anchor d-block animsition-link" href="/products/{{ $cart->product->slug }}">
+                                                    @if($cart->product->image)
+                                                    <img src="img/admin_store/{{ $cart->product->image }}" width="70" />
+                                                    @else
+                                                    <img src="{{ asset('img/customer/img-1.png') }}" width="70" />
+                                                    @endif
+                                                </a>
+                                                <div class="ms-3">
+                                                    <a class="reset-anchor animsition-link title text-decoration-none" href="/products/{{ $cart->product->slug }}">{{ $cart->product->name }}</a>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-sm btn-dark ms-5    mt-2" style="margin-right:20px">Update</button>
-                                        </form>
-                                    </td>
-                                    <td class="p-3 align-middle border-0">
-                                        <p class="mb-0 small">Rp{{ number_format($cart->total_product, 0,",",".") }}</p>
-                                    </td>
-                                    <td class="p-3 align-middle border-0">
-                                        <form action="/delete_cart" method="post">
-                                            @csrf
-                                            <input type="hidden" name="id" id="id" value="{{ $cart->id }}">
-                                            <a class="reset-anchor">
-                                                <button type="submit" class="btn btn-link">
-                                                    <img src="{{ asset('img/customer/bx-trash.svg') }}" width="20">
-                                                </button>
-                                            </a>
-                                        </form>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                        </td>
+                                        <td class="p-3 align-middle border-0">
+                                            <p class="mb-0 small">Rp{{ number_format(($cart->product->price * ((100 - $cart->product->discount)/100)), 0,",",".") }}</p>
+                                        </td>
+                                        <td class="p-3 align-middle border-0">
+                                            <form action="/update_cart" method="POST">
+                                                @csrf
+                                                <div class="row">
+                                                    <div class="col-5">
+                                                        <input type="hidden" name="cart" value="{{ $cart->id }}">
+                                                        <input type="number" name="quantity" value="{{ $cart->qty }}" class="w-100 ms-5" min="0" max="{{ $cart->product->stock }}">
+                                                    </div>
+                                                </div>
+                                                <button type="submit" class="btn btn-sm btn-dark ms-5    mt-2" style="margin-right:20px">Update</button>
+                                            </form>
+                                        </td>
+                                        <td class="p-3 align-middle border-0">
+                                            <p class="mb-0 small">Rp{{ number_format($cart->total_product, 0,",",".") }}</p>
+                                        </td>
+                                        <td class="p-3 align-middle border-0">
+                                            <form action="/delete_cart" method="post">
+                                                @csrf
+                                                <input type="hidden" name="id" id="id" value="{{ $cart->id }}">
+                                                <a class="reset-anchor">
+                                                    <button type="submit" class="btn btn-link">
+                                                        <img src="{{ asset('img/customer/bx-trash.svg') }}" width="20">
+                                                    </button>
+                                                </a>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        @endforeach
                     </div>
                 </div>
                 <div class="col-lg-3 my-3">
