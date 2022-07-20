@@ -36,7 +36,7 @@
                                 @foreach ($cartdetails as $cartdetail)
                                 <h5 class="mt-4 mb-2 title">Payment Method</h5>
                                 <div class="accordion accordion-flush" id="accordionFlushExample">
-                                    @foreach ($banks as $bank)
+                                    @foreach ($banks->take(4) as $bank)
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="flush-heading{{ $bank->id }}">
                                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ $bank->id }}" aria-expanded="false" aria-controls="flush-collapse{{ $bank->id }}">

@@ -218,7 +218,7 @@
                 }
             },
             title: {
-                text: 'Monthly Revenue of Foreshell 2022'
+                text: 'Monthly Revenue of Foresell 2022'
             },
             subtitle: {
                 text: ''

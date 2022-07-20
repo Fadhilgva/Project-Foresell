@@ -137,25 +137,24 @@ class CartController extends Controller
     public function updatecart(Request $request)
     {
         $cart = Cart::find($request->cart);
-        $cartdetails = CartDetail::where('user_id', Auth::user()->id)->first()->get();
-        if ($cart) {
-            if ($request->quantity < 1) {
-                $cart->delete();
-                return redirect('/cart');
-            }
-            $cart->qty = $request->quantity;
-            $cart->total_product = ($cart->Product->price * ((100 - $cart->Product->discount) / 100)) * $request->quantity;
-            $cart->save();
-
-            foreach ($cartdetails as $cartdetail) {
-                $cartdetail->total = ($cart->Product->price * ((100 - $cart->Product->discount) / 100)) * $request->quantity;
-                $cartdetail->total_disc = ($cart->Product->price * (($cart->Product->discount) / 100)) * $request->quantity;
+        $cartdetail = CartDetail::where('user_id', Auth::user()->id)->first();
+        $help = $request->quantity - $cart->qty;
+        if ($request->quantity) {
+            if ($request->quantity < 0) {
+                $cartdetail->total -= ($cart->Product->price * ((100 - $cart->Product->discount) / 100)) * $request->quantity;
+                $cartdetail->total_disc -= ($cart->Product->price * (($cart->Product->discount) / 100)) * $request->quantity;
                 $cartdetail->save();
-            }
-        } else {
-            return redirect('/cart');
-        }
+                $cart->delete();
+            } else {
+                $cart->qty = $request->quantity;
+                $cart->total_product = ($cart->Product->price * ((100 - $cart->Product->discount) / 100)) * $request->quantity;
+                $cart->save();
 
-        return redirect('/cart');
+                $cartdetail->total += ($cart->Product->price * ((100 - $cart->Product->discount) / 100)) * $help;
+                $cartdetail->total_disc += ($cart->Product->price * (($cart->Product->discount) / 100)) * $help;
+                $cartdetail->save();
+                return back();
+            }
+        }
     }
 }

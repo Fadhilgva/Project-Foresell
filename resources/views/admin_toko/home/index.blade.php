@@ -117,7 +117,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $order->name }}</td>
-                            <td>Rp{{ $order->total }}</td>
+                            <td>Rp{{ number_format($order->total, 0,",",".") }}</td>
                             <td>{{ $order->Bank->name }}</td>
                             <td>
                                 @switch($order->status)

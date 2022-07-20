@@ -21,13 +21,15 @@
                                 @elseif (Request::is ('stores'))
                                 <form action="/stores">
                                     <input type="hidden" name="store" value="{{ request('store') }}">
-                                    @endif
-                                    {{-- @csrf --}}
-                                    <div class="d-flex form-inputs">
-                                        <button class="btn border-0" type="submit"><i class="bx bx-search"></i></button>
-                                        <input type="text" class="form-control" placeholder="Search any product..." name="search" value="{{ request('search') }}">
-                                    </div>
-                                </form>
+                                    @else
+                                    <form action="/products">
+                                        @endif
+                                        {{-- @csrf --}}
+                                        <div class="d-flex form-inputs">
+                                            <button class="btn border-0" type="submit"><i class="bx bx-search"></i></button>
+                                            <input type="text" class="form-control" placeholder="Search any product..." name="search" value="{{ request('search') }}">
+                                        </div>
+                                    </form>
                 </div>
                 <div class="ms-auto">
                     <ul class="navbar-nav">

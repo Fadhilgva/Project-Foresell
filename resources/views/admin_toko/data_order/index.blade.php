@@ -13,6 +13,10 @@
     $(function () {
     $("#example1").DataTable();
   });
+
+  $('#example1').DataTable({
+        "order": [[5, "desc"]]
+    });
 </script>
 @endpush
 
@@ -29,7 +33,7 @@
                 <tr>
                     <th>No</th>
                     <th>Customer</th>
-                    <th>Total Price (Rupiah)</th>
+                    <th>Total Price</th>
                     <th>Payment</th>
                     <th>Status</th>
                     <th>Order Date</th>
@@ -40,7 +44,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $order->name }}</td>
-                    <td>{{ number_format($order->total, 0,",",".") }}</td>
+                    <td>Rp{{ number_format($order->total, 0,",",".") }}</td>
                     <td>{{ $order->Bank->name }}</td>
                     <td>
                         @switch($order->status)
@@ -79,13 +83,13 @@
     </div>
 </div>
 
-                
-
-            
 
 
 
-        </table>
-    </div>
+
+
+
+</table>
+</div>
 </div>
 @endsection

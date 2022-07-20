@@ -14,10 +14,10 @@
             <div class="col-md-2">
                 <p class="mb-2 fs-5">Category</p>
                 <ul class="card-text footer">
-                    <li>IT Consulting</li>
-                    <li>Development</li>
-                    <li>Cloud</li>
-                    <li>Support</li>
+                    <li>Fashion</li>
+                    <li>Gaming</li>
+                    <li>Electronic</li>
+                    <li>Body Care</li>
                 </ul>
             </div>
             <div class="col-md-2">
@@ -33,10 +33,10 @@
             <div class="col-md-2">
                 <p class="mb-2 fs-5">About Us</p>
                 <ul class="card-text footer">
-                    <li>Fashion</li>
-                    <li>Electronic</li>
-                    <li>Gaming</li>
-                    <li>Personal Care</li>
+                    <li>Terms and Condition</li>
+                    <li>Foresell Care</li>
+                    <li>Privacy</li>
+                    <li>Payment</li>
                 </ul>
             </div>
         </div>
