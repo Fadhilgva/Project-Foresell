@@ -125,7 +125,9 @@
                         <div class="card-body">
                             <h5 class="mb-4 fw-bold text-center">Cart total</h5>
                             @foreach ($carts as $cart => $items)
-                            <h5>{{ $cart }}</h5>
+                            <p>
+                                {{ $cart }}
+                            </p>
                             <ul class="list-unstyled mt-2">
                                 <li class="d-flex align-items-center justify-content-between mt-3 mb-1">
                                     <strong class="small font-weight-bold">Discount
