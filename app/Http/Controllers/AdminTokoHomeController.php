@@ -50,7 +50,8 @@ class AdminTokoHomeController extends Controller
             ->join('products', 'order_details.product_id', '=', 'products.id')
             ->join('stores', 'products.store_id', '=', 'stores.id')
             ->where('stores.user_id', '=', Auth::user()->id)
-            ->select('orders.*')->latest()->get();
+            ->select('orders.*')
+            ->groupByRaw('id')->latest()->get();
 
         return view('admin_toko.home.index', [
             'store' => $store,
