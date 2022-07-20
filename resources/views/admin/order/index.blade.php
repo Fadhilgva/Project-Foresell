@@ -54,7 +54,7 @@
                                     <th>Invoice</th>
                                     <th>Name</th>
                                     <th>User ID</th>
-                                    <th>Product</th>
+                                    {{-- <th>Product</th> --}}
                                     <th>Store</th>
                                     <th>Qty</th>
                                     <th>Total</th>
@@ -81,11 +81,13 @@
                                         </div>
                                     </td>
                                     <td class="text-center">
-                                        {{ date_format($data->created_at, 'Y'). '-' .sprintf("%02d", $data->userId). '-' .sprintf("%02d", $data->id) }} 
+                                        {{ date_format($data->created_at, 'Y'). '-' .sprintf("%02d", $data->userId). '-' .sprintf("%02d", $data->id) }}
                                     </td>
                                     <td>{{ $data->name }}</td>
                                     <td class="text-center">#{{ $data->userId }}</td>
-                                    <td>{{ $data->productName }}</td>
+                                    {{-- <td>
+                                        {{ $data->productName }}
+                                    </td> --}}
                                     <td>{{ $data->storeName }}</td>
                                     <td class="text-center">{{ $data->qty }}</td>
                                     <td>Rp {{ number_format($data->total, 0,",",".") }}</td>

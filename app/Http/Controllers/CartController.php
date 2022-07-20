@@ -10,18 +10,19 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    public function index(Request $request)
-    {
-        $itemuser = $request->user();
-        $cartdetail = CartDetail::where('user_id', $itemuser->id)->get();
-        $cart = Cart::where('user_id', $itemuser->id)->groupBy('user_id', 'store_id')->get();
+public function index(Request $request)
+{
+    $itemuser = $request->user();
+    // $cartdetail = CartDetail::where('user_id', $itemuser->id)->get();
+    $cart = Cart::where('user_id', $itemuser->id)->get();
+    $carts = $cart->groupBy(fn ($i) => $i->Product->Store->name);
 
-        return view('customer.cart', [
-            'title' => 'Cart',
-            'carts' => $cart,
-            'cartdetail' => $cartdetail
-        ]);
-    }
+    return view('customer.cart', [
+        'title' => 'Cart',
+        'carts' => $carts,
+        // 'cartdetail' => $cartdetail
+    ]);
+}
 
     public function store($id)
     {
@@ -53,6 +54,7 @@ class CartController extends Controller
             $input['user_id'] = $userid;
             $input['product_id'] = $product->id;
             $input['store_id'] = $store->id;
+            $input['discount'] = $product->price * (($product->discount) / 100);
             $input['qty'] = 1;
             $input['total_product'] = ($product->price * ((100 - $product->discount) / 100)) * 1;
             $itemcart = Cart::create($input);

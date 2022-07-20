@@ -17,15 +17,34 @@ use Illuminate\Support\Facades\Request as FacadesRequest;
 
 class OrdersCustController extends Controller
 {
-    public function index()
+    public function index($id)
     {
+        $cart = Cart::where('user_id', Auth::user()->id)->where('store_id', $id)->get();
+        // $carts = $cart->groupBy(fn ($i) => $i->Product->Store->name);
+        $carts = $cart->groupBy(fn ($i) => $i->Product->Store->name);
+        // dd($cart);
+        // $sum = 0;
+        // foreach($carts as $c => $items){
+        //     // echo $items->total_product;
+        //     dd($c->Product->name);
+        // }
+        $cartdetail = CartDetail::where('user_id', Auth()->user()->id)->get();
+        $banks = Payment::all();
+        $couriers = Courier::all();
+        // dd($carts->first()->store_id);
         return view('customer.shipping', [
-            'title' => 'Shipping'
+            'title' => 'Shipping',
+            'carts' => $carts,
+            // 'cartdetails' => $cart,
+            'banks' => $banks,
+            'couriers' => $couriers
         ]);
     }
 
-    public function updateaddress(Request $request)
+    public function updateaddress(Request $request, $id)
     {
+        $cart = Cart::where('user_id', Auth::user()->id)->where('store_id', $id)->get();
+
 
         $validatedData = $request->validate([
             'name' => 'required|max:255|',
@@ -38,6 +57,7 @@ class OrdersCustController extends Controller
 
         $user = Orders::create([
             'user_id' => Auth::user()->id,
+            'store_id' => $id,
             'name' => $validatedData['name'],
             'email'  => $validatedData['email'],
             'phone'  => $validatedData['phone'],
@@ -46,7 +66,7 @@ class OrdersCustController extends Controller
             'postalcode'  => $validatedData['postalcode']
         ]);
 
-        return redirect('/billing');
+        return view('customer.billing', compact('cart'));
     }
 
     public function billing()
@@ -54,7 +74,10 @@ class OrdersCustController extends Controller
         $banks = Payment::all();
         $couriers = Courier::all();
         $cartdetail = CartDetail::where('user_id', Auth()->user()->id)->get();
-        $carts = Cart::where('user_id', Auth()->user()->id)->get();
+        $store_id = Cart::where('user_id', Auth()->user()->id)->get();
+        // dd($store_id->Product->store_id);
+        $carts = Cart::where('user_id', Auth::user()->id)->get();
+
         return view('customer.billing', [
             'title' => 'Billing',
             'banks' => $banks,
@@ -64,52 +87,90 @@ class OrdersCustController extends Controller
         ]);
     }
 
-    public function storebilling(Request $request)
+    public function storebilling(Request $request, $id)
     {
-        $orders = Orders::where('user_id', Auth()->user()->id)->latest()->get();
-        $cartdetails = CartDetail::where('user_id', Auth()->user()->id)->get();
-        $carts = Cart::where('user_id', Auth()->user()->id)->get();
 
-        if ($cartdetails) {
-            foreach ($cartdetails as $cartdetail) {
-                $validatedData['total_disc'] = $cartdetail->total_disc;
-                $validatedData['total'] = $cartdetail->total;
-                $cartdetail->delete();
+        // $cartdetails = CartDetail::where('user_id', Auth()->user()->id)->get();
+        $cart = Cart::where('user_id', Auth::user()->id)->where('store_id', $id)->get();
+        $carts = $cart->groupBy(fn ($i) => $i->Product->Store->name);
+        // foreach($carts as $c => $items){
+        //             // echo $items->total_product;
+        //         dd($c->product->name);
+        // }
+
+        $validatedData = $request->validate([
+            'name' => 'required|max:255|',
+            'email' => 'required|email:dns|',
+            'phone' => 'required|min:8|max:15',
+            'city' => 'required|min:3|max:50',
+            'address' => 'required|min:20|max:200',
+            'postalcode' => 'required|min:5|max:7',
+            'bank' => 'required',
+            'courier' => 'required',
+        ]);
+
+        $user = [
+            'user_id' => Auth::user()->id,
+            'store_id' => $id,
+            'name' => $validatedData['name'],
+            'email'  => $validatedData['email'],
+            'phone'  => $validatedData['phone'],
+            'city'  => $validatedData['city'],
+            'address'  => $validatedData['address'],
+            'postalcode'  => $validatedData['postalcode'],
+            'bank_id'  => $validatedData['bank'],
+            'courier_id'  => $validatedData['courier'],
+        ];
+
+        if ($carts) {
+            foreach ($carts as $cart => $items) {
+
+                    $user['total_disc'] = $items->sum('discount');
+                    $user['total'] = $items->sum('total_product') ;
+                    // $cartdetails->delete();
+
             }
         } else {
             return redirect('/cart');
         }
-
-        $validatedData['bank_id'] = $request->bank;
-        $validatedData['courier_id'] = $request->courier;
 
         Orders::where('user_id', $request->user()->id)
             ->take(1)
             ->latest()
-            ->update($validatedData);
+            ->create($user);
+
+        $orders = Orders::where('user_id', Auth()->user()->id)->latest()->get();
 
         if ($carts) {
-            foreach ($carts as $cart) {
-                foreach ($orders->take(1) as $order) {
-                    OrderDetails::create([
-                        'product_id' => $cart->product_id,
-                        'order_id' => $order->id,
-                        'price' => $cart->product->price * ((100 - $cart->product->discount) / 100),
-                        'qty' => $cart->qty,
-                        'discount' => $cart->product->discount
-                    ]);
+            foreach ($carts as $cart => $items) {
+                foreach($items as $item){
+                    foreach ($orders->take(1) as $order) {
+                        OrderDetails::create([
+                            'product_id' => $item->product_id,
+                            'order_id' => $order->id,
+                            'price' => $item->product->price * ((100 - $item->product->discount) / 100),
+                            'qty' => $item->qty,
+                            'discount' => $item->product->discount
+                        ]);
+                    }
                 }
-                $cart->delete();
+                // $cart->delete();
             }
         } else {
             return redirect('/cart');
         }
 
-        foreach ($carts as $cart) {
-            $product = Product::find($cart->product->id);
-            $product['stock'] -= $cart->qty;
-            $product['sold'] += $cart->qty;
-            $product->save();
+        if($carts){
+            Cart::where('user_id', Auth::user()->id)->where('store_id', $id)->delete();
+        }
+
+        foreach ($carts as $cart => $items) {
+            foreach($items as $item){
+                $product = Product::find($item->product->id);
+                $product['stock'] -= $item->qty;
+                $product['sold'] += $item->qty;
+                $product->save();
+            }
         }
 
         return redirect('/completed');

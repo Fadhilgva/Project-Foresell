@@ -132,10 +132,10 @@ Route::group(
         Route::post('/add_cartproduct/{product:id}', [CartController::class, 'storeproduct']);
         Route::post('/delete_cart', [CartController::class, 'destroy']);
         Route::post('/update_cart', [CartController::class, 'updatecart']);
-        Route::get('/shipping', [OrdersCustController::class, 'index']);
-        Route::post('/editshipping', [OrdersCustController::class, 'updateaddress']);
+        Route::get('/shipping/{id}', [OrdersCustController::class, 'index']);
+        Route::post('/editshipping/{id}', [OrdersCustController::class, 'updateaddress']);
         Route::get('/billing', [OrdersCustController::class, 'billing']);
-        Route::post('/billing', [OrdersCustController::class, 'storebilling']);
+        Route::post('/billing/{id}', [OrdersCustController::class, 'storebilling'])->name('store.billing');
         Route::get('/completed', [OrdersCustController::class, 'completed']);
         Route::get('/orders', [OrdersCustController::class, 'showorders']);
         Route::get('/orders/{orders:id}/confirm', [OrdersCustController::class, 'confirm']);
