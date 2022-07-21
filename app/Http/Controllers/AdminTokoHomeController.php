@@ -35,8 +35,8 @@ class AdminTokoHomeController extends Controller
             ->join('products', 'stores.id', '=', 'products.store_id')
             ->join('order_details', 'products.id', '=', 'order_details.product_id')
             ->join('orders', 'order_details.order_id', '=', 'orders.id')
+            ->whereYear('orders.created_at', '=', 2022)
             ->whereMonth('orders.created_at', Carbon::now()->format('m'))
-            ->whereYear('orders.created_at', Carbon::now()->format('y'))
             ->sum('orders.total');
 
         $valueYear = Store::where('stores.user_id', Auth::user()->id)
