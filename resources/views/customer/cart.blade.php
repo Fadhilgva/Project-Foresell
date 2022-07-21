@@ -73,7 +73,7 @@
                                     </td>
                                     <td class="p-3 align-middle border-0">
                                         <p class="mb-0 small">
-                                            Rp{{ number_format($cart->product->price * ((100 - $cart->product->discount) / 100), 0, ',', '.') }}
+                                            Rp{{ number_format($cart->product->price, 0, ',', '.') }}
                                         </p>
                                     </td>
                                     <td class="p-3 align-middle border-0">
@@ -90,7 +90,7 @@
                                     </td>
                                     <td class="p-3 align-middle border-0">
                                         <p class="mb-0 small">
-                                            Rp{{ number_format($cart->total_product, 0, ',', '.') }}</p>
+                                            Rp{{ number_format(($cart->product->price * $cart->qty), 0, ',', '.') }}</p>
                                     </td>
                                     <td class="p-3 align-middle border-0">
                                         <form action="/delete_cart" method="post">
