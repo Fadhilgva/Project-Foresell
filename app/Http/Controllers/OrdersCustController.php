@@ -125,9 +125,9 @@ class OrdersCustController extends Controller
         if ($carts) {
             foreach ($carts as $cart => $items) {
 
-                    $user['total_disc'] = $items->sum('discount');
-                    $user['total'] = $items->sum('total_product') ;
-                    // $cartdetails->delete();
+                $user['total_disc'] = $items->sum('discount');
+                $user['total'] = $items->sum('total_product');
+                // $cartdetails->delete();
 
             }
         } else {
@@ -143,12 +143,12 @@ class OrdersCustController extends Controller
 
         if ($carts) {
             foreach ($carts as $cart => $items) {
-                foreach($items as $item){
+                foreach ($items as $item) {
                     foreach ($orders->take(1) as $order) {
                         OrderDetails::create([
                             'product_id' => $item->product_id,
                             'order_id' => $order->id,
-                            'price' => $item->product->price * ((100 - $item->product->discount) / 100),
+                            'price' => $item->product->price,
                             'qty' => $item->qty,
                             'discount' => $item->product->discount
                         ]);
@@ -160,12 +160,12 @@ class OrdersCustController extends Controller
             return redirect('/cart');
         }
 
-        if($carts){
+        if ($carts) {
             Cart::where('user_id', Auth::user()->id)->where('store_id', $id)->delete();
         }
 
         foreach ($carts as $cart => $items) {
-            foreach($items as $item){
+            foreach ($items as $item) {
                 $product = Product::find($item->product->id);
                 $product['stock'] -= $item->qty;
                 $product['sold'] += $item->qty;
