@@ -24,7 +24,8 @@ class DataOrderController extends Controller
             ->join('products', 'order_details.product_id', '=', 'products.id')
             ->join('stores', 'products.store_id', '=', 'stores.id')
             ->where('stores.user_id', '=', Auth::user()->id)
-            ->select('orders.*')->latest()->get();
+            ->select('orders.*')
+            ->groupByRaw('id')->latest()->get();
 
         return view('admin_toko.data_order.index', [
             'orderstore' => $orderstore
@@ -38,7 +39,7 @@ class DataOrderController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -49,7 +50,7 @@ class DataOrderController extends Controller
      */
     public function store(Request $request, $id)
     {
-        
+
     }
 
     /**
@@ -60,7 +61,7 @@ class DataOrderController extends Controller
      */
     public function show()
     {
-        
+
     }
 
     /**
@@ -78,7 +79,7 @@ class DataOrderController extends Controller
             ->count('order_details.id');
 
         $orders = Orders::where('id', $data_order_id)->first();
-        
+
         return view('admin_toko.data_order.index', [
             'orders' => $orders,
 
@@ -96,7 +97,7 @@ class DataOrderController extends Controller
     {
         $request->validate([
             'status' => 'required',
-            
+
         ]);
 
         $orders = Orders::join('order_details', 'orders.id', '=', 'order_details.order_id')
@@ -104,7 +105,7 @@ class DataOrderController extends Controller
             ->join('stores', 'products.store_id', '=', 'stores.id')
             ->where('stores.user_id', '=', Auth::user()->id)
             ->count('order_details.id');
-        
+
         // $orders = Orders::find($data_order_id);
 
         $orders->status = $request['status'];

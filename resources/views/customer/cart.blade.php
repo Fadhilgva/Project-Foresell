@@ -3,22 +3,21 @@
 @section('container')
 <div class="container">
     <div class="row">
-        @if($carts->count()>0)
+        @if ($carts->count() > 0)
         <div class="col-lg-10 mx-auto" style="margin-top: 60px; margin-bottom:50px">
             {{-- Order Navigasi --}}
             <div>
-                <div class="h2 mb-5 text-center title">Shopping cart</div>
+                <div class="h2 mb-5 text-center title">Shopping Cart</div>
                 <ul class="nav nav-tabs nav-fill border-bottom mb-4">
                     <li class="mx-auto">
-                        <a class="nav-link title" aria-current="page">1. Shopping cart</a>
+                        <a class="nav-link title" aria-current="page">1. Shopping Cart</a>
                     </li>
                     <li class="mx-auto"></li>
-                    <li class="mx-auto">
+                    {{-- <li class="mx-auto">
                         <a class="nav-link disabled" aria-current="page">2. Shipping Details</a>
-                    </li>
-                    <li class="mx-auto"></li>
+                    </li>--}}
                     <li class="mx-auto">
-                        <a class="nav-link disabled" aria-current="page">3. Billing Information</a>
+                        <a class="nav-link disabled" aria-current="page">2. Billing Information</a>
                     </li>
                     <li class="mx-auto"></li>
                     <li class="mx-auto">
@@ -31,13 +30,13 @@
             <div class="row">
                 <div class="col-lg-9 my-3">
                     <div class="table-responsive mb-4">
-                        @foreach ($carts as $cart)
-                        <h6 class="ms-3 mb-0 mt-1">
-                            <a href="/stores?store={{ $cart->Product->store->slug }}" class="text-decoration-none title small">
-                                {{ $cart->product->store->name }}
-                            </a>
-                        </h6>
-                        <table class="table mb-4">
+                        @foreach ($carts as $cart => $items)
+                        <h5 class="text-decoration-none title">
+                            {{ $cart }}
+                        </h5>
+                        {{-- TABLE --}}
+                        <table class="table">
+                            {{-- HEAD --}}
                             <thead>
                                 <tr>
                                     <th class="border-0 p-3 h6 title" scope="col">
@@ -54,12 +53,14 @@
                                     </th>
                                 </tr>
                             </thead>
+                            {{-- CONTENT --}}
                             <tbody class="border-0">
+                                @foreach ($items as $cart)
                                 <tr>
                                     <td class="p-3 border-0">
                                         <div class="d-flex align-items-center">
                                             <a class="reset-anchor d-block animsition-link" href="/products/{{ $cart->product->slug }}">
-                                                @if($cart->product->image)
+                                                @if ($cart->product->image)
                                                 <img src="img/admin_store/{{ $cart->product->image }}" width="70" />
                                                 @else
                                                 <img src="{{ asset('img/customer/img-1.png') }}" width="70" />
@@ -71,7 +72,9 @@
                                         </div>
                                     </td>
                                     <td class="p-3 align-middle border-0">
-                                        <p class="mb-0 small">Rp{{ number_format(($cart->product->price * ((100 - $cart->product->discount)/100)), 0,",",".") }}</p>
+                                        <p class="mb-0 small">
+                                            Rp{{ number_format($cart->product->price, 0, ',', '.') }}
+                                        </p>
                                     </td>
                                     <td class="p-3 align-middle border-0">
                                         <form action="/update_cart" method="POST">
@@ -86,7 +89,8 @@
                                         </form>
                                     </td>
                                     <td class="p-3 align-middle border-0">
-                                        <p class="mb-0 small">Rp{{ number_format($cart->total_product, 0,",",".") }}</p>
+                                        <p class="mb-0 small">
+                                            Rp{{ number_format(($cart->product->price * $cart->qty), 0, ',', '.') }}</p>
                                     </td>
                                     <td class="p-3 align-middle border-0">
                                         <form action="/delete_cart" method="post">
@@ -100,29 +104,44 @@
                                         </form>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
+                        <hr>
+                        {{-- TOTAL --}}
+                        {{-- <div>
+                            <h6 class="text-md-end">Total :
+                                Rp{{ number_format($items->sum('total_product'), 0, ',', '.') }}</h6>
+                        </div> --}}
+                        {{-- SHIPPING --}}
+                        <div class="text-md-end my-3">
+                            <a class="btn btn-dark" href="/shipping/{{ $cart->store_id }}"> Checkout <i class='bx bx-basket'> </i> </a>
+                        </div>
                         @endforeach
                     </div>
                 </div>
                 <div class="col-lg-3 my-3">
                     <div class="card border rounded p-lg-1 bg-light">
                         <div class="card-body">
-                            <h5 class="mb-4">Cart total</h5>
-                            @foreach ($cartdetail as $cart)
-                            <ul class="list-unstyled mb-0">
+                            <h5 class="mb-4 fw-bold text-center">Cart total</h5>
+                            @foreach ($carts as $cart => $items)
+                            <p>
+                                {{ $cart }}
+                            </p>
+                            <ul class="list-unstyled mt-2">
                                 <li class="d-flex align-items-center justify-content-between mt-3 mb-1">
                                     <strong class="small font-weight-bold">Discount
                                     </strong>
-                                    <span> -Rp{{ number_format($cart->total_disc, 0,",",".") }}</span>
+                                    <span> Rp{{ number_format($items->sum('discount'), 0, ',', '.') }}</span>
                                 </li>
-                                <li class="d-flex align-items-center justify-content-between mb-4">
+                                <li class="d-flex align-items-center justify-content-between mb-3">
                                     <strong class="small font-weight-bold">Total
                                     </strong>
-                                    <span>Rp{{ number_format($cart->total, 0,",",".") }}
+                                    <span>Rp{{ number_format($items->sum('total_product'), 0, ',', '.') }}
                                     </span>
                                 </li>
                             </ul>
+                            <hr>
                             @endforeach
                         </div>
                     </div>
@@ -130,18 +149,14 @@
             </div>
 
             {{-- Navigation --}}
-            <div class="mt-3">
+            <div class="">
                 <div class="row align-items-center text-center">
                     <div class="col-md-6 mb-3 mb-md-0 text-md-start">
-                        <a class="btn btn-outline-dark" href="/products"><i class='bx bx-shopping-bag'></i> Continue shopping</a>
-                    </div>
-                    <div class="col-md-6 text-md-end">
-                        <a class="btn btn-dark" href="/shipping">Process checkout <i class='bx bx-basket'></i></a>
+                        <a class="btn btn-outline-dark" href="/products"><i class='bx bx-shopping-bag'></i> Continue Shopping</a>
                     </div>
                 </div>
             </div>
         </div>
-
         @else
         <div class="col-lg-10 mx-auto" style="margin-top: 60px; margin-bottom:50px">
             {{-- Order Navigasi --}}
@@ -152,12 +167,11 @@
                         <a class="nav-link title" aria-current="page">1. Shopping cart</a>
                     </li>
                     <li class="mx-auto"></li>
-                    <li class="mx-auto">
+                    {{-- <li class="mx-auto">
                         <a class="nav-link disabled" aria-current="page">2. Shipping Details</a>
-                    </li>
-                    <li class="mx-auto"></li>
+                    </li> --}}
                     <li class="mx-auto">
-                        <a class="nav-link disabled" aria-current="page">3. Billing Information</a>
+                        <a class="nav-link disabled" aria-current="page">2. Billing Information</a>
                     </li>
                     <li class="mx-auto"></li>
                     <li class="mx-auto">
@@ -175,7 +189,8 @@
             <div class="mt-3">
                 <div class="row align-items-center text-center">
                     <div class="col-md-6 mb-3 mb-md-0 text-md-start">
-                        <a class="btn btn-outline-dark" href="/products"><i class='bx bx-shopping-bag'></i> Back to Products</a>
+                        <a class="btn btn-outline-dark" href="/products"><i class='bx bx-shopping-bag'></i> Back
+                            to Products</a>
                     </div>
                 </div>
             </div>

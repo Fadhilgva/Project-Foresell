@@ -13,13 +13,14 @@ class CartController extends Controller
     public function index(Request $request)
     {
         $itemuser = $request->user();
-        $cartdetail = CartDetail::where('user_id', $itemuser->id)->get();
-        $cart = Cart::where('user_id', $itemuser->id)->with(['product'])->get();
+        // $cartdetail = CartDetail::where('user_id', $itemuser->id)->get();
+        $cart = Cart::where('user_id', $itemuser->id)->get();
+        $carts = $cart->groupBy(fn ($i) => $i->Product->Store->name);
 
         return view('customer.cart', [
             'title' => 'Cart',
-            'carts' => $cart,
-            'cartdetail' => $cartdetail
+            'carts' => $carts
+            // 'cartdetail' => $cartdetail
         ]);
     }
 
@@ -27,13 +28,15 @@ class CartController extends Controller
     {
         $userid = auth()->user()->id;
         $product = Product::find($id);
-        $userproduct = Cart::where('user_id', $userid)->where('product_id', $product->id)->first();
+        $store = $product->Store;
+        $userproduct = Cart::where('user_id', $userid)->where('product_id', $product->id)->where('store_id', $store->id)->first();
+        // dd($userproduct);
         $userdetail = CartDetail::where('user_id', $userid)->first();
-
 
         if ($userproduct) {
             $userproduct->qty += 1;
             $userproduct->total_product += ($product->price * ((100 - $product->discount) / 100)) * 1;
+            $userproduct->discount += ($product->price * (($product->discount) / 100)) * 1;
             $userproduct->save();
 
             if ($userdetail) {
@@ -51,6 +54,8 @@ class CartController extends Controller
         } else {
             $input['user_id'] = $userid;
             $input['product_id'] = $product->id;
+            $input['store_id'] = $store->id;
+            $input['discount'] = $product->price * (($product->discount) / 100);
             $input['qty'] = 1;
             $input['total_product'] = ($product->price * ((100 - $product->discount) / 100)) * 1;
             $itemcart = Cart::create($input);
@@ -74,11 +79,13 @@ class CartController extends Controller
     {
         $userid = auth()->user()->id;
         $product = Product::find($id);
+        $store = $product->Store;
         $userproduct = Cart::where('user_id', $userid)->where('product_id', $product->id)->first();
         $userdetail = CartDetail::where('user_id', $userid)->first();
         if ($userproduct) {
             $userproduct->qty += $request->quantity;
             $userproduct->total_product += ($product->price * ((100 - $product->discount) / 100)) * $request->quantity;
+            $userproduct->discount += ($product->price * (($product->discount) / 100)) * $request->quantity;
             $userproduct->save();
 
             if ($userdetail) {
@@ -97,6 +104,8 @@ class CartController extends Controller
             $input['user_id'] = $userid;
             $input['product_id'] = $product->id;
             $input['qty'] = $request->quantity;
+            $input['store_id'] = $store->id;
+            $input['discount'] = ($product->price * (($product->discount) / 100)) * $input['qty'];
             $input['total_product'] = ($product->price * ((100 - $product->discount) / 100)) * $request->quantity;
             $itemcart = Cart::create($input);
 
@@ -146,6 +155,7 @@ class CartController extends Controller
             } else {
                 $cart->qty = $request->quantity;
                 $cart->total_product = ($cart->Product->price * ((100 - $cart->Product->discount) / 100)) * $request->quantity;
+                $cart->discount = ($cart->Product->price * (($cart->Product->discount) / 100)) * $request->quantity;
                 $cart->save();
 
                 $cartdetail->total += ($cart->Product->price * ((100 - $cart->Product->discount) / 100)) * $help;

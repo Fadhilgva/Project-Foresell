@@ -11,13 +11,13 @@
                     <li class="mx-auto">
                         <a class="nav-link disabled" aria-current="page">1. Shopping cart</a>
                     </li>
-                    <li class="mx-auto"></li>
-                    <li class="mx-auto">
+                    {{-- <li class="mx-auto"></li> --}}
+                    {{-- <li class="mx-auto">
                         <a class="nav-link disabled" aria-current="page">2. Shipping Details</a>
-                    </li>
+                    </li> --}}
                     <li class="mx-auto"></li>
                     <li class="mx-auto">
-                        <a class="nav-link disabled" aria-current="page">3. Billing Information</a>
+                        <a class="nav-link disabled" aria-current="page">2. Billing Information</a>
                     </li>
                     <li class="mx-auto"></li>
                     <li class="mx-auto">
