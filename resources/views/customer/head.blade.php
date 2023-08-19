@@ -29,3 +29,5 @@
 
 {{-- Title --}}
 <title>{{ $title }}</title>
+
+<link rel="icon" href="{{ asset('img/customer/title.png') }}" type="image/x-icon">
